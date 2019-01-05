@@ -1,0 +1,37 @@
+{
+  "name": "felagatal",
+  "version": "1.0.0",
+  "description": "Félagatal fyrir FRÍ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha **/**.spec.js",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frjalsar/felagatal.git"
+  },
+  "author": "Skráninganefnd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frjalsar/felagatal/issues"
+  },
+  "homepage": "https://github.com/frjalsar/felagatal#readme",
+  "dependencies": {
+    "eslint": "^5.12.0",
+    "express": "^4.16.4",
+    "pg": "^7.7.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.3.1",
+    "mocha": "^5.2.0"
+  }
+}
