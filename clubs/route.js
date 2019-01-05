@@ -3,7 +3,7 @@ const getAll = require('./getAll')
 
 router.get('/', (_, res) => {
   return getAll().then(list => {
-    res.send(list)
+    res.json(list)
   })
 })
 
