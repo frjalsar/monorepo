@@ -13,9 +13,9 @@ function select (id) {
         CASE WHEN m.to IS null THEN true ELSE false END as activeclub                  
       FROM
         athletes a
-      JOIN
+      LEFT JOIN
         membership m ON m.athleteid = a.id
-      JOIN
+      LEFT JOIN
         clubs c ON c.id = m.clubid
       WHERE
         a.id = $1
