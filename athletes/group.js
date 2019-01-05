@@ -14,14 +14,16 @@ function group (list) {
     }
 
     const currentAthlete = result[result.length - 1]
-    const club = {
-      id: item.clubid,
-      name: item.clubname,
-      from: item.from,
-      to: item.to,
-      active: !item.to
+    if (item.clubid) {
+      const club = {
+        id: item.clubid,
+        name: item.clubname,
+        from: item.from,
+        to: item.to,
+        active: !item.to
+      }
+      currentAthlete.clubs.push(club)
     }
-    currentAthlete.clubs.push(club)
   })
   return result
 }
