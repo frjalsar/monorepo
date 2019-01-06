@@ -6,9 +6,9 @@ Félagatal FRÍ er hluti af markmiði skráningarnefndar FRÍ til að brjóta ni
 ### Vandamál
 Stærsta vandamálið er uppsetning gamla grunnsins:
  - Afrek eru oftast skráð á það félag sem keppendur kepptu fyrir á viðkomandi móti. 
- - Erfitt er að finna út hvenær keppandi var skráður í ákveðið félag og hvenær hann hætti. 
-
-Margar skráningar eru hreinlega vitlausar. Til dæmis getur keppandi aldrei veirð skráður beint í héraðssamband eins og HSÞ heldur verðu hann að vera skráður á íþróttafélag. Dæmi eru um í grunninum að keppendur séu skráðir beint á íþróttahéruð ÍSÍ.
+ - Erfitt er að finna út hvenær keppandi var skráður í ákveðið félag og hvenær hann hætti.
+ - Boðhlaupssveitir eru merktar sem keppendur.
+ - Margar skráningar vitlausar, t.d. getur keppandi aldrei veirð skráður beint í héraðssamband eins og HSÞ heldur verðu hann að vera skráður á íþróttafélag. Dæmi eru um í grunninum að keppendur séu skráðir beint á íþróttahéruð ÍSÍ.
 
 ## Uppsetning
 Kerfið er byggt upp sem einfalt REST API og er skrifað í nodeJS með Postgres gagnagrunn sem bakenda.  Til að fá kerfið keyrandi locally þarf að fara í gegnum eftirfarandi skref.
