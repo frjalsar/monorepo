@@ -7,10 +7,6 @@ console.log('dirname', __dirname)
 const dirname = readdirSync(__dirname)
 console.log(dirname)
 
-console.log('cert', join(__dirname, 'cert'))
-const cert = readdirSync(join(__dirname, 'cert'))
-console.log(cert)
-
 console.log('certs', join(__dirname, 'certs'))
 const certs = readdirSync(join(__dirname, 'certs'))
 console.log(certs)
