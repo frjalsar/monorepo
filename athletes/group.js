@@ -6,7 +6,10 @@ function group (list) {
       const atheleteObj = {
         id: item.id,
         fullName: item.fullname,
-        ssnr: item.ssnr,
+        birthyear: item.birthyear,
+        gender: item.gender,
+        country: item.country,
+        verified: item.verified,
         clubs: []
       }
       result.push(atheleteObj)
@@ -18,8 +21,8 @@ function group (list) {
       const club = {
         id: item.clubid,
         name: item.clubname,
-        from: item.from,
-        to: item.to,
+        from: new Date(item.from).getFullYear(),
+        to: new Date(item.to).getFullYear(),
         active: !item.to
       }
       currentAthlete.clubs.push(club)

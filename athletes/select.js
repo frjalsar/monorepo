@@ -5,7 +5,11 @@ function select (id) {
       SELECT
         a.id,
         a.fullname,
-        a.ssnr,
+        a.birthyear,
+        a.gender,
+        a.country,
+        a.lastupdated,
+        a.verified,
         c.fullname as clubname,
         c.id as clubid,
         m.from,

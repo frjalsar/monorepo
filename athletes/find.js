@@ -9,7 +9,7 @@ function find (searchString) {
     a.gender,
     a.country,
     a.lastupdated,
-    a.verified
+    a.verified,
     c.fullname as clubname,
     c.id as clubid,
     m.from,
@@ -23,13 +23,11 @@ function find (searchString) {
     clubs c ON c.id = m.clubid
   WHERE
     a.fullname like $1
-  OR
-    a.ssnr like $2
   ORDER BY
     a.fullname asc
 `
   return db
-    .query(sql, ['%' + searchString + '%', '%' + searchString + '%'])
+    .query(sql, ['%' + searchString + '%'])
     .then(res => res.rows)
 }
 
