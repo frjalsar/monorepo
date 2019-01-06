@@ -1,15 +1,5 @@
 const pg = require('pg')
 const readFileSync = require('fs').readFileSync
-const readdirSync = require('fs').readdirSync
-const join = require('path').join
-
-console.log('dirname', __dirname)
-const dirname = readdirSync(__dirname)
-console.log(dirname)
-
-console.log('certs', join(__dirname, 'certs'))
-const certs = readdirSync(join(__dirname, 'certs'))
-console.log(certs)
 
 const pool = new pg.Pool({
   user: process.env.FRJALSAR_USERNAME,
