@@ -32,4 +32,7 @@ Hver hluti af kerfinu hefur sína möppu sem inniheldur allt sem við kemur þei
 Kóðasafnið notar eslint-standard til að viðhalda sama kóðastíl af öllum sem snerta á verkefninu. Með því verður allur kóðu samræmdur og við lendum ekki í óþarfa breytingasögum sem snúast um formatting. 
 
 ### Pre-commit krókar (e. hooks)
-Kóðasafnið hefur pre-commit krók sem keyrir linter og test til að vera viss um að ekkert sé brotið áður en kóðinn er sendur inn á github
+Kóðasafnið hefur pre-commit krók sem keyrir linter og test til að vera viss um að ekkert sé brotið áður en kóðinn er sendur inn á github.
+
+### Github
+Þegar ný útgáfa kemur inn á master branch þá fer breytingin strax live. Allar stærri breytingar ættu að fara fyrst inn á sér branch sem er síðan mergað inn á masterinn.
