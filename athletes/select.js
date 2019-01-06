@@ -10,6 +10,7 @@ function select (id) {
         a.country,
         a.lastupdated,
         a.verified,
+        a.thorid,
         c.fullname as clubname,
         c.id as clubid,
         m.from,

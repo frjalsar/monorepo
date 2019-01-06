@@ -10,6 +10,7 @@ function group (list) {
         gender: item.gender,
         country: item.country,
         verified: item.verified,
+        thorId: item.thorid,
         clubs: []
       }
       result.push(atheleteObj)
