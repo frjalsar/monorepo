@@ -1,7 +1,7 @@
 # API þjónusta FRÍ
 
 ## Markmið
-Félagatal FRÍ er hluti af markmiði skráningarnefndar FRÍ til að brjóta niður mótaforrit og afrekaskrá niður í smærri einingar. Hugmyndin er að útbúa vefþjónustu fyrir félagatal, mótaforrit og afrekaskrá. 
+Eitt af stóru markmiðum skráningarnefndar FRÍ er að brjóta niður mótaforrit og afrekaskrá niður í smærri einingar. Hugmyndin er að útbúa vefþjónustu sem hefði mismunandi endapunkta fyrir félagatal, mótaforrit og afrekaskrá, sem önnur kerfi gætu nýtt sér. Þannig væri hægt að búa til sér viðmót fyrir félagatal og vinna með það án þess að hafa áhrif á önnur kerfi. Auk þess sem hægt er að bjóða upp á tengingar við ytri kerfi.
 
 ## Uppsetning
 Kerfið er byggt upp sem einfalt REST API og er skrifað í nodeJS með Postgres gagnagrunn sem bakenda.  Til að fá kerfið keyrandi locally þarf að fara í gegnum eftirfarandi skref.
