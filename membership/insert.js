@@ -8,8 +8,8 @@ function insert (db) {
       INSERT INTO membership(
         athleteid,
         clubid,
-        "from",
-        "to"
+        fromdate,
+        todate
       )
       VALUES ` + toTuple(arr, true)
 

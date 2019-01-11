@@ -19,8 +19,8 @@ function group (list) {
 
     const currentAthlete = result[result.length - 1]
     if (item.clubid) {
-      const fromDate = new Date(item.from)
-      const toDate = new Date(item.to)
+      const fromDate = new Date(item.fromdate)
+      const toDate = new Date(item.todate)
       const club = {
         id: item.clubid,
         name: item.clubname,

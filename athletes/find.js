@@ -12,9 +12,9 @@ function find (db) {
       a.thorid,
       c.fullname as clubname,
       c.id as clubid,
-      m.from,
-      m.to,
-      CASE WHEN m.to IS null THEN true ELSE false END as activeclub
+      m.fromdate,
+      m.todate,
+      CASE WHEN m.todate IS null THEN true ELSE false END as activeclub
     FROM
       athletes a
     LEFT JOIN

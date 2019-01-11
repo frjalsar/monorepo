@@ -3,8 +3,8 @@ function athleteMembership (clubs, athleteId) {
     return {
       athleteId: athleteId,
       clubId: club.id,
-      from: club.from,
-      to: club.to
+      from: club.fromdate,
+      to: club.todate
     }
   })
 }
