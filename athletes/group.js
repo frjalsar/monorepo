@@ -19,11 +19,13 @@ function group (list) {
 
     const currentAthlete = result[result.length - 1]
     if (item.clubid) {
+      const fromDate = new Date(item.from)
+      const toDate = new Date(item.to)
       const club = {
         id: item.clubid,
         name: item.clubname,
-        from: new Date(item.from).getFullYear(),
-        to: new Date(item.to).getFullYear(),
+        from: fromDate.getFullYear() + '-' + (fromDate.getMonth() + 1) + '-' + fromDate.getDate(),
+        to: toDate.getFullYear() + '-' + (toDate.getMonth() + 1) + '-' + toDate.getDate(),
         active: !item.to
       }
       currentAthlete.clubs.push(club)
