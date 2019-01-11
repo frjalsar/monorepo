@@ -1,14 +1,7 @@
-# Félagatal FRÍ
+# API þjónusta FRÍ
 
 ## Markmið
-Félagatal FRÍ er hluti af markmiði skráningarnefndar FRÍ til að brjóta niður mótaforrit og afrekaskrá niður í smærri einingar. Hugmyndin er að þarna sé vefþjónusta sem inniheldur alla keppendur FRÍ og skráningu/sögu þeirra í félögum. Með þessu móti gæti mótaforrit, hvort sem er utanaðkomandi eða heimasmíðað, flett upp keppendum. Auk þess væri hægt að bjóða upp á viðbmót fyrir skrifstofur FRÍ til að samþykkja félagaskipti.
-
-### Vandamál
-Stærsta vandamálið er uppsetning gamla grunnsins:
- - Afrek eru oftast skráð á það félag sem keppendur kepptu fyrir á viðkomandi móti. 
- - Erfitt er að finna út hvenær keppandi var skráður í ákveðið félag og hvenær hann hætti.
- - Boðhlaupssveitir eru merktar sem keppendur.
- - Margar skráningar vitlausar, t.d. getur keppandi aldrei veirð skráður beint í héraðssamband eins og HSÞ heldur verðu hann að vera skráður á íþróttafélag. Dæmi eru um í grunninum að keppendur séu skráðir beint á íþróttahéruð ÍSÍ.
+Eitt af stóru markmiðum skráningarnefndar FRÍ er að brjóta niður mótaforrit og afrekaskrá niður í smærri einingar. Hugmyndin er að útbúa vefþjónustu sem hefði mismunandi endapunkta fyrir félagatal, mótaforrit og afrekaskrá, sem önnur kerfi gætu nýtt sér. Þannig væri hægt að búa til sér viðmót fyrir félagatal og vinna með það án þess að hafa áhrif á önnur kerfi. Auk þess sem hægt er að bjóða upp á tengingar við ytri kerfi.
 
 ## Uppsetning
 Kerfið er byggt upp sem einfalt REST API og er skrifað í nodeJS með Postgres gagnagrunn sem bakenda.  Til að fá kerfið keyrandi locally þarf að fara í gegnum eftirfarandi skref.
