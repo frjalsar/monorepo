@@ -9,25 +9,29 @@ function find (db) {
       a.country,
       a.lastupdated,
       a.verified,
-      a.thorid,
+      a.thorid,      
       c.fullname as clubname,
       c.id as clubid,
       m.fromdate,
       m.todate,
-      CASE WHEN m.todate IS null THEN true ELSE false END as activeclub
+      m.legacyteam      
     FROM
       athletes a
     LEFT JOIN
       membership m ON m.athleteid = a.id
-    LEFT JOIN
+    LEFT JOIN 
       clubs c ON c.id = m.clubid
     WHERE
       a.fullname like $1
-    ORDER BY
-      a.fullname asc
+    OR
+      a.ssnr like $2
+    ORDER BY      
+      a.fullname ASC,
+      a.ssnr ASC,
+      m.todate DESC
   `
     return db
-      .query(sql, ['%' + searchString + '%'])
+      .query(sql, ['%' + searchString + '%', '%' + searchString + '%'])
       .then(res => res.rows)
   }
 }
