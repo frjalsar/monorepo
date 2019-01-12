@@ -4,17 +4,18 @@ function select (db) {
         SELECT
           a.id,
           a.fullname,
+          a.ssnr,
           a.birthyear,
           a.gender,
           a.country,
           a.lastupdated,
-          a.verified,
           a.thorid,
+          a.confirmedbyuser,
           c.fullname as clubname,
           c.id as clubid,
           m.fromdate,
           m.todate,
-          CASE WHEN m.todate IS null THEN true ELSE false END as activeclub
+          m.legacyteam
         FROM
           athletes a
         LEFT JOIN
@@ -23,6 +24,10 @@ function select (db) {
           clubs c ON c.id = m.clubid
         WHERE
           a.id = $1
+        ORDER BY
+          a.fullname ASC,
+          a.ssnr ASC,
+          m.todate DESC
       `
     return db
       .query(sql, [id])

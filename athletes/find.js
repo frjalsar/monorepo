@@ -8,13 +8,13 @@ function find (db) {
       a.gender,
       a.country,
       a.lastupdated,
-      a.verified,
-      a.thorid,      
+      a.thorid,
+      a.confirmedbyuser,
       c.fullname as clubname,
       c.id as clubid,
       m.fromdate,
       m.todate,
-      m.legacyteam      
+      m.legacyteam
     FROM
       athletes a
     LEFT JOIN
@@ -25,7 +25,7 @@ function find (db) {
       a.fullname like $1
     OR
       a.ssnr like $2
-    ORDER BY      
+    ORDER BY
       a.fullname ASC,
       a.ssnr ASC,
       m.todate DESC

@@ -9,9 +9,6 @@ function remove (db) {
 
     return db
       .query(sql, [athleteId])
-      .catch(e => {
-        console.log(e)
-      })
   }
 }
 

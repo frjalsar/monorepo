@@ -8,12 +8,14 @@ function insert (db) {
           gender,
           country,
           lastupdated,
-          verified,
-          thorid
+          thorid,
+          confirmedbyuser
         )
         VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP, $6, $7)
         RETURNING id
       `
+    obj.confirmedByUser = 1 // hack þangað til að login kemur
+
     return db
       .query(sql, [
         obj.fullName,
@@ -21,13 +23,10 @@ function insert (db) {
         obj.birthyear,
         obj.gender,
         obj.country,
-        obj.verified,
-        obj.thorId
+        obj.thorId,
+        obj.verified ? obj.confirmedByUser : null
       ])
       .then(res => res.rows[0].id)
-      .catch(e => {
-        console.log(e)
-      })
   }
 }
 
