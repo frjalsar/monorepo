@@ -1,9 +1,9 @@
 const router = require('express').Router()
 const pool = require('../db')
-const createGetAllClubs = require('./getAll')
+const createGetAllProvinces = require('./getAll')
 
 router.get('/', (_, res) => {
-  const getAll = createGetAllClubs(pool)
+  const getAll = createGetAllProvinces(pool)
   return getAll().then(list => {
     res.json(list)
   })

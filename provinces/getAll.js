@@ -2,11 +2,14 @@ function getAll (db) {
   return function () {
     const sql = `
       SELECT
-        c.id,
-        c.fullname,
-        c.shortname,
-        c.abbreviation
-      FROM clubs c`
+        p.id,
+        p.abbreviation,
+        p.fullname
+      FROM
+        provinces p
+      ORDER BY
+        p.fullname asc
+    `
 
     return db
       .query(sql, [])
