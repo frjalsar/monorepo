@@ -29,7 +29,6 @@ router.get('/:id', (req, res) => {
   })
 })
 
-// Klára
 router.post('/', async (req, res) => {
   const client = await pool.connect()
   const insertAthlete = createInsertAthlete(client)
