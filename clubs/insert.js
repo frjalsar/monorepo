@@ -7,14 +7,16 @@ function insert (db) {
         abbreviation,
         provinceid
       )
-      VALUS ($1, $2, $3, $4)
+      VALUES ($1, $2, $3, $4)
       RETURNING id
     `
     return db.query(sql, [
       obj.fullName,
       obj.shortName,
       obj.abbreviation,
-      obj.province.id
+      obj.provinceId
     ])
   }
 }
+
+module.exports = insert

@@ -12,6 +12,8 @@ function getAll (db) {
       FROM clubs c
       LEFT JOIN
         provinces p ON p.id = c.provinceid
+      ORDER BY
+        c.fullname asc
     `
 
     return db

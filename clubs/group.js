@@ -9,6 +9,7 @@ function group (list) {
         shortName: item.shortname,
         abbreviation: item.abbreviation,
         thorId: item.thorid,
+        provinceId: item.provinceid,
         province: {}
       }
       result.push(clubObj)
@@ -29,4 +30,3 @@ function group (list) {
 }
 
 module.exports = group
-

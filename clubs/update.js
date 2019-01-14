@@ -15,7 +15,7 @@ function update (db) {
         obj.fullName,
         obj.shortName,
         obj.abbreviation,
-        obj.province.id,
+        obj.provinceId,
         obj.id
       ])
       .then(res => res.rows[0].id)
