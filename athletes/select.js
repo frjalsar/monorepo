@@ -1,12 +1,10 @@
 function select (db, admin) {
   return function (id) {
-    admin = true
     const params = [id]
-    let sql = `
+    const sql = `
         SELECT
           a.id,
-          a.fullname,        
-          ${admin ? 'a.ssnr,' : ''}
+          a.fullname,
           a.birthyear,
           a.gender,
           a.country,
@@ -27,8 +25,7 @@ function select (db, admin) {
         WHERE
           a.id = $1
         ORDER BY
-          a.fullname ASC,
-          ${admin ? 'a.ssnr ASC,' : ''}
+          a.fullname ASC,          
           m.todate DESC
       `
     return db

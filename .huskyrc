@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "echo no ci"
+    "pre-commit": "npm run lint"
   }
 }
