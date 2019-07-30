@@ -1,10 +1,12 @@
-function select (db) {
+function select (db, admin) {
   return function (id) {
-    const sql = `
+    admin = true
+    const params = [id]
+    let sql = `
         SELECT
           a.id,
-          a.fullname,
-          a.ssnr,
+          a.fullname,        
+          ${admin ? 'a.ssnr,' : ''}
           a.birthyear,
           a.gender,
           a.country,
@@ -26,11 +28,11 @@ function select (db) {
           a.id = $1
         ORDER BY
           a.fullname ASC,
-          a.ssnr ASC,
+          ${admin ? 'a.ssnr ASC,' : ''}
           m.todate DESC
       `
     return db
-      .query(sql, [id])
+      .query(sql, params)
       .then(res => res.rows)
   }
 }

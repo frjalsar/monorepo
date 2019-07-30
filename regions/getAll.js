@@ -2,13 +2,13 @@ function getAll (db) {
   return function () {
     const sql = `
       SELECT
-        p.id,
-        p.abbreviation,
-        p.fullname
+        r.id,
+        r.abbreviation,
+        r.fullname
       FROM
-        provinces p
+        regions r
       ORDER BY
-        p.fullname asc
+        r.fullname asc
     `
 
     return db

@@ -5,7 +5,7 @@ function update (db) {
         fullname = $1,
         shortname = $2,
         abbreviation = $3,
-        provinceid = $4
+        regionid = $4
       WHERE
         id = $5
       RETURNING id
@@ -15,7 +15,7 @@ function update (db) {
         obj.fullName,
         obj.shortName,
         obj.abbreviation,
-        obj.provinceId,
+        obj.regionId,
         obj.id
       ])
       .then(res => res.rows[0].id)

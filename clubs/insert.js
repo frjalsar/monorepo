@@ -5,7 +5,7 @@ function insert (db) {
         fullname,
         shortname,        
         abbreviation,
-        provinceid
+        regionid
       )
       VALUES ($1, $2, $3, $4)
       RETURNING id
@@ -14,7 +14,7 @@ function insert (db) {
       obj.fullName,
       obj.shortName,
       obj.abbreviation,
-      obj.provinceId
+      obj.regionId
     ])
   }
 }

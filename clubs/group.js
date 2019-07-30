@@ -9,21 +9,21 @@ function group (list) {
         shortName: item.shortname,
         abbreviation: item.abbreviation,
         thorId: item.thorid,
-        provinceId: item.provinceid,
-        province: {}
+        regionId: item.regionid,
+        region: {}
       }
       result.push(clubObj)
       currentId = item.id
     }
 
     const current = result[result.length - 1]
-    if (item.provinceid) {
-      const province = {
-        id: item.provinceid,
-        fullName: item.provincename,
-        abbreviation: item.provinceabbr
+    if (item.regionid) {
+      const region = {
+        id: item.regionid,
+        fullName: item.regionname,
+        abbreviation: item.regionabbr
       }
-      current.province = province
+      current.region = region
     }
   })
   return result

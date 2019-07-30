@@ -4,12 +4,12 @@ const createGetAllClubs = require('./getAll')
 const createSelectClub = require('./select')
 const createUpdate = require('./update')
 const createInsert = require('./insert')
-const groupProvince = require('./group')
+const groupRegion = require('./group')
 
 router.get('/', (_, res) => {
   const getAll = createGetAllClubs(pool)
   return getAll().then(list => {
-    const groupedList = groupProvince(list)
+    const groupedList = groupRegion(list)
     res.json(groupedList)
   })
 })
@@ -17,7 +17,7 @@ router.get('/', (_, res) => {
 router.get('/:id', (req, res) => {
   const select = createSelectClub(pool)
   return select(req.params.id).then(list => {
-    const groupedList = groupProvince(list)
+    const groupedList = groupRegion(list)
     res.json(groupedList)
   })
 })

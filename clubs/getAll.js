@@ -6,12 +6,12 @@ function getAll (db) {
         c.fullname,
         c.shortname,
         c.abbreviation,
-        p.id provinceid,
-        p.fullname provincename,
-        p.abbreviation provinceabbr
+        r.id regionid,
+        r.fullname regionname,
+        r.abbreviation regionabbr
       FROM clubs c
       LEFT JOIN
-        provinces p ON p.id = c.provinceid
+        regions r ON r.id = c.regionid
       ORDER BY
         c.fullname asc
     `

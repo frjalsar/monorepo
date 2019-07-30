@@ -13,6 +13,7 @@ const createRemoveMembership = require('../membership/remove')
 const createInsertMembership = require('../membership/insert')
 
 router.get('/', (req, res) => {
+  console.log('hérna')
   const findAthlete = createFindAthlete(pool)
 
   return findAthlete(req.query.search).then(list => {

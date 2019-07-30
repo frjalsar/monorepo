@@ -7,12 +7,12 @@ function select (db) {
         c.shortname,
         c.abbreviation,
         c.thorid,
-        p.id provinceid,
-        p.fullname provincename,
-        p.abbreviation provinceabbr
+        p.id regionid,
+        p.fullname regionname,
+        p.abbreviation regionabbr
       FROM clubs c
       LEFT JOIN
-        provinces p ON p.id = c.provinceid
+        regions p ON p.id = c.regionid
       WHERE
         c.id = $1
     `
