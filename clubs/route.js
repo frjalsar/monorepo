@@ -7,6 +7,8 @@ const createInsert = require('./insert')
 const groupRegion = require('./group')
 
 router.get('/', (_, res) => {
+  res.set('Cache-Control', 'public, max-age=0')
+
   const getAll = createGetAllClubs(pool)
   return getAll().then(list => {
     const groupedList = groupRegion(list)
