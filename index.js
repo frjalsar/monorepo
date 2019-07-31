@@ -1,4 +1,5 @@
 const express = require('express')
+const compression = require('compression')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
@@ -8,6 +9,7 @@ const clubRoute = require('./clubs/route')
 const regionRoute = require('./regions/route')
 
 const app = express()
+app.use(compression())
 app.use(cors()) // All sites, fix before launch
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
