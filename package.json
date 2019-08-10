@@ -11,31 +11,38 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/frjalsar/felagatal.git"
+    "url": "https://github.com/frjalsar/api-service.git"
   },
   "author": "Skráninganefnd",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/frjalsar/felagatal/issues"
+    "url": "https://github.com/frjalsar/api-service/issues"
   },
-  "homepage": "https://github.com/frjalsar/felagatal#readme",
+  "homepage": "https://github.com/frjalsar/api-service#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
+    "connect-ensure-login": "^0.1.1",
     "connect-pg-simple": "^6.0.0",
+    "connect-redis": "^3.4.2",
+    "cookie-parser": "^1.4.4",
+    "cookies": "^0.7.3",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
-    "eslint": "^6.1.0",
     "express": "^4.17.1",
+    "express-session": "^1.16.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.12.0",
     "pg-parameterize": "^2.0.2",
+    "redis": "^2.8.0",
     "superagent": "^5.1.0",
+    "uid-safe": "^2.1.5",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^6.1.0",
     "eslint-config-standard": "^13.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^9.1.0",
