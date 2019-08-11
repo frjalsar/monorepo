@@ -22,10 +22,7 @@ const whitelist = [
   'https://icelandathletics-membership.herokuapp.com'
 ]
 */
-app.use(cors({
-  origin: true,
-  credentials: true
-})) // All sites, fix before launch
+app.use(cors()) // All sites, fix before launch
 app.use(cookieParser())
 app.use(bodyParser.json({ limit: '40mb' }))
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
