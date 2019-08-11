@@ -16,18 +16,14 @@ const loginRoute = require('./auth/route')
 
 const app = express()
 app.use(compression())
+/*
 const whitelist = [
   'http://icelandathletics.local:1234',
   'https://icelandathletics-membership.herokuapp.com'
 ]
+*/
 app.use(cors({
-  origin: (origin, cb) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      cb(null, true)
-    } else {
-      cb(new Error('Not allowed by CORS'))
-    }
-  },
+  origin: true,
   credentials: true
 })) // All sites, fix before launch
 app.use(cookieParser())
