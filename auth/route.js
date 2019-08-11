@@ -12,7 +12,8 @@ router.post('/', (req, res) => {
       uid(18).then(sid => {
         redis.set(sid, JSON.stringify(user))
         res.cookie('icelandathletics', sid, {
-          httpOnly: true
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production'
         })
         res.json(user)
       })
