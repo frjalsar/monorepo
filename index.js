@@ -17,8 +17,8 @@ const loginRoute = require('./auth/route')
 const app = express()
 app.use(compression())
 const whitelist = [
-  'http://icelandathletics.local:1234',
-  'https://icelandathletics-membership.herokuapp.com'
+  'http://fri.local:1234',
+  'https://fri-api.herokuapp.com'
 ]
 app.use(cors({
   origin: (origin, cb) => {
