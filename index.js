@@ -22,6 +22,7 @@ const whitelist = [
 ]
 app.use(cors({
   origin: (origin, cb) => {
+    console.log('origin', origin)
     if (whitelist.indexOf(origin) !== -1) {
       cb(null, true)
     } else {
