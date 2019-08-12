@@ -11,9 +11,7 @@ router.post('/', (req, res) => {
     if (user) {
       uid(18).then(sid => {
         redis.set(sid, JSON.stringify(user))
-        res.cookie('icelandathletics', sid, {
-          domain: 'icelandathletics-membership.herokuapp.com'
-        })
+        res.cookie('icelandathletics', sid)
         res.json(user)
       })
     } else {
