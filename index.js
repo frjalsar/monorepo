@@ -18,7 +18,9 @@ const loginRoute = require('./auth/route')
 const app = express()
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(enforceHttps())
+  app.use(enforceHttps({
+    trustProtoHeader: true
+  }))
   app.use(compression())
   app.use(helmet())
 }
