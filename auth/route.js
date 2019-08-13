@@ -11,7 +11,9 @@ router.post('/', (req, res) => {
     if (user) {
       uid(18).then(sid => {
         redis.set(sid, JSON.stringify(user))
-        res.cookie('icelandathletics', sid)
+        res.cookie('icelandathletics', sid, {
+          domain: '.fri.is'
+        })
         res.json(user)
       })
     } else {

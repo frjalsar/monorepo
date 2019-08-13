@@ -17,7 +17,7 @@ const loginRoute = require('./auth/route')
 const app = express()
 app.use(compression())
 const whitelist = [
-  'http://fri.local:1234',
+  'http://local.fri.is:1234',
   'https://felagatal.fri.is'
 ]
 app.use(cors({
