@@ -18,7 +18,8 @@ const app = express()
 app.use(compression())
 const whitelist = [
   'http://fri.local:1234',
-  'https://fri-api.herokuapp.com'
+  'https://fri-felagatal.herokuapp.com',
+  'https://felagatal.fri.is'
 ]
 app.use(cors({
   origin: (origin, cb) => {
