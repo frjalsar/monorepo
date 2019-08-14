@@ -11,13 +11,18 @@ router.post('/', (req, res) => {
     if (user) {
       uid(18).then(sid => {
         redis.set(sid, JSON.stringify(user))
-        res.cookie('icelandathletics', sid, {
+        res.cookie('FRI_API', sid, {
           domain: '.fri.is',
           sameSite: true,
+          httpOnly: true,
           maxAge: 7 * 24 * 60 * 60 * 1000,
           secure: process.env.NODE_ENV === 'production'
         })
-        res.json(user)
+        res.json({
+          username: user.username,
+          clubId: user.clubid,
+          admin: user.admin
+        })
       })
     } else {
       res.status(401).send('Notendanafn eða lykilorð rangt')

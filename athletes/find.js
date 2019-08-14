@@ -23,9 +23,9 @@ function find (db) {
       LEFT JOIN 
         clubs c ON c.id = m.clubid
       WHERE
-        a.fullname like $1        
+        a.fullname ilike $1
       OR
-        a.ssnr like $2
+        a.ssnr ilike $2
       ORDER BY
         a.fullname ASC,
         a.ssnr ASC,

@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const compression = require('compression')
+const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
 const enforceHttps = require('express-sslify').HTTPS
@@ -41,12 +42,13 @@ app.use(cors({
   credentials: true
 }))
 
+app.use(cookieParser())
 app.use(bodyParser.json({ limit: '40mb' }))
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
 
 app.use('/login', loginRoute)
 app.use('/athletes', authorize(), athleteRoute)
-app.use('/clubs', clubRoute)
+app.use('/clubs', authorize(), clubRoute)
 app.use('/regions', authorize(), regionRoute)
 app.use('/passes', authorize(), passesRoute)
 
