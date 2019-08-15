@@ -8,6 +8,7 @@ const createFindAthlete = require('./find')
 const createSelectAthlete = require('./select')
 const createInsertAthlete = require('./insert')
 const createUpdateAthlete = require('./update')
+const createThorSearch = require('./thor')
 
 const createRemoveMembership = require('../membership/remove')
 const createInsertMembership = require('../membership/insert')
@@ -16,6 +17,19 @@ router.get('/', (req, res) => {
   const findAthlete = createFindAthlete(pool)
 
   return findAthlete(req.query.search).then(list => {
+    const groupedList = group(list)
+    res.json(groupedList)
+  })
+})
+
+router.get('/thor', (req, res) => {
+  const thorSearch = createThorSearch(pool)
+  
+  const thorId = req.query.thorId
+  const birthyearFrom = req.query.birthyearFrom
+  const birthyearTo = req.query.birthyearTo
+      
+  return thorSearch(thorId, birthyearFrom, birthyearTo).then(list => {
     const groupedList = group(list)
     res.json(groupedList)
   })
