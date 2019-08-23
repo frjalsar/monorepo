@@ -1,10 +1,21 @@
-const redis = require('../redis')
+const parseCookie = require('cookie').parse
 
-function authorize () {
+function makeAuthorize (redisClient) {
   return (req, res, next) => {
-    if (req.cookies.FRI_API) {
-      const value = req.cookies.FRI_API
-      redis.get(value, (err, reply) => {
+    let token
+    if (req.headers.cookie) {
+      token = parseCookie(req.headers.cookie).FRI_API_TOKEN
+    }
+
+    if (req.headers.authorization) {
+      const parts = req.headers.authorization.split(' ')
+      if (parts.length === 2 && parts[0] === 'Bearer') {
+        token = parts[1]
+      }
+    }
+
+    if (token) {
+      redisClient.get(token, (err, reply) => {
         if (!err && reply) {
           req.user = JSON.parse(reply)
           next()
@@ -18,4 +29,4 @@ function authorize () {
   }
 }
 
-module.exports = authorize
+module.exports = makeAuthorize

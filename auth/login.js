@@ -1,20 +1,30 @@
 const { compare } = require('bcryptjs')
-const findUser = require('../users/find')
+const uid = require('uid-safe')
+const makeSelectUsers = require('../lib/users/select')
 
-function login (username, password) {
-  return findUser(username).then(user => {
-    if (!user) {
-      return undefined
-    }
+function makeLogin (pgPool, redisClient) {
+  return function login (username, password) {
+    const selectUsers = makeSelectUsers(pgPool)
 
-    return compare(password, user.password).then(success => {
-      if (!success) {
+    return selectUsers(username).then(user => {
+      if (!user) {
         return undefined
-      } else {
-        return user
       }
+
+      return compare(password, user.password).then(success => {
+        if (!success) {
+          return undefined
+        } else {
+          return uid(18).then(token => {
+            user.password = undefined
+            redisClient.set(token, JSON.stringify(user), 'EX', 604800)
+            user.token = token
+            return user
+          })
+        }
+      })
     })
-  })
+  }
 }
 
-module.exports = login
+module.exports = makeLogin

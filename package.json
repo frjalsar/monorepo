@@ -1,12 +1,13 @@
 {
-  "name": "icelandathletics",
+  "name": "fri-api",
   "version": "1.0.0",
   "description": "Gagnagrunnur FRÍ",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "mocha **/**.spec.js",
-    "lint": "eslint .",
+    "start": "node ./server/index.js",
+    "test": "mocha ./test/",
+    "tdd": "mocha ./test/ --reporter dot --watch" ,
+    "lint": "eslint . --fix",    
     "ci": "npm run lint && npm run test"
   },
   "repository": {
@@ -22,13 +23,10 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
-    "connect-pg-simple": "^6.0.0",
-    "connect-redis": "^3.4.2",
-    "cookie-parser": "^1.4.4",
+    "cookie": "^0.4.0",
     "cors": "^2.8.5",
-    "dotenv": "^8.0.0",
+    "dotenv": "8.1.0",
     "express": "^4.17.1",
-    "express-session": "^1.16.2",
     "express-sslify": "^1.2.0",
     "helmet": "^3.20.0",
     "pg": "^7.12.0",
@@ -36,17 +34,18 @@
     "redis": "^2.8.0",
     "superagent": "^5.1.0",
     "uid-safe": "^2.1.5",
-    "uuid": "^3.3.2"
+    "uuid": "3.3.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^6.1.0",
-    "eslint-config-standard": "^13.0.1",
+    "eslint": "6.2.1",
+    "eslint-config-standard": "14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "husky": "^3.0.2",
-    "mocha": "^6.2.0"
+    "eslint-plugin-standard": "4.0.1",
+    "husky": "3.0.4",
+    "mocha": "^6.2.0",
+    "supertest": "^4.0.2"
   }
 }
