@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node ./server/index.js",
     "test": "mocha ./test/",
-    "tdd": "mocha ./test/ --reporter dot --watch" ,
-    "lint": "eslint . --fix",    
+    "tdd": "mocha ./test/ --reporter dot --watch",
+    "lint": "eslint . --fix",
     "ci": "npm run lint && npm run test"
   },
   "repository": {
@@ -25,6 +25,7 @@
     "compression": "^1.7.4",
     "cookie": "^0.4.0",
     "cors": "^2.8.5",
+    "date-fns": "^2.0.1",
     "dotenv": "8.1.0",
     "express": "^4.17.1",
     "express-sslify": "^1.2.0",
