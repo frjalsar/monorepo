@@ -46,9 +46,9 @@ function createService (pgPool, redisClient) {
   app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
 
   app.use('/login', makeLoginRoute(pgPool, redisClient))
-  app.use('/athletes', makeAthleteRoute(pgPool))
-  app.use('/clubs', makeClubRoute(pgPool))
-  app.use('/regions', makeRegionRoute(pgPool))
+  app.use('/athletes', authorize(), makeAthleteRoute(pgPool))
+  app.use('/clubs', authorize(), makeClubRoute(pgPool))
+  app.use('/regions', authorize(), makeRegionRoute(pgPool))
   // app.use('/passes', makePassesRoute(pgPool))
 
   return app
