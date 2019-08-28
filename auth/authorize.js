@@ -20,8 +20,6 @@ function makeAuthorize (redisClient) {
           if (!err && reply) {
             req.user = JSON.parse(reply)
             next()
-          } else {
-            res.sendStatus(401)
           }
         })
       } else {
