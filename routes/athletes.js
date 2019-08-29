@@ -26,7 +26,7 @@ function makeAthleteRoute (db) {
       .catch(next)
   })
 
-  router.put('/', hasAccess('id'), (req, res, next) => {
+  router.put('/', hasAccess('username', 'ssnr'), (req, res, next) => {
     const changeAthlete = makeChangeAthlete(db)
 
     changeAthlete(req.body)
@@ -34,7 +34,7 @@ function makeAthleteRoute (db) {
       .catch(next)
   })
 
-  router.post('/', hasAccess('id'), (req, res, next) => {
+  router.post('/', hasAccess('username', 'ssnr'), (req, res, next) => {
     const createAthlete = makeCreateAthlete(db)
 
     createAthlete(req.body)
