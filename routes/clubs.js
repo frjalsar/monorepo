@@ -1,5 +1,4 @@
 const express = require('express')
-const hasAccess = require('../auth/hasAccess')
 const makeSelectClubs = require('../lib/clubs/select')
 const makeUpdateClub = require('../lib/clubs/update')
 const makeInsertClub = require('../lib/clubs/insert')
@@ -26,23 +25,64 @@ function makeClubRoute (db) {
       .catch(next)
   })
 
-  router.put('/', hasAccess('clubId'), (req, res, next) => {
+  /*
+  hasAccess
+   - Notandi með clubId sama og er skráð sem current club.
+   - Notandi með regionId sama og er skráð sem region hjá current club.
+   - Notandi með regionAbbreviation eða clubAbbreviation sama og eitthvert thorClub í membership.
+  */
+
+  router.put('/', editAccess(db), (req, res, next) => {
     const updateClub = makeUpdateClub(db)
 
-    updateClub(req.body)
+    return updateClub(req.body)
       .then(res.json.bind(res))
       .catch(next)
   })
 
-  router.post('/', hasAccess('clubId'), (req, res, next) => {
+  router.post('/', createAccess(), (req, res, next) => {
     const insertClub = makeInsertClub(db)
 
-    insertClub(req.body)
+    return insertClub(req.body)
       .then(res.json.bind(res))
       .catch(next)
   })
 
   return router
+}
+
+function editAccess (db) {
+  return async (req, res, next) => {
+    const selectClubs = makeSelectClubs(db)
+    if (req.user) {
+      if (req.user.admin) {
+        return next()
+      }
+
+      if (req.user.clubId === req.body.id) {
+        return next()
+      }
+
+      const clubs = await selectClubs({ id: req.body.id }).then(mapClubs)
+      const clubRegionId = clubs[0] && clubs[0].regionId
+
+      if (req.user.regionId === clubRegionId) {
+        return next()
+      }
+    }
+
+    return res.sendStatus(401)
+  }
+}
+
+function createAccess () {
+  return (req, res, next) => {
+    if (req.user && req.user.admin) {
+      return next()
+    }
+
+    return res.sendStatus(401)
+  }
 }
 
 module.exports = makeClubRoute

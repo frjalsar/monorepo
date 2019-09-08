@@ -1,3 +1,4 @@
+const cleanKennitala = require('kennitala-utility').clean
 const express = require('express')
 const makeLogin = require('../auth/login')
 
@@ -6,7 +7,7 @@ function makeLoginRoute (db, redisClient) {
 
   router.post('/', (req, res, next) => {
     const login = makeLogin(db, redisClient)
-    const username = req.body.username
+    const username = cleanKennitala(req.body.username)
     const password = req.body.password
 
     return login(username, password)

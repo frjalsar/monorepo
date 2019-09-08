@@ -1,7 +1,7 @@
 const parseCookie = require('cookie').parse
 
 function makeAuthorize (redisClient) {
-  return function authorize () {
+  return function setUser () {
     return (req, res, next) => {
       let token
       if (req.headers.cookie) {
@@ -19,11 +19,11 @@ function makeAuthorize (redisClient) {
         redisClient.get(token, (err, reply) => {
           if (!err && reply) {
             req.user = JSON.parse(reply)
-            next()
+            return next()
           }
         })
       } else {
-        res.sendStatus(401)
+        return next()
       }
     }
   }

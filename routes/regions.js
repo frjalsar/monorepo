@@ -1,5 +1,4 @@
 const express = require('express')
-const hasAccess = require('../auth/hasAccess')
 const makeSelectRegions = require('../lib/regions/select')
 const makeUpdateRegion = require('../lib/regions/update')
 const mapRegions = require('../lib/regions/map')
@@ -25,7 +24,7 @@ function makeRegionsRoute (db) {
       .catch(next)
   })
 
-  router.put('/', hasAccess('regionId'), (req, res, next) => {
+  router.put('/', hasAccess(), (req, res, next) => {
     const updateRegion = makeUpdateRegion(db)
 
     return updateRegion(req.body, req.user)
@@ -34,6 +33,22 @@ function makeRegionsRoute (db) {
   })
 
   return router
+}
+
+function hasAccess () {
+  return (req, res, next) => {
+    if (req.user) {
+      if (req.user.admin) {
+        return next()
+      }
+
+      if (req.user.regionId === req.body.id) {
+        return next()
+      }
+    }
+
+    return res.sendStatus(401)
+  }
 }
 
 module.exports = makeRegionsRoute

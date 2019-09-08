@@ -40,21 +40,21 @@ describe('athletes', () => {
         clubs: [{
           id: 5,
           fullName: 'Ungmennafélagið Breiðablik',
-          legacyTeam: null,
+          thorClub: null,
           from: '1999-1-1',
           to: null,
           current: true
         }, {
           id: 73,
           fullName: 'Ungmennafélag Stafholtstungna',
-          legacyTeam: 'UMSB',
+          thorClub: 'UMSB',
           from: '1994-1-1',
           to: '1998-12-31',
           current: false
         }, {
           id: 54,
           fullName: 'Ungmennafélagið Leiknir',
-          legacyTeam: null,
+          thorClub: null,
           from: '1990-1-1',
           to: '1993-12-31',
           current: false
