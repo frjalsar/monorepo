@@ -58,11 +58,18 @@ function editAccess (db) {
         return next()
       }
 
+      if (req.user.username === req.body.ssnr) {
+        return next()
+      }
+
       const athletes = await selectAthletes({ id: req.body.id }).then(mapAthletes)
       const foundMembership = athletes[0] && athletes[0].membership.find(club => {
-        const foundClub = club.id === req.user.clubId
-        const foundRegion = club.regionId === req.user.regionId
-        return foundClub || foundRegion
+        const foundClub = req.user.clubId && req.user.clubId === club.id
+        const foundRegion = req.user.regionId && req.user.regionId === club.regionId
+        const foundThorClub = req.user.clubId && req.user.clubAbbreviation === club.thorClub
+        const foundThorRegion = req.user.regionId && req.user.regionAbbreviation === club.thorClub
+
+        return foundClub || foundRegion || foundThorClub || foundThorRegion
       })
 
       if (foundMembership) {
