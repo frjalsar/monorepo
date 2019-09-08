@@ -10,7 +10,7 @@ function makeAthleteRoute (db) {
   router.get('/', (req, res, next) => {
     const selectAthlete = makeSelectAthletes(db)
 
-    return selectAthlete(req.query)
+    return selectAthlete(req.query, req.user)
       .then(mapAthletes)
       .then(res.json.bind(res))
       .catch(next)
@@ -18,8 +18,7 @@ function makeAthleteRoute (db) {
 
   router.get('/:id', (req, res, next) => {
     const selectAthlete = makeSelectAthletes(db)
-
-    return selectAthlete({ id: req.params.id })
+    return selectAthlete({ id: req.params.id }, req.user)
       .then(mapAthletes)
       .then(res.json.bind(res))
       .catch(next)
