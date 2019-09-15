@@ -15,6 +15,7 @@ function createService (pgPool, redisClient) {
   const makeAthleteRoute = require('../routes/athletes')
   const makeClubRoute = require('../routes/clubs')
   const makeRegionRoute = require('../routes/regions')
+  const makeMembershipRoute = require('../routes/membership')
   // const makePassesRoute = require('../passes/route')
   const makeLoginRoute = require('../routes/login')
   const app = express()
@@ -40,6 +41,7 @@ function createService (pgPool, redisClient) {
   app.use('/athletes', makeAthleteRoute(pgPool))
   app.use('/clubs', makeClubRoute(pgPool))
   app.use('/regions', makeRegionRoute(pgPool))
+  app.use('/membership', makeMembershipRoute(pgPool))
   // app.use('/passes', makePassesRoute(pgPool))
 
   return app
