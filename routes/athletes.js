@@ -58,7 +58,7 @@ function editAccess (db) {
         return next()
       }
 
-      if (req.user.username === req.body.ssnr) {
+      if (req.user.username === req.body.kt) {
         return next()
       }
 
