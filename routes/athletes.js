@@ -34,7 +34,7 @@ function makeAthleteRoute (db) {
   router.put('/', editAccess(db), (req, res, next) => {
     const changeAthlete = makeChangeAthlete(db)
 
-    return changeAthlete(req.body)
+    return changeAthlete(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
@@ -42,7 +42,7 @@ function makeAthleteRoute (db) {
   router.post('/', createAccess(), (req, res, next) => {
     const createAthlete = makeCreateAthlete(db)
 
-    return createAthlete(req.body)
+    return createAthlete(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })

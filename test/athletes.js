@@ -36,7 +36,6 @@ describe('athletes', () => {
         gender: 1,
         country: 'ISL',
         thorId: 20844,
-        confirmedByUser: 1,
         clubs: [{
           id: 5,
           fullName: 'Ungmennafélagið Breiðablik',

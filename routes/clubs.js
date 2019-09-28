@@ -35,7 +35,7 @@ function makeClubRoute (db) {
   router.put('/', editAccess(db), (req, res, next) => {
     const updateClub = makeUpdateClub(db)
 
-    return updateClub(req.body)
+    return updateClub(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
@@ -43,7 +43,7 @@ function makeClubRoute (db) {
   router.post('/', createAccess(), (req, res, next) => {
     const insertClub = makeInsertClub(db)
 
-    return insertClub(req.body)
+    return insertClub(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
