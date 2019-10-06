@@ -63,11 +63,11 @@ function editAccess (db) {
       }
 
       const athletes = await selectAthletes({ id: req.body.id }).then(mapAthletes)
-      const foundMembership = athletes[0] && athletes[0].membership.find(club => {
-        const foundClub = req.user.clubId && req.user.clubId === club.id
-        const foundRegion = req.user.regionId && req.user.regionId === club.regionId
-        const foundThorClub = req.user.clubId && req.user.clubAbbreviation === club.thorClub
-        const foundThorRegion = req.user.regionId && req.user.regionAbbreviation === club.thorClub
+      const foundMembership = athletes[0] && athletes[0].membership.find(m => {
+        const foundClub = req.user.clubId && req.user.clubId === m.clubId
+        const foundRegion = req.user.regionId && req.user.regionId === m.regionId
+        const foundThorClub = req.user.clubId && req.user.clubAbbreviation === m.legacyClub
+        const foundThorRegion = req.user.regionId && req.user.regionAbbreviation === m.legacyClub
 
         return foundClub || foundRegion || foundThorClub || foundThorRegion
       })

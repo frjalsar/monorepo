@@ -36,24 +36,24 @@ describe('athletes', () => {
         gender: 1,
         country: 'ISL',
         thorId: 20844,
-        clubs: [{
-          id: 5,
+        membership: [{
+          clubId: 5,
           fullName: 'Ungmennafélagið Breiðablik',
-          thorClub: null,
+          legacyClub: null,
           from: '1999-1-1',
           to: null,
           current: true
         }, {
-          id: 73,
+          clubId: 73,
           fullName: 'Ungmennafélag Stafholtstungna',
-          thorClub: 'UMSB',
+          legacyClub: 'UMSB',
           from: '1994-1-1',
           to: '1998-12-31',
           current: false
         }, {
-          id: 54,
+          clubId: 54,
           fullName: 'Ungmennafélagið Leiknir',
-          thorClub: null,
+          legacyClub: null,
           from: '1990-1-1',
           to: '1993-12-31',
           current: false
