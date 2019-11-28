@@ -17,10 +17,17 @@ function makeAuthorize (redisClient) {
 
       if (token) {
         redisClient.get(token, (err, reply) => {
-          if (!err && reply) {
-            req.user = JSON.parse(reply)
+          if (err) {
+            console.log('Error authorizing', err)
             return next()
           }
+
+          if (!reply) {
+            return res.sendStatus(401)
+          }
+
+          req.user = JSON.parse(reply)
+          return next()
         })
       } else {
         return next()
