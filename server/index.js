@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const pg = require('pg')
+const sql = require('mssql')
 const redis = require('redis')
 const createService = require('./service')
 
@@ -15,4 +16,7 @@ const redisClient = redis.createClient({
   url: process.env.REDIS_URL
 })
 
-createService(pgPool, redisClient).listen(process.env.PORT || 3000)
+const sqlPool = new sql.ConnectionPool(process.env.THOR_URL)
+const sqlConnection = sqlPool.connect()
+
+createService(pgPool, redisClient, sqlConnection).listen(process.env.PORT || 3000)

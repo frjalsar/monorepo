@@ -8,7 +8,7 @@ const cors = require('cors')
 const makeAuthorize = require('../auth/authorize')
 const corsOrigin = require('../auth/corsOrigin')
 
-function createService (pgPool, redisClient) {
+function createService (pgPool, redisClient, sqlConnection) {
   const authorize = makeAuthorize(redisClient)
 
   // Routes
@@ -16,6 +16,7 @@ function createService (pgPool, redisClient) {
   const makeClubRoute = require('../routes/clubs')
   const makeRegionRoute = require('../routes/regions')
   const makeMembershipRoute = require('../routes/membership')
+  const makeThorRoute = require('../routes/thor')
   // const makePassesRoute = require('../passes/route')
   const makeLoginRoute = require('../routes/login')
   const app = express()
@@ -42,6 +43,7 @@ function createService (pgPool, redisClient) {
   app.use('/clubs', makeClubRoute(pgPool))
   app.use('/regions', makeRegionRoute(pgPool))
   app.use('/membership', makeMembershipRoute(pgPool))
+  app.use('/thor', makeThorRoute(sqlConnection))
   // app.use('/passes', makePassesRoute(pgPool))
 
   return app
