@@ -17,8 +17,8 @@ const sqlConnection = sqlConnectionPool.connect()
 
 let counter = 0
 pgPool
-  .query('SELECT id, thorid FROM athletes WHERE id > 397')
-  .then(res => {    
+  .query('SELECT id, thorid FROM athletes')
+  .then(res => {
     logger.info('Got list athletes', { count: res.rows.length })
 
     return sqlConnection.then(sqlPool => {
@@ -33,7 +33,7 @@ pgPool
           `)
         }).then(res => {
           const dags = (res && res.recordset.length && res.recordset[0].Dagsetning) || null
-          
+
           return pgPool
             .query('UPDATE athletes SET lastcompeted = $1 WHERE id = $2', [dags, curr.id])
             .then(() => {
