@@ -34,6 +34,7 @@
     "express": "^4.17.1",
     "express-sslify": "^1.2.0",
     "helmet": "^3.21.1",
+    "heroku-logger": "^0.3.3",
     "kennitala-utility": "^4.4.2",
     "mssql": "^6.0.1",
     "pg": "^7.12.0",
