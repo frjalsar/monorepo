@@ -15,38 +15,48 @@ const pgPool = new pg.Pool({
 const sqlConnectionPool = new sql.ConnectionPool(process.env.THOR_URL)
 const sqlConnection = sqlConnectionPool.connect()
 
-let counter = 0
-pgPool
-  .query('SELECT id, thorid FROM athletes')
+sqlConnection
+  .then(sqlPool => {
+    logger.info('Connected to Thor')
+
+    return sqlPool
+      .query(`
+        SELECT
+          max([Dagsetning]) Dags,
+          [Keppandanúmer]
+        FROM
+          [Athletics].[dbo].[Athl$Afrek]        
+        WHERE
+          [Dagsetning] <> ''
+        AND
+          [Keppandanúmer] <>  ''
+        GROUP BY
+          [Keppandanúmer]`
+      )
+      .then(achievements => {
+        logger.info('Got achievements', { count: achievements.recordset.length })
+        const values = achievements.recordset.map(item => {
+          const dags = new Date(item.Dags).toUTCString()
+          return '(' + item['Keppandanúmer'] + ', \'' + dags + '\'::timestamp)'
+        }).join(',')
+
+        logger.info('Starting insert')
+
+        const sql = `
+          UPDATE athletes SET
+            lastcompeted = ach.dags
+          FROM (VALUES
+            ${values}
+          ) AS ach(id, dags)
+          WHERE
+            ach.id = athletes.thorid`
+        return pgPool.query(sql)
+      })
+  })
   .then(res => {
-    logger.info('Got list athletes', { count: res.rows.length })
-
-    return sqlConnection.then(sqlPool => {
-      logger.info('Connected to thor')
-      return res.rows.reduce((prev, curr) => {
-        return prev.then(() => {
-          return sqlPool.query(`
-            SELECT TOP 1 [Dagsetning]
-            FROM [Athletics].[dbo].[Athl$Afrek]
-            WHERE [Keppandanúmer] = ${curr.thorid}
-            ORDER BY [Dagsetning] DESC
-          `)
-        }).then(res => {
-          const dags = (res && res.recordset.length && res.recordset[0].Dagsetning) || null
-
-          return pgPool
-            .query('UPDATE athletes SET lastcompeted = $1 WHERE id = $2', [dags, curr.id])
-            .then(() => {
-              counter++
-              logger.info('Updated', curr)
-            })
-        })
-      }, Promise.resolve())
-    })
-  }).then(() => {
     const endtime = new Date().getTime()
     const time = endtime - starttime
-    logger.info('Finished', { counter, time })
+    logger.info('Finished', { count: res.rowCount, time })
     process.exit(0)
   })
   .catch(e => {
