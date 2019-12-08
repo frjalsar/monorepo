@@ -36,6 +36,7 @@
     "helmet": "^3.21.1",
     "heroku-logger": "^0.3.3",
     "kennitala-utility": "^4.4.2",
+    "lodash.isempty": "^4.4.0",
     "mssql": "^6.0.1",
     "pg": "^7.12.0",
     "pg-parameterize": "^2.0.2",
