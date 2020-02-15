@@ -1,7 +1,5 @@
 function corsOrigin () {
   const whitelist = [
-    'http://local.fri.is:1234',
-    'http://local.fri.is:3010',
     'https://felagatal.fri.is'
   ]
 

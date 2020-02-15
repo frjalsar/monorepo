@@ -27,12 +27,16 @@ function createService (pgPool, redisClient, sqlConnection) {
     }))
     app.use(compression())
     app.use(helmet())
+    app.use(cors({
+      origin: corsOrigin(),
+      credentials: true
+    }))
+  } else {
+    app.use(cors({
+      origin: true,
+      credentials: true
+    }))
   }
-
-  app.use(cors({
-    origin: corsOrigin(),
-    credentials: true
-  }))
 
   app.use(bodyParser.json({ limit: '40mb' }))
   app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
