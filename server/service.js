@@ -8,8 +8,8 @@ const cors = require('cors')
 const makeAuthorize = require('../auth/authorize')
 const corsOrigin = require('../auth/corsOrigin')
 
-function createService (pgPool, redisClient, sqlConnection) {
-  const authorize = makeAuthorize(redisClient)
+function createService (pgPool, redisClient, sqlConnection, logger) {
+  const authorize = makeAuthorize(redisClient, logger)
 
   // Routes
   const makeAthleteRoute = require('../routes/athletes')
@@ -18,7 +18,7 @@ function createService (pgPool, redisClient, sqlConnection) {
   const makeMembershipRoute = require('../routes/membership')
   const makeThorRoute = require('../routes/thor')
   // const makePassesRoute = require('../passes/route')
-  const makeLoginRoute = require('../routes/login')
+  const makeLoginRoute = require('../routes/user')
   const app = express()
 
   if (process.env.NODE_ENV === 'production') {
@@ -27,22 +27,18 @@ function createService (pgPool, redisClient, sqlConnection) {
     }))
     app.use(compression())
     app.use(helmet())
-    app.use(cors({
-      origin: corsOrigin(),
-      credentials: true
-    }))
-  } else {
-    app.use(cors({
-      origin: true,
-      credentials: true
-    }))
   }
+
+  app.use(cors({
+    origin: corsOrigin(),
+    credentials: true
+  }))
 
   app.use(bodyParser.json({ limit: '40mb' }))
   app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
 
-  app.use('/login', makeLoginRoute(pgPool, redisClient))
   app.use(authorize())
+  app.use('/user', makeLoginRoute(pgPool, redisClient, logger))
   app.use('/athletes', makeAthleteRoute(pgPool))
   app.use('/clubs', makeClubRoute(pgPool))
   app.use('/regions', makeRegionRoute(pgPool))

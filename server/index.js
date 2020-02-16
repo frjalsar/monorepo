@@ -3,6 +3,7 @@ require('dotenv').config()
 const pg = require('pg')
 const sql = require('mssql')
 const redis = require('redis')
+const logger = require('heroku-logger')
 const createService = require('./service')
 
 const pgPool = new pg.Pool({
@@ -19,4 +20,9 @@ const redisClient = redis.createClient({
 const sqlPool = new sql.ConnectionPool(process.env.THOR_URL)
 const sqlConnection = sqlPool.connect()
 
-createService(pgPool, redisClient, sqlConnection).listen(process.env.PORT || 3000)
+createService(
+  pgPool,
+  redisClient,
+  sqlConnection,
+  logger
+).listen(process.env.PORT || 3000)
