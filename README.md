@@ -46,7 +46,7 @@ Til að breyta upplýsingum þarf að skrá sig inn. Hægt er að skrá sig inn 
 
 Athugið að þetta auðkennir bara notandann fyrir api-service. Þú þarft að halda utan um session á þinni síðu. API þjónustan er stateless og heldur ekki utan um sessions heldur tekur bara á móti token í formi köku eða Bearer til að auðkenna fyrirspurn. Kerfið sendir notendaupplýsingarnar líka sem JSON þegar viðkomandi skráir sig inn og því auðvelt að halda utan um slíkt í clientinum með köku eða storage (td. session eða local). Þær upplýsingar eru ekki viðkvæmar (nafn, félag) og innihalda engar upplýsingar sem api-service notar til að auðkenna notendann. Þær upplýsingar eru í FRI_API_TOKEN kökunni sem er httpOnly og secure. Þessi token ætti aldrei að vera geymdur á clientinum þar sem hægt er að stela honum.
 
-Það er hægt að senda fyrirspurn á http://api.fri.is/user með kökunni til að sjá hvaða notandi er bakvið tokenið.
+Það er hægt að senda fyrirspurn á http://api.fri.is/user með kökunni til að sjá hvaða notandi er bakvið tokenið. Ef þú ert að smíða nýtt kerfi er ráðlagt að 
 
 ### Coding rules
 Kóðasafnið notar eslint-standard til að viðhalda sama kóðastíl af öllum sem snerta á verkefninu. Með því verður allur kóðu samræmdur og við lendum ekki í óþarfa breytingasögum sem snúast um formatting. 
