@@ -20,9 +20,15 @@ const redisClient = redis.createClient({
 const sqlPool = new sql.ConnectionPool(process.env.THOR_URL)
 const sqlConnection = sqlPool.connect()
 
+const jiraConfig = {
+  url: process.env.JIRA_URL,
+  auth: Buffer.from(process.env.JIRA_USERNAME + ':' + process.env.JIRA_TOKEN).toString('base64')
+}
+
 createService(
   pgPool,
   redisClient,
   sqlConnection,
+  jiraConfig,
   logger
 ).listen(process.env.PORT || 3000)

@@ -8,7 +8,7 @@ const cors = require('cors')
 const makeAuthorize = require('../auth/authorize')
 const corsOrigin = require('../auth/corsOrigin')
 
-function createService (pgPool, redisClient, sqlConnection, logger) {
+function createService (pgPool, redisClient, sqlConnection, jiraConfig, logger) {
   const authorize = makeAuthorize(redisClient, logger)
 
   // Routes
@@ -17,6 +17,7 @@ function createService (pgPool, redisClient, sqlConnection, logger) {
   const makeRegionRoute = require('../routes/regions')
   const makeMembershipRoute = require('../routes/membership')
   const makeThorRoute = require('../routes/thor')
+  const makeJiraRoute = require('../routes/jira')
   // const makePassesRoute = require('../passes/route')
   const makeLoginRoute = require('../routes/user')
   const app = express()
@@ -44,6 +45,7 @@ function createService (pgPool, redisClient, sqlConnection, logger) {
   app.use('/regions', makeRegionRoute(pgPool))
   app.use('/membership', makeMembershipRoute(pgPool))
   app.use('/thor', makeThorRoute(sqlConnection))
+  app.use('/jira', makeJiraRoute(jiraConfig))
   // app.use('/passes', makePassesRoute(pgPool))
 
   return app
