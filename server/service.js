@@ -44,7 +44,7 @@ function createService (pgPool, redisClient, sqlConnection, jiraConfig, logger) 
   app.use('/clubs', makeClubRoute(pgPool))
   app.use('/regions', makeRegionRoute(pgPool))
   app.use('/membership', makeMembershipRoute(pgPool))
-  app.use('/thor', makeThorRoute(sqlConnection))
+  app.use('/thor', makeThorRoute(sqlConnection, logger))
   app.use('/jira', makeJiraRoute(jiraConfig))
   // app.use('/passes', makePassesRoute(pgPool))
 
