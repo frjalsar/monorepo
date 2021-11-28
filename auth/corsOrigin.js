@@ -1,7 +1,8 @@
 function corsOrigin () {
   const whitelist = {
     production: [
-      'https://felagatal.fri.is'
+      'https://felagatal.fri.is',
+      'https://fri-mot-production.herokuapp.com'
     ],
     development: [
       'http://local.fri.is:1234',
