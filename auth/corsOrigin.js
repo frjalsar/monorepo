@@ -6,6 +6,7 @@ function corsOrigin () {
     ],
     development: [
       'http://local.fri.is:1234',
+      'http://localhost:1234',
       'http://local.fri.is:3010'
     ]
   }
