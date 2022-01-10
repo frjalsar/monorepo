@@ -20,6 +20,12 @@ function makeLoginRoute (db, redisClient, logger) {
     res.json(req.user)
   })
 
+  router.post('/islogin', (req, res, _) => {
+    console.log('body')
+    console.log(req.body.token)
+    res.status(200).send('ok')
+  })
+
   router.post('/login', (req, res, next) => {
     const oldToken = getToken(req.headers)
     const username = cleanKennitala(req.body.username)
