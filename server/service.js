@@ -45,9 +45,9 @@ function createService (pgPool, redisClient, sqlConnection, jiraConfig, logger) 
       type: () => true,
       limit: '100mb',
     }),
-    (req, res, next) => {
-      console.log('----')
-      console.log(req)
+    (req, res, next) => {      
+      console.log('buffer', req.body)
+      console.log('text', Buffer.from(req.body).toString('utf-8'))
       res.send('ok')
   })
 
