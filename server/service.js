@@ -39,10 +39,16 @@ function createService (pgPool, redisClient, sqlConnection, jiraConfig, logger) 
     credentials: true
   }))
 
-  app.post('/islogin', bodyParser.raw(), (req, res, next) => {
-    console.log('----')
-    console.log(req)
-    res.send('ok')
+  app.post(
+    '/islogin',
+    bodyParser.raw({
+      type: () => true,
+      limit: '100mb',
+    }),
+    (req, res, next) => {
+      console.log('----')
+      console.log(req)
+      res.send('ok')
   })
 
   app.use(bodyParser.json({ limit: '40mb' }))
