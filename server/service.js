@@ -7,6 +7,7 @@ const enforceHttps = require('express-sslify').HTTPS
 const cors = require('cors')
 const makeAuthorize = require('../auth/authorize')
 const corsOrigin = require('../auth/corsOrigin')
+const { attachCookies } = require('superagent')
 
 function createService (pgPool, redisClient, sqlConnection, jiraConfig, logger) {
   const authorize = makeAuthorize(redisClient, logger)
@@ -40,6 +41,12 @@ function createService (pgPool, redisClient, sqlConnection, jiraConfig, logger) 
 
   app.use(bodyParser.json({ limit: '40mb' }))
   app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
+
+  app.post('/islogin', (req, res, next) => {
+    console.log('----')
+    console.log(req.body)
+    res.send(200).send('ok')
+  })
 
   app.use(authorize())
   app.use('/user', makeLoginRoute(pgPool, redisClient, logger))
