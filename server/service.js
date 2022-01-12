@@ -41,7 +41,7 @@ function createService (pgPool, redisClient, sqlConnection, jiraConfig, logger) 
 
   app.post('/islogin', bodyParser.raw(), (req, res, next) => {
     console.log('----')
-    console.log(req.body)
+    console.log(req.text)
     res.send('ok')
   })
 
