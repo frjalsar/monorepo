@@ -39,15 +39,15 @@ function createService (pgPool, redisClient, sqlConnection, jiraConfig, logger) 
     credentials: true
   }))
 
-  app.use(bodyParser.json({ limit: '40mb' }))
-  app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
-
-  app.post('/islogin', (req, res, next) => {
+  app.post('/islogin', bodyParser.raw(), (req, res, next) => {
     console.log('----')
     console.log(req.body)
-    res.send(200).send('ok')
+    res.send('ok')
   })
 
+  app.use(bodyParser.json({ limit: '40mb' }))
+  app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
+  
   app.use(authorize())
   app.use('/user', makeLoginRoute(pgPool, redisClient, logger))
   app.use('/athletes', makeAthleteRoute(pgPool))
