@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const { parseMssqlConnectionString } = require('@tediousjs/connection-string')
 const pg = require('pg')
 const sql = require('mssql')
 const redis = require('redis')
@@ -17,7 +17,12 @@ const redisClient = redis.createClient({
   url: process.env.REDIS_URL
 })
 
-const sqlPool = new sql.ConnectionPool(process.env.THOR_URL)
+const sqlPool = new sql.ConnectionPool({
+  user: process.env.THOR_USER,
+  password: process.env.THOR_PWD,
+  server: process.env.THOR_SERVER,
+  database: process.env.THOR_DB,  
+})
 const sqlConnection = sqlPool.connect()
 
 const jiraConfig = {
