@@ -33,7 +33,7 @@
     "dotenv": "^11.0.0",
     "express": "^4.17.2",
     "express-sslify": "^1.2.0",
-    "helmet": "^3.22.0",
+    "helmet": "^5.0.1",
     "heroku-logger": "^0.3.3",
     "kennitala-utility": "^5.0.0",
     "lodash.isempty": "^4.4.0",
