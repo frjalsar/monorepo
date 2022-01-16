@@ -10,28 +10,31 @@
         <router-link to="/idkendur" class="nav-link link-dark text-decoration-none">Iðkendur</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/felog" class="nav-link link-dark text-decoration-none">Félög</router-link>        
+        <router-link to="/" class="nav-link link-dark text-decoration-none">Félög</router-link>        
       </li>      
       <li class="nav-item">
-        <router-link to="/ithrottaherud" class="nav-link link-dark text-decoration-none">Íþróttahéruð</router-link>
+        <router-link to="/" class="nav-link link-dark text-decoration-none">Íþróttahéruð</router-link>
       </li>  
     </ul>
      <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <router-link to="/idkendur" class="nav-link link-dark text-decoration-none">Dómarar</router-link>
+        <router-link to="/" class="nav-link link-dark text-decoration-none">Dómarar</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/idkendur" class="nav-link link-dark text-decoration-none">Mannvirki</router-link>
+        <router-link to="/" class="nav-link link-dark text-decoration-none">Mannvirki</router-link>
       </li>      
     </ul>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">      
       <li class="nav-item">
-        <router-link to="/idkendur" class="nav-link link-dark text-decoration-none">Félagaskipti</router-link>
+        <router-link to="/" class="nav-link link-dark text-decoration-none">Félagaskipti</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/" class="nav-link link-dark text-decoration-none">Mótaumsóknir</router-link>
       </li>      
     </ul>
-    <hr> 
+    <hr />
   </nav>
 
   <main class="py-4 px-5">    
