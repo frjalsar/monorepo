@@ -4,9 +4,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "heroku-postbuild": "npm run build",
+    "start": "node server.js"
   },
   "dependencies": {
+    "body-parser": "^1.19.1",
+    "compression": "^1.7.4",
+    "express": "^4.17.2",
+    "express-sslify": "^1.2.0",
+    "helmet": "^5.0.1",
     "lodash.debounce": "^4.0.8",
     "superagent": "^7.0.2",
     "vue": "^3.2.25",
