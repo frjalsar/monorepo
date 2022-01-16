@@ -5,26 +5,9 @@
 
   <div class="card shadow-sm mb-3">
     <div class="card-body">
-      <SearchPanel
-        :regions="regions"
-        :clubs="clubs"
-        :legacy="legacy"
-        :settings="settings"
-        @search="setQueryParams"
-    />
+      Edit athlete      
     </div>
-  </div>
-
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      <SimpleTable
-        :data="athletes"     
-        :definition="tableDefinition"   
-        :busy="busy"
-        @click="goToEdit"
-      />
-    </div>
-  </div>
+  </div> 
 
 </div>
 </template>
@@ -95,7 +78,7 @@ export default {
         this.search()
       })      
     },
-    goToEdit (item) {
+    onClick (item) {
       this.$router.push('/idkendur/' + item.id)
     },
     search () {

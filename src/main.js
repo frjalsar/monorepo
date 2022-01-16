@@ -10,6 +10,10 @@ const router = createRouter({
       component: () => import('./athletes/List.vue')
     },
     {
+      path: '/idkendur/:id',
+      component: () => import('./athletes/Edit.vue')
+    },
+    {
       path: '/felog',
       component: () => import('./clubs/List.vue')
     },
