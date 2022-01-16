@@ -8,6 +8,14 @@ const router = createRouter({
     {
       path: '/idkendur',
       component: () => import('./athletes/List.vue')
+    },
+    {
+      path: '/felog',
+      component: () => import('./clubs/List.vue')
+    },
+    {
+      path: '/ithrottaherud',
+      component: () => import('./regions/List.vue')
     }
   ]
 })

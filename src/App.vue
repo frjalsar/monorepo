@@ -10,10 +10,10 @@
         <router-link to="/idkendur" class="nav-link link-dark text-decoration-none">Iðkendur</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/" class="nav-link link-dark text-decoration-none">Félög</router-link>        
+        <router-link to="/felog" class="nav-link link-dark text-decoration-none">Félög</router-link>        
       </li>      
       <li class="nav-item">
-        <router-link to="/" class="nav-link link-dark text-decoration-none">Íþróttahéruð</router-link>
+        <router-link to="/ithrottaherud" class="nav-link link-dark text-decoration-none">Íþróttahéruð</router-link>
       </li>  
     </ul>
      <hr>

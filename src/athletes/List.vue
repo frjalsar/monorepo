@@ -2,6 +2,7 @@
 <div>
   <h2>Iðkendur</h2>
   <hr />
+
   <div class="card shadow-sm mb-3">
     <div class="card-body">
       <SearchPanel
@@ -13,64 +14,31 @@
     />
     </div>
   </div>
+
   <div class="card shadow-sm mb-3">
     <div class="card-body">
-      <table class="table table-striped">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col" class="d-none d-lg-table-cell"> Númer </th>
-            <th scope="col"> Nafn </th>
-            <th scope="col" class="d-none d-md-table-cell"> Fæðingarár </th>
-            <th scope="col" class="d-none d-md-table-cell"> Félag </th>
-            <th scope="col" class="d-none d-lg-table-cell"> Land </th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr v-if="busy">
-              <td
-                colspan="5"
-                align="center"
-              >
-                <div class="text-center">
-                  <div class="spinner-border" role="status"></div>
-                </div>
-
-              </td>
-            </tr>
-            <tr
-              v-for="athlete in athletes"
-              :key="athlete.id"
-              @click.prevent="onClick && onClick(athlete)"
-            >
-              <td class="d-none d-lg-table-cell">
-                {{ athlete.id }}
-              </td>
-              <td>{{ athlete.fullName }}</td>
-              <td class="d-none d-md-table-cell">
-                {{ athlete.birthyear }}
-              </td>
-              <td class="d-none d-md-table-cell">
-                {{ athlete.club && athlete.club.fullName }}
-              </td>
-              <td class="d-none d-lg-table-cell">
-                {{ athlete.country }}
-              </td>
-            </tr>
-          </tbody>
-      </table>
+      <SimpleTable
+        :data="athletes"     
+        :definition="tableDefinition"   
+        :busy="busy"
+      />
     </div>
   </div>
+
 </div>
 </template>
 
 <script>
 import agent from 'superagent'
-import SearchPanel from './SearchPanel.vue'
+import { format } from 'date-fns'
+import SearchPanel from '../_components/SearchPanel.vue'
+import SimpleTable from '../_components/SimpleTable.vue'
 
 export default {
   name: 'AthleteList',
   components: {
-    SearchPanel
+    SearchPanel,
+    SimpleTable
   },
   inject: ['FRI_API_URL'],
   data() {
@@ -79,7 +47,40 @@ export default {
       athletes: [],
       clubs: [],
       regions: [],
-      legacy: []
+      legacy: [],
+      tableDefinition: [
+        {
+          field: 'id',
+          label: '#',
+          display: 'lg'
+        },
+        {
+          field: 'fullName',
+          label: 'Nafn',
+          display: 'md'
+        },
+        {
+          field: 'birthyear',
+          label: 'Fæðingarár',
+          display: 'md'
+        },
+        {
+          field: 'clubFullName',
+          label: 'Félag',
+          display: 'md'
+        },
+        {
+          field: 'lastCompeted',
+          label: 'Keppti seinast',
+          display: 'lg'
+        },
+        {
+          field: 'country',
+          label: 'Land',
+          display: 'lg'
+        },
+
+      ]
     }
   },
   computed: {
@@ -104,7 +105,15 @@ export default {
         .withCredentials()
         .query(this.$route.query)
         .then(res => {
-          this.athletes = res.body
+          this.athletes = res.body.map(athlete => ({
+            id: athlete.id,
+            fullName: athlete.fullName,
+            birthyear: athlete.birthyear,
+            clubFullName: athlete.club?.fullName,
+            lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),
+            country: athlete.country
+          }))
+
           this.busy = false
         })
     }
