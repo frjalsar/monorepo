@@ -3,6 +3,7 @@ function corsOrigin () {
     production: [
       'https://felagatal.fri.is',
       'https://felagaskipti.fri.is',
+      'https://admin.fri.is',
       'https://fri-mot-production.herokuapp.com'
     ],
     development: [

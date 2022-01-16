@@ -21,7 +21,10 @@ const sqlPool = new sql.ConnectionPool({
   user: process.env.THOR_USER,
   password: process.env.THOR_PASSWORD,
   server: process.env.THOR_SERVER,
-  database: process.env.THOR_DB,  
+  database: process.env.THOR_DB,
+  options: {
+    trustServerCertificate: process.env.NODE_ENV !== 'production',
+  }
 })
 const sqlConnection = sqlPool.connect()
 
