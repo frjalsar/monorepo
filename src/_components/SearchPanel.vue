@@ -25,7 +25,7 @@
       </div>
       <div class="col-md-4 col-lg-3 mb-3">
         <select
-          v-model="clubId"
+          :value="clubId"
           class="form-select"          
           @change="changeClub"
         >
@@ -43,7 +43,7 @@
       </div>
       <div class="col-md-6 col-lg-3 mb-3">
         <select
-          v-model="regionId"
+          :value="regionId"
           class="form-select"
           @change="changeRegion"
         >
@@ -62,7 +62,7 @@
       </div>
       <div class="col-md-4 col-lg-2 mb-3">
         <select
-          v-model="legacyClub"
+          :value="legacyClub"
           class="form-select"
           @change="changeLegacy"
         >
@@ -99,6 +99,7 @@ import debounce from 'lodash.debounce'
 
 export default {
   name: 'AthleteSearchPanel',
+  emits: ['click', 'input', 'change'],
   props: {
     regions: {
       type: Array,

@@ -30,7 +30,7 @@
       <tr        
         v-for="item in data"
         :key="item.id"
-        @click="emit('click', item)"
+        @click="$emit('click', item)"
       >
         <td          
           v-for="header in headers"
@@ -50,7 +50,8 @@
 
 <script>
 export default {
-  name: 'SimpleTable',
+  name: 'SimpleTable', 
+  emits: ['click'],
   props: {
     definition: {
       type: Array,
@@ -67,6 +68,12 @@ export default {
     busy: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    click(item) {
+      console.log('clicking')
+      this.$emit('click', item)
     }
   },
   computed: {
