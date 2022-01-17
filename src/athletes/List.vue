@@ -126,6 +126,7 @@ export default {
             fullName: athlete.fullName,
             birthyear: athlete.birthyear,
             clubFullName: athlete.club?.fullName,
+            clubId: athlete.club?.id,
             lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),
             country: athlete.country,
             gender: athlete.gender,
