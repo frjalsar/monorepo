@@ -70,12 +70,6 @@ export default {
       default: false
     }
   },
-  methods: {
-    click(item) {
-      console.log('clicking')
-      this.$emit('click', item)
-    }
-  },
   computed: {
     headers () {
       if (this.definition.length) {
@@ -84,7 +78,6 @@ export default {
 
       if (this.data.length) {
         return Object.keys(this.data[0]).map(key => {
-          console.log(key)
           return {
             label: key,
             field: key

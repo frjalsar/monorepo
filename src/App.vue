@@ -47,7 +47,8 @@
 export default {
   name: 'admin',
   provide: {
-    FRI_API_URL: import.meta.env.VITE_FRI_API_URL
+    FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
+    COUNTRIES_API_URL: import.meta.env.VITE_COUNTRIES_API_URL
   }
 }
 </script>

@@ -1,127 +1,65 @@
 <template>
-<div>
-  <h2>Iðkendur</h2>
-  <hr />
-
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      Edit athlete      
+<form>
+  <div class="row g-3 mb-3">
+    <div class="col-md-6">
+      <label for="name" class="form-label">Nafn</label>
+      <input type="name" class="form-control" id="name" v-model="currAthlete.fullName">
     </div>
-  </div> 
 
-</div>
+    <div class="col-md-4">
+      <label for="name" class="form-label">Kennitala</label>
+      <input type="name" class="form-control" id="name" v-model="currAthlete.kt">
+    </div>
+
+    <div class="col-md-2">
+      <label for="name" class="form-label">Fæðingarár</label>
+      <input type="name" class="form-control" id="name" v-model="currAthlete.birthyear">
+    </div>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-md-2">
+      <label for="name" class="form-label">Kyn</label>      
+      <select class="form-select" v-model="currAthlete.gender">
+        <option v-for="gender in genders" :key="gender.value" :value="gender.value">{{ gender.text }}</option>        
+      </select>
+    </div>    
+
+    <div class="col-md-4">
+      <label for="name" class="form-label">Land</label>      
+      <select class="form-select" v-model="currAthlete.country">
+        <option v-for="country in countries" :key="country.value" :value="country.value">{{ country.text }}</option>        
+      </select>
+    </div>
+
+  </div>  
+
+</form>
 </template>
 
 <script>
-import agent from 'superagent'
-import { format } from 'date-fns'
-import SearchPanel from '../_components/SearchPanel.vue'
-import SimpleTable from '../_components/SimpleTable.vue'
 
 export default {
   name: 'AthleteList',
-  components: {
-    SearchPanel,
-    SimpleTable
-  },
   inject: ['FRI_API_URL'],
+  props: ['athlete', 'countries'],
   data() {
     return {
       busy: false,
-      athletes: [],
-      clubs: [],
-      regions: [],
-      legacy: [],
-      tableDefinition: [
-        {
-          field: 'id',
-          label: '#',
-          display: 'lg'
-        },
-        {
-          field: 'fullName',
-          label: 'Nafn',
-          display: 'md'
-        },
-        {
-          field: 'birthyear',
-          label: 'Fæðingarár',
-          display: 'md'
-        },
-        {
-          field: 'clubFullName',
-          label: 'Félag',
-          display: 'md'
-        },
-        {
-          field: 'lastCompeted',
-          label: 'Keppti seinast',
-          display: 'lg'
-        },
-        {
-          field: 'country',
-          label: 'Land',
-          display: 'lg'
-        },
-
-      ]
+      currAthlete: this.athlete,
+      genders: [{
+        value: 1,
+        text: 'Karl'
+      }, {
+        value: 2,
+        text: 'Kona'
+      }],      
     }
   },
-  computed: {
-    settings () {
-      return this.$route.query
+  watch: {
+    athlete (val) {
+      this.currAthlete = val
     }
-  },
-  methods: {
-    setQueryParams (query) {
-      this.$router.replace({ query }).then(() => {
-        this.search()
-      })      
-    },
-    onClick (item) {
-      this.$router.push('/idkendur/' + item.id)
-    },
-    search () {
-      this.busy = true
-      this.athletes = []
-      return agent
-        .get(this.FRI_API_URL + '/athletes')
-        .withCredentials()
-        .query(this.$route.query)
-        .then(res => {
-          this.athletes = res.body.map(athlete => ({
-            id: athlete.id,
-            fullName: athlete.fullName,
-            birthyear: athlete.birthyear,
-            clubFullName: athlete.club?.fullName,
-            lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),
-            country: athlete.country
-          }))
-
-          this.busy = false
-        })
-    }
-  },
-  created() {
-    this.search()
-
-    agent
-      .get(this.FRI_API_URL + '/clubs')
-      .then(res => {
-        this.clubs = res.body
-      })
-
-    agent
-      .get(this.FRI_API_URL + '/regions')
-      .then(res => {
-        this.regions = res.body
-      })
-
-    agent
-      .get(this.FRI_API_URL + '/membership/legacy')
-      .then(res => {
-        this.legacy = res.body
-      })
   }
 }
 </script>

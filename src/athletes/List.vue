@@ -3,63 +3,70 @@
   <h2>Iðkendur</h2>
   <hr />
 
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      <SearchPanel
-        :regions="regions"
-        :clubs="clubs"
-        :legacy="legacy"
-        :settings="settings"
-        @search="setQueryParams"
+  <Card>
+    <SearchPanel
+      :regions="regions"
+      :clubs="clubs"
+      :legacy="legacy"
+      :settings="settings"
+      @search="setQueryParams"
     />
-    </div>
-  </div>
+  </Card>
 
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      <SimpleTable
-        :data="athletes"     
-        :definition="tableDefinition"   
-        :busy="busy"
-        @click="goToEdit"
-      />
-    </div>
-  </div>
+  <Card>  
+    <SimpleTable
+      :data="athletes"     
+      :definition="tableDefinition"   
+      :busy="busy"
+      @click="goToEdit"
+    />
+  </Card>    
 
+  <ModalPopup>
+    <EditAthlete :athlete="selectedAthlete" :countries="countries"/>
+  </ModalPopup>
 </div>
 </template>
 
 <script>
 import agent from 'superagent'
 import { format } from 'date-fns'
+import Card from '../_components/Card.vue'
 import SearchPanel from '../_components/SearchPanel.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
+import ModalPopup from '../_components/ModalPopup.vue'
+import EditAthlete from './Edit.vue'
 
 export default {
   name: 'AthleteList',
   components: {
+    Card,
     SearchPanel,
-    SimpleTable
+    SimpleTable,
+    ModalPopup,
+    EditAthlete
   },
-  inject: ['FRI_API_URL'],
+  inject: ['FRI_API_URL', 'COUNTRIES_API_URL'],
   data() {
     return {
       busy: false,
+      selectedAthlete: {},
       athletes: [],
       clubs: [],
       regions: [],
       legacy: [],
+      countries: [],
       tableDefinition: [
-        {
-          field: 'id',
-          label: '#',
-          display: 'lg'
-        },
         {
           field: 'fullName',
           label: 'Nafn',
           display: 'md'
         },
+        {
+          field: 'kt',
+          label: 'Kennitala',
+          display: 'lg'
+        },        
         {
           field: 'birthyear',
           label: 'Fæðingarár',
@@ -96,7 +103,11 @@ export default {
       })      
     },
     goToEdit (item) {
-      this.$router.push('/idkendur/' + item.id)
+      this.selectedAthlete = item
+      const el = document.getElementById('myModal')      
+      const myModal = new bootstrap.Modal(el)
+      
+      myModal.show()
     },
     search () {
       this.busy = true
@@ -112,7 +123,8 @@ export default {
             birthyear: athlete.birthyear,
             clubFullName: athlete.club?.fullName,
             lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),
-            country: athlete.country
+            country: athlete.country,
+            gender: athlete.gender
           }))
 
           this.busy = false
@@ -138,6 +150,20 @@ export default {
       .get(this.FRI_API_URL + '/membership/legacy')
       .then(res => {
         this.legacy = res.body
+      })
+    
+    agent
+      .get(this.COUNTRIES_API_URL + '/v2/all')
+      .then(res => {
+        this.countries = res.body.map(country => ({
+          value: country.alpha3Code,
+          text: country.nativeName
+        }))
+
+        this.countries.unshift({
+          value: undefined,
+          text: 'Velja land'
+        })
       })
   }
 }
