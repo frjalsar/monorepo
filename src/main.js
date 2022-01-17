@@ -1,10 +1,15 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
+import UserMixin from './UserMixin.js'
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
+    {
+      path: '/',
+      component: () => import('./Login.vue')
+    },
     {
       path: '/idkendur',
       component: () => import('./athletes/List.vue')
@@ -21,4 +26,5 @@ const router = createRouter({
 })
 const app = createApp(App)
 app.use(router)
+app.mixin(UserMixin)
 app.mount('#app')
