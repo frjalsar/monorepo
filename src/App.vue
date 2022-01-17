@@ -1,43 +1,44 @@
 <template>
-<div class="container-fluid d-flex bg-light">
-  <nav class="shadow p-3 bg-white">
+<div class="container-fluid d-flex bg-light">   
+  <nav class="shadow p-3 bg-white" v-if="user">
     <a href="/" class="">
-      <img src="./assets/logo.png" width="100" height="90" class="d-block mx-auto" />      
+      <img src="./assets/logo.png" width="100" height="90" class="d-block mx-auto" />
     </a>
+      <span class="navbar-toggler-icon"></span>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <router-link to="/idkendur" class="nav-link link-dark text-decoration-none">Iðkendur</router-link>
+        <router-link to="/idkendur" class="nav-link link-dark text-decoration-none" active-class="active">Iðkendur</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/felog" class="nav-link link-dark text-decoration-none">Félög</router-link>        
-      </li>      
+        <router-link to="/felog" class="nav-link link-dark text-decoration-none" active-class="active">Félög</router-link>
+      </li>
       <li class="nav-item">
-        <router-link to="/ithrottaherud" class="nav-link link-dark text-decoration-none">Íþróttahéruð</router-link>
-      </li>  
+        <router-link to="/ithrottaherud" class="nav-link link-dark text-decoration-none" active-class="active">Íþróttahéruð</router-link>
+      </li>
     </ul>
      <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <router-link to="/" class="nav-link link-dark text-decoration-none">Dómarar</router-link>
+        <router-link to="/domarar" class="nav-link link-dark text-decoration-none" active-class="active">Dómarar</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/" class="nav-link link-dark text-decoration-none">Mannvirki</router-link>
-      </li>      
+        <router-link to="/mannvirki" class="nav-link link-dark text-decoration-none" active-class="active">Mannvirki</router-link>
+      </li>
     </ul>
     <hr>
-    <ul class="nav nav-pills flex-column mb-auto">      
+    <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <router-link to="/" class="nav-link link-dark text-decoration-none">Félagaskipti</router-link>
+        <router-link to="/felagsskipti" class="nav-link link-dark text-decoration-none" active-class="active">Félagaskipti</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/" class="nav-link link-dark text-decoration-none">Mótaumsóknir</router-link>
-      </li>      
+        <router-link to="/motaumsoknir" class="nav-link link-dark text-decoration-none" active-class="active">Mótaumsóknir</router-link>
+      </li>
     </ul>
     <hr />
   </nav>
 
-  <main class="py-4 px-5">    
+  <main class="py-4 px-5">
     <router-view></router-view>
   </main>
 </div>
@@ -49,6 +50,9 @@ export default {
   provide: {
     FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
     COUNTRIES_API_URL: import.meta.env.VITE_COUNTRIES_API_URL
+  },
+  created() {
+    this.getUser().then(this.setUser)
   }
 }
 </script>
