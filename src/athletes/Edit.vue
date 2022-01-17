@@ -30,9 +30,35 @@
       <select class="form-select" v-model="currAthlete.country">
         <option v-for="country in countries" :key="country.value" :value="country.value">{{ country.text }}</option>        
       </select>
+    </div>    
+  </div>
+
+  <hr class="my-4" />
+
+  <div
+    class="row g-3 mb-3"
+    v-for="(m, index) in currAthlete.membership"
+    :key="m.clubId + '-' + m.from"
+  >
+
+    <div class="col-md-6">
+      <label for="name" class="form-label" v-if="index === 0">Félag</label>      
+      <select class="form-select" v-model="currAthlete.clubId">
+        <option v-for="club in clubsByRegion(m.legacyClub)" :key="club.id" :value="club.id">{{ club.fullName }}</option>        
+      </select>
+      <div v-if="m.legacyClub" class="form-text">Viðkomandi var skráður í <em>{{ m.legacyClub }}</em> en ekki félag í gamla grunninum. Vinsamlegast lagið.</div>
+    </div>
+    
+    <div class="col-md-3">
+      <label for="name" class="form-label" v-if="index === 0">Frá</label>
+      <input type="name" class="form-control" id="name" v-model="m.from">
     </div>
 
-  </div>  
+    <div class="col-md-3">
+      <label for="name" class="form-label" v-if="index === 0">Til</label>
+      <input type="name" class="form-control" id="name" v-model="m.to">
+    </div>
+  </div>
 
 </form>
 </template>
@@ -42,7 +68,7 @@
 export default {
   name: 'AthleteList',
   inject: ['FRI_API_URL'],
-  props: ['athlete', 'countries'],
+  props: ['athlete', 'clubs', 'countries'],
   data() {
     return {
       busy: false,
@@ -54,6 +80,12 @@ export default {
         value: 2,
         text: 'Kona'
       }],      
+    }
+  },
+  methods: {
+    clubsByRegion(region) {
+      const byRegion = this.clubs.filter(c => c.region.abbreviation === region)
+      return (byRegion.length) ? byRegion : this.clubs      
     }
   },
   watch: {

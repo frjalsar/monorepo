@@ -23,7 +23,11 @@
   </Card>    
 
   <ModalPopup>
-    <EditAthlete :athlete="selectedAthlete" :countries="countries"/>
+    <EditAthlete
+      :athlete="selectedAthlete"
+      :clubs="clubs"
+      :countries="countries"      
+    />
   </ModalPopup>
 </div>
 </template>
@@ -124,7 +128,8 @@ export default {
             clubFullName: athlete.club?.fullName,
             lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),
             country: athlete.country,
-            gender: athlete.gender
+            gender: athlete.gender,
+            membership: athlete.membership,
           }))
 
           this.busy = false
