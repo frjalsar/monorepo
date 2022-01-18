@@ -1,14 +1,15 @@
+<script>
 import agent from 'superagent'
 
 export default {
-  name: 'UserMixin',
+  name: 'GetUser',
   data() {
     return {
-      user: undefined,
+      user: undefined
     }
   },
   methods: {
-    getUser() {
+    getUser() {      
       const apiUrl = import.meta.env.VITE_FRI_API_URL
 
       const userSession = sessionStorage.getItem('FRI_ADMIN')            
@@ -20,20 +21,21 @@ export default {
           .get(apiUrl + '/user')
           .withCredentials()
           .then(res => {
-            if (res.body && res.body.id) {
-              return res.body
-            }
+            return res.body           
           })
       }
     },
     setUser(user) {
-      if (user && user.id) {        
+      if (user && user.id) {              
         sessionStorage.setItem('FRI_ADMIN', JSON.stringify(user))
-        this.user = user        
-      } else {
+        this.user = user
+        this.$router.push({ path: '/idkendur' })
+      } else {      
+        sessionStorage.removeItem('FRI_ADMIN')
         this.user = undefined
-        this.$router.push({ path: '/'})
-      }      
+        this.$router.push({ path: '/' })
+      }
     }
   },  
 }
+</script>

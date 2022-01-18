@@ -29,7 +29,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <router-link to="/felagsskipti" class="nav-link link-dark text-decoration-none" active-class="active">Félagaskipti</router-link>
+        <router-link to="/felagaskipti" class="nav-link link-dark text-decoration-none" active-class="active">Félagaskipti</router-link>
       </li>
       <li class="nav-item">
         <router-link to="/motaumsoknir" class="nav-link link-dark text-decoration-none" active-class="active">Mótaumsóknir</router-link>
@@ -39,17 +39,23 @@
   </nav>
 
   <main class="py-4 px-5">
-    <router-view></router-view>
+    <router-view @login="login">
+    </router-view>
   </main>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'admin',
+  name: 'admin',  
   provide: {
     FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
     COUNTRIES_API_URL: import.meta.env.VITE_COUNTRIES_API_URL
+  }, 
+  methods: {
+    login(user) {
+      this.setUser(user)
+    }
   },
   created() {
     this.getUser().then(this.setUser)

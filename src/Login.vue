@@ -44,9 +44,7 @@ export default {
           password: this.password
         })
         .then(res => {
-          this.setUser(res.body)
-          this.$emit('login', res.body)
-          this.$router.push({ path: '/idkendur'})
+          this.$emit('login',res.body)
         })
         .catch(e => {
           if (e.status === 401) {            

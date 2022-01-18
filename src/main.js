@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
-import UserMixin from './UserMixin.js'
+import GetUser from './_mixins/GetUser.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -21,10 +21,26 @@ const router = createRouter({
     {
       path: '/ithrottaherud',
       component: () => import('./regions/List.vue')
+    },
+    {
+      path: '/domarar',
+      component: () => import('./judges/List.vue')
+    },
+    {
+      path: '/mannvirki',
+      component: () => import('./venues/List.vue')
+    },
+    {
+      path: '/felagaskipti',
+      component: () => import('./transfers/List.vue')
+    },
+    {
+      path: '/motaumsoknir',
+      component: () => import('./meetapplications/List.vue')
     }
   ]
 })
 const app = createApp(App)
 app.use(router)
-app.mixin(UserMixin)
+app.mixin(GetUser)
 app.mount('#app')
