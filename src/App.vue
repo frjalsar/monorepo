@@ -54,11 +54,15 @@ export default {
   }, 
   methods: {
     login(user) {
+      this.user = user
       this.setUser(user)
+      this.$router.push({ path: '/idkendur '})
     }
   },
   created() {
-    this.getUser().then(this.setUser)
+    this.getUser().then(user => {
+      this.user = user
+    })
   }
 }
 </script>

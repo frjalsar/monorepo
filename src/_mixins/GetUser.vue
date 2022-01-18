@@ -21,18 +21,15 @@ export default {
           .get(apiUrl + '/user')
           .withCredentials()
           .then(res => {
-            return res.body           
+            this.setUser(res.body)
           })
       }
     },
     setUser(user) {
       if (user && user.id) {              
         sessionStorage.setItem('FRI_ADMIN', JSON.stringify(user))
-        this.user = user
-        this.$router.push({ path: '/idkendur' })
       } else {      
         sessionStorage.removeItem('FRI_ADMIN')
-        this.user = undefined
         this.$router.push({ path: '/' })
       }
     }

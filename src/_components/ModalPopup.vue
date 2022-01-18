@@ -10,8 +10,8 @@
         <slot></slot>        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Loka</button>
-        <button type="button" class="btn btn-primary">Vista</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hætta við</button>
+        <button type="button" class="btn btn-primary">Staðfesta</button>
       </div>
     </div>
   </div>
