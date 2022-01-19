@@ -1,32 +1,24 @@
-const express = require('express')
-const makeSelectRegions = require('../lib/regions/select')
-const makeUpdateRegion = require('../lib/regions/update')
-const mapRegions = require('../lib/regions/map')
+const { Router } = require('express')
+const mapRegions = require('../repo/regions/map')
 
-function makeRegionsRoute (db) {
-  const router = express.Router()
+function makeRegionsRoute (selectRegions, updateRegion) {
+  const router = Router()
 
-  router.get('/', (req, res, next) => {
-    const selectRegions = makeSelectRegions(db)
-
+  router.get('/', (req, res, next) => {    
     return selectRegions()
       .then(mapRegions)
       .then(res.json.bind(res))
       .catch(next)
   })
 
-  router.get('/:id', (req, res, next) => {
-    const selectRegions = makeSelectRegions(db)
-
+  router.get('/:id', (req, res, next) => {    
     return selectRegions({ id: req.params.id })
       .then(mapRegions)
       .then(res.json.bind(res))
       .catch(next)
   })
 
-  router.put('/', hasAccess(), (req, res, next) => {
-    const updateRegion = makeUpdateRegion(db)
-
+  router.put('/', (req, res, next) => {
     return updateRegion(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)

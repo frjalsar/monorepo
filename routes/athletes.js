@@ -1,15 +1,10 @@
-const express = require('express')
-const mapAthletes = require('../lib/athletes/map')
-const makeSelectAthletes = require('../lib/athletes/select')
-const makeCreateAthlete = require('../lib/athletes/create')
-const makeChangeAthlete = require('../lib/athletes/change')
+const { Router } = require('express')
+const mapAthletes = require('../repo/athletes/map')
 
-function makeAthleteRoute (db) {
-  const router = express.Router()
+function makeAthleteRoute (selectAthlete, editAthlete, createAthlete) {
+  const router = Router()
 
   router.get('/', (req, res, next) => {
-    const selectAthlete = makeSelectAthletes(db)
-
     return selectAthlete(req.query, req.user)
       .then(mapAthletes)
       .then(res.json.bind(res))
@@ -17,7 +12,6 @@ function makeAthleteRoute (db) {
   })
 
   router.get('/:id', (req, res, next) => {
-    const selectAthlete = makeSelectAthletes(db)
     return selectAthlete({ id: req.params.id }, req.user)
       .then(mapAthletes)
       .then(res.json.bind(res))
@@ -31,17 +25,13 @@ function makeAthleteRoute (db) {
    - Notandi með regionId sama og er skráð sem current region hjá íþróttamanni.
    - Notandi með regionAbbreviation eða clubAbbreviation sama og eitthvert thorClub í membership.
   */
-  router.put('/', editAccess(db), (req, res, next) => {
-    const changeAthlete = makeChangeAthlete(db)
-
-    return changeAthlete(req.body, req.user)
+  router.put('/', (req, res, next) => {    
+    return editAthlete(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
 
-  router.post('/', createAccess(), (req, res, next) => {
-    const createAthlete = makeCreateAthlete(db)
-
+  router.post('/', (req, res, next) => {
     return createAthlete(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)

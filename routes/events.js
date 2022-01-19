@@ -1,9 +1,7 @@
-const express = require('express')
-const makeSelectEvents = require('../lib/events/select')
+const { Router } = require('express')
 
-function makeEventsRoute (db) {
-  const router = express.Router()
-  const selectEvents = makeSelectEvents(db)  
+function makeEventsRoute (selectEvents) {
+  const router = Router()
 
   router.get('/', (_, res, next) => {
     return selectEvents()

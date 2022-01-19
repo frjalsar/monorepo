@@ -1,15 +1,10 @@
-const express = require('express')
-const makeSelectClubs = require('../lib/clubs/select')
-const makeUpdateClub = require('../lib/clubs/update')
-const makeInsertClub = require('../lib/clubs/insert')
-const mapClubs = require('../lib/clubs/map')
+const { Router } = require('express')
+const mapClubs = require('../repo/clubs/map')
 
-function makeClubRoute (db) {
-  const router = express.Router()
+function makeClubRoute (selectClubs, updateClub, insertClub) {
+  const router = Router()
 
-  router.get('/', (req, res, next) => {
-    const selectClubs = makeSelectClubs(db)
-
+  router.get('/', (req, res, next) => {    
     selectClubs()
       .then(mapClubs)
       .then(res.json.bind(res))
@@ -17,8 +12,6 @@ function makeClubRoute (db) {
   })
 
   router.get('/:id', (req, res, next) => {
-    const selectClubs = makeSelectClubs(db)
-
     selectClubs({ id: req.params.id })
       .then(mapClubs)
       .then(res.json.bind(res))
@@ -32,17 +25,13 @@ function makeClubRoute (db) {
    - Notandi með regionAbbreviation eða clubAbbreviation sama og eitthvert thorClub í membership.
   */
 
-  router.put('/', editAccess(db), (req, res, next) => {
-    const updateClub = makeUpdateClub(db)
-
+  router.put('/', (req, res, next) => {
     return updateClub(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
 
-  router.post('/', createAccess(), (req, res, next) => {
-    const insertClub = makeInsertClub(db)
-
+  router.post('/', (req, res, next) => {    
     return insertClub(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)

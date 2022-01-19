@@ -27,14 +27,10 @@ function makeSelectAthletes (db) {
         c.regionid,
         r.fullname regionfullname,
         r.abbreviation regionabbreviation,
-        m.fromdate,
-        m.todate,
+        m.yearfrom,
+        m.yearto,
         m.legacyclub,
-        m.sentat,
-        m.sentby,
-        m.status,
-        m.confirmedat,
-        m.confirmedby,
+        m.confirmed,
         u.fullName as userfullname
       FROM
         athletes a
@@ -45,7 +41,7 @@ function makeSelectAthletes (db) {
       LEFT JOIN
         regions r ON r.id = c.regionid
       LEFT JOIN
-        users u ON u.id = m.sentby
+        users u ON u.id = m._userid
       WHERE 1 = 1`
 
     if (opt.id) {
@@ -112,7 +108,7 @@ function makeSelectAthletes (db) {
       ORDER BY
         a.fullname ASC,
         a.id ASC,
-        m.fromdate ASC`
+        m.yearfrom ASC`
 
     if (opt.offset) {
       sql += ' OFFSET ' + opt.offset

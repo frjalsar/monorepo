@@ -1,7 +1,7 @@
 const cleanKennitala = require('kennitala-utility').clean
 const express = require('express')
-const makeLogin = require('../auth/login')
-const makeLogout = require('../auth/logout')
+const makeLogin = require('../lib/login')
+const makeLogout = require('../lib/logout')
 const getToken = require('../auth/gettoken')
 
 function makeLoginRoute (db, redisClient, logger) {

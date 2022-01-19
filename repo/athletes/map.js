@@ -40,18 +40,12 @@ function mapAthletes (list) {
         confirmedAt: item.confirmedat,
         confirmedBy: item.confirmedby
       }
-
-      // Default or confirmed
-      if (item.status === -1 || item.status === 1) {
-        currentAthlete.membership.push(membership)
-      } else {
-        currentAthlete.pendingMembership.push(membership)
-      }
-
+      
+      currentAthlete.membership.push(membership)
+      
       // Set current club  and region
       if (
         item.clubid !== null &&
-        item.status === 1 &&
         startOfToday().getTime() >= new Date(item.fromdate).getTime() &&
         (!item.todate || startOfToday().getTime() <= new Date(item.todate).getTime())
       ) {

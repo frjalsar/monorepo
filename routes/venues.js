@@ -1,12 +1,8 @@
-const express = require('express')
-const mapVenues = require('../lib/venues/map')
-const makeSelectVenues = require('../lib/venues/select')
-const makeUpdateVenue = require('../lib/venues/update')
+const { Router } = require('express')
+const mapVenues = require('../repo/venues/map')
 
-function makeVenuesRoute (db) {
-  const router = express.Router()
-  const selectVenues = makeSelectVenues(db)
-  const updateVenues = makeUpdateVenue(db)
+function makeVenuesRoute (selectVenues, updateVenue) {
+  const router = new Router()
 
   router.get('/:id?', (req, res, next) => {
     return selectVenues(req.params)
@@ -15,8 +11,8 @@ function makeVenuesRoute (db) {
       .catch(next)
   })
 
-  router.put('/', hasAccess(), (req, res, next) => {
-    return updateVenues(req.body)
+  router.put('/', (req, res, next) => {
+    return updateVenue(req.body)
       .then(res.json.bind(res))
       .catch(next)
   })
