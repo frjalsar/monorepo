@@ -9,12 +9,12 @@ function makeLoginRoute (loginHandler, isProduction) {
     const password = req.body.password
 
     return loginHandler(username, password)
-      .then(user => {
-        if (user && user.token) {
+      .then(({ token, user }) => {
+        if (token && user) {
           res
             .cookie(
               'FRI_API_TOKEN',
-              user.token,
+              token,
               {
                 domain: '.fri.is',
                 secure: isProduction,
@@ -24,14 +24,7 @@ function makeLoginRoute (loginHandler, isProduction) {
                 path: '/'
               }
             )
-            .json({
-              id: user.id,              
-              username: user.username,
-              isAdmin: user.isAdmin,
-              isClub: user.clubId !== null,
-              isRegion: user.regionId !== null,
-              isMeet: user.meetId !== null
-            })
+            .json(user)
         } else {
           res.sendStatus(401)
         }
