@@ -7,33 +7,43 @@
       :data="clubs"
       :definition="tableDefinition"   
       :busy="busy"
+      @click="openModalEdit"
     />
   </Card>
 
-  <ModalPopup>
-    <EditAthlete
-      :athlete="selectedAthlete"
-      :clubs="clubs"
-      :countries="countries"      
+  <ModalEdit v-slot="{ confirm }">
+    <EditClub
+      :club="selectedModalItem"
+      :regions="regions"
+      :confirm="confirm"
     />
-  </ModalPopup>    
+  </ModalEdit>
 </div>
 </template>
 
 <script>
 import agent from 'superagent'
+import Card from '../_components/Card.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
+import ModalEdit from '../_components/ModalEdit.vue'
+import ModalEditMixin from '../_mixins/ModalEdit.vue'
+import EditClub from './Edit.vue'
 
 export default {
   name: 'ClubList',
+  mixins: [ModalEditMixin],
   components: {
-    SimpleTable
+    Card,
+    SimpleTable,
+    ModalEdit,
+    EditClub
   },
   inject: ['FRI_API_URL'],
   data() {
     return {
       busy: false,      
       clubs: [],
+      regions: [],
       tableDefinition: [
         {
           field: 'id',
@@ -63,13 +73,18 @@ export default {
       .get(this.FRI_API_URL + '/clubs')
       .withCredentials()
       .then(res => {
-        this.clubs = res.body.map(club => ({
-          id: club.id,
-          fullName: club.fullName,
-          abbreviation: club.abbreviation,
-          regionFullName: club.region?.fullName
+        this.clubs = res.body.map(item => ({
+          ...item,
+          regionFullName: item.region.fullName
         }))
-      })   
+      })
+
+    agent
+      .get(this.FRI_API_URL + '/regions')
+      .withCredentials()
+      .then(res => {
+        this.regions = res.body
+      })
   }
 }
 </script>

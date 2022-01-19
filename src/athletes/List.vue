@@ -18,17 +18,17 @@
       :data="athletes"     
       :definition="tableDefinition"   
       :busy="busy"
-      @click="goToEdit"
+      @click="openModalEdit"
     />
   </Card>    
 
-  <ModalPopup>
+  <ModalEdit>
     <EditAthlete
-      :athlete="selectedAthlete"
+      :athlete="selectedModalItem"
       :clubs="clubs"
       :countries="countries"      
     />
-  </ModalPopup>
+  </ModalEdit>
 </div>
 </template>
 
@@ -38,16 +38,18 @@ import { format } from 'date-fns'
 import Card from '../_components/Card.vue'
 import SearchPanel from '../_components/SearchPanel.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
-import ModalPopup from '../_components/ModalPopup.vue'
+import ModalEdit from '../_components/ModalEdit.vue'
+import ModalEditMixin from '../_mixins/ModalEdit.vue'
 import EditAthlete from './Edit.vue'
 
 export default {
-  name: 'AthleteList',
+  name: 'ListAthlete',
+  mixins: [ModalEditMixin],  
   components: {
     Card,
     SearchPanel,
     SimpleTable,
-    ModalPopup,
+    ModalEdit,
     EditAthlete
   },
   inject: ['FRI_API_URL', 'COUNTRIES_API_URL'],
@@ -106,13 +108,6 @@ export default {
         this.search()
       })      
     },
-    goToEdit (item) {
-      this.selectedAthlete = item
-      const el = document.getElementById('myModal')      
-      const myModal = new bootstrap.Modal(el)
-      
-      myModal.show()
-    },
     search () {
       this.busy = true
       this.athletes = []
@@ -121,17 +116,14 @@ export default {
         .withCredentials()
         .query(this.$route.query)
         .then(res => {
+          console.log(res.body)
           this.athletes = res.body.map(athlete => ({
-            id: athlete.id,
-            fullName: athlete.fullName,
-            birthyear: athlete.birthyear,
+            ...athlete,
             clubFullName: athlete.club?.fullName,
-            clubId: athlete.club?.id,
-            lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),
-            country: athlete.country,
-            gender: athlete.gender,
-            membership: athlete.membership,
+            lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),            
           }))
+
+          console.log(this.athletes)
 
           this.busy = false
         })
@@ -142,24 +134,28 @@ export default {
 
     agent
       .get(this.FRI_API_URL + '/clubs')
+      .withCredentials()
       .then(res => {
         this.clubs = res.body
       })
 
     agent
       .get(this.FRI_API_URL + '/regions')
+      .withCredentials()
       .then(res => {
         this.regions = res.body
       })
 
     agent
       .get(this.FRI_API_URL + '/membership/legacy')
+      .withCredentials()
       .then(res => {
         this.legacy = res.body
       })
     
     agent
       .get(this.COUNTRIES_API_URL + '/v2/all')
+      .withCredentials()
       .then(res => {
         this.countries = res.body.map(country => ({
           value: country.alpha3Code,

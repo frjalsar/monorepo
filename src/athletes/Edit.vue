@@ -80,7 +80,7 @@
 <script>
 
 export default {
-  name: 'AthleteList',
+  name: 'EditAthlete',
   inject: ['FRI_API_URL'],
   props: ['athlete', 'clubs', 'countries'],
   data() {
@@ -117,6 +117,11 @@ export default {
   watch: {
     athlete (val) {
       this.currentItem = val
+    },
+    confirm (shouldConfirm) {
+      if (shouldConfirm) {
+        this.save()
+      }
     }
   }
 }
