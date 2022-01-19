@@ -3,31 +3,31 @@
   <div class="row g-3 mb-3">
     <div class="col-md-6">
       <label for="name" class="form-label">Nafn</label>
-      <input type="name" class="form-control" id="name" v-model="currAthlete.fullName">
+      <input type="name" class="form-control" id="name" v-model="currentItem.fullName">
     </div>
 
     <div class="col-md-4">
       <label for="name" class="form-label">Kennitala</label>
-      <input type="name" class="form-control" id="name" v-model="currAthlete.kt">
+      <input type="name" class="form-control" id="name" v-model="currentItem.kt">
     </div>
 
     <div class="col-md-2">
       <label for="name" class="form-label">Fæðingarár</label>
-      <input type="name" class="form-control" id="name" v-model="currAthlete.birthyear">
+      <input type="name" class="form-control" id="name" v-model="currentItem.birthyear">
     </div>
   </div>
 
   <div class="row g-3 mb-3">
     <div class="col-md-2">
       <label for="name" class="form-label">Kyn</label>      
-      <select class="form-select" v-model="currAthlete.gender">
+      <select class="form-select" v-model="currentItem.gender">
         <option v-for="gender in genders" :key="gender.value" :value="gender.value">{{ gender.text }}</option>        
       </select>
     </div>    
 
     <div class="col-md-4">
       <label for="name" class="form-label">Land</label>      
-      <select class="form-select" v-model="currAthlete.country">
+      <select class="form-select" v-model="currentItem.country">
         <option v-for="country in countries" :key="country.value" :value="country.value">{{ country.text }}</option>        
       </select>
     </div>    
@@ -37,7 +37,7 @@
 
   <div
     class="row g-3 mb-3"
-    v-for="(m, index) in currAthlete.membership"
+    v-for="(m, index) in currentItem.membership"
     :key="m.clubId + '-' + m.from"
   >
     <div class="col-md-6">
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       busy: false,
-      currAthlete: this.athlete,
+      currentItem: this.athlete,
       genders: [{
         value: 1,
         text: 'Karl'
@@ -102,21 +102,21 @@ export default {
       return (byRegion.length) ? byRegion : this.clubs      
     },
     remove(index) {
-      this.currAthlete.membership.splice(index, 1)
+      this.currentItem.membership.splice(index, 1)
     },
     add() {
-      const length = this.currAthlete.membership.length
-      const lastItem = this.currAthlete.membership[length - 1]
+      const length = this.currentItem.membership.length
+      const lastItem = this.currentItem.membership[length - 1]
       if (lastItem) {
         lastItem.to = new Date().getFullYear()
       }
       
-      this.currAthlete.membership.push({})
+      this.currentItem.membership.push({})
     }
   },
   watch: {
     athlete (val) {
-      this.currAthlete = val
+      this.currentItem = val
     }
   }
 }

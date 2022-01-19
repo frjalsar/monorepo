@@ -2,15 +2,21 @@
 <div>
   <h2>Félög</h2>
   <hr />
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      <SimpleTable
-        :data="clubs"     
-        :definition="tableDefinition"   
-        :busy="busy"
-      />
-    </div>
-  </div>
+  <Card>
+    <SimpleTable
+      :data="clubs"
+      :definition="tableDefinition"   
+      :busy="busy"
+    />
+  </Card>
+
+  <ModalPopup>
+    <EditAthlete
+      :athlete="selectedAthlete"
+      :clubs="clubs"
+      :countries="countries"      
+    />
+  </ModalPopup>    
 </div>
 </template>
 
@@ -55,6 +61,7 @@ export default {
   created() {
     agent
       .get(this.FRI_API_URL + '/clubs')
+      .withCredentials()
       .then(res => {
         this.clubs = res.body.map(club => ({
           id: club.id,

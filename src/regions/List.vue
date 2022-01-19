@@ -50,6 +50,7 @@ export default {
   created() {
     agent
       .get(this.FRI_API_URL + '/regions')
+      .withCredentials()
       .then(res => {
         this.regions = res.body.map(region => ({
           id: region.id,

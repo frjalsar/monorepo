@@ -22,6 +22,7 @@ export default {
           .withCredentials()
           .then(res => {
             this.setUser(res.body)
+            return res.body
           })
       }
     },
