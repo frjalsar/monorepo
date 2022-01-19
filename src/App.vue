@@ -56,7 +56,7 @@ export default {
     login(user) {
       this.user = user
       this.setUser(user)
-      this.$router.push({ path: '/idkendur '})
+      this.$router.push({ path: '/idkendur'})
     }
   },
   created() {

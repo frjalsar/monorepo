@@ -37,7 +37,7 @@ export default {
   methods: {
     login() {            
       return agent
-        .post(this.FRI_API_URL + '/user/login')
+        .post(this.FRI_API_URL + '/login')
         .withCredentials()
         .send({
           username: this.username,
