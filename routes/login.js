@@ -13,7 +13,7 @@ function makeLoginRoute (loginHandler, isProduction) {
         if (token && user) {
           res
             .cookie(
-              'FRI_API_TOKEN',
+              'FRI_API',
               token,
               {
                 domain: '.fri.is',
