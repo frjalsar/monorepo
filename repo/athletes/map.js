@@ -1,6 +1,3 @@
-const format = require('date-fns/format')
-const startOfToday = require('date-fns/startOfToday')
-
 function mapAthletes (list) {
   let currentId
   const result = []
@@ -18,7 +15,6 @@ function mapAthletes (list) {
         club: {},
         region: {},
         membership: [],
-        pendingMembership: []
       }
       result.push(atheleteObj)
       currentId = item.id
@@ -28,17 +24,13 @@ function mapAthletes (list) {
     if (item.clubid || item.legacyclub) {
       // Create membership
       const membership = {
+        athleteId: item.id,
         clubId: item.clubid,
         clubFullName: item.clubname,
         legacyClub: item.legacyclub,
-        from: item.fromdate ? format(item.fromdate, 'yyyy-MM-dd') : null,
-        to: item.todate ? format(item.todate, 'yyyy-MM-dd') : null,
-        sentAt: item.sentat,
-        sentBy: item.sentby,
-        sentByName: item.userfullname,
-        confirmed: item.status === 1,
-        confirmedAt: item.confirmedat,
-        confirmedBy: item.confirmedby
+        from: item.yearfrom,
+        to: item.yearto,
+        confirmed: item.confirmed === true      
       }
       
       currentAthlete.membership.push(membership)
@@ -46,8 +38,8 @@ function mapAthletes (list) {
       // Set current club  and region
       if (
         item.clubid !== null &&
-        startOfToday().getTime() >= new Date(item.fromdate).getTime() &&
-        (!item.todate || startOfToday().getTime() <= new Date(item.todate).getTime())
+        new Date().getFullYear >= item.yearFrom &&
+        (!item.yearTo || new Date().getFullYear() <= yearTo)
       ) {
         currentAthlete.club = {
           id: item.clubid,
