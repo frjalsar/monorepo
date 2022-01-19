@@ -10,9 +10,12 @@ const makeAthletes =  require('../composition/athletes')
 const makeClubs =  require('../composition/clubs')
 const makeEvents =  require('../composition/events')
 const makeJudges =  require('../composition/judges')
+const makeLogin = require('../composition/login')
+const makeMembership = require('../composition/membership')
 const makeRegions =  require('../composition/regions')
 const makeVenues =  require('../composition/venues')
 const makeThor = require('../composition/thor')
+
 
 
 const pgPool = new pg.Pool({
@@ -41,11 +44,13 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 const app = createApp(isProduction)
 const authorize = makeAuthorize(redisClient, pgPool, logger)
+app.use('/login', makeLogin(pgPool, redisClient, isProduction))
 // app.use(authorize())
 app.use('/athletes', makeAthletes(pgPool))
 app.use('/clubs', makeClubs(pgPool))
 app.use('/events', makeEvents(pgPool))
 app.use('/judges', makeJudges(pgPool))
+app.use('/membership', makeMembership(pgPool))
 app.use('/regions', makeRegions(pgPool))
 app.use('/venues', makeVenues(pgPool))
 app.use('/thor', makeThor(sqlConnection))
@@ -56,7 +61,7 @@ app.get('/user', (req, res) => {
     return res.json(req.user)
   }
 
-  return res.sendStatus(404)
+  return res.json()
 })
 
 const port = process.env.PORT || 3000

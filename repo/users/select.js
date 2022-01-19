@@ -11,11 +11,13 @@ function makeSelectUsers (db) {
         u.username,
         u.password,
         u.fullname,
+        u.meetid,
         u.clubid,
         c.abbreviation clubabbreviation,
         u.regionid,
         r.abbreviation regionabbreviation,
-        u.admin
+        u.admin,
+        u.token
       FROM users u
       LEFT JOIN
         clubs c ON c.id = u.clubid

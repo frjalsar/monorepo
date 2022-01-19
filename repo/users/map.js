@@ -8,7 +8,9 @@ function mapUsers (list) {
     clubAbbreviation: user.clubabbreviation,
     regionId: user.regionid,
     regionAbbreviation: user.regionabbreviation,
-    admin: user.admin
+    meetId: user.meetId,
+    admin: user.admin,
+    token: user.token,
   }))
 }
 

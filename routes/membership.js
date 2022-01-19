@@ -1,13 +1,10 @@
-const express = require('express')
-const makeSelectLegacyClubs = require('../lib/membership/legacyclubs')
+const { Router } = require('express')
 
-function makeMembershipRoute (db) {
-  const router = express.Router()
+function makeMembershipRoute (selectLegacyClubs) {
+  const router = Router()
 
   router.get('/legacy', (req, res, next) => {
-    const selectClubs = makeSelectLegacyClubs(db)
-
-    selectClubs()
+    selectLegacyClubs()
       .then(res.json.bind(res))
       .catch(next)
   })
