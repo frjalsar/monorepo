@@ -17,7 +17,6 @@ const makeVenues =  require('../composition/venues')
 const makeThor = require('../composition/thor')
 
 const isProduction = process.env.NODE_ENV === 'production'
-console.log(isProduction)
 
 const pgPool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
