@@ -34,6 +34,7 @@ const sqlPool = new sql.ConnectionPool({
   server: process.env.THOR_SERVER,
   database: process.env.THOR_DB,
   options: {
+    encrypt: true,
     trustServerCertificate: true,
   }
 })
