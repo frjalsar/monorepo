@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const authorize = require('../lib/authorizeHandler')
 const mapAthletes = require('../repo/athletes/map')
 
 function makeAthleteRoute (selectAthlete, editAthlete, createAthlete) {
@@ -25,13 +26,13 @@ function makeAthleteRoute (selectAthlete, editAthlete, createAthlete) {
    - Notandi með regionId sama og er skráð sem current region hjá íþróttamanni.
    - Notandi með regionAbbreviation eða clubAbbreviation sama og eitthvert thorClub í membership.
   */
-  router.put('/', (req, res, next) => {    
+  router.put('/', authorize(['admin']), (req, res, next) => {    
     return editAthlete(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
 
-  router.post('/', (req, res, next) => {
+  router.post('/', authorize(['admin']), (req, res, next) => {
     return createAthlete(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)

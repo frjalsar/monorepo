@@ -1,5 +1,5 @@
 
-const { toOrdinal, flatten } = require('pg-parameterize')
+const { flatten, toTuple } = require('pg-parameterize')
 
 function makeInsertMembership (db) {
   return function insertMembership (membership, user) {
@@ -13,32 +13,25 @@ function makeInsertMembership (db) {
       obj.from,
       obj.to,
       obj.legacyClub,
-      obj.status,
-      obj.sentBy,
-      obj.sentAt,
-      user.admin ? user.id : null
+      obj.confirmed,
+      user.id
     ])
 
     const sql = `
       INSERT INTO membership(
         athleteid,
         clubid,
-        fromdate,
-        todate,
+        yearfrom,
+        yearto,
         legacyclub,
-        status,
-        sentby,
-        sentat,
-        confirmedby,
-        confirmedat
+        confirmed,
+        _userid
       )
-      VALUES ` + membership.map(m => {
-        return '(?, ?, ?, ?, ?, ?, ?, ?, ?,' + (user.admin ? 'CURRENT_TIMESTAMP(3)' : 'NULL') + ')'
-      }).join(', ')
+      VALUES ` + toTuple(arr, true)
 
     const params = flatten(arr)
 
-    return db.query(toOrdinal(sql), params)
+    return db.query(sql, params)
   }
 }
 

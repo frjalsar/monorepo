@@ -42,7 +42,7 @@ function makeSelectAthletes (db) {
         regions r ON r.id = c.regionid
       LEFT JOIN
         users u ON u.id = m._userid
-      WHERE 1 = 1`
+      WHERE m._enabled = true`
 
     if (opt.id) {
       sql += ' AND a.id = ?'

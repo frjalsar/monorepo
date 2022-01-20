@@ -1,13 +1,12 @@
 function makeUpdateClub (db) {
   return function updateClub (club, user) {
     const sql = `
-      UPDATE clubs SET      
+      UPDATE clubs SET
         fullname = $1,
         shortname = $2,
         abbreviation = $3,
         regionid = $4,
-        modifiedby = $5,
-        modifiedat = CURRENT_TIMESTAMP
+        _userid = $5
       WHERE
         id = $6
       RETURNING id`

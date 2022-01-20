@@ -1,4 +1,4 @@
-const mapMembership = require('../membership/mapMembership')
+const isEqual = require('lodash.isequal')
 
 function makeEditOrCreateAthlete (makeUpdateOrInsertAthlete, makeDisableMembership, makeInsertMembership, db) {
   return async function editAthlete (athlete, user) {
@@ -12,9 +12,12 @@ function makeEditOrCreateAthlete (makeUpdateOrInsertAthlete, makeDisableMembersh
       await client.query('BEGIN')
       
       await updateOrInsertAthlete(athlete, user)
-      const membershipList = mapMembership(athlete.membership, athlete.id)
-      await updateMembership(athlete.id)
-      await insertMembership(membershipList, user)
+      const sameMembership = isEqual(athlete.membership, athlete.newMembership)
+      
+      if (!sameMembership) {
+        await disableMembership(athlete.id)
+        await insertMembership(athlete.newMembership, user)
+      }
 
       await client.query('COMMIT')
       return { athleteId: athlete.id }

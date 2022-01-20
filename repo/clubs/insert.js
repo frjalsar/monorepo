@@ -3,13 +3,12 @@ function makeInsertClub (db) {
     const sql = `
       INSERT INTO clubs (
         fullname,
-        shortname,        
+        shortname,
         abbreviation,
         regionid,
-        modifiedby,
-        modifiedat
+        _userid,
       )
-      VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP(3))
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING id`
 
     const params = [

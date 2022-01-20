@@ -21,7 +21,7 @@ function mapClubs (list) {
       const region = {
         id: item.regionid,
         fullName: item.regionname,
-        abbreviation: item.regionabbr
+        abbreviation: item.regionabbreviation
       }
       current.region = region
     }

@@ -12,7 +12,7 @@ function makeSelectClubs (db) {
         c.thorid,
         r.id regionid,
         r.fullname regionname,
-        r.abbreviation regionabbr
+        r.abbreviation regionabbrevation
       FROM clubs c
       LEFT JOIN
         regions r ON r.id = c.regionid`

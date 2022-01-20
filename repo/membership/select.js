@@ -8,14 +8,13 @@ function makeSelectMembership (db) {
       SELECT
         m.athleteid,
         m.clubid,
-        m.fromdate,
-        m.todate,
+        m.yearfrom,
+        m.yearto,
         m.legacyclub,
-        m.sentat,
-        m.sentby,
-        m.status
+        m.confirmed
       FROM membership m
-      WHERE 1=1`
+      WHERE
+        _enabled = true`
 
     if (opt.athleteId) {
       sql += ' AND m.athleteid = ?'
@@ -27,16 +26,16 @@ function makeSelectMembership (db) {
       params.push(opt.clubid)
     }
 
-    if (opt.status !== undefined && opt.status !== null) {
-      sql += ' AND m.status = ?'
-      params.push(opt.status)
+    if (opt.confirmed !== undefined && opt.confirmed !== null) {
+      sql += ' AND m.confirmed = ?'
+      params.push(opt.confirmed)
     }
 
     sql += `
       ORDER BY
         m.athleteid ASC,
-        m.sentat DESC,
-        m.fromdate ASC`
+        m.yearfrom ASC`
+
 
     // Lets not return all data
     if (params.length === 0) {

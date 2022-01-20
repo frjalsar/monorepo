@@ -3,9 +3,6 @@ const { toOrdinal, flatten } = require('pg-parameterize')
 
 function makeDisableMembership (db) {
   return function updateMembership (athleteId) {
-    if (membership.length === 0) {
-      return Promise.resolve()
-    }
 
     const sql = `
       UPDATE
@@ -15,7 +12,7 @@ function makeDisableMembership (db) {
       WHERE
         athleteid = $1`
         
-    const params = [ath]
+    const params = [athleteId]
 
     return db.query(sql, params)
   }

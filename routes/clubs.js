@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const authorize = require('../lib/authorizeHandler')
 const mapClubs = require('../repo/clubs/map')
 
 function makeClubRoute (selectClubs, updateClub, insertClub) {
@@ -25,13 +26,13 @@ function makeClubRoute (selectClubs, updateClub, insertClub) {
    - Notandi með regionAbbreviation eða clubAbbreviation sama og eitthvert thorClub í membership.
   */
 
-  router.put('/', (req, res, next) => {
+  router.put('/', authorize(['club']), (req, res, next) => {
     return updateClub(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
 
-  router.post('/', (req, res, next) => {    
+  router.post('/', (req, res, next) => {
     return insertClub(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
