@@ -1,7 +1,6 @@
 <template>
 <div>
-  <h2>Iðkendur</h2>
-  <hr />
+  <Title text="Iðkendur" @addNewItem="openModalEdit({})" />
 
   <Card>
     <SearchPanel
@@ -37,6 +36,7 @@
 <script>
 import agent from 'superagent'
 import { format } from 'date-fns'
+import Title from '../_components/Title.vue'
 import Card from '../_components/Card.vue'
 import SearchPanel from '../_components/SearchPanel.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
@@ -48,6 +48,7 @@ export default {
   name: 'ListAthlete',
   mixins: [ModalEditMixin],  
   components: {
+    Title,
     Card,
     SearchPanel,
     SimpleTable,
@@ -120,14 +121,14 @@ export default {
         .then(res => {
           this.athletes = res.body.map(athlete => ({
             ...athlete,
-            newMembership: athlete.membership.map(m => ({...m})), // cloning to avoid assign by ref
+            newMembership: athlete?.membership.map(m => ({...m})), // cloning to avoid assign by ref
             clubFullName: athlete.club?.fullName,
             lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),            
           }))
 
           this.busy = false
         })
-    }
+    },
   },
   created() {
     this.search()

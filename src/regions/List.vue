@@ -2,25 +2,25 @@
 <div>
   <h2>Íþróttahéruð</h2>
   <hr />
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      <SimpleTable
-        :data="regions"     
-        :definition="tableDefinition"   
-        :busy="busy"
-      />
-    </div>
-  </div>
+  <Card>
+    <SimpleTable
+      :data="regions"     
+      :definition="tableDefinition"
+      @click="openModalEdit"
+    />
+</Card>
 </div>
 </template>
 
 <script>
 import agent from 'superagent'
+import Card from '../_components/Card.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 
 export default {
   name: 'RegionList',
   components: {
+    Card,
     SimpleTable
   },
   inject: ['FRI_API_URL'],

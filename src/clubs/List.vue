@@ -1,12 +1,11 @@
 <template>
 <div>
-  <Title text="Félög" />
+  <Title text="Félög" @addNewItem="openModalEdit({})" />
 
   <Card>
     <SimpleTable
       :data="clubs"
-      :definition="tableDefinition"   
-      :busy="busy"
+      :definition="tableDefinition"
       @click="openModalEdit"
     />
   </Card>
@@ -44,7 +43,6 @@ export default {
   inject: ['FRI_API_URL'],
   data() {
     return {
-      busy: false,      
       clubs: [],
       regions: [],
       tableDefinition: [
@@ -62,12 +60,17 @@ export default {
           field: 'abbreviation',
           label: 'Skammstöfun',
           display: 'lg'
-        },
+        },       
         {
+          field: 'thorId',
+          label: 'Þór',
+          display: 'md'
+        },
+         {
           field: 'regionFullName',
           label: 'Íþróttahérað',
           display: 'md'
-        }
+        },
       ]
     }
   },

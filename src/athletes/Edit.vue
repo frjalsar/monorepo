@@ -31,6 +31,16 @@
         <option v-for="country in countries" :key="country.value" :value="country.value">{{ country.text }}</option>
       </select>
     </div>
+
+    <div class="col-md-3">
+      <label for="thorId" class="form-label">Þór auðkenni &nbsp;<i class="bi bi-exclamation-triangle-fill text-warning"></i> </label>
+      <input type="name" class="form-control" id="thorId" v-model="currentItem.thorId" :disabled="busy">
+    </div>
+
+    <div class="col-md-1 offset-md-1">
+      <label for="id" class="form-label">Númer</label>
+      <input type="name" class="form-control-plaintext" readonly id="id" v-model="currentItem.id" :disabled="busy">
+    </div>
   </div>
 
   <hr class="my-4" />
@@ -137,10 +147,10 @@ export default {
   },
   watch: {
     athlete (val) {
-      this.currentItem = val
-      const confirmedCount = this.currentItem.newMembership.reduce((total, current) => total + current.confirmed, 0)
-      const totalCount = this.currentItem.newMembership.length      
-      this.membershipIsConfirmed = confirmedCount === totalCount
+        this.currentItem = val
+        const confirmedCount = this.currentItem.newMembership?.reduce((total, current) => total + current.confirmed, 0)
+        const totalCount = this.currentItem.newMembership?.length      
+        this.membershipIsConfirmed = confirmedCount === totalCount
     },
   },  
 }

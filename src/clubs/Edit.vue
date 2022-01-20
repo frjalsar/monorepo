@@ -18,12 +18,22 @@
   </div>
 
   <div class="row g-3 mb-3">
-    <div class="col-md-4">
+    <div class="col-md-7">
       <label for="name" class="form-label">Íþróttahérað</label>      
       <select class="form-select" v-model="currentItem.regionId" :disabled="busy">
         <option v-for="region in regions" :key="region.id" :value="region.id">{{ region.fullName }}</option>        
       </select>
-    </div>    
+    </div>
+
+    <div class="col-md-3">
+      <label for="thorId" class="form-label">Þór auðkenni</label>
+      <input type="name" class="form-control" id="thorId" v-model="currentItem.thorId" :disabled="busy">
+    </div>
+
+    <div class="col-md-1">
+      <label for="id" class="form-label">Númer</label>
+      <input type="name" class="form-control-plaintext" readonly id="id" v-model="currentItem.id" :disabled="busy">
+    </div>
   </div>  
 
 </form>
