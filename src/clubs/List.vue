@@ -1,7 +1,7 @@
 <template>
 <div>
-  <h2>Félög</h2>
-  <hr />
+  <Title text="Félög" />
+
   <Card>
     <SimpleTable
       :data="clubs"
@@ -11,11 +11,12 @@
     />
   </Card>
 
-  <ModalEdit v-slot="{ confirm }">
+  <ModalEdit v-slot="{ confirm, callback }"> 
     <EditClub
       :club="selectedModalItem"
       :regions="regions"
       :confirm="confirm"
+      @done="callback"
     />
   </ModalEdit>
 </div>
@@ -23,6 +24,7 @@
 
 <script>
 import agent from 'superagent'
+import Title from '../_components/Title.vue'
 import Card from '../_components/Card.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/ModalEdit.vue'
@@ -33,6 +35,7 @@ export default {
   name: 'ClubList',
   mixins: [ModalEditMixin],
   components: {
+    Title,
     Card,
     SimpleTable,
     ModalEdit,
@@ -67,7 +70,7 @@ export default {
         }
       ]
     }
-  },  
+  },
   created() {
     agent
       .get(this.FRI_API_URL + '/clubs')
@@ -88,10 +91,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-tr:hover td {
-  cursor: pointer;
-  background-color: #eee;
-}
-</style>

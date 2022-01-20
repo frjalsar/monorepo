@@ -22,11 +22,13 @@
     />
   </Card>    
 
-  <ModalEdit>
+  <ModalEdit v-slot="{ confirm, callback }">
     <EditAthlete
       :athlete="selectedModalItem"
       :clubs="clubs"
       :countries="countries"      
+      :confirm="confirm"
+      @done="callback"
     />
   </ModalEdit>
 </div>
@@ -116,14 +118,12 @@ export default {
         .withCredentials()
         .query(this.$route.query)
         .then(res => {
-          console.log(res.body)
           this.athletes = res.body.map(athlete => ({
             ...athlete,
+            newMembership: athlete.membership.map(m => ({...m})), // cloning to avoid assign by ref
             clubFullName: athlete.club?.fullName,
             lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),            
           }))
-
-          console.log(this.athletes)
 
           this.busy = false
         })
@@ -170,10 +170,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-tr:hover td {
-  cursor: pointer;
-  background-color: #eee;
-}
-</style>

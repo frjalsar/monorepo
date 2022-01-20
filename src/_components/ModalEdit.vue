@@ -3,15 +3,15 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Breyta skráningu</h5>
+        <h5 class="modal-title">Breyta skráningum</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <slot :confirm="shouldConfirm"></slot>        
+        <slot :confirm="shouldConfirm" :callback="callback"></slot>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hætta við</button>
-        <button type="button" class="btn btn-primary" @click.prevent="confirm()">Staðfesta</button>
+        <button type="button" class="btn btn-primary" @click.prevent="confirm()" :disabled="shouldConfirm">Staðfesta</button>
       </div>
     </div>
   </div>
@@ -29,8 +29,10 @@ export default {
   methods: {
     confirm() {
       this.shouldConfirm = true
+    },
+    callback() {
+      this.shouldConfirm = false
     }
   }
-
 }
 </script>

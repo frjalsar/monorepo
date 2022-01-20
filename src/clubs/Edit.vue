@@ -30,49 +30,21 @@
 </template>
 
 <script>
-import agent from 'superagent'
+import EditMixin from '../_mixins/EditMixin.vue'
 export default {
   name: 'EditClub',
   inject: ['FRI_API_URL'],
-  props: ['club', 'regions', 'confirm'],
-  data() {
-    return {
-      busy: false,
-      currentItem: this.club,      
+  mixins: [EditMixin],
+  props: ['club', 'regions'], 
+  computed: {
+    apiUrl() {
+      return this.FRI_API_URL + '/clubs'
     }
-  },
-  methods: {
-    save() {
-      this.busy = true
-      agent
-        .post(this.FRI_API_URL + '/clubs')
-        .send(this.currentItem)
-        .withCredentials()
-        .then(res => {          
-          console.log(res)          
-          this.busy = false
-        })
-        .catch(e => {
-          console.log(e)
-        })
-    }
-  },
+  },  
   watch: {
     club (val) {
       this.currentItem = val
-    },
-    confirm (shouldConfirm) {
-      if (shouldConfirm) {
-        this.save()
-      }
-    }
-  }
+    },    
+  },  
 }
 </script>
-
-<style scoped>
-tr:hover td {
-  cursor: pointer;
-  background-color: #eee;
-}
-</style>
