@@ -28,8 +28,8 @@ function mapAthletes (list) {
         clubId: item.clubid,
         clubFullName: item.clubname,
         legacyClub: item.legacyclub,
-        from: item.yearfrom,
-        to: item.yearto,
+        yearFrom: item.yearfrom,
+        yearTo: item.yearto,
         confirmed: item.confirmed === true      
       }
       

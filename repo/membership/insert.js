@@ -10,8 +10,8 @@ function makeInsertMembership (db) {
     const arr = membership.map(obj => [
       obj.athleteId,
       obj.clubId,
-      obj.from,
-      obj.to,
+      obj.yearFrom,
+      obj.yearTo,
       obj.legacyClub,
       obj.confirmed,
       user.id

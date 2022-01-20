@@ -3,11 +3,10 @@ function mapMembership (membership, athleteId) {
     return {
       athleteId: athleteId,
       clubId: m.clubId,
-      from: m.from ? m.from : null,
-      to: m.to ? m.to : null,
-      legacyClub: m.legacyClub,      
-      sentBy: m.sentBy,
-      sentAt: m.sentAt
+      legacyClub: m.legacyClub,
+      yearFrom: m.yearFrom ? m.yearFrom : null,
+      yearTo: m.yearTo ? m.yearTo : null,      
+      confirmed: m.confirmed
     }
   })
 }
