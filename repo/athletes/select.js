@@ -35,14 +35,14 @@ function makeSelectAthletes (db) {
       FROM
         athletes a
       LEFT JOIN
-        membership m ON m.athleteid = a.id
+        membership m ON m.athleteid = a.id AND m._enabled = true
       LEFT JOIN 
         clubs c ON c.id = m.clubid
       LEFT JOIN
         regions r ON r.id = c.regionid
       LEFT JOIN
         users u ON u.id = m._userid
-      WHERE m._enabled = true`
+      WHERE 1=1`
 
     if (opt.id) {
       sql += ' AND a.id = ?'

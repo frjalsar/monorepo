@@ -34,12 +34,12 @@ function mapAthletes (list) {
       }
       
       currentAthlete.membership.push(membership)
-      
-      // Set current club  and region
+
       if (
         item.clubid !== null &&
-        new Date().getFullYear >= item.yearFrom &&
-        (!item.yearTo || new Date().getFullYear() <= yearTo)
+        new Date().getFullYear() >= item.yearfrom &&
+        (item.yearto === null || new Date().getFullYear() <= item.yearto) &&
+        item.confirmed
       ) {
         currentAthlete.club = {
           id: item.clubid,
