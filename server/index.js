@@ -16,7 +16,8 @@ const makeRegions =  require('../composition/regions')
 const makeVenues =  require('../composition/venues')
 const makeThor = require('../composition/thor')
 
-
+const isProduction = process.env.NODE_ENV === 'production'
+console.log(isProduction)
 
 const pgPool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -28,19 +29,17 @@ const pgPool = new pg.Pool({
 const redisClient = redis.createClient({
   url: process.env.REDIS_URL
 })
-
 const sqlPool = new sql.ConnectionPool({
   user: process.env.THOR_USER,
   password: process.env.THOR_PASSWORD,
   server: process.env.THOR_SERVER,
   database: process.env.THOR_DB,
   options: {
-    trustServerCertificate: process.env.NODE_ENV !== 'production',
+    trustServerCertificate: true,
   }
 })
 
 const sqlConnection = sqlPool.connect()
-const isProduction = process.env.NODE_ENV === 'production'
 
 const app = createApp(isProduction)
 const authenticate = makeAuthenticate(pgPool, redisClient, logger)
