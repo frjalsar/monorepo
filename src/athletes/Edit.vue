@@ -50,12 +50,12 @@
     
     <div class="col-md-2">
       <label :for="'from-' + index" class="form-label" v-if="index === 0">Frá</label>
-      <input type="tel" class="form-control" :for="'from-' + index" v-model="m.from">
+      <input type="tel" class="form-control" :for="'from-' + index" v-model="m.yearFrom">
     </div>
 
     <div class="col-md-2">
       <label :for="'from-' + index" class="form-label" v-if="index === 0">Til</label>
-      <input type="tel" class="form-control"  :for="'to-' + index" v-model="m.to">
+      <input type="tel" class="form-control"  :for="'to-' + index" v-model="m.yearTo">
     </div>
 
     <div class="col-md-1 offset-md-1">
@@ -124,10 +124,10 @@ export default {
       const length = this.currentItem.newMembership.length
       const lastItem = this.currentItem.newMembership[length - 1]
       if (lastItem) {
-        lastItem.to = new Date().getFullYear()
+        lastItem.yearTo = new Date().getFullYear() -1
       }
       
-      this.currentItem.newMembership.push({})
+      this.currentItem.newMembership.push({ yearFrom: new Date().getFullYear() })
     },
     confirmAllMembership () {
       this.currentItem.newMembership.forEach(m => {
