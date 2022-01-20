@@ -79,7 +79,7 @@
       <div class="form-check">
         <input class="form-check-input" type="checkbox" v-model="membershipIsConfirmed" @change="confirmAllMembership()" id="felagasaga">
         <label class="form-check-label" for="felagasaga">
-          Staðfesta skráningu í félagasögu.
+          Staðfesta að félagasaga sé yfirfarin.
         </label>
 </div>
     </div>
