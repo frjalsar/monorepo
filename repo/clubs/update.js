@@ -5,16 +5,18 @@ function makeUpdateClub (db) {
         fullname = $1,
         shortname = $2,
         abbreviation = $3,
-        regionid = $4,
-        _userid = $5
+        thorid = $4,
+        regionid = $5,
+        _userid = $6
       WHERE
-        id = $6
+        id = $7
       RETURNING id`
 
     const params = [
       club.fullName,
       club.shortName,
       club.abbreviation,
+      club.thorId,
       club.regionId,
       user.id,
       club.id
