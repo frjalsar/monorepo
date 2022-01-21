@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Title text="Iðkendur" @addNewItem="openModalEdit({})" />
+  <Title text="Iðkendur" @addNewItem="openModalEdit()" />
 
   <Card>
     <SearchPanel
@@ -12,20 +12,20 @@
     />
   </Card>
 
-  <Card>  
+  <Card>
     <SimpleTable
-      :data="athletes"     
-      :definition="tableDefinition"   
+      :data="athletes"
+      :definition="tableDefinition"
       :busy="busy"
       @click="openModalEdit"
     />
-  </Card>    
+  </Card>
 
   <ModalEdit v-slot="{ confirm, callback }">
     <EditAthlete
       :athlete="selectedModalItem"
       :clubs="clubs"
-      :countries="countries"      
+      :countries="countries"
       :confirm="confirm"
       @done="callback"
     />
@@ -46,7 +46,7 @@ import EditAthlete from './Edit.vue'
 
 export default {
   name: 'ListAthlete',
-  mixins: [ModalEditMixin],  
+  mixins: [ModalEditMixin],
   components: {
     Title,
     Card,
@@ -67,6 +67,11 @@ export default {
       countries: [],
       tableDefinition: [
         {
+          field: 'id',
+          label: '#',
+          display: 'lg'
+        },
+        {
           field: 'fullName',
           label: 'Nafn',
           display: 'md'
@@ -75,7 +80,7 @@ export default {
           field: 'kt',
           label: 'Kennitala',
           display: 'lg'
-        },        
+        },
         {
           field: 'birthyear',
           label: 'Fæðingarár',
@@ -96,7 +101,6 @@ export default {
           label: 'Land',
           display: 'lg'
         },
-
       ]
     }
   },
@@ -109,7 +113,7 @@ export default {
     setQueryParams (query) {
       this.$router.replace({ query }).then(() => {
         this.search()
-      })      
+      })
     },
     search () {
       this.busy = true
@@ -121,9 +125,9 @@ export default {
         .then(res => {
           this.athletes = res.body.map(athlete => ({
             ...athlete,
-            newMembership: athlete?.membership.map(m => ({...m})), // cloning to avoid assign by ref
+            newMembership: athlete.membership.map(m => ({...m})), // cloning to avoid assign by ref
             clubFullName: athlete.club?.fullName,
-            lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),            
+            lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),
           }))
 
           this.busy = false

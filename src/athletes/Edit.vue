@@ -3,38 +3,38 @@
   <div class="row g-3 mb-3">
     <div class="col-md-6">
       <label for="fullName" class="form-label">Nafn</label>
-      <input type="text" class="form-control" id="fullName" v-model="currentItem.fullName">
+      <input type="text" class="form-control" id="fullName" v-model="currentItem.fullName" :disabled="busy">
     </div>
 
     <div class="col-md-4">
       <label for="kt" class="form-label">Kennitala</label>
-      <input type="text" class="form-control" id="kt" v-model="currentItem.kt">
+      <input type="text" class="form-control" id="kt" v-model="currentItem.kt" :disabled="busy">
     </div>
 
     <div class="col-md-2">
       <label for="birthyear" class="form-label">Fæðingarár</label>
-      <input type="tel" class="form-control" id="birthyear" v-model="currentItem.birthyear">
+      <input type="tel" class="form-control" id="birthyear" v-model="currentItem.birthyear" :disabled="busy">
     </div>
   </div>
 
   <div class="row g-3 mb-3">
     <div class="col-md-2">
       <label for="name" class="form-label">Kyn</label>
-      <select class="form-select" v-model="currentItem.gender">
+      <select class="form-select" v-model="currentItem.gender" :disabled="busy">
         <option v-for="gender in genders" :key="gender.value" :value="gender.value">{{ gender.text }}</option>
       </select>
     </div>
 
     <div class="col-md-4">
       <label for="name" class="form-label">Land</label>
-      <select class="form-select" v-model="currentItem.country">
+      <select class="form-select" v-model="currentItem.country" :disabled="busy">
         <option v-for="country in countries" :key="country.value" :value="country.value">{{ country.text }}</option>
       </select>
     </div>
 
     <div class="col-md-3">
-      <label for="thorId" class="form-label">Þór auðkenni &nbsp;<i class="bi bi-exclamation-triangle-fill text-warning"></i> </label>
-      <input type="name" class="form-control" id="thorId" v-model="currentItem.thorId" :disabled="busy">
+      <label for="thorId" class="form-label">Þór auðkenni &nbsp;<i class="bi bi-exclamation-triangle-fill text-warning" title="Þessi reitur er möppunin yfir í Þór. Farið varlega í að breyta."></i> </label>
+      <input type="tel" class="form-control" id="thorId" v-model="currentItem.thorId" :disabled="busy">
     </div>
 
     <div class="col-md-1 offset-md-1">
@@ -147,10 +147,23 @@ export default {
   },
   watch: {
     athlete (val) {
+      if (val && val.id) {                
         this.currentItem = val
         const confirmedCount = this.currentItem.newMembership?.reduce((total, current) => total + current.confirmed, 0)
         const totalCount = this.currentItem.newMembership?.length      
         this.membershipIsConfirmed = confirmedCount === totalCount
+      } else {
+        // Empty athlete object
+        this.currentItem = {
+          club: {},
+          region: {},
+          newMembership: [{
+            yearFrom: new Date().getFullYear()
+          }]
+        }
+
+        this.membershipIsConfirmed = false
+      }
     },
   },  
 }

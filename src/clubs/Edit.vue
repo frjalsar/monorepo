@@ -53,7 +53,13 @@ export default {
   },  
   watch: {
     club (val) {
-      this.currentItem = val
+      if (val && val.id) {
+        this.currentItem = val
+      } else {
+        this.currentItem = {
+          region: {}
+        }
+      }
     },    
   },  
 }

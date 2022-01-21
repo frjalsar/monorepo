@@ -6,7 +6,7 @@
           v-for="header in headers"
           :key="header.field"
           :class="{
-            'text-secondary': header.field === 'id',
+            'text-muted': header.field === 'id',
             'd-none d-lg-table-cell': header.display === 'lg',
             'd-none d-md-table-cell': header.display === 'md'
           }"

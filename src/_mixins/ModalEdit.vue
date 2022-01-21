@@ -6,9 +6,9 @@ export default {
     }
   },
   methods: {
-     openModalEdit (item) {
+    openModalEdit (item) {
       this.selectedModalItem = item
-      const el = document.getElementById('ModalEdit')      
+      const el = document.getElementById('ModalEdit')
       const ModalEdit = new bootstrap.Modal(el)
       
       ModalEdit.show()
