@@ -1,10 +1,7 @@
 <template>
-<div class="container-fluid d-flex bg-light">   
-  <nav class="shadow p-3 bg-white" v-if="user">
-    <a href="/" class="">
-      <img src="./assets/logo.png" width="100" height="90" class="d-block mx-auto" />
-    </a>
-      <span class="navbar-toggler-icon"></span>
+<div class="container-fluid d-flex bg-light">
+  <nav class="shadow p-3 bg-white" :class="{ fullview: fullview }" dv-if="user" @dblclick="toggleNav()">    
+    <img src="./assets/logo.png" width="100" height="90" class="d-block mx-auto" />    
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
@@ -17,7 +14,7 @@
         <router-link to="/ithrottaherud" class="nav-link link-dark text-decoration-none" active-class="active">Íþróttahéruð</router-link>
       </li>
     </ul>
-     <hr>
+    <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
         <router-link to="/domarar" class="nav-link link-dark text-decoration-none" active-class="active">Dómarar</router-link>
@@ -39,15 +36,19 @@
   </nav>
 
   <main class="py-4 px-5">
-    <router-view @login="login">
-    </router-view>
+    <router-view @login="login"></router-view>
   </main>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'admin',  
+  name: 'admin',
+  data() {
+    return {
+      fullview: false
+    }
+  },
   provide: {
     FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
     COUNTRIES_API_URL: import.meta.env.VITE_COUNTRIES_API_URL
@@ -57,6 +58,9 @@ export default {
       this.user = user
       this.setUser(user)
       this.$router.push({ path: '/idkendur'})
+    },
+    toggleNav() {
+      this.fullview = !this.fullview
     }
   },
   created() {
@@ -86,4 +90,29 @@ div.container-fluid {
   width: 100%;
 }
 
+@media (max-width: 576px) {
+  nav {
+    transition: 1s;
+    width: 50px;
+  }
+
+  nav * {
+    transition: 0.3s;
+    opacity: 0;
+    display: none;
+  }
+
+  nav.fullview {
+    transition: 1s;
+    width: 280px;
+    position: fixed;
+    z-index: 99;
+    height: 100vh;
+  }  
+
+  nav.fullview * {
+    opacity: 1;
+    display: block;
+  }  
+}
 </style>

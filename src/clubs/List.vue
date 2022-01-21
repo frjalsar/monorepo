@@ -54,7 +54,7 @@ export default {
         {
           field: 'fullName',
           label: 'Nafn',
-          display: 'md'
+          display: 'xs'
         },
         {
           field: 'abbreviation',

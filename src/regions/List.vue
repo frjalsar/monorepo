@@ -26,7 +26,7 @@ import Title from '../_components/Title.vue'
 import Card from '../_components/Card.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
-import ModalEditMixin from '../_mixins/EditModalMixin.vue'
+import ModalEditMixin from '../_mixins/ModalMixin.vue'
 import EditRegion from './Edit.vue'
 
 export default {
@@ -53,7 +53,7 @@ export default {
         {
           field: 'fullName',
           label: 'Nafn',
-          display: 'md'
+          display: 'xs'
         },
         {
           field: 'abbreviation',

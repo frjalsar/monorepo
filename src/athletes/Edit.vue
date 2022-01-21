@@ -147,10 +147,10 @@ export default {
   },
   watch: {
     athlete (val) {
-      if (val && val.id) {                
+      if (val && val.id) {
         this.currentItem = val
         const confirmedCount = this.currentItem.newMembership?.reduce((total, current) => total + current.confirmed, 0)
-        const totalCount = this.currentItem.newMembership?.length      
+        const totalCount = this.currentItem.newMembership?.length
         this.membershipIsConfirmed = confirmedCount === totalCount
       } else {
         // Empty athlete object

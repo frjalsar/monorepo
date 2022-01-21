@@ -73,7 +73,7 @@ export default {
         {
           field: 'fullName',
           label: 'Nafn',
-          display: 'md'
+          display: 'xs'
         },
         {
           field: 'kt',
@@ -88,7 +88,7 @@ export default {
         {
           field: 'clubFullName',
           label: 'Félag',
-          display: 'md'
+          display: 'xs'
         },
         {
           field: 'lastCompeted',
