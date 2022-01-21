@@ -12,7 +12,17 @@ const pgPool = new pg.Pool({
   }
 })
 
-const sqlConnectionPool = new sql.ConnectionPool(process.env.THOR_URL)
+const sqlPool = new sql.ConnectionPool({
+  user: process.env.THOR_USER,
+  password: process.env.THOR_PASSWORD,
+  server: process.env.THOR_SERVER,
+  database: process.env.THOR_DB,
+  options: {
+    encrypt: false,
+    trustServerCertificate: true,
+  }
+})
+
 const sqlConnection = sqlConnectionPool.connect()
 
 sqlConnection
