@@ -12,14 +12,14 @@ const pgPool = new pg.Pool({
   }
 })
 
-const sqlPool = new sql.ConnectionPool({
+const sqlConnectionPool = new sql.ConnectionPool({
   user: process.env.THOR_USER,
   password: process.env.THOR_PASSWORD,
   server: process.env.THOR_SERVER,
   database: process.env.THOR_DB,
   options: {
     encrypt: false,
-    trustServerCertificate: true,
+    trustServerCertificate: true
   }
 })
 

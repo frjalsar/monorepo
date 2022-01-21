@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const mapRegions = require('../repo/regions/map')
+const authorize = require('../lib/authorizeHandler')
 
 function makeRegionsRoute (selectRegions, updateRegion, insertRegion) {
   const router = Router()
@@ -31,6 +31,7 @@ function makeRegionsRoute (selectRegions, updateRegion, insertRegion) {
   return router
 }
 
+/*
 function hasAccess () {
   return (req, res, next) => {
     if (req.user) {
@@ -46,5 +47,6 @@ function hasAccess () {
     return res.sendStatus(401)
   }
 }
+*/
 
 module.exports = makeRegionsRoute

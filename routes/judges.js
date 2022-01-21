@@ -2,7 +2,7 @@ const { Router } = require('express')
 const mapJudges = require('../repo/judges/map')
 
 function makeJudgesRoute (selectJudges, updateJudge) {
-  const router = Router()  
+  const router = Router()
 
   router.get('/:id?', (req, res, next) => {
     return selectJudges(req.params)

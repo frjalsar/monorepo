@@ -4,7 +4,7 @@ const authorize = require('../lib/authorizeHandler')
 function makeClubRoute (selectClubs, updateClub, insertClub) {
   const router = Router()
 
-  router.get('/', (req, res, next) => {    
+  router.get('/', (req, res, next) => {
     selectClubs()
       .then(res.json.bind(res))
       .catch(next)
@@ -38,6 +38,7 @@ function makeClubRoute (selectClubs, updateClub, insertClub) {
   return router
 }
 
+/*
 function editAccess (db) {
   return async (req, res, next) => {
     const selectClubs = makeSelectClubs(db)
@@ -71,5 +72,6 @@ function createAccess () {
     return res.sendStatus(401)
   }
 }
+*/
 
 module.exports = makeClubRoute

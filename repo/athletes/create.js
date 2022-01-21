@@ -12,17 +12,16 @@ function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeDisabl
       await client.query('BEGIN')
       console.log('athlete', athlete)
       const id = await insertAthlete(athlete, user)
-            
+
       const membershipList = mapMembership(athlete.newMembership, id)
       await insertMembership(membershipList, user)
 
-       // THOR - always update Thor. TODO refactor away
-       const latestClub = membershipList[membershipList.length - 1] 
-       const clubs = await selectClubs({ id: latestClub.clubId })
-       if (clubs.length === 1)
-       {
-         await insertCompetitor()
-       }
+      // THOR - always update Thor. TODO refactor away
+      const latestClub = membershipList[membershipList.length - 1]
+      const clubs = await selectClubs({ id: latestClub.clubId })
+      if (clubs.length === 1) {
+        await insertCompetitor()
+      }
 
       await client.query('COMMIT')
       return { athleteId: id }

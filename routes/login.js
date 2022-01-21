@@ -1,6 +1,5 @@
 const { Router } = require('express')
 
-
 function makeLoginRoute (loginHandler, isProduction) {
   const router = Router()
 
@@ -36,4 +35,3 @@ function makeLoginRoute (loginHandler, isProduction) {
 }
 
 module.exports = makeLoginRoute
-

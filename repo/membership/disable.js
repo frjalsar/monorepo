@@ -1,9 +1,5 @@
-
-const { toOrdinal, flatten } = require('pg-parameterize')
-
 function makeDisableMembership (db) {
   return function updateMembership (athleteId) {
-
     const sql = `
       UPDATE
         membership
@@ -11,7 +7,7 @@ function makeDisableMembership (db) {
         _enabled = false
       WHERE
         athleteid = $1`
-        
+
     const params = [athleteId]
 
     return db.query(sql, params)

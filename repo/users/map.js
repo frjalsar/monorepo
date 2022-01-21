@@ -10,7 +10,7 @@ function mapUsers (list) {
     regionAbbreviation: user.regionabbreviation,
     meetId: user.meetId,
     admin: user.admin,
-    token: user.token,
+    token: user.token
   }))
 }
 

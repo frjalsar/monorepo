@@ -5,7 +5,7 @@ function mapMembership (membership, athleteId) {
       clubId: m.clubId,
       legacyClub: m.legacyClub,
       yearFrom: m.yearFrom ? m.yearFrom : null,
-      yearTo: m.yearTo ? m.yearTo : null,      
+      yearTo: m.yearTo ? m.yearTo : null,
       confirmed: m.confirmed
     }
   })

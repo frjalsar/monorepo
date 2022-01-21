@@ -13,22 +13,21 @@ function makeEditAthlete (makeUpdateAthlete, makeSelectClubs, makeDisableMembers
     try {
       await client.query('BEGIN')
       await updateAthlete(athlete, user)
-      
+
       const sameMembership = isEqual(athlete.membership, athlete.newMembership)
       const membershipList = mapMembership(athlete.newMembership, athlete.id)
-      
+
       if (!sameMembership) {
         await disableMembership(athlete.id)
         await insertMembership(membershipList, user)
       }
 
-       // THOR - always update Thor. TODO refactor away
-       const latestClub = membershipList[membershipList.length - 1]
-       const clubs = await selectClubs({ id: latestClub.clubId })
-       if (clubs.length === 1)
-       {
-         await updateCompetitor(athlete.thorId, club[0].thorId)
-       }
+      // THOR - always update Thor. TODO refactor away
+      const latestClub = membershipList[membershipList.length - 1]
+      const clubs = await selectClubs({ id: latestClub.clubId })
+      if (clubs.length === 1) {
+        await updateCompetitor(athlete.thorId, clubs[0].thorId)
+      }
 
       await client.query('COMMIT')
       return { athleteId: athlete.id }

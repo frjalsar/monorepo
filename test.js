@@ -28,7 +28,7 @@ const a = [
     confirmed: false
   }
 ]
-const b= [
+const b = [
   {
     athleteId: 7993,
     clubId: 54,

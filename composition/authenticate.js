@@ -1,4 +1,4 @@
-function makeAuthenticate(pgPool, redisClient, logger) {
+function makeAuthenticate (pgPool, redisClient, logger) {
   const getToken = require('../lib/getToken')
   const makeGetUser = require('../userstore/get')
   const makeSetUser = require('../userstore/set')

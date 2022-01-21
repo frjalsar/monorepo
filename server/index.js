@@ -5,7 +5,7 @@ const sql = require('mssql')
 const redis = require('redis')
 const logger = require('heroku-logger')
 const createApp = require('./app')
-const makeAuthenticate= require('../composition/authenticate')
+const makeAuthenticate = require('../composition/authenticate')
 const makeAthletes = require('../composition/athletes')
 const makeClubs = require('../composition/clubs')
 const makeEvents = require('../composition/events')
@@ -35,7 +35,7 @@ const sqlPool = new sql.ConnectionPool({
   database: process.env.THOR_DB,
   options: {
     encrypt: false,
-    trustServerCertificate: true,
+    trustServerCertificate: true
   }
 })
 
@@ -53,7 +53,6 @@ app.use('/membership', makeMembership(pgPool))
 app.use('/regions', makeRegions(pgPool))
 app.use('/venues', makeVenues(pgPool))
 app.use('/thor', makeThor(sqlConnection))
-
 
 app.get('/user', (req, res) => {
   if (req.user) {

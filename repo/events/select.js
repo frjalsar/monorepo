@@ -1,9 +1,7 @@
 function makeSelectEvents (db) {
-  return function selectEvents (options) {
-    const opt = options || {}
-
+  return function selectEvents () {
     const params = []
-    let sql = `
+    const sql = `
       SELECT
         e.id,
         e.strid,

@@ -1,7 +1,7 @@
 const { Router } = require('express')
 
 function makeThorRoute (selectThorEvents, selectThorAchievements) {
-  const router = Router() 
+  const router = Router()
 
   router.get('/events', (req, res, next) => {
     selectThorEvents(req.query)

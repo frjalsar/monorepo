@@ -23,7 +23,7 @@ function makeAthleteRoute (selectAthlete, editAthlete, createAthlete) {
    - Notandi með regionId sama og er skráð sem current region hjá íþróttamanni.
    - Notandi með regionAbbreviation eða clubAbbreviation sama og eitthvert thorClub í membership.
   */
-  router.put('/', authorize(['admin']), (req, res, next) => {    
+  router.put('/', authorize(['admin']), (req, res, next) => {
     return editAthlete(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
@@ -38,6 +38,7 @@ function makeAthleteRoute (selectAthlete, editAthlete, createAthlete) {
   return router
 }
 
+/*
 function editAccess (db) {
   return async (req, res, next) => {
     const selectAthletes = makeSelectAthletes(db)
@@ -78,5 +79,5 @@ function createAccess () {
     return res.sendStatus(401)
   }
 }
-
+*/
 module.exports = makeAthleteRoute

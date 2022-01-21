@@ -12,5 +12,4 @@ function makeEventsRoute (selectEvents) {
   return router
 }
 
-
 module.exports = makeEventsRoute

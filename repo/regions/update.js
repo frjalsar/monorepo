@@ -13,7 +13,7 @@ function makeUpdateRegion (db) {
     const params = [
       region.fullName,
       region.abbreviation,
-      user.id,
+      user.id
     ]
 
     return db

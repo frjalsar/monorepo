@@ -5,11 +5,11 @@ function makeLogin (db, redis, isProduction) {
   const makeLoginHandler = require('../lib/loginHandler')
   const makeLoginRouter = require('../routes/login')
 
-  const selectUsers = makeSelectUsers(db)  
-  const setUser = makeSetUser(redis)  
+  const selectUsers = makeSelectUsers(db)
+  const setUser = makeSetUser(redis)
   const loginHandler = makeLoginHandler(selectUsers, setUser)
-  
-  return makeLoginRouter(loginHandler, isProduction)  
+
+  return makeLoginRouter(loginHandler, isProduction)
 }
 
 module.exports = makeLogin

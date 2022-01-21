@@ -36,7 +36,6 @@ function makeSelectMembership (db) {
         m.athleteid ASC,
         m.yearfrom ASC`
 
-
     // Lets not return all data
     if (params.length === 0) {
       return Promise.resolve([])

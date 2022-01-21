@@ -14,7 +14,7 @@ function mapAthletes (list) {
         lastCompeted: item.lastcompeted,
         club: {},
         region: {},
-        membership: [],
+        membership: []
       }
       result.push(atheleteObj)
       currentId = item.id
@@ -30,9 +30,9 @@ function mapAthletes (list) {
         legacyClub: item.legacyclub,
         yearFrom: item.yearfrom,
         yearTo: item.yearto,
-        confirmed: item.confirmed === true      
+        confirmed: item.confirmed === true
       }
-      
+
       currentAthlete.membership.push(membership)
 
       if (
