@@ -14,7 +14,6 @@ function makeUpdateRegion (db) {
       region.fullName,
       region.abbreviation,
       user.id,
-      region.id
     ]
 
     return db

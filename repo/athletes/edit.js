@@ -27,7 +27,7 @@ function makeEditAthlete (makeUpdateAthlete, makeSelectClubs, makeDisableMembers
        const clubs = await selectClubs({ id: latestClub.clubId })
        if (clubs.length === 1)
        {
-         await updateCompetitor(athlete.thorId, club[0].thorid)
+         await updateCompetitor(athlete.thorId, club[0].thorId)
        }
 
       await client.query('COMMIT')
