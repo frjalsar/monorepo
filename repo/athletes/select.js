@@ -67,17 +67,17 @@ function makeSelectAthletes (db) {
     }
 
     if (opt.regionId) {
-      sql += ' AND c.regionid = ? AND m.todate is null'
+      sql += ' AND c.regionid = ? AND m.yearTo is null'
       params.push(opt.regionId)
     }
 
     if (opt.clubId) {
-      sql += ' AND c.id = ? AND m.todate is null'
+      sql += ' AND c.id = ? AND m.yearTo is null'
       params.push(opt.clubId)
     }
 
     if (opt.thorClubId) {
-      sql += ' AND c.thorid = ? AND m.todate is null'
+      sql += ' AND c.thorid = ? AND m.yearTo is null'
       params.push(opt.thorClubId)
     }
 
