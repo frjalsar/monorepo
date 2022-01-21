@@ -96,7 +96,7 @@ import debounce from 'lodash.debounce'
 
 export default {
   name: 'AthleteSearchPanel',
-  emits: ['click', 'input', 'change'],
+  emits: ['click', 'input', 'change', 'search'],
   props: {
     regions: {
       type: Array,

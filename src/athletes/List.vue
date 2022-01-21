@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Title text="Iðkendur" @addNewItem="openModalEdit()" />
+  <Title text="Iðkendur" @addNewItem="openEditModal()" />
 
   <Card>
     <SearchPanel
@@ -17,7 +17,7 @@
       :data="athletes"
       :definition="tableDefinition"
       :busy="busy"
-      @click="openModalEdit"
+      @click="openEditModal"
     />
   </Card>
 
@@ -27,7 +27,7 @@
       :clubs="clubs"
       :countries="countries"
       :confirm="confirm"
-      @done="callback"
+      @done="closeEditModal(callback)"
     />
   </ModalEdit>
 </div>
@@ -40,13 +40,13 @@ import Title from '../_components/Title.vue'
 import Card from '../_components/Card.vue'
 import SearchPanel from '../_components/SearchPanel.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
-import ModalEdit from '../_components/ModalEdit.vue'
-import ModalEditMixin from '../_mixins/ModalEdit.vue'
+import ModalEdit from '../_components/EditModal.vue'
+import ModalMixin from '../_mixins/ModalMixin.vue'
 import EditAthlete from './Edit.vue'
 
 export default {
   name: 'ListAthlete',
-  mixins: [ModalEditMixin],
+  mixins: [ModalMixin],
   components: {
     Title,
     Card,
@@ -59,7 +59,6 @@ export default {
   data() {
     return {
       busy: false,
-      selectedAthlete: {},
       athletes: [],
       clubs: [],
       regions: [],

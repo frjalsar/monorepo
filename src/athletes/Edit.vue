@@ -52,7 +52,7 @@
   >
     <div class="col-md-6">
       <label :for="'club- '+ index" class="form-label" v-if="index === 0">Félag</label>
-      <select class="form-select" v-model="m.clubId" :id="'club-' + index">
+      <select class="form-select" v-model="m.clubId" :id="'club-' + index" :disabled="busy">
         <option v-for="club in clubsByRegion(m.legacyClub)" :key="club.id" :value="club.id">{{ club.fullName }}</option>
       </select>
       <div v-if="m.legacyClub" class="form-text">Viðkomandi var skráður í <em>{{ m.legacyClub }}</em> en ekki félag í gamla grunninum. Vinsamlegast lagið.</div>
@@ -60,17 +60,17 @@
     
     <div class="col-md-2">
       <label :for="'from-' + index" class="form-label" v-if="index === 0">Frá</label>
-      <input type="tel" class="form-control" :for="'from-' + index" v-model="m.yearFrom">
+      <input type="tel" class="form-control" :for="'from-' + index" v-model="m.yearFrom" :disabled="busy">
     </div>
 
     <div class="col-md-2">
       <label :for="'from-' + index" class="form-label" v-if="index === 0">Til</label>
-      <input type="tel" class="form-control"  :for="'to-' + index" v-model="m.yearTo">
+      <input type="tel" class="form-control"  :for="'to-' + index" v-model="m.yearTo" :disabled="busy">
     </div>
 
     <div class="col-md-1 offset-md-1">
       <div class="form-label" v-if="index === 0">Aðgerð</div>
-      <button type="button" class="btn btn-outline-danger" @click="remove(index)">
+      <button type="button" class="btn btn-outline-danger" @click="remove(index)" :disabled="busy">
         <i class="bi-trash"></i>
       </button>
     </div>
@@ -78,7 +78,7 @@
 
   <div class="row g-3 mb-3">
     <div class="col-md-1 offset-md-11">
-      <button type="button" class="btn btn-outline-danger" @click="add()">
+      <button type="button" class="btn btn-outline-danger" @click="add()" :disabled="busy">
         <i class="bi-plus-lg"></i>
       </button>
     </div>
@@ -87,7 +87,7 @@
   <div class="row g-3 mb-3">
     <div class="col-md-12">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" v-model="membershipIsConfirmed" @change="confirmAllMembership()" id="felagasaga">
+        <input class="form-check-input" type="checkbox" v-model="membershipIsConfirmed" @change="confirmAllMembership()" id="felagasaga" :disabled="busy">
         <label class="form-check-label" for="felagasaga">
           Staðfesta að félagasaga sé yfirfarin.
         </label>

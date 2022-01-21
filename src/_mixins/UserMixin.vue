@@ -2,7 +2,7 @@
 import agent from 'superagent'
 
 export default {
-  name: 'GetUser',
+  name: 'UserMixin',
   data() {
     return {
       user: undefined

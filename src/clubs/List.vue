@@ -1,12 +1,12 @@
 <template>
 <div>
-  <Title text="Félög" @addNewItem="openModalEdit({})" />
+  <Title text="Félög" @addNewItem="openEditModal({})" />
 
   <Card>
     <SimpleTable
       :data="clubs"
       :definition="tableDefinition"
-      @click="openModalEdit"
+      @click="openEditModal"
     />
   </Card>
 
@@ -15,7 +15,7 @@
       :club="selectedModalItem"
       :regions="regions"
       :confirm="confirm"
-      @done="callback"
+      @done="closeEditModal(callback)"
     />
   </ModalEdit>
 </div>
@@ -26,8 +26,8 @@ import agent from 'superagent'
 import Title from '../_components/Title.vue'
 import Card from '../_components/Card.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
-import ModalEdit from '../_components/ModalEdit.vue'
-import ModalEditMixin from '../_mixins/ModalEdit.vue'
+import ModalEdit from '../_components/EditModal.vue'
+import ModalEditMixin from '../_mixins/ModalMixin.vue'
 import EditClub from './Edit.vue'
 
 export default {
