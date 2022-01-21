@@ -3,7 +3,7 @@ function mapMembership (membership, athleteId) {
     return {
       athleteId: athleteId,
       clubId: m.clubId,
-      legacyClub: m.legacyClub,
+      legacyClub: m.clubId ? null : m.legacyClub,
       yearFrom: m.yearFrom ? m.yearFrom : null,
       yearTo: m.yearTo ? m.yearTo : null,
       confirmed: m.confirmed
