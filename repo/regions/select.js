@@ -1,3 +1,5 @@
+const mapRegions = require('./map')
+
 function makeSelectRegions (db) {
   return function selectRegions (options) {
     const opt = options || {}
@@ -9,7 +11,7 @@ function makeSelectRegions (db) {
         r.abbreviation,
         r.fullname
       FROM
-        regions r    
+        regions r
       WHERE 1 = 1`
 
     if (opt.id) {
@@ -21,7 +23,7 @@ function makeSelectRegions (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows)
+      .then(res => mapRegions(res.rows))
   }
 }
 

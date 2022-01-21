@@ -1,24 +1,25 @@
 function makeUpdateRegion (db) {
   return function updateRegion (region, user) {
     const sql = `
-      UPDATE regions SET        
-        abbreviation = $1,
-        fullname = $2,        
-        modifiedby = $3,
-        modifiedat = CURRENT_TIMESTAMP(3)
+      UPDATE regions SET
+        fullname = $1,
+        abbreviation = $2,
+        _userid = $3,
+        _enabled = true
+        _time = CURRENT_TIMESTAMP(3)
       WHERE
         id = $4`
 
     const params = [
-      region.abbreviation,
       region.fullName,
+      region.abbreviation,
       user.id,
       region.id
     ]
 
     return db
       .query(sql, params)
-      .then(res => res.rows)
+      .then(res => mapRegions(res.rows))
   }
 }
 

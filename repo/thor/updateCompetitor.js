@@ -1,7 +1,7 @@
 const { VarChar } = require('mssql')
 
-function makeClubTransfer (sqlPoolConnection) {
-  return function clubTransfer (id, club) {
+function makeUpdateCompetitor (sqlPoolConnection) {
+  return function updateCompetitor (id, club) {
     let sql = `
       UPDATE
         [Athletics].[dbo].[Athl$Competitors]
@@ -11,7 +11,6 @@ function makeClubTransfer (sqlPoolConnection) {
         [Númer] = @id`
 
     return sqlPoolConnection.then(pool => {
-      console.log(id, club)
       const request = pool.request()
       
       request.input('id', VarChar(20), id)
@@ -20,11 +19,10 @@ function makeClubTransfer (sqlPoolConnection) {
       return request
         .query(sql)
         .then(res => {
-          console.log(res)
           return res.rowsAffected
         })        
     })
   }
 }
 
-module.exports = makeClubTransfer
+module.exports = makeUpdateCompetitor

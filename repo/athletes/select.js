@@ -1,5 +1,6 @@
 const toOrdinal = require('pg-parameterize').toOrdinal
 const isEmpty = require('lodash.isempty')
+const mapToAthletes = require('./map')
 
 function makeSelectAthletes (db) {
   return function selectAthletes (options, user) {
@@ -60,8 +61,9 @@ function makeSelectAthletes (db) {
     }
 
     if (opt.search) {
-      sql += ' AND a.fullname ilike ?'
+      sql += ' AND (a.fullname ilike ? OR a.kt like ?)'
       params.push('%' + opt.search + '%')
+      params.push(opt.search + '%')
     }
 
     if (opt.regionId) {
@@ -120,7 +122,7 @@ function makeSelectAthletes (db) {
 
     return db
       .query(toOrdinal(sql), params)
-      .then(res => res.rows)
+      .then(res => mapToAthletes(res.rows))
   }
 }
 

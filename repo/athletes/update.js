@@ -9,11 +9,11 @@ function makeUpdateAthlete (db) {
           gender = $4,
           country = $5,
           thorid = $6,
-          modifiedby = $7,
-          modifiedat = CURRENT_TIMESTAMP
+          _userid = $7,
+          _enabled = true
+          _time = CURRENT_TIMESTAMP
         WHERE id = $8
-        RETURNING id
-      `
+        RETURNING id`
 
     const params = [
       athlete.fullName,

@@ -1,37 +1,32 @@
-const isEqual = require('lodash.isequal')
 const mapMembership = require('../membership/mapMembership')
 
-function makeEditOrCreateAthlete (makeUpdateOrInsertAthlete, makeSelectClubs, makeDisableMembership, makeInsertMembership, db, clubTransfer) {
+function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeDisableMembership, makeInsertMembership, db, insertCompetitor) {
   return async function editAthlete (athlete, user) {
     const client = await db.connect()
 
-    const updateOrInsertAthlete = makeUpdateOrInsertAthlete(client)
+    const insertAthlete = makeInsertAthlete(client)
     const selectClubs = makeSelectClubs(client)
     const disableMembership = makeDisableMembership(client)
     const insertMembership = makeInsertMembership(client)
 
     try {
       await client.query('BEGIN')
-      
-      await updateOrInsertAthlete(athlete, user)
-      const sameMembership = isEqual(athlete.membership, athlete.newMembership)
+      console.log('athlete', athlete)
+      const id = await insertAthlete(athlete, user)
+            
       const membershipList =  mapMembership(athlete.newMembership, athlete.id)
+      await insertMembership(membershipList, user)
 
        // THOR - always update Thor. TODO refactor away
        const latestClub = membershipList[membershipList.length - 1] 
        const clubs = await selectClubs({ id: latestClub.clubId })
        if (clubs.length === 1)
        {          
-         await clubTransfer(athlete.thorId, club[0].thorid)        
+         await insertCompetitor()
        }
-      
-      if (!sameMembership) {
-        await disableMembership(athlete.id)        
-        await insertMembership(membershipList, user)       
-      }
 
       await client.query('COMMIT')
-      return { athleteId: athlete.id }
+      return { athleteId: id }
     } catch (e) {
       await client.query('ROLLBACK')
       throw e

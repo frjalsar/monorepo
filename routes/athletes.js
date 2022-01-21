@@ -1,20 +1,17 @@
 const { Router } = require('express')
 const authorize = require('../lib/authorizeHandler')
-const mapAthletes = require('../repo/athletes/map')
 
 function makeAthleteRoute (selectAthlete, editAthlete, createAthlete) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
     return selectAthlete(req.query, req.user)
-      .then(mapAthletes)
       .then(res.json.bind(res))
       .catch(next)
   })
 
   router.get('/:id', (req, res, next) => {
     return selectAthlete({ id: req.params.id }, req.user)
-      .then(mapAthletes)
       .then(res.json.bind(res))
       .catch(next)
   })
@@ -53,7 +50,7 @@ function editAccess (db) {
         return next()
       }
 
-      const athletes = await selectAthletes({ id: req.body.id }).then(mapAthletes)
+      const athletes = await selectAthletes({ id: req.body.id })
       const foundMembership = athletes[0] && athletes[0].membership.find(m => {
         const foundClub = req.user.clubId && req.user.clubId === m.clubId
         const foundRegion = req.user.regionId && req.user.regionId === m.regionId

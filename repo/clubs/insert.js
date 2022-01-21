@@ -7,8 +7,10 @@ function makeInsertClub (db) {
         abbreviation,
         regionid,
         _userid,
+        _enabled
+        _time
       )
-      VALUES ($1, $2, $3, $4, $5)
+      VALUES ($1, $2, $3, $4, $5, true, CURRENT_TIMESTAMP(3))
       RETURNING id`
 
     const params = [

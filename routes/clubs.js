@@ -1,20 +1,17 @@
 const { Router } = require('express')
 const authorize = require('../lib/authorizeHandler')
-const mapClubs = require('../repo/clubs/map')
 
 function makeClubRoute (selectClubs, updateClub, insertClub) {
   const router = Router()
 
   router.get('/', (req, res, next) => {    
     selectClubs()
-      .then(mapClubs)
       .then(res.json.bind(res))
       .catch(next)
   })
 
   router.get('/:id', (req, res, next) => {
     selectClubs({ id: req.params.id })
-      .then(mapClubs)
       .then(res.json.bind(res))
       .catch(next)
   })

@@ -6,14 +6,12 @@ function makeRegionsRoute (selectRegions, updateRegion) {
 
   router.get('/', (req, res, next) => {    
     return selectRegions()
-      .then(mapRegions)
       .then(res.json.bind(res))
       .catch(next)
   })
 
   router.get('/:id', (req, res, next) => {    
-    return selectRegions({ id: req.params.id })
-      .then(mapRegions)
+    return selectRegions({ id: req.params.id })      
       .then(res.json.bind(res))
       .catch(next)
   })

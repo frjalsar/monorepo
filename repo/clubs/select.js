@@ -1,3 +1,5 @@
+const mapClubs = require('./map')
+
 function makeSelectClubs (db) {
   return function selectClubs (options) {
     const opt = options || {}
@@ -26,7 +28,7 @@ function makeSelectClubs (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows)
+      .then(res => mapClubs(res.rows))
   }
 }
 

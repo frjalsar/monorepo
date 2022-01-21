@@ -8,10 +8,11 @@ function makeInsertAthlete (db) {
           gender,
           country,
           thorid,
-          modifiedby,
-          modifiedat                   
+          _userid,
+          _enabled,
+          _time
         )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP(3))
+        VALUES ($1, $2, $3, $4, $5, $6, $7, true, CURRENT_TIMESTAMP(3))
         RETURNING id
       `
 
