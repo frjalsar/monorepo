@@ -19,7 +19,7 @@ function makeUpdateRegion (db) {
 
     return db
       .query(sql, params)
-      .then(res => mapRegions(res.rows))
+      .then(res => res.rows[0].id)
   }
 }
 
