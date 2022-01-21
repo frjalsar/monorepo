@@ -6,7 +6,6 @@ function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeDisabl
 
     const insertAthlete = makeInsertAthlete(client)
     const selectClubs = makeSelectClubs(client)
-    const disableMembership = makeDisableMembership(client)
     const insertMembership = makeInsertMembership(client)
 
     try {
@@ -14,14 +13,14 @@ function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeDisabl
       console.log('athlete', athlete)
       const id = await insertAthlete(athlete, user)
             
-      const membershipList =  mapMembership(athlete.newMembership, athlete.id)
+      const membershipList = mapMembership(athlete.newMembership, id)
       await insertMembership(membershipList, user)
 
        // THOR - always update Thor. TODO refactor away
        const latestClub = membershipList[membershipList.length - 1] 
        const clubs = await selectClubs({ id: latestClub.clubId })
        if (clubs.length === 1)
-       {          
+       {
          await insertCompetitor()
        }
 
