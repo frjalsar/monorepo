@@ -5,15 +5,17 @@ function makeUpdateRegion (db) {
         fullname = $1,
         abbreviation = $2,
         _userid = $3,
-        _enabled = true
+        _enabled = true,
         _time = CURRENT_TIMESTAMP(3)
       WHERE
-        id = $4`
+        id = $4
+      RETURNING id`
 
     const params = [
       region.fullName,
       region.abbreviation,
-      user.id
+      user.id,
+      region.id
     ]
 
     return db

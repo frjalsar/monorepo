@@ -5,7 +5,7 @@ function makeInsertRegion (db) {
         fullname,
         abbreviation,
         _userid,
-        _enabled
+        _enabled,
         _time
       )
       VALUES ($1, $2, $3, true, CURRENT_TIMESTAMP(3))
