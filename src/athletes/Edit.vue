@@ -33,7 +33,7 @@
     </div>
 
     <div class="col-md-3">
-      <label for="thorId" class="form-label">Þór auðkenni &nbsp;<i class="bi bi-exclamation-triangle-fill text-warning" title="Þessi reitur er möppunin yfir í Þór. Farið varlega í að breyta."></i> </label>
+      <label for="thorId" class="form-label">Þór auðkenni &nbsp;<i class="bi bi-exclamation-triangle-fill text-warning" title="Þessi reitur er möppunin yfir í Þór. Farið varlega í að breyta."></i></label>
       <input type="tel" class="form-control" id="thorId" v-model="currentItem.thorId" :disabled="busy">
     </div>
 
