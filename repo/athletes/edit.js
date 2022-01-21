@@ -1,5 +1,5 @@
 const isEqual = require('lodash.isequal')
-const mapMembership = require('../membership/mapMembership')
+const mapMembership = require('../membership/map')
 
 function makeEditAthlete (makeUpdateAthlete, makeSelectClubs, makeDisableMembership, makeInsertMembership, db, updateCompetitor) {
   return async function editAthlete (athlete, user) {

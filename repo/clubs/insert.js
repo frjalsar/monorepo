@@ -21,7 +21,9 @@ function makeInsertClub (db) {
       user.id
     ]
 
-    return db.query(sql, params)
+    return db
+      .query(sql, params)
+      .then(res => res.rows[0].id)
   }
 }
 

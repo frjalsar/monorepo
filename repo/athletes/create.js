@@ -1,4 +1,4 @@
-const mapMembership = require('../membership/mapMembership')
+const mapMembership = require('../membership/map')
 
 function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeDisableMembership, makeInsertMembership, db, insertCompetitor) {
   return async function editAthlete (athlete, user) {

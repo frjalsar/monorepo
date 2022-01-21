@@ -1,6 +1,6 @@
 
 const { toOrdinal } = require('pg-parameterize')
-
+const mapJudges = require('./map')
 function makeSelectJudges (db) {
   return function selectJudges (options) {
     const opt = options || {}
@@ -12,7 +12,8 @@ function makeSelectJudges (db) {
         j.fullname,
         j.date,
         j.clubid,
-        c.fullname clubfullname
+        c.fullname clubfullname,
+        c.thorid clubthorid
       FROM
         judges j
       LEFT JOIN
@@ -44,7 +45,7 @@ function makeSelectJudges (db) {
 
     return db
       .query(toOrdinal(sql), params)
-      .then(res => res.rows)
+      .then(res => mapJudges(res.rows))
   }
 }
 

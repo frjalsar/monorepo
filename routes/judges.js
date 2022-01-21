@@ -1,18 +1,23 @@
 const { Router } = require('express')
-const mapJudges = require('../repo/judges/map')
+const authorize = require('../lib/authorizeHandler')
 
-function makeJudgesRoute (selectJudges, updateJudge) {
+function makeJudgesRoute (selectJudges, updateJudge, insertJudge) {
   const router = Router()
 
   router.get('/:id?', (req, res, next) => {
     return selectJudges(req.params)
-      .then(mapJudges)
       .then(res.json.bind(res))
       .catch(next)
   })
 
-  router.put('/', (req, res, next) => {
-    return updateJudge(req.body)
+  router.put('/', authorize(['admin']), (req, res, next) => {
+    return updateJudge(req.body, req.user)
+      .then(res.json.bind(res))
+      .catch(next)
+  })
+
+  router.post('/', authorize(['admin']), (req, res, next) => {
+    return insertJudge(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })

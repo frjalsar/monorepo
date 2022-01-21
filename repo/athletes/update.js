@@ -11,7 +11,7 @@ function makeUpdateAthlete (db) {
           thorid = $6,
           _userid = $7,
           _enabled = true,
-          _time = CURRENT_TIMESTAMP
+          _time = CURRENT_TIMESTAMP(3)
         WHERE id = $8
         RETURNING id`
 

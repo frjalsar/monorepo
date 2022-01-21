@@ -28,6 +28,7 @@ function mapAthletes (list) {
         clubId: item.clubid,
         clubFullName: item.clubname,
         legacyClub: item.legacyclub,
+        thorId: item.thorclubid,
         yearFrom: item.yearfrom,
         yearTo: item.yearto,
         confirmed: item.confirmed === true
