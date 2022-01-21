@@ -1,27 +1,43 @@
 <template>
 <div>
-  <h2>Íþróttahéruð</h2>
-  <hr />
+  <Title text="Íþróttahéruð" @addNewItem="openModalEdit()" />
+
   <Card>
     <SimpleTable
       :data="regions"     
       :definition="tableDefinition"
       @click="openModalEdit"
     />
-</Card>
+  </Card>
+
+  <ModalEdit v-slot="{ confirm, callback }"> 
+    <EditRegion
+      :region="selectedModalItem"
+      :confirm="confirm"
+      @done="callback"
+    />
+  </ModalEdit>
 </div>
 </template>
 
 <script>
 import agent from 'superagent'
+import Title from '../_components/Title.vue'
 import Card from '../_components/Card.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
+import ModalEdit from '../_components/ModalEdit.vue'
+import ModalEditMixin from '../_mixins/ModalEdit.vue'
+import EditRegion from './Edit.vue'
 
 export default {
   name: 'RegionList',
+  mixins: [ModalEditMixin],
   components: {
+    Title,
     Card,
-    SimpleTable
+    SimpleTable,
+    ModalEdit,
+    EditRegion
   },
   inject: ['FRI_API_URL'],
   data() {

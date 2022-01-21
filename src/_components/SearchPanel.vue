@@ -28,8 +28,8 @@
           :value="clubId"
           class="form-select"          
           @change="changeClub"
-        >
-          <option :value="undefined">
+        > 
+          <option :value="''">
             Félag
           </option>
           <option
@@ -47,7 +47,7 @@
           class="form-select"
           @change="changeRegion"
         >
-          <option :value="undefined">
+          <option :value="''">
             Íþróttahérað
           </option>
 
@@ -66,10 +66,7 @@
           class="form-select"
           @change="changeLegacy"
         >
-          <option
-            selected="selected"
-            :value="undefined"
-          >
+          <option :value="''">
             Gömul skráning
           </option>
           <option
@@ -193,7 +190,7 @@ export default {
       this.clubId = undefined
       this.$emit('search', this.selected)
     }
-  }
+  },
 }
 </script>
 <style scoped>
