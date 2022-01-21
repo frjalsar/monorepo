@@ -10,7 +10,7 @@ function makeUpdateAthlete (db) {
           country = $5,
           thorid = $6,
           _userid = $7,
-          _enabled = true
+          _enabled = true,
           _time = CURRENT_TIMESTAMP
         WHERE id = $8
         RETURNING id`
