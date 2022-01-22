@@ -15,17 +15,17 @@
 
   <div class="row g-3 mb-3">
     <div class="col-md-6">
-      <label for="name" class="form-label">Félag</label>      
+      <label for="name" class="form-label">Félag</label>
       <select class="form-select" v-model="currentItem.clubId" :disabled="busy">
-        <option v-for="club in clubs" :key="club.id" :value="club.id">{{ club.fullName }}</option>        
+        <option v-for="club in clubs" :key="club.id" :value="club.id">{{ club.fullName }}</option>
       </select>
-    </div>    
+    </div>
 
     <div class="col-md-1">
       <label for="id" class="form-label">Númer</label>
       <input type="name" class="form-control-plaintext" readonly id="id" v-model="currentItem.id" :disabled="busy">
     </div>
-  </div>  
+  </div>
 
 </form>
 </template>
