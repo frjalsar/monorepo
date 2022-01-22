@@ -11,7 +11,7 @@
   </Card>
 
   <ModalEdit v-slot="{ confirm, callback }"> 
-    <EditClub
+    <EditVenue
       :venue="selectedModalItem"
       :confirm="confirm"
       @done="(isDone) => closeEditModal(isDone, callback)"
@@ -27,7 +27,7 @@ import Card from '../_components/Card.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
 import ModalEditMixin from '../_mixins/ModalMixin.vue'
-import EditClub from './Edit.vue'
+import EditVenue from './Edit.vue'
 
 export default {
   name: 'ClubList',
@@ -37,7 +37,7 @@ export default {
     Card,
     SimpleTable,
     ModalEdit,
-    EditClub
+    EditVenue
   },
   inject: ['FRI_API_URL'],
   data() {
