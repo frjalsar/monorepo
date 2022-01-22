@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       busy: false,      
-      currentItem: {}
+      currentItem: {},
     }
   },
   methods: {
@@ -21,8 +21,7 @@ export default {
           this.$emit('done', true)
         })
         .catch(e => {
-          this.busy = false
-          this.$emit('done', true)
+          this.$emit('done', false)
         })
     }
   },

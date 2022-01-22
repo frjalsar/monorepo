@@ -7,6 +7,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <div class="alert alert-danger" role="alert" v-if="error">
+          Villa koma upp. Lokið vafranum og prófið aftur eða hafið samband við skráningarnefnd.
+        </div>
         <slot :confirm="shouldConfirm" :callback="callback"></slot>
       </div>
       <div class="modal-footer">
@@ -23,15 +26,17 @@ export default {
   name: 'ModalEdit',
   data() {
     return {
-      shouldConfirm: false
+      shouldConfirm: false,
+      error: false
     }
   },
   methods: {
     confirm() {
       this.shouldConfirm = true
     },
-    callback() {
-      this.shouldConfirm = false
+    callback(success) {
+      this.error = !success
+      this.shouldConfirm = !success
     }
   },  
 }

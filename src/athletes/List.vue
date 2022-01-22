@@ -27,7 +27,7 @@
       :clubs="clubs"
       :countries="countries"
       :confirm="confirm"
-      @done="closeEditModal(callback)"
+      @done="(isDone) => closeEditModal(isDone, callback)"
     />
   </ModalEdit>
 </div>

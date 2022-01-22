@@ -11,9 +11,12 @@ export default {
         this.selectedModalItem = item
         this.modal.show()
     },      
-    closeEditModal(callback) {
-      callback()
-      this.modal.hide()
+    closeEditModal(isDone, callback) {
+      if (isDone) {
+        this.modal.hide()
+      }
+
+      callback(isDone)
     },
   },
   mounted() {    

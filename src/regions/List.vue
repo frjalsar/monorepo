@@ -14,7 +14,7 @@
     <EditRegion
       :region="selectedModalItem"
       :confirm="confirm"
-      @done="callback"
+      @done="(isDone) => closeEditModal(isDone, callback)"
     />
   </ModalEdit>
 </div>

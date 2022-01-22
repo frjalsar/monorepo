@@ -15,7 +15,7 @@
       :club="selectedModalItem"
       :regions="regions"
       :confirm="confirm"
-      @done="closeEditModal(callback)"
+      @done="(isDone) => closeEditModal(isDone, callback)"
     />
   </ModalEdit>
 </div>
