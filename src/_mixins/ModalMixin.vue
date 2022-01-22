@@ -17,6 +17,7 @@ export default {
       }
 
       callback(isDone)
+      this.$router.go()
     },
   },
   mounted() {    

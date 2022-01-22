@@ -31,13 +31,21 @@ const router = createRouter({
       component: () => import('./venues/List.vue')
     },
     {
+      path: '/greinar',
+      component: () => import('./events/List.vue')
+    },
+    {
+      path: '/flokkungreina',
+      component: () => import('./eventtypes/List.vue')
+    },
+    {
       path: '/felagaskipti',
       component: () => import('./transfers/List.vue')
     },
     {
       path: '/motaumsoknir',
       component: () => import('./meetapplications/List.vue')
-    }
+    },    
   ]
 })
 const app = createApp(App)
