@@ -1,3 +1,5 @@
+const mapEvents = require('./map')
+
 function makeSelectEvents (db) {
   return function selectEvents () {
     const params = []
@@ -7,9 +9,9 @@ function makeSelectEvents (db) {
         e.strid,
         e.name,
         e.iaaf,
-        e.worldrecord,        
+        e.worldrecord,
         e.typeid,
-        et.name as type
+        et.name as typename
       FROM
         events e
       JOIN
@@ -18,7 +20,7 @@ function makeSelectEvents (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows)
+      .then(res => mapEvents(res.rows))
   }
 }
 

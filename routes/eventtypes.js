@@ -1,23 +1,23 @@
 const { Router } = require('express')
 const authorize = require('../lib/authorizeHandler')
 
-function makeEventsRoute (selectEvents, updateEvent, insertEvent) {
+function makeEventTypesRoute (selectEventTypes, updateEventType, insertEventType) {
   const router = Router()
 
   router.get('/', (_, res, next) => {
-    return selectEvents()
+    return selectEventTypes()
       .then(res.json.bind(res))
       .catch(next)
   })
 
   router.put('/', authorize(['admin']), (req, res, next) => {
-    return updateEvent(req.body, req.user)
+    return updateEventType(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
 
   router.post('/', authorize(['admin']), (req, res, next) => {
-    return insertEvent(req.body, req.user)
+    return insertEventType(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
@@ -25,4 +25,4 @@ function makeEventsRoute (selectEvents, updateEvent, insertEvent) {
   return router
 }
 
-module.exports = makeEventsRoute
+module.exports = makeEventTypesRoute
