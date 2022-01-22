@@ -1,6 +1,7 @@
 const { Router } = require('express')
+const authorize = require('../lib/authorizeHandler')
 
-function makeVenuesRoute (selectVenues, updateVenue) {
+function makeVenuesRoute (selectVenues, updateVenue, insertVenue) {
   const router = new Router()
 
   router.get('/:id?', (req, res, next) => {
@@ -9,8 +10,14 @@ function makeVenuesRoute (selectVenues, updateVenue) {
       .catch(next)
   })
 
-  router.put('/', (req, res, next) => {
-    return updateVenue(req.body)
+  router.put('/', authorize(['admin']), (req, res, next) => {
+    return updateVenue(req.body, req.user)
+      .then(res.json.bind(res))
+      .catch(next)
+  })
+
+  router.post('/', authorize(['admin']), (req, res, next) => {
+    return insertVenue(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })

@@ -1,5 +1,6 @@
 
 const { toOrdinal } = require('pg-parameterize')
+const mapVenues = require('./map')
 
 function makeSelectVenues (db) {
   return function selectVenues (options) {
@@ -48,7 +49,7 @@ function makeSelectVenues (db) {
 
     return db
       .query(toOrdinal(sql), params)
-      .then(res => res.rows)
+      .then(res => mapVenues(res.rows))
   }
 }
 
