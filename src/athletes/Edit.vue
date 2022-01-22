@@ -52,10 +52,12 @@
   >
     <div class="col-md-6">
       <label :for="'club- '+ index" class="form-label" v-if="index === 0">Félag</label>
-      <select class="form-select" v-model="m.clubId" :id="'club-' + index" :disabled="busy">
+      <select class="form-select" v-model="m.clubId" :id="'club-' + index" :disabled="busy" @change="updateThorId()">
         <option v-for="club in clubsByRegion(m.legacyClub)" :key="club.id" :value="club.id">{{ club.fullName }}</option>
       </select>
       <div v-if="m.legacyClub" class="form-text">Viðkomandi var skráður í <em>{{ m.legacyClub }}</em> en ekki félag í gamla grunninum. Vinsamlegast lagið.</div>
+      <div v-if="lastMembershipItem(index) && Boolean(m.thorId)" class="form-text">Iðkandi mun skrást í {{ m.thorId }} í Þór.</div>
+      <div v-if="lastMembershipItem(index) && !Boolean(m.thorId)" class="form-text text-danger">ATH: Það vantar möppun yfir í Þór fyrir þetta félag.</div>
     </div>
     
     <div class="col-md-2">
@@ -124,6 +126,7 @@ export default {
   },  
   methods: {
     clubsByRegion(region) {
+      console.log(region)      
       const byRegion = this.clubs.filter(c => c.region.abbreviation === region)
       return (byRegion.length) ? byRegion : this.clubs
     },
@@ -143,7 +146,16 @@ export default {
       this.currentItem.newMembership.forEach(m => {
         m.confirmed = this.membershipIsConfirmed
       })
-    },    
+    },
+    lastMembershipItem(index) {
+      return this.currentItem.newMembership.length - 1 === index
+    },
+    updateThorId() {
+      const lastIndex = this.currentItem.newMembership.length - 1
+      const lastMembership = this.currentItem.newMembership[lastIndex]
+      const findClub = this.clubs.find(club => club.id == lastMembership.clubId)
+      this.currentItem.newMembership[lastIndex].thorId = findClub.thorId
+    }
   },
   watch: {
     athlete (val) {
