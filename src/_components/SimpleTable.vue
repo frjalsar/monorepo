@@ -18,7 +18,7 @@
     <tbody>
       <tr v-if="busy">
         <td
-          colspan="5"
+          colspan="8"
           align="center"
         >
           <div class="text-center">
