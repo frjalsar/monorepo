@@ -6,7 +6,8 @@ function makeSelectAthletes (db) {
   return function selectAthletes (options, user) {
     const opt = options || {}
 
-    if (isEmpty(options)) {
+    const hasEmptyProperties = Object.keys(opt).every(i => i === '')
+    if (isEmpty(opt) || hasEmptyProperties) {
       return Promise.resolve([])
     }
 
@@ -61,6 +62,7 @@ function makeSelectAthletes (db) {
     }
 
     if (opt.search) {
+      console.error.log('leitar')
       sql += ' AND (a.fullname ilike ? OR a.kt like ?)'
       params.push('%' + opt.search + '%')
       params.push(opt.search + '%')
@@ -119,6 +121,8 @@ function makeSelectAthletes (db) {
     if (opt.limit) {
       sql += ' LIMIT ' + opt.limit
     }
+
+    console.log(sql)
 
     return db
       .query(toOrdinal(sql), params)
