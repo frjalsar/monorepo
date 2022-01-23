@@ -1,30 +1,24 @@
-function mapClubs (list) {
-  let currentId
+function mapClubs (list) { 
   const result = []
-  list.forEach(item => {
-    if (item.id !== currentId) {
-      const clubObj = {
-        id: item.id,
-        fullName: item.fullname,
-        shortName: item.shortname,
-        abbreviation: item.abbreviation,
-        thorId: item.thorid,
-        regionId: item.regionid,
-        region: {}
-      }
-      result.push(clubObj)
-      currentId = item.id
+  list.forEach(item => {    
+    const clubObj = {
+      id: item.id,
+      fullName: item.fullname,
+      shortName: item.shortname,
+      abbreviation: item.abbreviation,
+      thorId: item.thorid,
+      regionId: item.regionid,
+      region: {}
     }
-
-    const current = result[result.length - 1]
-    if (item.regionid) {
-      const region = {
+    
+    if (item.regionid !== null) {
+      clubObj.region = {
         id: item.regionid,
         fullName: item.regionname,
         abbreviation: item.regionabbreviation
       }
-      current.region = region
     }
+    result.push(clubObj)
   })
   return result
 }

@@ -23,7 +23,7 @@ function makeClubRoute (selectClubs, updateClub, insertClub) {
    - Notandi með regionAbbreviation eða clubAbbreviation sama og eitthvert thorClub í membership.
   */
 
-  router.put('/', authorize(['admin']), (req, res, next) => {
+  router.put('/', authorize(['admin']), (req, res, next) => {        
     return updateClub(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
