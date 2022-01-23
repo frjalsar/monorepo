@@ -41,7 +41,7 @@ function makeUpdateVenue (db) {
       venue.warmupTrack,
       venue.throwingField,
       venue.certification,
-      user.id      
+      user.id
     ]
 
     return db

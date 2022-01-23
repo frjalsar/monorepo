@@ -13,9 +13,7 @@ function makeEvents (db) {
   const editEvent = makeEditEvent(makeUpdateEvent, makeDeleteCombinedEvents, makeInsertCombinedEvents, db)
   const createEvent = makeCreateEvent(makeInsertEvent, makeDeleteCombinedEvents, makeInsertCombinedEvents, db)
 
-
   return makeEventsRouter(selectEvents, editEvent, createEvent)
 }
 
 module.exports = makeEvents
-

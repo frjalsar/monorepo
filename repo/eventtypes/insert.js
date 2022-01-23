@@ -11,7 +11,7 @@ function makeInsertEventType (db) {
       RETURNING id`
 
     const params = [
-      eventType.name,      
+      eventType.name,
       eventType.id
     ]
 

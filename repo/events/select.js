@@ -26,7 +26,7 @@ function makeSelectEvents (db) {
           events e2 ON e2.id = ce.childeventid)
         ON ce.parenteventid = e.id
       WHERE 1 = 1`
-    
+
     if (opt.typeId) {
       sql += ' AND e.typeid = $1'
       params.push(opt.typeId)

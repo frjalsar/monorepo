@@ -1,7 +1,7 @@
 const mapCombinedEvents = require('../combinedevents/map')
 
 function makeEditEvents (makeInsertEvent, makeDeleteCombinedEvents, makeInsertCombinedEvents, db) {
-  return async function makeEditEvents(event, user) {
+  return async function makeEditEvents (event, user) {
     const client = await db.connect()
 
     const insertEvents = makeInsertEvent(client)
@@ -20,7 +20,7 @@ function makeEditEvents (makeInsertEvent, makeDeleteCombinedEvents, makeInsertCo
       }
 
       await client.query('COMMIT')
-      return { eventId: event.id }    
+      return { eventId: event.id }
     } catch (e) {
       await client.query('ROLLBACK')
       throw e

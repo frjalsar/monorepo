@@ -2,7 +2,6 @@ const mapEventTypes = require('./map')
 
 function makeSelectEventTypes (db) {
   return function selectEventTypes () {
-
     const params = []
     const sql = `
       SELECT

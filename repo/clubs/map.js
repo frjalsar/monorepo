@@ -1,6 +1,6 @@
-function mapClubs (list) { 
+function mapClubs (list) {
   const result = []
-  list.forEach(item => {    
+  list.forEach(item => {
     const clubObj = {
       id: item.id,
       fullName: item.fullname,
@@ -10,7 +10,7 @@ function mapClubs (list) {
       regionId: item.regionid,
       region: {}
     }
-    
+
     if (item.regionid !== null) {
       clubObj.region = {
         id: item.regionid,

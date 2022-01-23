@@ -1,4 +1,4 @@
-function mapEvents (list) { 
+function mapEvents (list) {
   let currentId
   const result = []
   list.forEach(item => {
@@ -25,23 +25,23 @@ function mapEvents (list) {
       }
 
       currentEvent.childEvents.push(childEvent)
-    }    
-    
+    }
+
     if (item.typeid !== null) {
       currentEvent.type = {
         id: item.typeid,
         name: item.typename
       }
-    }    
+    }
   })
 
-  return result  
+  return result
 }
 
 module.exports = mapEvents
 /*
 function mapEvents (list) {
-  return list.map(item => {    
+  return list.map(item => {
     return {
       id: item.id,
       strId: item.strid,

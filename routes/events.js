@@ -10,7 +10,7 @@ function makeEventsRoute (selectEvents, updateEvent, insertEvent) {
       .catch(next)
   })
 
-  router.put('/', authorize(['admin']), (req, res, next) => {    
+  router.put('/', authorize(['admin']), (req, res, next) => {
     return updateEvent(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
