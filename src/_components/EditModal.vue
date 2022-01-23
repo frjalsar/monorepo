@@ -13,7 +13,7 @@
         <slot :confirm="shouldConfirm" :callback="callback"></slot>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" disabled="shouldConfirm">Hætta við</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" :disabled="shouldConfirm">Hætta við</button>
         <button type="button" class="btn btn-primary" @click.prevent="confirm()" :disabled="shouldConfirm">Vista</button>
       </div>
     </div>

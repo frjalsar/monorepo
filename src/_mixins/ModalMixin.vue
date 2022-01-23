@@ -11,13 +11,13 @@ export default {
         this.selectedModalItem = item
         this.modal.show()
     },      
-    closeEditModal(isDone, callback) {
+    closeEditModal(isDone, callback) {      
       if (isDone) {
-        this.modal.hide()
+        this.modal.hide()        
+        this.$router.go()
       }
 
-      callback(isDone)
-      this.$router.go()
+      callback(isDone)      
     },
   },
   mounted() {    
