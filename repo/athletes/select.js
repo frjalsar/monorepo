@@ -62,7 +62,6 @@ function makeSelectAthletes (db) {
     }
 
     if (opt.search) {
-      console.error.log('leitar')
       sql += ' AND (a.fullname ilike ? OR a.kt like ?)'
       params.push('%' + opt.search + '%')
       params.push(opt.search + '%')
@@ -121,8 +120,6 @@ function makeSelectAthletes (db) {
     if (opt.limit) {
       sql += ' LIMIT ' + opt.limit
     }
-
-    console.log(sql)
 
     return db
       .query(toOrdinal(sql), params)

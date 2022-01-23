@@ -14,7 +14,7 @@ function makeEditEvents (makeInsertEvent, makeDeleteCombinedEvents, makeInsertCo
 
       if (event.typeId === 10 && event.childEvents && event.childEvents.length > 0) {
         const combinedEvents = mapCombinedEvents(event.childEvents, eventId)
-        console.log(combinedEvents)
+
         await deleteCombinedEvents(event.id)
         await insertCombinedEvents(combinedEvents, user)
       }
