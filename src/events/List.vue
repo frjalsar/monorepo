@@ -14,6 +14,7 @@
     <EditEvent
       :event="selectedModalItem"
       :types="eventtypes"
+      :events="events"
       :confirm="confirm"
       @done="(isDone) => closeEditModal(isDone, callback)"
     />
@@ -68,7 +69,7 @@ export default {
         },
       ]
     }
-  },
+  }, 
   created() {
     agent
       .get(this.FRI_API_URL + '/events')
@@ -79,7 +80,7 @@ export default {
           typeName: item.type?.name,
           iaafLabel: item.iaaf ? 'Já' : 'Nei',
           worldRecordLabel: item.worldRecord ? 'Já' : 'Nei'
-        }))
+        }))        
       })
 
     agent

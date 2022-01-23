@@ -17,16 +17,19 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <router-link to="/domarar" class="nav-link link-dark text-decoration-none" active-class="active">Dómarar</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link to="/mannvirki" class="nav-link link-dark text-decoration-none" active-class="active">Mannvirki</router-link>
-      </li>
-      <li class="nav-item">
         <router-link to="/greinar" class="nav-link link-dark text-decoration-none" active-class="active">Greinar</router-link>
       </li>
       <li class="nav-item">
         <router-link to="/flokkungreina" class="nav-link link-dark text-decoration-none" active-class="active">Flokkun greina</router-link>
+      </li>
+    </ul>
+    <hr>
+     <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <router-link to="/domarar" class="nav-link link-dark text-decoration-none" active-class="active">Dómarar</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/mannvirki" class="nav-link link-dark text-decoration-none" active-class="active">Mannvirki</router-link>
       </li>
     </ul>
     <hr>
