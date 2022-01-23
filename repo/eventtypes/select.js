@@ -2,6 +2,7 @@ const mapEventTypes = require('./map')
 
 function makeSelectEventTypes (db) {
   return function selectEventTypes () {
+
     const params = []
     const sql = `
       SELECT
@@ -9,7 +10,8 @@ function makeSelectEventTypes (db) {
         et.name
       FROM
         eventtypes et
-      WHERE 1 = 1`
+      ORDER BY
+        et.name`
 
     return db
       .query(sql, params)

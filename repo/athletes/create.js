@@ -10,7 +10,6 @@ function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeDisabl
 
     try {
       await client.query('BEGIN')
-      console.log('athlete', athlete)
       const id = await insertAthlete(athlete, user)
 
       const membershipList = mapMembership(athlete.newMembership, id)
