@@ -126,8 +126,13 @@ export default {
   },  
   methods: {
     clubsByRegion(region) {
-      const byRegion = this.clubs.filter(c => c.region.abbreviation === region)
-      return (byRegion.length) ? byRegion : this.clubs
+      if (region) {
+        const byRegion = this.clubs.filter(c => c.region.abbreviation === region)
+        return (byRegion.length) ? byRegion : this.clubs
+      }
+      
+      return this.clubs
+       
     },
     remove(index) {
       this.currentItem.newMembership.splice(index, 1)
