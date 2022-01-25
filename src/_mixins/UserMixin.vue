@@ -5,7 +5,7 @@ export default {
   name: 'UserMixin',
   data() {
     return {
-      user: undefined
+      loggedInUser: undefined
     }
   },
   methods: {

@@ -45,7 +45,11 @@ const router = createRouter({
     {
       path: '/motaumsoknir',
       component: () => import('./meetapplications/List.vue')
-    },    
+    },
+    {
+      path: '/notendur',
+      component: () => import('./users/List.vue')
+    },
   ]
 })
 const app = createApp(App)

@@ -42,6 +42,11 @@
       </li>
     </ul>
     <hr />
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <router-link to="/notendur" class="nav-link link-dark text-decoration-none" active-class="active">Notendur</router-link>
+      </li>
+    </ul>
   </nav>
 
   <main class="py-4 px-5">
@@ -64,7 +69,7 @@ export default {
   }, 
   methods: {
     login(user) {
-      this.user = user
+      this.loggedInUser = user
       this.setUser(user)
       this.$router.push({ path: '/idkendur'})
     },
@@ -72,11 +77,6 @@ export default {
       this.fullview = !this.fullview
     }
   },
-  created() {
-    this.getUser().then(user => {
-      this.user = user
-    })
-  }
 }
 </script>
 <style>

@@ -1,5 +1,5 @@
 <template>
-  <form v-if="!user">
+  <form v-if="!loggedInUser">
     <img class="d-block mx-auto mb-3" src="./assets/logo.png" alt="" width="100" height="90">
 
     <div class="form-floating mb-3">      
@@ -14,9 +14,13 @@
 
     <div v-if="error" class="text-danger text-center mb-3">{{ error }}</div>
     
-    <button class="w-100 btn btn-lg btn-primary" type="submit" @click.prevent="login()">Innskrá</button>
-    
-  </form>  
+    <button class="w-100 btn btn-lg btn-primary" type="submit" @click.prevent="login()">Innskrá</button>    
+  </form>    
+  <div v-if="loggedInUser"> 
+    <Card>
+      Hæ {{ this.loggedInUser.fullname }}
+    </Card>
+  </div>
 </template>
 
 <script>
@@ -27,6 +31,7 @@ export default {
     Card
   },
   inject: ['FRI_API_URL'],
+  emits: ['login'],
   data() {
     return {
       username: '',
@@ -54,6 +59,11 @@ export default {
           }
         })
     },
+  },
+  created() {
+    this.getUser().then(user => {
+      this.loggedInUser = user
+    })
   }
 }
 </script>
