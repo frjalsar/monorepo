@@ -11,7 +11,7 @@ function makeSelectUsers (db) {
       SELECT
         u.id,
         u.username,
-        ${selectPassword ? 'u.password' : ''}
+        ${selectPassword ? 'u.password,' : ''}
         u.fullname,
         u.meetid,
         u.clubid,
@@ -25,14 +25,14 @@ function makeSelectUsers (db) {
         clubs c ON c.id = u.clubid
       LEFT JOIN
         regions r ON r.id = u.regionid
-      WHERE 1=1
-      ORDER BY
-        u.fullname ASC`
+      WHERE 1=1`
 
     if (opt.username) {
       sql += ' AND username = ?'
       params.push(opt.username)
     }
+
+    sql += ` ORDER BY u.fullname ASC`
 
     return db
       .query(toOrdinal(sql), params)
