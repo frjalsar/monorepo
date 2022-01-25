@@ -1,15 +1,17 @@
 
 const { toOrdinal } = require('pg-parameterize')
+const mapUsers = require('./map')
 
 function makeSelectUsers (db) {
   return function selectUsers (options) {
     const opt = options || {}
+    const selectPassword = Boolean(opt.username)
     const params = []
     let sql = `
       SELECT
         u.id,
         u.username,
-        u.password,
+        ${selectPassword ? 'u.password' : ''}
         u.fullname,
         u.meetid,
         u.clubid,
@@ -23,7 +25,9 @@ function makeSelectUsers (db) {
         clubs c ON c.id = u.clubid
       LEFT JOIN
         regions r ON r.id = u.regionid
-      WHERE 1=1`
+      WHERE 1=1
+      ORDER BY
+        u.fullname ASC`
 
     if (opt.username) {
       sql += ' AND username = ?'
@@ -32,7 +36,7 @@ function makeSelectUsers (db) {
 
     return db
       .query(toOrdinal(sql), params)
-      .then(res => res.rows)
+      .then(res => mapUsers(res.rows))
   }
 }
 
