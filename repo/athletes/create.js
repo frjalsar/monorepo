@@ -1,6 +1,6 @@
 const mapMembership = require('../membership/map')
 
-function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeDisableMembership, makeInsertMembership, db, insertCompetitor) {
+function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeInsertMembership, db, insertCompetitor) {
   return async function editAthlete (athlete, user) {
     const client = await db.connect()
 

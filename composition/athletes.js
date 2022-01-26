@@ -17,7 +17,7 @@ function makeAthletes (pgPool, sqlConnection) {
 
   const selectAthletes = makeSelectAthletes(pgPool)
   const editAthlete = makeEditAthlete(makeUpdateAthlete, makeSelectClubs, makeDisableMembership, makeInsertMembership, pgPool, updateCompetitor)
-  const createAthlete = makeCreateAthlete(makeInsertAthlete, makeSelectClubs, makeDisableMembership, makeInsertMembership, pgPool, insertCompetitor)
+  const createAthlete = makeCreateAthlete(makeInsertAthlete, makeSelectClubs, makeInsertMembership, pgPool, insertCompetitor)
 
   return makeAthleteRoute(selectAthletes, editAthlete, createAthlete)
 }
