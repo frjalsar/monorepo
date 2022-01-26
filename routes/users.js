@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const authorize = require('../lib/authorizeHandler')
 
-function makeUsersRoute (selectUsers, updateUser, insertUser) {
+function makeUsersRoute (selectUsers, updateUser, createUser) {
   const router = Router()
 
   router.get('/', authorize(['admin']), (req, res, next) => {
@@ -23,7 +23,7 @@ function makeUsersRoute (selectUsers, updateUser, insertUser) {
   })
 
   router.post('/', authorize(['admin']), (req, res, next) => {
-    return insertUser(req.body, req.user)
+    return createUser(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })

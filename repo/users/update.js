@@ -6,18 +6,20 @@ function makeUpdatetUser (db) {
       UPDATE users SET
         fullname = $1,
         admin = $2,
-        clubid = $3,
-        regionid = $4,
-        _userid = $5,
+        application = $3,
+        clubid = $4,
+        regionid = $5,
+        _userid = $6,
         _enabled = true,
         _time = CURRENT_TIMESTAMP(3)
       WHERE
-        id = $6
+        id = $7
       RETURNING id`
 
     const params = [
       userObj.fullName,
       userObj.admin,
+      userObj.application,
       userObj.clubId,
       userObj.regionId,
       user.id,

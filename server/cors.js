@@ -11,6 +11,7 @@ function corsOrigin () {
       'http://localhost:1234',
       'http://localhost:3001',
       'http://local.fri.is:3001',
+      'http://local.fri.is:3002',
       'http://local.fri.is:3010'
     ]
   }

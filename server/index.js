@@ -54,7 +54,7 @@ app.use('/eventtypes', makeEventTypes(pgPool))
 app.use('/judges', makeJudges(pgPool))
 app.use('/membership', makeMembership(pgPool))
 app.use('/regions', makeRegions(pgPool))
-app.use('/users', makeUsers(pgPool))
+app.use('/users', makeUsers(pgPool, redisClient))
 app.use('/venues', makeVenues(pgPool))
 app.use('/thor', makeThor(sqlConnection))
 

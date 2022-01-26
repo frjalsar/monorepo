@@ -7,6 +7,7 @@ function makeInsertUser (db) {
       INSERT INTO users (
         fullname,        
         admin,
+        application,
         clubid,
         regionid,
         token,
@@ -16,7 +17,7 @@ function makeInsertUser (db) {
         _enabled,
         _time
       ) VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8, true, CURRENT_TIMESTAMP(3)
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, true, CURRENT_TIMESTAMP(3)
       )
       RETURNING id`
       
@@ -30,6 +31,7 @@ function makeInsertUser (db) {
     const params = [
       userObj.fullName,
       userObj.admin,
+      userObj.application,
       userObj.clubId,
       userObj.regionId,
       token,

@@ -19,6 +19,7 @@ function makeSelectUsers (db) {
         u.regionid,
         r.abbreviation regionabbreviation,
         u.admin,
+        u.application,
         u.token
       FROM users u
       LEFT JOIN
@@ -30,6 +31,11 @@ function makeSelectUsers (db) {
     if (opt.username) {
       sql += ' AND username = ?'
       params.push(opt.username)
+    }
+
+    if (opt.id) {
+      sql += ' AND u.id = ?'
+      params.push(opt.id)
     }
 
     sql += ` ORDER BY u.fullname ASC`
