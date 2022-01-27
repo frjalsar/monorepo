@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const authorize = require('../lib/authorizeHandler')
 
-function makeClubRoute (selectClubs, updateClub, insertClub) {
+function makeClubsRoute (selectClubs, updateClub, insertClub) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -74,4 +74,4 @@ function createAccess () {
 }
 */
 
-module.exports = makeClubRoute
+module.exports = makeClubsRoute
