@@ -61,7 +61,7 @@ export default {
       this.$emit('next', {
         contactName: this.contactName,
         contactEmail: this.contactEmail,
-        contactPhone: this.phone
+        contactPhone: this.contactPhone
       })
     }
   }

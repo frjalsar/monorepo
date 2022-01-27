@@ -24,6 +24,7 @@ import Meet from './track/Meet.vue'
 import Judge from './track/Judge.vue'
 import Events from './track/Events.vue'
 import Confirm from './track/Confirm.vue'
+import Thanks from './track/Thanks.vue'
 
 export default {
   components: {
@@ -33,7 +34,8 @@ export default {
     Meet,
     Judge,
     Events,
-    Confirm
+    Confirm,
+    Thanks
   },
   provide: {
     FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
@@ -72,6 +74,10 @@ export default {
         {
           title: 'Staðfesting',
           component: 'Confirm'
+        },
+        {
+          title: 'Takk',
+          component: 'Thanks'
         }
       ],
       runSteps: [

@@ -10,7 +10,7 @@
     <div class="col-md-4 offset-md-2">
       <h2>Ábyrgðaraðili</h2>
       {{ data.organizerName }}<br />
-      {{ data.organizerId }}
+      {{ data.organizerKt }}
     </div>
     <div class="col-md-4">
       <h2>Mótsstjóri</h2>
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import agent from 'superagent'
 export default {
   props: ['data'],
   emits: ['next'],
@@ -60,7 +61,29 @@ export default {
   props: ['data'],
   methods: {
     next() {
-      
+      agent
+        .post(this.FRI_API_URL + '/meets')
+        .send({
+          name: this.data.meetName,
+          organizerName: this.data.organizerName,
+          organizerKt: this.data.organizerKt,
+          contactName: this.data.contactName,
+          contactEmail: this.data.contactEmail,
+          contactPhone: this.data.contactPhone,
+          location: this.data.meetLocation,
+          venueId: this.data.meetVenue.id,
+          judgeId: this.data.judge.id,
+          startDate: this.data.meetStart,
+          endDate: this.data.meetEnd
+        })
+        .auth(this.FRI_API_TOKEN, { type: 'bearer' })
+        .then(() => {
+          this.$emit('next', { success: true })
+        })
+        .catch(e => {
+          console.log(e)
+        })
+        
     }
   },  
 };

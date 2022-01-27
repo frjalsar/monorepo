@@ -13,8 +13,8 @@
 
     <div class="col-md-4">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="organizerId" placeholder="Kennitala ábyrgðaraðila" v-model="organizerId">
-        <label for="organizerId">Kennitala ábyrgðaraðila</label>
+        <input type="text" class="form-control" id="organizerKt" placeholder="Kennitala ábyrgðaraðila" v-model="organizerKt">
+        <label for="organizerKt">Kennitala ábyrgðaraðila</label>
       </div>
     </div>
   </div>
@@ -42,14 +42,14 @@ export default {
   data() {
     return {
       organizerName: '',
-      organizerId: ''
+      organizerKt: ''
     }
   },
   methods: {
     next() {
       this.$emit('next', {
         organizerName: this.organizerName,
-        organizerId: this.organizerId
+        organizerKt: this.organizerKt
       })
     }
   }
