@@ -6,11 +6,13 @@ function makeSelectEventTypes (db) {
     const sql = `
       SELECT
         et.id,
-        et.name
+        et.name,
+        et.ordering
       FROM
         eventtypes et
       ORDER BY
-        et.name`
+        et.ordering ASC,
+        et.name ASC`
 
     return db
       .query(sql, params)
