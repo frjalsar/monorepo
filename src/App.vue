@@ -1,6 +1,6 @@
 <template>
 <div class="container-fluid d-flex bg-light">
-  <nav class="shadow p-3 bg-white" :class="{ fullview: fullview }" dv-if="user" @dblclick="toggleNav()">    
+  <nav class="shadow p-3 bg-white" :class="{ fullview: fullview }" v-if="loggedInUser" @dblclick="toggleNav()">    
     <img src="./assets/logo.png" width="100" height="90" class="d-block mx-auto" />    
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -77,6 +77,11 @@ export default {
       this.fullview = !this.fullview
     }
   },
+  created() {
+    this.getUser().then(user => {
+      this.loggedInUser = user
+    })
+  }
 }
 </script>
 <style>
