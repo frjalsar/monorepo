@@ -54,6 +54,12 @@ export default {
           label: 'Nafn',
           display: 'xs'
         },
+        {
+          field: 'ordering',
+          label: 'Röðun',
+          display: 'md'
+        },
+
       ]
     }
   },

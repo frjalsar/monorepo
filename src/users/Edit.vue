@@ -59,6 +59,13 @@
         <label class="form-check-label" for="admin">Stjórnandi (admin)</label>
       </div>
     </div>
+
+    <div class="col-md-6">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="application" v-model="currentItem.application">
+        <label class="form-check-label" for="application">Forrit</label>
+      </div>
+    </div>
   </div>
 
 

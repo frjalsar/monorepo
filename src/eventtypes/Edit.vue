@@ -6,6 +6,11 @@
       <input id="name" type="text" class="form-control" v-model="currentItem.name" :disabled="busy">
     </div>
 
+    <div class="col-md-2">
+      <label for="order" class="form-label">Röðun</label>
+      <input id="order" type="text" class="form-control" v-model="currentItem.ordering" :disabled="busy">
+    </div>
+
     <div class="col-md-1 offset-md-1">
       <label for="id" class="form-label">Númer</label>
       <input type="name" class="form-control-plaintext" readonly id="id" v-model="currentItem.id" :disabled="busy">
