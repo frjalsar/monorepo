@@ -1,15 +1,11 @@
 function corsOrigin () {
   const whitelist = {
-    production: [
-      'https://felagatal.fri.is',
+    production: [    
+      'https://admin.fri.is',  
       'https://felagaskipti.fri.is',
-      'https://admin.fri.is',
-      'https://fri-mot-production.herokuapp.com'
+      'https://umsokn.fri.is',            
     ],
     development: [
-      'http://local.fri.is:1234',
-      'http://localhost:1234',
-      'http://localhost:3001',
       'http://local.fri.is:3001',
       'http://local.fri.is:3002',
       'http://local.fri.is:3010'
