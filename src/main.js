@@ -43,8 +43,8 @@ const router = createRouter({
       component: () => import('./transfers/List.vue')
     },
     {
-      path: '/motaumsoknir',
-      component: () => import('./meetapplications/List.vue')
+      path: '/umsoknir',
+      component: () => import('./applications/List.vue')
     },
     {
       path: '/notendur',

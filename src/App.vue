@@ -38,7 +38,7 @@
         <router-link to="/felagaskipti" class="nav-link link-dark text-decoration-none" active-class="active">Félagaskipti</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/motaumsoknir" class="nav-link link-dark text-decoration-none" active-class="active">Mótaumsóknir</router-link>
+        <router-link to="/umsoknir" class="nav-link link-dark text-decoration-none" active-class="active">Umsóknir</router-link>
       </li>
     </ul>
     <hr />
