@@ -53,7 +53,7 @@ export default {
       .get(this.FRI_API_URL + '/judges')
       .auth(this.FRI_API_TOKEN, { type: 'bearer' })
       .then(res => {
-        this.judges = res.body
+        this.judges = res.body.filter(judge => judge.valid)
       })
   }
 };
