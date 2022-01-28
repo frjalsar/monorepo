@@ -17,25 +17,40 @@
 </template>
 
 <script>
-import Intro from './track/Intro.vue'
-import Organizer from './track/Organizer.vue'
-import Contact from './track/Contact.vue'
-import Meet from './track/Meet.vue'
-import Judge from './track/Judge.vue'
-import Events from './track/Events.vue'
-import Confirm from './track/Confirm.vue'
-import Thanks from './track/Thanks.vue'
+import Intro from './shared/Intro.vue'
+import TrackOrganizer from './track/Organizer.vue'
+import TrackContact from './track/Contact.vue'
+import TrackMeet from './track/Meet.vue'
+import TrackJudge from './track/Judge.vue'
+import TrackEvents from './track/Events.vue'
+import TrackConfirm from './track/Confirm.vue'
+import TrackThanks from './track/Thanks.vue'
+
+import RunOrganizer from './run/Organizer.vue'
+import RunContact from './run/Contact.vue'
+import RunMeet from './run/Meet.vue'
+import RunJudge from './run/Judge.vue'
+import RunEvents from './run/Events.vue'
+import RunConfirm from './run/Confirm.vue'
+import RunThanks from './run/Thanks.vue'
 
 export default {
   components: {
     Intro,
-    Organizer,
-    Contact,
-    Meet,
-    Judge,
-    Events,
-    Confirm,
-    Thanks
+    TrackOrganizer,
+    TrackContact,
+    TrackMeet,
+    TrackJudge,
+    TrackEvents,
+    TrackConfirm,
+    TrackThanks,
+    RunOrganizer,
+    RunContact,
+    RunMeet,
+    RunJudge,
+    RunEvents,
+    RunConfirm,
+    RunThanks
   },
   provide: {
     FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
@@ -53,41 +68,65 @@ export default {
         },
         {
           title: 'Ábyrgðaraðili',
-          component: 'Organizer'
+          component: 'TrackOrganizer'
         },
         {
           title: 'Mótsstjóri',
-          component: 'Contact'
+          component: 'TrackContact'
         },
         {
           title: 'Mótið',
-          component: 'Meet'
+          component: 'TrackMeet'
         },
         {
           title: 'Dómari',
-          component: 'Judge'
+          component: 'TrackJudge'
         },
         {
           title: 'Greinar',
-          component: 'Events'
+          component: 'TrackEvents'
         },
         {
           title: 'Staðfesting',
-          component: 'Confirm'
+          component: 'TrackConfirm'
         },
         {
           title: 'Takk',
-          component: 'Thanks'
+          component: 'TrackThanks'
         }
       ],
       runSteps: [
         {
-          title: 'Ábyrgðaraðili',
-          component: 'Organizer'
+          title: 'Umsókn vegna mótahalds',
+          component: 'Intro'
         },
         {
-          title: 'Hlaupastjóri',
-          component: 'Contact'
+          title: 'Ábyrgðaraðili',
+          component: 'RunOrganizer'
+        },
+        {
+          title: 'Hlaupstjóri',
+          component: 'RunContact'
+        },
+        {
+          title: 'Hlaupið',
+          component: 'RunMeet'
+        },
+        {
+          title: 'Dómari',
+          component: 'RunJudge'
+        },
+        {
+          title: 'Greinar',
+          component: 'RunEvents'
+        },
+        {
+          title: 'Staðfesting',
+          component: 'RunConfirm'
+        },
+        {
+          title: 'Takk',
+          component: 'RunThanks'
         }
       ],
     };
@@ -120,7 +159,7 @@ export default {
     },
     next(data) {
       if (data.type) {
-        this.type = 'track'
+        this.type = data.type
       }      
       this.step = this.step + 1;
       this.updateSession(data);

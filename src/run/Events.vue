@@ -35,7 +35,7 @@ import groupBy from 'lodash.groupby'
 import agent from 'superagent'
 
 export default {
-  name: 'TrackEvents',
+  name: 'RunEvents',
   props: ['data'],
   emits: ['next'],
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
@@ -75,7 +75,7 @@ export default {
           const hasRoad = type.name.includes('Götu')
           const hasOff = type.name.includes('Utan')
 
-          return !(hasRoad || hasOff)
+          return (hasRoad || hasOff)
         })
       })
   }

@@ -2,7 +2,7 @@
 <div>
    
   <p class="lead mb-4">
-    Næst þarf að skrá mótssjóra. Mótsstjóri er einstaklingur sem sér um framkvæmd mótsins og bæði keppendur og FRÍ geta leitað til sé eitthvað óljóst eða þarfnast úrlausnar. 
+    Næst þarf að skrá hlaupstjóra. Hlaupstjóri er einstaklingur sem sér um framkvæmd hlaupsins og bæði keppendur og FRÍ geta leitað til sé eitthvað óljóst eða þarfnast úrlausnar. 
   </p>
 
   <div class="row">
@@ -47,7 +47,7 @@
 const apiUrl = import.meta.env.VITE_FRI_API_URL
 
 export default {
-  name: 'TrackContact',
+  name: 'RunContact',
   props: ['data'],
   emits: ['next'],
   data() {

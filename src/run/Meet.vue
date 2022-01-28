@@ -2,49 +2,30 @@
 <div>
    
   <p class="lead mb-4">
-    Þá eru það almennar upplýsingar um mótið sjálft.
+    Þá eru það almennar upplýsingar um hlaupið sjálft.
   </p>
 
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="meetName" placeholder="Heiti móts" v-model="meetName">
-        <label for="meetName">Heiti móts</label>
+        <label for="meetName">Heiti hlaups</label>
       </div>
     </div>
   </div>
 
    <div class="row">
-    <div class="col-md-4 offset-md-2">
+    <div class="col-md-5 offset-md-2">
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="meetLocation" placeholder="Staðsetning" v-model="meetLocation">
         <label for="meetLocation">Staðsetning</label>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="form-floating">
-        <select class="form-select" id="meetVenues" aria-label="Mannvirki" v-model="meetVenue">
-          <option :value="undefined">Mannvirki</option>
-          <option v-for="venue in venues" :key="venue.id" :value="venue">{{ venue.fullName }}</option>          
-        </select>
-        <label for="meetVenues">Mannvirki</label>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4 offset-md-2">
+     <div class="col-md-3">
       <div class="form-floating mb-3">
         <input type="date" class="form-control" id="meetStart" placeholder="Hefst" v-model="meetStart">
         <label for="meetStart">Hefst</label>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="meetEnd" placeholder="Lýkur" v-model="meetEnd">
-        <label for="meetEnd">Lýkur</label>
       </div>
     </div>
   </div>
@@ -65,7 +46,7 @@
 <script>
 import agent from 'superagent'
 export default {
-  name: 'TrackMeet',
+  name: 'RunMeet',
   props: ['data'],
   emits: ['next'],
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],

@@ -1,7 +1,7 @@
 <template>
 <div>
   <p class="lead mb-4">
-   Dómari sem er viðurkenndur af FRÍ er nauðsynlegur til að fá árangurinn staðfestan. Dómari gætir þess að framkvæmd mótsins hafi verið í samræmi við reglur FRÍ og World Athletics og leysir úr ágreiningsatriðum sem upp koma á mótinu.
+   Dómari sem er viðurkenndur af FRÍ er nauðsynlegur til að fá árangurinn staðfestan. Dómari gætir þess að framkvæmd hlaupsins hafi verið í samræmi við reglur og leysir úr ágreiningsatriðum sem upp koma.
   </p>
  <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -32,7 +32,7 @@
 <script>
 import agent from 'superagent'
 export default {
-  name: 'TrackJudge',
+  name: 'RunJudge',
   props: ['data'],
   emits: ['next'],
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],

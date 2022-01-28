@@ -13,7 +13,7 @@
       {{ data.organizerKt }}
     </div>
     <div class="col-md-4">
-      <h2>Mótsstjóri</h2>
+      <h2>Hlaupstjóri</h2>
       {{ data.contactName }}<br />
       {{ data.contactEmail }}<br />
       {{ data.contactPhone }}
@@ -22,9 +22,8 @@
 
   <div class="row mb-3">
     <div class="col-md-4 offset-md-2">
-      <h2>Mót</h2>
-      {{ data.meetName }}<br />
-      {{ data.meetVenue.fullName }}<br />
+      <h2>Hlaup</h2>
+      {{ data.meetName }}<br />      
       {{ data.meetLocation }}
     </div>
     <div class="col-md-4">
@@ -55,7 +54,7 @@
 <script>
 import agent from 'superagent'
 export default {
-  name: 'TrackConfirm',
+  name: 'RunConfirm',
   props: ['data'],
   emits: ['next'],
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
@@ -72,10 +71,10 @@ export default {
           contactEmail: this.data.contactEmail,
           contactPhone: this.data.contactPhone,
           location: this.data.meetLocation,
-          venueId: this.data.meetVenue.id,
+          venueId: undefined,
           judgeId: this.data.judge.id,
           startDate: this.data.meetStart,
-          endDate: this.data.meetEnd
+          endDate: undefined
         })
         .auth(this.FRI_API_TOKEN, { type: 'bearer' })
         .then(() => {

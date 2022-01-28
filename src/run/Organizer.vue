@@ -1,7 +1,7 @@
 <template>
 <div>
   <p class="lead mb-4">
-   Fyrsta verk er að skrá ábyrgðaraðila. Ábyrgðaraðili er sá sem heldur mótið og ber ábyrgð á framkvæmd þess. Það getur verið frjálsíþróttadeild einhvers félags eða sambönd og félög eins og t.d. Félaga maraþonhlaupara.
+   Fyrsta verk er að skrá ábyrgðaraðila. Ábyrgðaraðili er sá sem heldur hlaupið og ber ábyrgð á framkvæmd þess. Það getur verið íþróttadeild einhvers félags eða sambönd og félög eins og t.d. Félaga maraþonhlaupara.
   </p>
  <div class="row">
     <div class="col-md-4 offset-md-2">
@@ -37,7 +37,7 @@
 const apiUrl = import.meta.env.VITE_FRI_API_URL
 
 export default {
-  name: 'TrackOrganizer',
+  name: 'RunOrganizer',
   props: ['data'],
   emits: ['next'],
   data() {
