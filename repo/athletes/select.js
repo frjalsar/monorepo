@@ -6,7 +6,7 @@ function makeSelectAthletes (db) {
   return function selectAthletes (options, user) {
     const opt = options || {}
 
-    const hasEmptyProperties = Object.keys(opt).every(i => i === '')
+    const hasEmptyProperties = Object.values(opt).every(i => i === '')
     if (isEmpty(opt) || hasEmptyProperties) {
       return Promise.resolve([])
     }
