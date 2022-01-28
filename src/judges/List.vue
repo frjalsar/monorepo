@@ -69,6 +69,11 @@ export default {
           display: 'md'
         },
         {
+          field: 'validLabel',
+          label: 'Gild réttindi',
+          display: 'md'
+        },
+        {
           field: 'clubFullName',
           label: 'Félag',
           display: 'md'
@@ -84,7 +89,8 @@ export default {
         this.judges = res.body.map(item => ({
           ...item,
           clubFullName: item.club?.fullName,
-          typeName: item.type?.name
+          typeName: item.type?.name,
+          validLabel: item.valid ? 'Já' : 'Nei'
         }))
       })
 
