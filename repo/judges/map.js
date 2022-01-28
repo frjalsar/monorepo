@@ -1,4 +1,5 @@
 const format = require('date-fns/format')
+const isValidJudge = require('../../lib/isValidJudge')
 
 function mapJudges (list) {
   const result = []
@@ -7,18 +8,11 @@ function mapJudges (list) {
       id: item.id,
       fullName: item.fullname,
       date: item.date ? format(item.date, 'yyyy-MM-dd') : null,
+      typeId: item.typeid,
+      type: {},
       clubId: item.clubid,
       club: {},
-      typeId: item.typeid,
-      type: {}
-    }
-
-    if (item.clubid !== null) {
-      judgeObj.club = {
-        id: item.clubid,
-        fullName: item.clubfullname,
-        thorId: item.thorclubid
-      }
+      valid: isValidJudge(item.date)
     }
 
     if (item.typeid !== null) {
@@ -28,6 +22,14 @@ function mapJudges (list) {
         stage: item.typestage,
       }
     }
+
+    if (item.clubid !== null) {
+      judgeObj.club = {
+        id: item.clubid,
+        fullName: item.clubfullname,
+        thorId: item.thorclubid
+      }
+    }    
 
     result.push(judgeObj)
   })
