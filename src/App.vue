@@ -29,6 +29,9 @@
         <router-link to="/domarar" class="nav-link link-dark text-decoration-none" active-class="active">Dómarar</router-link>
       </li>
       <li class="nav-item">
+        <router-link to="/flokkundomara" class="nav-link link-dark text-decoration-none" active-class="active">Flokkun dómara</router-link>
+      </li>
+      <li class="nav-item">
         <router-link to="/mannvirki" class="nav-link link-dark text-decoration-none" active-class="active">Mannvirki</router-link>
       </li>
     </ul>

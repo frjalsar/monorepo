@@ -1,20 +1,18 @@
 <template>
 <div>
-  <Title text="Dómarar" @addNewItem="openEditModal({})" />
+  <Title text="Flokkun dómara" @addNewItem="openEditModal({})" />
 
   <Card>
     <SimpleTable
-      :data="judges"
+      :data="judgetypes"
       :definition="tableDefinition"
       @click="openEditModal"
     />
   </Card>
 
   <ModalEdit v-slot="{ confirm, callback }"> 
-    <EditJudge
-      :judge="selectedModalItem"
-      :judgeTypes="judgeTypes"
-      :clubs="clubs"
+    <EditJudgeTypes
+      :judgetype="selectedModalItem"
       :confirm="confirm"
       @done="(isDone) => closeEditModal(isDone, callback)"
     />
@@ -29,24 +27,22 @@ import Card from '../_components/Card.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
 import ModalEditMixin from '../_mixins/ModalMixin.vue'
-import EditJudge from './Edit.vue'
+import EditJudgeTypes from './Edit.vue'
 
 export default {
-  name: 'ListJudges',
+  name: 'JudgeTypeList',
   mixins: [ModalEditMixin],
   components: {
     Title,
     Card,
     SimpleTable,
     ModalEdit,
-    EditJudge
+    EditJudgeTypes
   },
   inject: ['FRI_API_URL'],
   data() {
     return {
-      judges: [],
-      judgeTypes: [],
-      clubs: [],      
+      judgetypes: [],
       tableDefinition: [
         {
           field: 'id',
@@ -54,53 +50,26 @@ export default {
           display: 'lg'
         },
         {
-          field: 'fullName',
+          field: 'name',
           label: 'Nafn',
           display: 'xs'
         },
         {
-          field: 'date',
-          label: 'Dags. réttinda',
+          field: 'stage',
+          label: 'Stig',
           display: 'md'
         },
-        {
-          field: 'typeName',
-          label: 'Flokkur',
-          display: 'md'
-        },
-        {
-          field: 'clubFullName',
-          label: 'Félag',
-          display: 'md'
-        },
+
       ]
     }
   },
   created() {
     agent
-      .get(this.FRI_API_URL + '/judges')
-      .withCredentials()
-      .then(res => {
-        this.judges = res.body.map(item => ({
-          ...item,
-          clubFullName: item.club?.fullName,
-          typeName: item.type?.name
-        }))
-      })
-
-    agent
-      .get(this.FRI_API_URL + '/clubs')
-      .withCredentials()
-      .then(res => {
-        this.clubs = res.body
-      })
-
-    agent
       .get(this.FRI_API_URL + '/judgetypes')
       .withCredentials()
       .then(res => {
-        this.judgeTypes = res.body
-      })
+        this.judgetypes = res.body
+      })  
   }
 }
 </script>

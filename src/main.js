@@ -27,6 +27,10 @@ const router = createRouter({
       component: () => import('./judges/List.vue')
     },
     {
+      path: '/flokkundomara',
+      component: () => import('./judgetypes/List.vue')
+    },
+    {
       path: '/mannvirki',
       component: () => import('./venues/List.vue')
     },

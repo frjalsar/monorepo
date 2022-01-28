@@ -6,6 +6,14 @@
       <input type="name" class="form-control" id="fullName" v-model="currentItem.fullName" :disabled="busy">
     </div>
 
+    <div class="col-md-4">
+      <label for="name" class="form-label">Flokkur</label>
+      <select class="form-select" v-model="currentItem.typeId" :disabled="busy">
+        <option :value="undefined"></option>
+        <option v-for="type in judgeTypes" :key="type.id" :value="type.id">{{ type.name }}</option>
+      </select>
+    </div>
+
     <div class="col-md-2">
       <label for="date" class="form-label">Dags. réttindi</label>
       <input type="name" class="form-control" id="date" v-model="currentItem.date" :disabled="busy">
@@ -36,7 +44,7 @@ export default {
   name: 'EditClub',
   inject: ['FRI_API_URL'],
   mixins: [EditMixin],
-  props: ['judge', 'clubs'], 
+  props: ['judge', 'judgeTypes', 'clubs'], 
   computed: {
     apiUrl() {
       return this.FRI_API_URL + '/judges'
