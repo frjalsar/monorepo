@@ -11,11 +11,16 @@ function makeSelectJudges (db) {
         j.id,
         j.fullname,
         j.date,
-        j.clubid,
+        j.typeid,
+        j.clubid,        
+        jt.name typename,
+        jt.stage typestage,
         c.fullname clubfullname,
         c.thorid clubthorid
       FROM
         judges j
+      LEFT JOIN
+        judgetypes jt ON jt.id = j.typeid
       LEFT JOIN
         clubs c ON c.id = j.clubid
       WHERE 1 = 1`
@@ -30,10 +35,15 @@ function makeSelectJudges (db) {
       params.push(opt.clubId)
     }
 
+    if (opt.typeId) {
+      sql += ' AND jt.id = ?'
+      params.push(opt.typeId)
+    }
+
     sql += ` 
       ORDER BY
         j.fullname ASC,
-        c.fullname ASC`
+        jt.stage ASC`
 
     if (opt.offset) {
       sql += ' OFFSET ' + opt.offset

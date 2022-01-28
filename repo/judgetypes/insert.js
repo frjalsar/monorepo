@@ -1,9 +1,9 @@
-function makeInsertEventType (db) {
-  return function insertEventType (eventType, user) {
+function makeInsertJudgeType (db) {
+  return function insertJudgeType (judgeType, user) {
     const sql = `
-      INSERT INTO eventtypes (
+      INSERT INTO judgetypes (
         name,
-        ordering,
+        stage,
         _userid,
         _enabled,
         _time
@@ -12,8 +12,8 @@ function makeInsertEventType (db) {
       RETURNING id`
 
     const params = [
-      eventType.name,
-      eventType.ordering,
+      judgeType.name,
+      judgeType.stage,
       user.id
     ]    
 
@@ -23,4 +23,4 @@ function makeInsertEventType (db) {
   }
 }
 
-module.exports = makeInsertEventType
+module.exports = makeInsertJudgeType

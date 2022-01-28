@@ -4,17 +4,19 @@ function makeInsertJudge (db) {
       INSERT INTO judges (
         fullname,
         date,
-        clubid,
+        typeid,
+        clubid,        
         _userid,
         _enabled,
         _time
       )
-      VALUES ($1, $2, $3, $4, true, CURRENT_TIMESTAMP(3))
+      VALUES ($1, $2, $3, $4, $5, true, CURRENT_TIMESTAMP(3))
       RETURNING id`
 
     const params = [
       judge.fullName,
       judge.date,
+      judge.typeId,
       judge.clubId,
       user.id
     ]

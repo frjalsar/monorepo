@@ -4,17 +4,19 @@ function makeUpdateJudge (db) {
       UPDATE judges SET
         fullname = $1,
         date = $2,
-        clubid = $3,
-        _userid = $4,
+        typeId = $3,
+        clubid = $4,
+        _userid = $5,
         _enabled = true,
         _time = CURRENT_TIMESTAMP(3)
       WHERE
-        id = $5
+        id = $6
       RETURNING id`
 
     const params = [
       judge.fullName,
       judge.date,
+      judge.typeId,
       judge.clubId,
       user.id,
       judge.id
