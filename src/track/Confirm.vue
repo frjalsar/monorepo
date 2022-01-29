@@ -75,7 +75,8 @@ export default {
           venueId: this.data.meetVenue.id,
           judgeId: this.data.judge.id,
           startDate: this.data.meetStart,
-          endDate: this.data.meetEnd
+          endDate: this.data.meetEnd,
+          events: this.data.selectedEvents.map(event => event.id),
         })
         .auth(this.FRI_API_TOKEN, { type: 'bearer' })
         .then(() => {

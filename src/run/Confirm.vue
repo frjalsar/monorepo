@@ -74,7 +74,8 @@ export default {
           venueId: undefined,
           judgeId: this.data.judge.id,
           startDate: this.data.meetStart,
-          endDate: undefined
+          endDate: undefined,
+          events: this.data.selectedEvents.map(event => event.id),
         })
         .auth(this.FRI_API_TOKEN, { type: 'bearer' })
         .then(() => {
