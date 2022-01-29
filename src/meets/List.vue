@@ -51,27 +51,23 @@ export default {
       venues: [],
       statuses: [
         {
-          id: -1,
-          name: 'Hafnað'
-        },
-        {
-          id: 0,
+          id: 1,
           name: 'Umsókn'
         },
         {
-          id: 1,
+          id: 2,
           name: 'Samþykkt'
         },        
         {
-          id: 2,
+          id: 3,
           name: 'Í gangi'
         },
         {
-          id: 3,
+          id: 4,
           name: 'Lokið'
         },
         {
-          id: 4,
+          id: 5,
           name: 'Staðfest'
         },
       ],
@@ -111,11 +107,6 @@ export default {
           label: 'Dómari',
           display: 'md'
         },
-        {
-          field: 'eventNames',
-          label: 'Greinar',
-          display: 'lg'
-        }
         
       ]
     }
@@ -130,7 +121,6 @@ export default {
           ...meet,
           sentFormatted: format(new Date(meet.sent), 'dd.MM.yyyy'),
           startDateFormatted: format(new Date(meet.startDate), 'dd.MM.yyyy'),
-          eventNames: meet.competition.map(c => c.eventName).join(', ')
         }))
       })
 
