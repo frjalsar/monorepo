@@ -14,8 +14,6 @@ function makeInsertCompetition (db) {
       obj.indodr
     ])
 
-    console.log('arr', arr)
-
     const sql = `
     INSERT INTO competitions (
       meetid,
@@ -28,8 +26,6 @@ function makeInsertCompetition (db) {
     VALUES ${toTuple(arr, true)}`
 
     const params = flatten(arr)
-
-    console.log(sql, params)
 
     return db.query(sql, params)
   }
