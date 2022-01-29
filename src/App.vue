@@ -133,9 +133,9 @@ export default {
   },
   computed: {    
     current() {
-      if (this.type === 'track') {
+      if (this.type === 'mot') {
         return this.trackSteps[this.step]
-      } else if (this.type === 'run') {
+      } else if (this.type === 'hlaup') {
         return this.runSteps[this.step]
       } else {
         return {
@@ -159,7 +159,8 @@ export default {
     },
     next(data) {
       if (data.type) {
-        this.type = data.type
+        this.type = data.type        
+        window.location.replace('#/?tegund=' + data.type)
       }      
       this.step = this.step + 1;
       this.updateSession(data);

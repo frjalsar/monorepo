@@ -10,7 +10,7 @@
     <button
       type="button"
       class="btn btn-primary btn-lg py-3 px-4 my-3"
-      @click="$emit('next', { type: 'track'})"
+      @click="$emit('next', { type: 'mot'})"
     >
       Sækja um mót
     </button>
@@ -18,7 +18,7 @@
     <button
       type="button"
       class="btn btn-primary btn-lg py-3 px-4 my-3"
-      @click="$emit('next', { type: 'run'})"
+      @click="$emit('next', { type: 'hlaup'})"
     >
       Sækja um hlaup      
     </button>
