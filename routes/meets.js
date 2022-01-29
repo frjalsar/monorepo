@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const authorize = require('../lib/authorizeHandler')
 
-function makeMeetsRoute (selectMeets, updateMeet, insertMeet) {
+function makeMeetsRoute (selectMeets, updateMeet, createMeet) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -17,7 +17,7 @@ function makeMeetsRoute (selectMeets, updateMeet, insertMeet) {
   })
 
   router.post('/', authorize(['admin', 'application']), (req, res, next) => {
-    return insertMeet(req.body, req.user)
+    return createMeet(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })

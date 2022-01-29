@@ -24,11 +24,12 @@ function makeSelectMeets (db) {
         m.status,
         m.sent,
         c.id competitionid,
-        e.id eventid
+        e.id eventid,
+        e.name eventname
       FROM
         meets m
       LEFT JOIN
-        competition c ON c.meetid = m.id
+        competitions c ON c.meetid = m.id
       LEFT JOIN
         events e ON e.id = c.eventid
       LEFT JOIN

@@ -28,7 +28,7 @@ function makeSelectVenues (db) {
         v.certification
       FROM
         venues v
-      WHERE 1 = 1`
+      WHERE _enabled = true`
 
     if (opt.id) {
       sql += ' AND v.id = ?'

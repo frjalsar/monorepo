@@ -35,8 +35,8 @@ function makeInsertMeet (db) {
       meet.venueId,
       meet.judgeId,
       meet.startDate,
-      meet.endDate,
-      1,
+      meet.endDate || meet.startDate,
+      0,
       user.id
     ]
 

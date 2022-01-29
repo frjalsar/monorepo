@@ -1,7 +1,7 @@
 const mapCombinedEvents = require('../combinedevents/map')
 
-function makeEditEvents (makeInsertEvent, makeDeleteCombinedEvents, makeInsertCombinedEvents, db) {
-  return async function makeEditEvents (event, user) {
+function makeCreateEvent (makeInsertEvent, makeDeleteCombinedEvents, makeInsertCombinedEvents, db) {
+  return async function makeCreateEvent (event, user) {
     const client = await db.connect()
 
     const insertEvents = makeInsertEvent(client)
@@ -30,4 +30,4 @@ function makeEditEvents (makeInsertEvent, makeDeleteCombinedEvents, makeInsertCo
   }
 }
 
-module.exports = makeEditEvents
+module.exports = makeCreateEvent

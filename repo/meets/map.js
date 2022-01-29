@@ -37,7 +37,7 @@ function mapMeets (list) {
         meetId: item.id
       }
 
-      currentAthlete.competition.push(competitionObj)
+      currentMeet.competition.push(competitionObj)
     }    
   })
 
