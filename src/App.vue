@@ -23,6 +23,7 @@ import TrackContact from './track/Contact.vue'
 import TrackMeet from './track/Meet.vue'
 import TrackJudge from './track/Judge.vue'
 import TrackEvents from './track/Events.vue'
+import TrackCompetition from './track/Competition.vue'
 import TrackConfirm from './track/Confirm.vue'
 import TrackThanks from './track/Thanks.vue'
 
@@ -42,6 +43,7 @@ export default {
     TrackMeet,
     TrackJudge,
     TrackEvents,
+    TrackCompetition,
     TrackConfirm,
     TrackThanks,
     RunOrganizer,
@@ -85,6 +87,10 @@ export default {
         {
           title: 'Greinar',
           component: 'TrackEvents'
+        },
+        {
+          title: 'Aldursflokkar og kyn',
+          component: 'TrackCompetition'
         },
         {
           title: 'Staðfesting',

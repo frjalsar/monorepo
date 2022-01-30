@@ -35,8 +35,8 @@
 
   <div class="row mb-3">
     <div class="col-md-4 offset-md-2">
-      <h2>Greinar</h2>
-      <div v-for="event in data.selectedEvents" :key="event.id">{{ event.name }}</div>
+      <h2>Keppni</h2>
+      <div v-for="item in data.competition" :key="item">{{ item.event.name }}, {{ item.ageFrom }} - {{ item.ageTo }} ára, {{ item.gender.text }}</div>
     </div>    
   </div>
   
@@ -76,7 +76,12 @@ export default {
           judgeId: this.data.judge.id,
           startDate: this.data.meetStart,
           endDate: this.data.meetEnd,
-          events: this.data.selectedEvents.map(event => event.id),
+          competition: this.data.competition.map(item => ({
+            eventId: item.event.id,
+            ageFrom: item.ageFrom,
+            ageTo: item.ageTo,
+            gender: item.gender.id
+          })),
         })
         .auth(this.FRI_API_TOKEN, { type: 'bearer' })
         .then(() => {
