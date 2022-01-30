@@ -9,9 +9,12 @@ function makeCreateMeet (makeInsertMeet, makeInsertCompetition, db) {
       await client.query('BEGIN')
       const meetId = await insertMeet(meet, user)
 
-      const competitionList = meet.events.map(eventId => ({
+      const competitionList = meet.competition.map(c => ({
         meetId,
-        eventId
+        eventId: c.eventId,
+        ageFrom: c.ageFrom,
+        ageTo: c.ageTo,
+        gender: c.gender
       }))
 
       await insertCompetition(competitionList, user)
