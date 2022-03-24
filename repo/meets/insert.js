@@ -14,13 +14,14 @@ function makeInsertMeet (db) {
         startdate,
         enddate,
         status,
+        attachment,
         sent,
         _userid,
         _enabled,
         _time
       )
       VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, CURRENT_TIMESTAMP(3), $13, true, CURRENT_TIMESTAMP(3)
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, CURRENT_TIMESTAMP(3), $14, true, CURRENT_TIMESTAMP(3)
       )
       RETURNING id`
 
@@ -37,6 +38,7 @@ function makeInsertMeet (db) {
       meet.startDate,
       meet.endDate || meet.startDate,
       0,
+      meet.attachment,
       user.id
     ]
 
