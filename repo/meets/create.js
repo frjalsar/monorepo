@@ -7,7 +7,9 @@ function makeCreateMeet (makeInsertMeet, makeInsertCompetition, db) {
 
     try {
       await client.query('BEGIN')
-      meet.attachment = Buffer.from(meet.base64Attachment, 'base64')
+      if (meet.base64Attachment) {
+        meet.attachment = Buffer.from(meet.base64Attachment, 'base64')
+      }           
       const meetId = await insertMeet(meet, user)
 
       const competitionList = meet.competition.map(c => ({
