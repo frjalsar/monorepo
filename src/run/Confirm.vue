@@ -28,7 +28,7 @@
     </div>
     <div class="col-md-4">
       <h2>Dómari</h2>
-      {{ data.judge.fullName }}<br />
+      {{ data.judge && data.judge.fullName }}<br />
     </div>
   </div>
 
@@ -72,10 +72,13 @@ export default {
           contactPhone: this.data.contactPhone,
           location: this.data.meetLocation,
           venueId: undefined,
-          judgeId: this.data.judge.id,
+          judgeId: this.data.judge ? this.data.judge.id : undefined,
           startDate: this.data.meetStart,
           endDate: undefined,
-          events: this.data.selectedEvents.map(event => event.id),
+          competition: this.data.selectedEvents.map(event => ({
+            eventId: event.id
+          })),
+          base64Attachment: undefined
         })
         .auth(this.FRI_API_TOKEN, { type: 'bearer' })
         .then(() => {

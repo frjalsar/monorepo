@@ -48,7 +48,7 @@
       {{ item.ageTo }}
     </div>
      <div class="col-md-2">
-      {{ item.gender.text }}
+      {{ item.gender && item.gender.text }}
     </div>
     <div class="col-md-2 text-start" >
       <button type="button" class="btn btn-warning" @click="remove(index)">Eyða línu</button>
@@ -89,8 +89,8 @@ export default {
     }
   },
   methods: {
-    add() {
-      this.setup.push({
+    add() {      
+      this.competition.push({
         event: this.event,
         ageFrom: this.ageFrom,
         ageTo: this.ageTo,
@@ -103,7 +103,7 @@ export default {
       this.gender = undefined
     },
     remove(index) {
-      this.setup.splice(index, 1)
+      this.competition.splice(index, 1)
     },
     next() {
       this.$emit('next', { competition: this.competition })

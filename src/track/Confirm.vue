@@ -24,25 +24,24 @@
     <div class="col-md-4 offset-md-2">
       <h2>Mót</h2>
       {{ data.meetName }}<br />
-      {{ data.meetVenue.fullName }}<br />
+      {{ data.meetVenue && data.meetVenue.fullName }}<br />
       {{ data.meetLocation }}
     </div>
     <div class="col-md-4">
       <h2>Dómari</h2>
-      {{ data.judge.fullName }}<br />
+      {{ data.judge && data.judge.fullName }}<br />
     </div>
   </div>
 
   <div class="row mb-3">
     <div class="col-md-4 offset-md-2">
       <h2>Keppni</h2>
-      <div v-for="item in data.competition" :key="item">{{ item.event.name }}, {{ item.ageFrom }} - {{ item.ageTo }} ára, {{ item.gender.text }}</div>
+      <div v-for="item in data.competition" :key="item">{{ item.event && item.event.name }}, {{ item.ageFrom }} - {{ item.ageTo }} ára, {{ item.gender && item.gender.text }}</div>
     </div>    
   </div>
   
 
   <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-    <button type="button" class="btn btn-outline-secondary btn-lg py-3 px-4 my-3" @click="back">Til baka</button>
     <button type="button" class="btn btn-primary btn-lg py-3 px-4 my-3" @click="next">
       Staðfesta
     </button>
@@ -72,16 +71,17 @@ export default {
           contactEmail: this.data.contactEmail,
           contactPhone: this.data.contactPhone,
           location: this.data.meetLocation,
-          venueId: this.data.meetVenue.id,
-          judgeId: this.data.judge.id,
+          venueId: this.data.meetVenue ? this.data.meetVenue.id : undefined,
+          judgeId: this.data.judge ? this.data.judge.id : undefined,
           startDate: this.data.meetStart,
           endDate: this.data.meetEnd,
           competition: this.data.competition.map(item => ({
-            eventId: item.event.id,
+            eventId: item.event ? item.event.id : undefined,
             ageFrom: item.ageFrom,
             ageTo: item.ageTo,
-            gender: item.gender.id
+            gender: item.gender ? item.gender.id : undefined
           })),
+          base64Attachment: this.data.base64Attachment
         })
         .auth(this.FRI_API_TOKEN, { type: 'bearer' })
         .then(() => {

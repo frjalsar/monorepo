@@ -24,6 +24,7 @@ import TrackMeet from './track/Meet.vue'
 import TrackJudge from './track/Judge.vue'
 import TrackEvents from './track/Events.vue'
 import TrackCompetition from './track/Competition.vue'
+import TrackAttachment from './track/Attachment.vue'
 import TrackConfirm from './track/Confirm.vue'
 import TrackThanks from './track/Thanks.vue'
 
@@ -44,6 +45,7 @@ export default {
     TrackJudge,
     TrackEvents,
     TrackCompetition,
+    TrackAttachment,
     TrackConfirm,
     TrackThanks,
     RunOrganizer,
@@ -93,6 +95,10 @@ export default {
           component: 'TrackCompetition'
         },
         {
+          title: 'Boðsbréf',
+          component: 'TrackAttachment'
+        },
+        {
           title: 'Staðfesting',
           component: 'TrackConfirm'
         },
@@ -125,6 +131,10 @@ export default {
         {
           title: 'Greinar',
           component: 'RunEvents'
+        },
+        {
+          title: 'Boðsbréf',
+          component: 'TrackAttachment'
         },
         {
           title: 'Staðfesting',
