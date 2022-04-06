@@ -1,4 +1,9 @@
 function mapMeets (list) {
+  const genderMap = {
+    '1': 'Karlar',    
+    '2': 'Konur',
+  }
+
   let currentId
   const result = []  
   list.forEach(item => {
@@ -34,7 +39,13 @@ function mapMeets (list) {
         id: item.competitionid,
         eventId: item.eventid,        
         eventName: item.eventname,
-        meetId: item.id
+        meetId: item.id,
+        ageFrom: item.agefrom,
+        ageTo: item.ageto,
+        gender: item.gender ? {
+          value: item.gender,
+          text: genderMap[item.gender]
+        } : undefined,
       }
 
       currentMeet.competition.push(competitionObj)

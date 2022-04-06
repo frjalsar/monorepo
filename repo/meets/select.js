@@ -24,6 +24,9 @@ function makeSelectMeets (db) {
         m.status,
         m.sent,
         c.id competitionid,
+        c.agefrom,
+        c.ageto,
+        c.gender,
         e.id eventid,
         e.name eventname
       FROM
