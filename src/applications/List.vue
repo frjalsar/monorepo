@@ -10,7 +10,7 @@
     />
   </Card>
 
-  <ModalEdit v-slot="{ confirm, callback }"> 
+  <ModalEdit v-slot="{ confirm, callback }" size="extra-large"> 
     <EditMeet
       :meet="selectedModalItem"
       :venues="venues"
@@ -130,7 +130,10 @@ export default {
           ...meet,
           sentFormatted: format(new Date(meet.sent), 'dd.MM.yyyy'),
           startDateFormatted: format(new Date(meet.startDate), 'dd.MM.yyyy'),
-          eventNames: meet.competition.map(c => c.eventName).join(', ')
+          eventNames: meet.competition
+            .map(c => c.eventName)
+            .filter((val, index, arr) => arr.indexOf(val) === index) // unique list
+            .join(', ')
         }))
       })
 
