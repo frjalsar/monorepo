@@ -1,6 +1,6 @@
 <template>
 <div class="modal" tabindex="-1" id="ModalEdit">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog" :class="modalSize">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Skráning</h5>
@@ -24,10 +24,34 @@
 <script>
 export default {
   name: 'ModalEdit',
+  props: {
+    size: {
+      typye: String,    
+      default: 'large',
+      validator (val) {
+        return val === 'small' || val === 'medium'  || val == 'large' || val === 'extra-large' || val == 'fullscreen'
+      }
+    }
+  },
   data() {
     return {
       shouldConfirm: false,
       error: false
+    }
+  },
+  computed: {
+    modalSize() {
+      const defaultSize = 'modal-lg'
+
+      const sizeMap = {
+        'small': 'modal-sm',
+        'medium' : '',
+        'large': 'modal-lg',
+        'extra-large': 'modal-xl',
+        'fullscreen': 'modal-fullscreen'
+      }
+
+      return sizeMap[this.size] || defaultSize
     }
   },
   methods: {
