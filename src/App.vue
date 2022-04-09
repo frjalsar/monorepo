@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-    <div class="px-4 py-5 my-sm-5 text-center">
+    <div class="py-5 my-sm-5 text-center">
       <img
         class="d-block mx-auto mb-4"
         src="./assets/logo.png"
@@ -10,7 +10,7 @@
       />
       <h1 class="display-5 fw-bold mb-4">{{ current.title }}</h1>
       <div class="col-lg-12 col-xl-10 mx-auto">
-        <component :is="current.component" :data="data" @next="next" />  
+        <component :is="current.component" :data="data" @back="back" @next="next" />  
       </div>
     </div>
   </main>
@@ -173,12 +173,16 @@ export default {
 
       sessionStorage.setItem("FRI_UMSOKN", JSON.stringify(this.data));
     },
+    back() {
+      this.step = this.step - 1
+      this.updateSession({});
+    },
     next(data) {
       if (data.type) {
         this.type = data.type        
         window.location.replace('#/?tegund=' + data.type)
       }      
-      this.step = this.step + 1;
+      this.step = this.step + 1
       this.updateSession(data);
     },
   },
@@ -186,7 +190,7 @@ export default {
     this.data = JSON.parse(sessionStorage.getItem("FRI_UMSOKN"));
     this.step = this.data ? this.data.step : 0;
     this.type = this.data ? this.data.type : undefined
-  },  
+  },
 };
 </script>
 

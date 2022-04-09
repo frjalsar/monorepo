@@ -41,12 +41,17 @@
   </div>
   
 
-  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-    <button type="button" class="btn btn-primary btn-lg py-3 px-4 my-3" @click="next">
-      Staðfesta
-    </button>
-    
+  <div class="row">
+    <div class="col mx">
+      <button type="button" class="btn btn-secondary btn-lg py-3 my-3" @click="back">
+        Til baka
+      </button>
+      <button type="button" class="btn btn-primary btn-lg py-3 my-3 mx-3" @click="next">
+        Staðfesta
+      </button>
+    </div>    
   </div>
+  
 
 </div>
 </template>
@@ -56,10 +61,12 @@ import agent from 'superagent'
 export default {
   name: 'TrackConfirm',
   props: ['data'],
-  emits: ['next'],
+  emits: ['back', 'next'],
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
-  props: ['data'],
   methods: {
+    back() {
+      this.$emit('back')
+    },
     next() {
       agent
         .post(this.FRI_API_URL + '/meets')

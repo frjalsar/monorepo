@@ -34,8 +34,9 @@
 
     <div class="col-md-2 text-start" >
       <button type="button" class="btn btn-primary add" @click="add">Bæta við</button>
-    </div>
+    </div>    
   </div>
+
 
   <div class="row mb-3" v-for="(item, index) in competition" :key="item">
     <div class="col-md-3 offset-md-2">
@@ -55,12 +56,17 @@
     </div>
   </div>  
 
-  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-    <button type="button" class="btn btn-primary btn-lg py-3 px-4 my-3" @click="next">
-      Áfram
-    </button>
-    
+  <div class="row">
+    <div class="col mx">
+      <button type="button" class="btn btn-secondary btn-lg py-3 my-3" @click="back">
+        Til baka
+      </button>
+      <button type="button" class="btn btn-primary btn-lg py-3 my-3 mx-3" @click="next">
+        Áfram
+      </button>
+    </div>    
   </div>
+  
 
 </div>
 </template>
@@ -69,9 +75,8 @@
 export default {
   name: 'TrackConfirm',
   props: ['data'],
-  emits: ['next'],
+  emits: ['back', 'next'],
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
-  props: ['data'],
   data() {
     return {
       event: undefined,
@@ -105,10 +110,16 @@ export default {
     remove(index) {
       this.competition.splice(index, 1)
     },
+    back() {
+      this.$emit('back')
+    },
     next() {
       this.$emit('next', { competition: this.competition })
     }    
-  },  
+  },
+  created() {
+    this.competition = this.data.competition || []
+  }
 };
 </script>
 

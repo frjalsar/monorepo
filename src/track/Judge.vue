@@ -16,15 +16,17 @@
   </diV>
 
 
-  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-    <button
-      type="button"
-      class="btn btn-primary btn-lg py-3 px-4 my-3"
-      @click="next"
-    >
-      Áfram     
-    </button>
+  <div class="row">
+    <div class="col mx">
+      <button type="button" class="btn btn-secondary btn-lg py-3 my-3" @click="back">
+        Til baka
+      </button>
+      <button type="button" class="btn btn-primary btn-lg py-3 my-3 mx-3" @click="next">
+        Áfram
+      </button>
+    </div>    
   </div>
+  
   
 </div>
 </template>
@@ -34,7 +36,7 @@ import agent from 'superagent'
 export default {
   name: 'TrackJudge',
   props: ['data'],
-  emits: ['next'],
+  emits: ['back', 'next'],
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
   data() {
     return {
@@ -43,6 +45,9 @@ export default {
     }
   },
   methods: {
+    back() {
+      this.$emit('back')
+    },
     next() {
       this.$emit('next', {
         judge: this.judge,
@@ -50,6 +55,7 @@ export default {
     }
   },
   created() {
+    this.judge = this.data.judge || undefined
     agent
       .get(this.FRI_API_URL + '/judges')
       .auth(this.FRI_API_TOKEN, { type: 'bearer' })

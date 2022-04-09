@@ -10,15 +10,17 @@
   </diV>
 
 
-  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-    <button
-      type="button"
-      class="btn btn-primary btn-lg py-3 px-4 my-3"
-      @click="next"
-    >
-      Áfram     
-    </button>
+  <div class="row">
+    <div class="col mx">
+      <button type="button" class="btn btn-secondary btn-lg py-3 my-3" @click="back">
+        Til baka
+      </button>
+      <button type="button" class="btn btn-primary btn-lg py-3 my-3 mx-3" @click="next">
+        Áfram
+      </button>
+    </div>    
   </div>
+  
   
 </div>
 </template>
@@ -27,7 +29,7 @@
 export default {
   name: 'TrackAttachment',
   props: ['data'],
-  emits: ['next'],
+  emits: ['back', 'next'],
   data() {
     return {
       base64Attachment: undefined,
@@ -44,6 +46,9 @@ export default {
         const base64String = dataUrl.substring(base64Index + 7)
         this.base64Attachment = base64String
       }
+    },
+    back() {
+      this.$emit('back')
     },
     next() {
       this.$emit('next', {

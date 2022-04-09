@@ -31,12 +31,13 @@
   </div>
 
   <div class="row">
-    <div class="col">
-      <button
-        type="button"
-        class="btn btn-primary btn-lg py-3 my-3"
-        @click="next"
-      >Áfram</button>
+    <div class="col mx">
+      <button type="button" class="btn btn-secondary btn-lg py-3 my-3" @click="back">
+        Til baka
+      </button>
+      <button type="button" class="btn btn-primary btn-lg py-3 my-3 mx-3" @click="next">
+        Áfram
+      </button>
     </div>    
   </div>
 
@@ -49,15 +50,18 @@ const apiUrl = import.meta.env.VITE_FRI_API_URL
 export default {
   name: 'TrackContact',
   props: ['data'],
-  emits: ['next'],
+  emits: ['back', 'next'],
   data() {
     return {
-      contactName: '',
-      contactEmail: '',
-      contactPhone: ''
+      contactName: undefined,
+      contactEmail: undefined,
+      contactPhone: undefined
     }
   },
   methods: {
+    back() {
+      this.$emit('back')
+    },
     next() {
       this.$emit('next', {
         contactName: this.contactName,
@@ -65,6 +69,11 @@ export default {
         contactPhone: this.contactPhone
       })
     }
+  },
+  created() {
+    this.contactName = this.data.contactName || []
+    this.contactEmail = this.data.contactEmail || []
+    this.contactPhone = this.data.contactPhone || []
   }
 };
 </script>

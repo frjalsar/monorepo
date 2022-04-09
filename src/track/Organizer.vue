@@ -20,14 +20,15 @@
   </div>
 
 
-  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-    <button
-      type="button"
-      class="btn btn-primary btn-lg py-3 px-4 my-3"
-      @click="next"
-    >
-      Áfram     
-    </button>
+  <div class="row">
+    <div class="col mx">
+      <button type="button" class="btn btn-secondary btn-lg py-3 my-3" @click="back">
+        Til baka
+      </button>
+      <button type="button" class="btn btn-primary btn-lg py-3 my-3 mx-3" @click="next">
+        Áfram
+      </button>
+    </div>    
   </div>
   
 </div>
@@ -39,20 +40,27 @@ const apiUrl = import.meta.env.VITE_FRI_API_URL
 export default {
   name: 'TrackOrganizer',
   props: ['data'],
-  emits: ['next'],
+  emits: ['back', 'next'],
   data() {
     return {
-      organizerName: '',
-      organizerKt: ''
+      organizerName: undefined,
+      organizerKt: undefined,
     }
-  },
+  }, 
   methods: {
+    back() {
+      this.$emit('back')
+    },
     next() {
       this.$emit('next', {
         organizerName: this.organizerName,
         organizerKt: this.organizerKt
       })
-    }
-  }
+    },
+  },
+  created() {
+    this.organizerName = this.data.organizerName || undefined
+    this.organizerKt = this.data.organizerKt ? this.data.organizerKt : undefined
+  },
 };
 </script>

@@ -66,15 +66,16 @@
   </div>
   
   <div class="row">
-    <div class="col">
-      <button
-        type="button"
-        class="btn btn-primary btn-lg py-3 my-3"
-        @click="next"
-      >Áfram</button>
+    <div class="col mx">
+      <button type="button" class="btn btn-secondary btn-lg py-3 my-3" @click="back">
+        Til baka
+      </button>
+      <button type="button" class="btn btn-primary btn-lg py-3 my-3 mx-3" @click="next">
+        Áfram
+      </button>
     </div>    
   </div>
-
+  
 </div>
 </template>
 
@@ -83,12 +84,12 @@ import agent from 'superagent'
 export default {
   name: 'TrackMeet',
   props: ['data'],
-  emits: ['next'],
+  emits: ['back', 'next'],
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
   data() {
     return {
-      meetName: '',
-      meetLocation: '',
+      meetName: undefined,
+      meetLocation: undefined,
       meetVenue: undefined,
       meetStartDate: undefined,
       meetStartTime: undefined,
@@ -147,6 +148,9 @@ export default {
     }    
   },
   methods: {
+    back() {
+      this.$emit('back')
+    },
     next() {
       this.$emit('next', {
         meetName: this.meetName,
@@ -158,6 +162,10 @@ export default {
     }
   },
   created() {
+    this.meetName = this.data.meetName || undefined
+    this.meetLocation = this.data.meetLocation || undefined
+    this.meetVenue = this.data.meetVenue || undefined
+
     agent
       .get(this.FRI_API_URL + '/venues')
       .auth(this.FRI_API_TOKEN, { type: 'bearer' })
