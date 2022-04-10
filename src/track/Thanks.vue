@@ -1,18 +1,19 @@
-  <template>
-<div>
-
-  <p class="lead mb-4">
-    Frjálsíþróttasamband Íslands hefur móttekið beiðni þína og mun núna fara yfir hana. Í framhaldinu verður haft samband við mótsstjóra.
-    Þér er óhætt að loka glugganum.
-  </p>     
-
-</div>
+<template>
+  <div>
+    <p class="lead mb-4">
+      Frjálsíþróttasamband Íslands hefur móttekið beiðni þína og mun núna fara yfir hana. Í framhaldinu verður haft samband við mótsstjóra.
+      Þér er óhætt að loka glugganum.
+    </p>
+  </div>
 </template>
 
 <script>
 export default {
-  emits: ['track', 'run'],
-};
+  name: 'TrackThanks',
+  created () {
+    sessionStorage.removeItem('FRI_UMSOKN')
+  }
+}
 </script>
 
 <style scoped>

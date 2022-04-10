@@ -7,10 +7,17 @@
         alt="FRI"
         width="100"
         height="90"
-      />
-      <h1 class="display-5 fw-bold mb-4">{{ current.title }}</h1>
+      >
+      <h1 class="display-5 fw-bold mb-4">
+        {{ current.title }}
+      </h1>
       <div class="col-lg-12 col-xl-10 mx-auto">
-        <component :is="current.component" :data="data" @back="back" @next="next" />  
+        <component
+          :is="current.component"
+          :data="data"
+          @back="back"
+          @next="next"
+        />
       </div>
     </div>
   </main>
@@ -58,17 +65,17 @@ export default {
   },
   provide: {
     FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
-    FRI_API_TOKEN: import.meta.env.VITE_FRI_API_TOKEN,    
-  }, 
-  data() {
+    FRI_API_TOKEN: import.meta.env.VITE_FRI_API_TOKEN
+  },
+  data () {
     return {
       data: undefined,
       type: undefined,
       step: 0,
       trackSteps: [
         {
-        title: 'Umsókn vegna mótahalds',
-        component: 'Intro'
+          title: 'Umsókn vegna mótahalds',
+          component: 'Intro'
         },
         {
           title: 'Ábyrgðaraðili',
@@ -144,11 +151,11 @@ export default {
           title: 'Takk',
           component: 'RunThanks'
         }
-      ],
-    };
+      ]
+    }
   },
-  computed: {    
-    current() {
+  computed: {
+    current () {
       if (this.type === 'mot') {
         return this.trackSteps[this.step]
       } else if (this.type === 'hlaup') {
@@ -158,40 +165,39 @@ export default {
           title: 'Umsókn vegna mótahalds',
           component: 'Intro'
         }
-      }      
-
+      }
     }
   },
+  created () {
+    this.data = JSON.parse(sessionStorage.getItem('FRI_UMSOKN'))
+    this.step = this.data ? this.data.step : 0
+    this.type = this.data ? this.data.type : undefined
+  },
   methods: {
-    updateSession(newData) {
-      const oldData = JSON.parse(sessionStorage.getItem("FRI_UMSOKN"));
+    updateSession (newData) {
+      const oldData = JSON.parse(sessionStorage.getItem('FRI_UMSOKN'))
       this.data = {
         ...oldData,
         ...newData,
-        step: this.step,
-      };
+        step: this.step
+      }
 
-      sessionStorage.setItem("FRI_UMSOKN", JSON.stringify(this.data));
+      sessionStorage.setItem('FRI_UMSOKN', JSON.stringify(this.data))
     },
-    back() {
+    back () {
       this.step = this.step - 1
-      this.updateSession({});
+      this.updateSession({})
     },
-    next(data) {
+    next (data) {
       if (data.type) {
-        this.type = data.type        
+        this.type = data.type
         window.location.replace('#/?tegund=' + data.type)
-      }      
+      }
       this.step = this.step + 1
-      this.updateSession(data);
-    },
-  },
-  created() {
-    this.data = JSON.parse(sessionStorage.getItem("FRI_UMSOKN"));
-    this.step = this.data ? this.data.step : 0;
-    this.type = this.data ? this.data.type : undefined
-  },
-};
+      this.updateSession(data)
+    }
+  }
+}
 </script>
 
 <style>

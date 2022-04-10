@@ -1,33 +1,50 @@
 <template>
-<div>
-   
-  <p class="lead mb-4">
-    Veldu þær greinar sem verða á mótinu.
-  </p>
-  <div class="row">    
-    <div v-for="(type, index) in eventTypes" :key="type.id" class="col-md-3 mb-3 text-start" :class="{ 'offset-md-2': index % 3 === 0}">
-      <strong>{{ type.name }}</strong>
-      <div class="form-check" v-for="event in eventsByType[type.id]" :key="event.id">
-        <input class="form-check-input" type="checkbox" :value="event" :id="'event-' + event.id" v-model="selectedEvents">
-        <label class="form-check-label" :id="'event-' + event.id">
-          {{ event.name }}
-        </label>
+  <div>
+    <p class="lead mb-4">
+      Veldu þær greinar sem verða á mótinu.
+    </p>
+    <div class="row">
+      <div
+        v-for="(type, index) in eventTypes"
+        :key="type.id"
+        class="col-md-3 mb-3 text-start"
+        :class="{ 'offset-md-2': index % 3 === 0}"
+      >
+        <strong>{{ type.name }}</strong>
+        <div
+          v-for="event in eventsByType[type.id]"
+          :key="event.id"
+          class="form-check"
+        >
+          <input
+            :id="'event-' + event.id"
+            v-model="selectedEvents"
+            class="form-check-input"
+            type="checkbox"
+            :value="event"
+          >
+          <label
+            :id="'event-' + event.id"
+            class="form-check-label"
+          >
+            {{ event.name }}
+          </label>
+        </div>
       </div>
     </div>
-    
-  </div>
-  
-  <div class="row">
-    <div class="col">
-      <button
-        type="button"
-        class="btn btn-primary btn-lg py-3 my-3"
-        @click="next"
-      >Áfram</button>
-    </div>    
-  </div>
 
-</div>
+    <div class="row">
+      <div class="col">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg py-3 my-3"
+          @click="next"
+        >
+          Áfram
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,10 +53,15 @@ import agent from 'superagent'
 
 export default {
   name: 'RunEvents',
-  props: ['data'],
-  emits: ['next'],
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
-  data() {
+  props: {
+    application: {
+      type: Object,
+      required: true
+    }
+  },
+  emits: ['next'],
+  data () {
     return {
       events: [],
       eventTypes: [],
@@ -47,19 +69,12 @@ export default {
     }
   },
   computed: {
-    eventsByType() {
+    eventsByType () {
       const eventsByType = groupBy(this.events, 'typeId')
       return eventsByType
-    }  
-  },
-  methods: {
-    next() {
-      this.$emit('next', {
-        selectedEvents: this.selectedEvents
-      })
     }
   },
-  created() {
+  created () {
     agent
       .get(this.FRI_API_URL + '/events')
       .auth(this.FRI_API_TOKEN, { type: 'bearer' })
@@ -78,6 +93,13 @@ export default {
           return (hasRoad || hasOff)
         })
       })
+  },
+  methods: {
+    next () {
+      this.$emit('next', {
+        selectedEvents: this.selectedEvents
+      })
+    }
   }
-};
+}
 </script>

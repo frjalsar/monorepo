@@ -1,99 +1,110 @@
 <template>
-<div>
-   
-  <p class="lead mb-4">
-    Næst þarf að skrá mótssjóra. Mótsstjóri er einstaklingur sem sér um framkvæmd mótsins og bæði keppendur og FRÍ geta leitað til sé eitthvað óljóst eða þarfnast úrlausnar. 
-  </p>
+  <div>
+    <p class="lead mb-4">
+      Næst þarf að skrá mótssjóra. Mótsstjóri er einstaklingur sem sér um framkvæmd mótsins og bæði keppendur og FRÍ geta leitað til sé eitthvað óljóst eða þarfnast úrlausnar.
+    </p>
 
-  <div class="row">
-    <div class="col-md-4 offset-md-2">
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          :class="{
-            'is-valid': validContactName,
-            'is-invalid': !validContactName && shake,
-            'shake': !validContactName && shake
-          }"
-          id="contactName"
-          placeholder="Nafn"
-          v-model="contactName"
-        />
-        <label for="contactName">Nafn</label>
+    <div class="row">
+      <div class="col-md-4 offset-md-2">
+        <div class="form-floating mb-3">
+          <input
+            id="contactName"
+            v-model="contactName"
+            type="text"
+            class="form-control"
+            :class="{
+              'is-valid': validContactName,
+              'is-invalid': !validContactName && shake,
+              'shake': !validContactName && shake
+            }"
+            placeholder="Nafn"
+          >
+          <label for="contactName">Nafn</label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating mb-3">
+          <input
+            id="contactEmail"
+            v-model="contactEmail"
+            type="email"
+            class="form-control"
+            :class="{
+              'is-valid': validContactEmail,
+              'is-invalid': !validContactEmail && shake,
+              'shake': !validContactEmail && shake
+            }"
+            placeholder="Netfang"
+          >
+          <label for="contactEmail">Netfang</label>
+        </div>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="form-floating mb-3">
-        <input
-          type="email"
-          class="form-control"
-          :class="{
-            'is-valid': validContactEmail,
-            'is-invalid': !validContactEmail && shake,
-            'shake': !validContactEmail && shake
-          }"
-          id="contactEmail"
-          placeholder="Netfang"
-          v-model="contactEmail"
-        />
-        <label for="contactEmail">Netfang</label>
+    <div class="row">
+      <div class="col-md-4 offset-md-2">
+        <div class="form-floating mb-3">
+          <input
+            id="contactPhone"
+            v-model="contactPhone"
+            v-maska="'###-####'"
+            type="tel"
+            class="form-control"
+            :class="{
+              'is-valid': validContactPhone,
+              'is-invalid': !validContactPhone && shake,
+              'shake': !validContactPhone && shake
+            }"
+            placeholder="Símanúmer"
+          >
+          <label for="contactPhone">Símanúmer</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col mx">
+        <button
+          type="button"
+          class="btn btn-secondary btn-lg py-3 my-3"
+          @click="back"
+        >
+          Til baka
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-lg py-3 my-3 mx-3"
+          @click="next"
+        >
+          Áfram
+        </button>
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-4 offset-md-2">
-      <div class="form-floating mb-3">
-        <input
-          type="tel"
-          class="form-control"
-          :class="{
-            'is-valid': validContactPhone,
-            'is-invalid': !validContactPhone && shake,
-            'shake': !validContactPhone && shake
-          }"
-          id="contactPhone"
-          placeholder="Símanúmer"
-          v-model="contactPhone"
-          v-maska="'###-####'"
-        />
-        <label for="contactPhone">Símanúmer</label>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col mx">
-      <button type="button" class="btn btn-secondary btn-lg py-3 my-3" @click="back">
-        Til baka
-      </button>
-      <button type="button" class="btn btn-primary btn-lg py-3 my-3 mx-3" @click="next">
-        Áfram
-      </button>
-    </div>    
-  </div>
-
-</div>
 </template>
 
 <script>
 
 export default {
   name: 'TrackContact',
-  props: ['data'],
+  props: {
+    application: {
+      type: Object,
+      required: true
+    }
+  },
   emits: ['back', 'next'],
-  data() {
+  data () {
     return {
       contactName: undefined,
       contactEmail: undefined,
       contactPhone: undefined,
-      shake: false,
+      shake: false
     }
   },
   computed: {
-    validContactName() {
+    validContactName () {
       return this.contactName && this.contactName.length > 3
     },
     validContactEmail () {
@@ -108,11 +119,16 @@ export default {
       return this.validContactName && this.validContactEmail && this.validContactPhone
     }
   },
+  created () {
+    this.contactName = this.application.contactName || undefined
+    this.contactEmail = this.application.contactEmail || undefined
+    this.contactPhone = this.application.contactPhone || undefined
+  },
   methods: {
-    back() {
+    back () {
       this.$emit('back')
     },
-    next() {
+    next () {
       this.shake = false
 
       if (this.isValid) {
@@ -125,11 +141,6 @@ export default {
         this.shake = true
       }
     }
-  },
-  created() {
-    this.contactName = this.data.contactName || undefined
-    this.contactEmail = this.data.contactEmail || undefined
-    this.contactPhone = this.data.contactPhone || undefined
   }
-};
+}
 </script>
