@@ -6,7 +6,7 @@
     </p>
 
     <div class="row mb-4">
-      <div class="col-md-3 offset-md-2">
+      <div class="col-md-3 offset-md-1">
         <label
           for="event"
           class="form-label"
@@ -84,7 +84,7 @@
         >
       </div>
 
-      <div class="col-md-2 text-start">
+      <div class="col-md-3 text-start">
         <button
           type="button"
           class="btn btn-primary add"
@@ -95,7 +95,15 @@
         >
           Bæta við
         </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary add ms-3"
+          @click="addAll"
+        >
+          Skrá allt
+        </button>
       </div>
+      <div class="col-md-2 text-start" />
     </div>
 
     <div
@@ -103,7 +111,7 @@
       :key="item"
       class="row mb-3"
     >
-      <div class="col-md-3 offset-md-2">
+      <div class="col-md-3 offset-md-1">
         {{ item.event.name }}
       </div>
       <div class="col-md-2">
@@ -211,6 +219,16 @@ export default {
       } else {
         this.shake = true
       }
+    },
+    addAll () {
+      this.application.selectedEvents.forEach(event => {
+        this.genders.forEach(gender => {
+          this.competition.push({
+            event,
+            gender
+          })
+        })
+      })
     },
     remove (index) {
       this.competition.splice(index, 1)
