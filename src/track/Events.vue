@@ -8,7 +8,17 @@
     <div v-for="(type, index) in eventTypes" :key="type.id" class="col-md-3 mb-3 text-start" :class="{ 'offset-md-2': index % 3 === 0}">
       <strong>{{ type.name }}</strong>
       <div class="form-check" v-for="event in eventsByType[type.id]" :key="event.id">
-        <input class="form-check-input" type="checkbox" :value="event" :id="'event-' + event.id" v-model="selectedEvents">
+        <input
+          class="form-check-input"
+          :class="{
+            'is-invalid': !validSelectedEvents && shake,
+            'shake': !validSelectedEvents && shake
+          }"
+          type="checkbox"
+          :value="event"
+          :id="'event-' + event.id"
+          v-model="selectedEvents"
+        />
         <label class="form-check-label" :id="'event-' + event.id">
           {{ event.name }}
         </label>
@@ -44,10 +54,17 @@ export default {
     return {
       events: [],
       eventTypes: [],
-      selectedEvents: []
+      selectedEvents: [],
+      shake: false
     }
   },
   computed: {
+    validSelectedEvents () {
+      return this.selectedEvents.length > 0
+    },
+    isValid () {
+      return this.validSelectedEvents
+    },
     eventsByType() {
       const eventsByType = groupBy(this.events, 'typeId')
       return eventsByType
@@ -58,9 +75,15 @@ export default {
       this.$emit('back')
     },
     next() {
-      this.$emit('next', {
-        selectedEvents: this.selectedEvents
-      })
+      this.shake = false
+
+      if (this.isValid) {
+        this.$emit('next', {
+          selectedEvents: this.selectedEvents
+        })
+      } else {
+        this.shake = true
+      }
     }
   },
   created() {

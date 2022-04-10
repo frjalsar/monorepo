@@ -8,7 +8,18 @@
   <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="meetName" placeholder="Heiti móts" v-model="meetName">
+        <input
+          type="text"
+          class="form-control"
+          :class="{
+            'is-valid': validMeetName,
+            'is-invalid': !validMeetName && shake,
+            'shake': !validMeetName && shake
+          }"
+          id="meetName"
+          placeholder="Heiti móts"
+          v-model="meetName"
+        />
         <label for="meetName">Heiti móts</label>
       </div>
     </div>
@@ -17,14 +28,30 @@
    <div class="row">
     <div class="col-md-4 offset-md-2">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="meetLocation" placeholder="Staðsetning" v-model="meetLocation">
+        <input
+          type="text"
+          class="form-control"
+          id="meetLocation"
+          placeholder="Staðsetning"
+          v-model="meetLocation"
+        />
         <label for="meetLocation">Staðsetning</label>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="form-floating">
-        <select class="form-select" id="meetVenues" aria-label="Mannvirki" v-model="meetVenue">
+        <select
+          class="form-select"
+          :class="{
+            'is-valid': validMeetVenue,
+            'is-invalid': !validMeetVenue && shake,
+            'shake': !validMeetVenue && shake
+          }"
+          id="meetVenues"
+          aria-label="Mannvirki"
+          v-model="meetVenue"
+        >
           <option :value="undefined">Mannvirki</option>
           <option v-for="venue in venues" :key="venue.id" :value="venue">{{ venue.fullName }}</option>          
         </select>
@@ -36,35 +63,44 @@
   <div class="row">
     <div class="col-md-4 offset-md-2">
       <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="meetStartDate" placeholder="Hefst" v-model="meetStartDate">
-        <label for="meetStartDate">Hefst</label>
+        <input
+          type="text"
+          class="form-control"
+          :class="{
+            'is-valid': validMeetStart,
+            'is-invalid': !validMeetStart && shake,
+            'shake': !validMeetStart && shake
+          }"
+          id="meetStart"
+          placeholder="Hefst"
+          v-model="meetStart"
+          v-maska="'##.##.#### kl. ##:##'"
+        />
+        <label for="meetStart">Hefst <small class="text-secondary">(dd.mm.yyyy kl. hh:mm)</small></label>
       </div>
     </div>
+
 
     <div class="col-md-4">
       <div class="form-floating mb-3">
-        <input type="time" class="form-control" id="meetStartTime" placeholder="Klukkan" v-model="meetStartTime">
-        <label for="meetStartTime">Klukkan</label>
+        <input
+          type="text"
+          class="form-control"
+          :class="{
+            'is-valid': validMeetEnd,
+            'is-invalid': !validMeetEnd && shake,
+            'shake': !validMeetEnd && shake
+          }"
+          id="meetEnd"
+          placeholder="Lýkur"
+          v-model="meetEnd"
+          v-maska="'##.##.#### kl. ##:##'"
+        />
+        <label for="meetEnd">Lýkur <small class="text-secondary">(dd.mm.yyyy kl. hh:mm)</small></label>
       </div>
-    </div>
+    </div>   
   </div>
 
-  <div class="row">
-    <div class="col-md-4 offset-md-2">
-      <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="meetEndDate" placeholder="Lýkur" v-model="meetEndDate">
-        <label for="meetEndDate">Lýkur</label>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="form-floating mb-3">
-        <input type="time" class="form-control" id="meetEndTime" placeholder="Klukkan" v-model="meetEndTime">
-        <label for="meetEndTime">Klukkan</label>
-      </div>
-    </div>
-  </div>
-  
   <div class="row">
     <div class="col mx">
       <button type="button" class="btn btn-secondary btn-lg py-3 my-3" @click="back">
@@ -81,6 +117,7 @@
 
 <script>
 import agent from 'superagent'
+
 export default {
   name: 'TrackMeet',
   props: ['data'],
@@ -91,74 +128,72 @@ export default {
       meetName: undefined,
       meetLocation: undefined,
       meetVenue: undefined,
-      meetStartDate: undefined,
-      meetStartTime: undefined,
-      meetEndDate: undefined,
-      meetEndTime: undefined,
-      venues: []
+      meetStart: undefined,      
+      meetEnd: undefined,      
+      venues: [],
+      shake: false,
     }
   },
   computed: {
-    meetStart() {
-      if (!this.meetStartDate) {
-        return undefined
-      }
-
-      const meetStartDate = new Date(this.meetStartDate)      
-      const day = meetStartDate.getDate()
-      const month = meetStartDate.getMonth()
-      const year = meetStartDate.getFullYear()      
-      
-      let hours = 0
-      let minutes = 0
-      
-      if (this.meetStartTime) {
-        const meetStartTime = this.meetStartTime.split(':')      
-        if (meetStartTime.length === 2) {
-          hours = meetStartTime[0]
-          minutes = meetStartTime[1]
-        }
-      }
-
-      return new Date(year, month, day, hours, minutes)      
-    },
-    meetEnd () {
-      if (!this.meetEndDate) {
-        return undefined
-      }
-
-      const meetEndDate = new Date(this.meetEndDate)
-      const day = meetEndDate.getDate()
-      const month = meetEndDate.getMonth()
-      const year = meetEndDate.getFullYear()
-
-      let hours = 0
-      let minutes = 0
-
-      if (this.meetEndTime) {
-      const meetEndTime = this.meetEndTime.split(':')
-        if (meetEndTime.length === 2) {
-          hours = meetEndTime[0]
-          minutes = meetEndTime[1]
-        }
-      }
-      
-
-      return new Date(year, month, day, hours, minutes)
-    }    
+   validMeetName () {
+     return this.meetName && this.meetName.length > 3
+   },   
+   validMeetVenue () {
+     return this.meetVenue && this.meetVenue.id
+   },
+   validMeetStart () {
+     const d = this.toDate(this.meetStart)
+     return !isNaN(d)     
+   },
+   validMeetEnd () {
+     const d = this.toDate(this.meetEnd)
+     return !isNaN(d)
+   },
+   isValid () {
+      return this.validMeetName && this.validMeetVenue && this.validMeetStart && this.validMeetEnd
+    }
   },
   methods: {
     back() {
       this.$emit('back')
     },
     next() {
-      this.$emit('next', {
-        meetName: this.meetName,
-        meetLocation: this.meetLocation,
-        meetVenue: this.meetVenue,
-        meetStart: this.meetStart,
-        meetEnd: this.meetEnd
-      })
+      this.shake = false
+
+      if (this.isValid) {
+        this.$emit('next', {
+          meetName: this.meetName,
+          meetLocation: this.meetLocation,
+          meetVenue: this.meetVenue,
+          meetStart: this.toDate(this.meetStart),
+          meetEnd: this.toDate(this.meetEnd)
+        })
+      } else {
+        this.shake = true
+      }
+    },
+    toDate(date) {
+      if (date) {
+        const meetStartParts = date.split(' ')
+        if (meetStartParts.length === 3) {
+          const date = meetStartParts[0].split('.')
+          const time = meetStartParts[2].split(':')
+
+          if (date.length === 3 && time.length == 2) {
+            const dd = Number(date[0])
+            const mm = Number(date[1])
+            const yyyy = Number(date[2])
+            const hh = Number(time[0])
+            const m = Number(time[1])          
+
+            if (dd > 0 && dd < 32 && mm > 0 && mm < 13 && yyyy > 1900) {
+              return new Date(yyyy, mm-1, dd, hh, m)
+            }
+          }
+        }
+      }
+
+      return undefined     
     }
   },
   created() {

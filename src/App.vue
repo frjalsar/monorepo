@@ -195,4 +195,14 @@ export default {
 </script>
 
 <style>
+@keyframes shakeAnimation {
+  0% { margin-left: 0rem; }
+  25% { margin-left: 1rem; }
+  75% { margin-left: -1rem; }
+  100% { margin-left: 0rem; }
+}
+
+.shake {
+  animation: shakeAnimation 0.2s ease-in-out 0s 2;
+}
 </style>

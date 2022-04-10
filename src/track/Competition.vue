@@ -10,47 +10,75 @@
     
     <div class="col-md-3 offset-md-2">
       <label for="event" class="form-label">Grein</label>
-      <select class="form-select" id="event" aria-label="event" v-model="event">
+      <select
+        class="form-select"
+        :class="{
+          'is-valid': validEvent,
+          'is-invalid': !validEvent && shake,
+          'shake': !validEvent && shake
+        }"
+        id="event"
+        aria-label="event"
+        v-model="event"
+      >
         <option v-for="event in data.selectedEvents" :key="event.id" :value="event">{{ event.name }}</option>
       </select>              
     </div>
-
-    <div class="col-md-1">
-        <label for="ageFrom" class="form-label">Aldur frá</label>
-        <input type="text" class="form-control" id="ageFrom" v-model="ageFrom">              
-    </div>
-
-     <div class="col-md-1">
-      <label for="ageTo" class="form-label">Aldur til</label>
-      <input type="text" class="form-control" id="ageTo" v-model="ageTo">        
-    </div>
-
+    
     <div class="col-md-2">
-      <label for="name" class="form-label">Kyn</label>
-      <select class="form-select" v-model="gender">
-        <option v-for="gender in genders" :key="gender.value" :value="gender">{{ gender.text }}</option>
+      <label for="gender" class="form-label">Kyn</label>
+      <select
+        class="form-select"
+        :class="{
+          'is-valid': validGender,
+          'is-invalid': !validGender && shake,
+          'shake': !validGender && shake
+        }"
+        id="gender"
+        aria-label="gender"
+        v-model="gender"
+      >
+        <option v-for="gender in genders" :key="gender.id" :value="gender">{{ gender.text }}</option>
       </select>
     </div>
 
+    <div class="col-md-1">
+      <label for="ageFrom" class="form-label">Aldur frá</label>
+      <input type="text" class="form-control" id="ageFrom" v-model="ageFrom">              
+    </div>
+
+    <div class="col-md-1">
+      <label for="ageTo" class="form-label">Aldur til</label>
+      <input type="text" class="form-control" id="ageTo" v-model="ageTo">        
+    </div>
+    
     <div class="col-md-2 text-start" >
-      <button type="button" class="btn btn-primary add" @click="add">Bæta við</button>
+      <button
+        type="button"
+        class="btn btn-primary add"
+        :class="{
+          'shake': !validCompetition && shake
+        }"
+        @click="add"
+      >
+        Bæta við
+      </button>
     </div>    
   </div>
-
 
   <div class="row mb-3" v-for="(item, index) in competition" :key="item">
     <div class="col-md-3 offset-md-2">
       {{ item.event.name }}
+    </div>
+     <div class="col-md-2">
+      {{ item.gender && item.gender.text }}
     </div>
      <div class="col-md-1">
       {{ item.ageFrom }}
     </div>
      <div class="col-md-1">
       {{ item.ageTo }}
-    </div>
-     <div class="col-md-2">
-      {{ item.gender && item.gender.text }}
-    </div>
+    </div>    
     <div class="col-md-2 text-start" >
       <button type="button" class="btn btn-warning" @click="remove(index)">Eyða línu</button>
     </div>
@@ -85,27 +113,48 @@ export default {
       gender: undefined,
       competition: [],
       genders: [{
-        value: 1,
+        id: 1,
         text: 'Karlar'
       }, {
-        value: 2,
+        id: 2,
         text: 'Konur'
       }],
+      shake: false
     }
   },
+  computed: {
+    validCompetition () {
+      return this.competition.length > 0
+    },
+    validEvent () {
+      return this.event && this.event.id
+    },
+    validGender () {
+      return this.gender && this.gender.id
+    },
+    isValid() {
+      return this.validCompetition
+    },    
+  },
   methods: {
-    add() {      
-      this.competition.push({
-        event: this.event,
-        ageFrom: this.ageFrom,
-        ageTo: this.ageTo,
-        gender: this.gender
-      })
+    add() {
+      this.shake = false
 
-      this.event = undefined,
-      this.ageFrom = undefined,
-      this.ageTo = undefined,
-      this.gender = undefined
+      if (this.validEvent && this.validGender) {
+        this.competition.push({
+          event: this.event,
+          ageFrom: this.ageFrom,
+          ageTo: this.ageTo,
+          gender: this.gender
+        })
+
+        this.event = undefined,
+        this.ageFrom = undefined,
+        this.ageTo = undefined,
+        this.gender = undefined
+      } else {
+        this.shake = true
+      }
     },
     remove(index) {
       this.competition.splice(index, 1)
@@ -114,7 +163,13 @@ export default {
       this.$emit('back')
     },
     next() {
-      this.$emit('next', { competition: this.competition })
+      if (this.isValid) {
+        this.$emit('next', {
+          competition: this.competition
+        })
+      } else {
+        this.shake = true
+      }
     }    
   },
   created() {

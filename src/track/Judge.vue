@@ -6,7 +6,17 @@
  <div class="row">
     <div class="col-md-8 offset-md-2">
       <div class="form-floating">
-        <select class="form-select" id="judge" aria-label="judge" v-model="judge">
+        <select
+          class="form-select"
+           :class="{
+            'is-valid': validJudge,
+            'is-invalid': !validJudge && shake,
+            'shake': !validJudge && shake
+          }"
+          id="judge"
+          aria-label="judge"
+          v-model="judge"
+        >
           <option :value="undefined">Dómari</option>
           <option v-for="judge in judges" :key="judge.id" :value="judge">{{ judge.fullName }}</option>
         </select>
@@ -41,7 +51,16 @@ export default {
   data() {
     return {
       judge: undefined,      
-      judges: []
+      judges: [],
+      shake: false,
+    }
+  },
+  computed: {
+    validJudge () {
+      return this.judge && this.judge.id
+    },
+    isValid () {
+      return this.validJudge
     }
   },
   methods: {
@@ -49,13 +68,20 @@ export default {
       this.$emit('back')
     },
     next() {
-      this.$emit('next', {
-        judge: this.judge,
-      })
+      this.shake = false
+
+      if (this.isValid) {
+        this.$emit('next', {
+          judge: this.judge,
+        })
+      } else {
+        this.shake = true
+      }
     }
   },
   created() {
     this.judge = this.data.judge || undefined
+
     agent
       .get(this.FRI_API_URL + '/judges')
       .auth(this.FRI_API_TOKEN, { type: 'bearer' })

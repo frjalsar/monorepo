@@ -8,14 +8,36 @@
   <div class="row">
     <div class="col-md-4 offset-md-2">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="contactName" placeholder="Nafn" v-model="contactName">
+        <input
+          type="text"
+          class="form-control"
+          :class="{
+            'is-valid': validContactName,
+            'is-invalid': !validContactName && shake,
+            'shake': !validContactName && shake
+          }"
+          id="contactName"
+          placeholder="Nafn"
+          v-model="contactName"
+        />
         <label for="contactName">Nafn</label>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="contactEmail" placeholder="Netfang" v-model="contactEmail">
+        <input
+          type="email"
+          class="form-control"
+          :class="{
+            'is-valid': validContactEmail,
+            'is-invalid': !validContactEmail && shake,
+            'shake': !validContactEmail && shake
+          }"
+          id="contactEmail"
+          placeholder="Netfang"
+          v-model="contactEmail"
+        />
         <label for="contactEmail">Netfang</label>
       </div>
     </div>
@@ -24,7 +46,19 @@
   <div class="row">
     <div class="col-md-4 offset-md-2">
       <div class="form-floating mb-3">
-        <input type="tel" class="form-control" id="contactPhone" placeholder="Símanúmer" v-model="contactPhone">
+        <input
+          type="tel"
+          class="form-control"
+          :class="{
+            'is-valid': validContactPhone,
+            'is-invalid': !validContactPhone && shake,
+            'shake': !validContactPhone && shake
+          }"
+          id="contactPhone"
+          placeholder="Símanúmer"
+          v-model="contactPhone"
+          v-maska="'###-####'"
+        />
         <label for="contactPhone">Símanúmer</label>
       </div>
     </div>
@@ -45,7 +79,6 @@
 </template>
 
 <script>
-const apiUrl = import.meta.env.VITE_FRI_API_URL
 
 export default {
   name: 'TrackContact',
@@ -55,7 +88,24 @@ export default {
     return {
       contactName: undefined,
       contactEmail: undefined,
-      contactPhone: undefined
+      contactPhone: undefined,
+      shake: false,
+    }
+  },
+  computed: {
+    validContactName() {
+      return this.contactName && this.contactName.length > 3
+    },
+    validContactEmail () {
+      const emailRegex = /\w+@\w+\.\w{2,10}/
+      return this.contactEmail && this.contactEmail.match(emailRegex)
+    },
+    validContactPhone () {
+      const phoneRegex = /^\d{7}/
+      return this.contactPhone && this.contactPhone.replace('-', '').match(phoneRegex)
+    },
+    isValid () {
+      return this.validContactName && this.validContactEmail && this.validContactPhone
     }
   },
   methods: {
@@ -63,17 +113,23 @@ export default {
       this.$emit('back')
     },
     next() {
-      this.$emit('next', {
-        contactName: this.contactName,
-        contactEmail: this.contactEmail,
-        contactPhone: this.contactPhone
-      })
+      this.shake = false
+
+      if (this.isValid) {
+        this.$emit('next', {
+          contactName: this.contactName,
+          contactEmail: this.contactEmail,
+          contactPhone: this.contactPhone.replace('-', '')
+        })
+      } else {
+        this.shake = true
+      }
     }
   },
   created() {
-    this.contactName = this.data.contactName || []
-    this.contactEmail = this.data.contactEmail || []
-    this.contactPhone = this.data.contactPhone || []
+    this.contactName = this.data.contactName || undefined
+    this.contactEmail = this.data.contactEmail || undefined
+    this.contactPhone = this.data.contactPhone || undefined
   }
 };
 </script>

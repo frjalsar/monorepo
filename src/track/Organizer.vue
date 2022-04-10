@@ -6,14 +6,38 @@
  <div class="row">
     <div class="col-md-4 offset-md-2">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="organizerName" placeholder="Heiti ábyrgðaraðila" v-model="organizerName">
+        <input
+          type="text"
+          class="form-control"
+          :class="{
+            'is-valid': validOrganizerName,
+            'is-invalid': !validOrganizerName && shake,
+            'shake': !validOrganizerName && shake
+          }"
+          id="organizerName"
+          placeholder="Heiti ábyrgðaraðila"
+          v-model="organizerName"
+        />
         <label for="organizerName">Heiti ábyrgðaraðila</label>
       </div>
+      
     </div>
 
     <div class="col-md-4">
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="organizerKt" placeholder="Kennitala ábyrgðaraðila" v-model="organizerKt">
+        <input
+          type="text"
+          class="form-control"
+          :class="{
+            'is-valid': validOrganizerKt,
+            'is-invalid': !validOrganizerKt && shake,
+            'shake': !validOrganizerKt && shake
+          }"
+          id="organizerKt"
+          placeholder="Kennitala ábyrgðaraðila"
+          v-model="organizerKt"
+          v-maska="'######-####'"
+        />
         <label for="organizerKt">Kennitala ábyrgðaraðila</label>
       </div>
     </div>
@@ -35,7 +59,7 @@
 </template>
 
 <script>
-const apiUrl = import.meta.env.VITE_FRI_API_URL
+import { isValid as isValidKt } from 'kennitala-utility'
 
 export default {
   name: 'TrackOrganizer',
@@ -45,17 +69,35 @@ export default {
     return {
       organizerName: undefined,
       organizerKt: undefined,
+      shake: false,
     }
-  }, 
+  },
+  computed: {
+    validOrganizerName () {
+      return this.organizerName && this.organizerName.length > 3
+    },
+    validOrganizerKt () {
+      return this.organizerKt && isValidKt(this.organizerKt)
+    },
+    isValid () {
+      return this.validOrganizerName && this.validOrganizerKt
+    }
+  },
   methods: {
     back() {
       this.$emit('back')
     },
     next() {
-      this.$emit('next', {
-        organizerName: this.organizerName,
-        organizerKt: this.organizerKt
-      })
+      this.shake = false
+
+      if (this.isValid) {
+        this.$emit('next', {
+          organizerName: this.organizerName,
+          organizerKt: this.organizerKt.replace('-', '')
+        })      
+      } else {
+        this.shake = true
+      }
     },
   },
   created() {
