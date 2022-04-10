@@ -14,7 +14,7 @@
       <div class="col-lg-12 col-xl-10 mx-auto">
         <component
           :is="current.component"
-          :data="data"
+          :application="application"
           @back="back"
           @next="next"
         />
@@ -69,7 +69,7 @@ export default {
   },
   data () {
     return {
-      data: undefined,
+      application: undefined,
       type: undefined,
       step: 0,
       trackSteps: [
@@ -169,32 +169,32 @@ export default {
     }
   },
   created () {
-    this.data = JSON.parse(sessionStorage.getItem('FRI_UMSOKN'))
-    this.step = this.data ? this.data.step : 0
-    this.type = this.data ? this.data.type : undefined
+    this.application = JSON.parse(sessionStorage.getItem('FRI_UMSOKN'))
+    this.step = this.application ? this.application.step : 0
+    this.type = this.application ? this.application.type : undefined
   },
   methods: {
-    updateSession (newData) {
-      const oldData = JSON.parse(sessionStorage.getItem('FRI_UMSOKN'))
-      this.data = {
-        ...oldData,
-        ...newData,
+    updateSession (newApplication) {
+      const oldApplication = JSON.parse(sessionStorage.getItem('FRI_UMSOKN'))
+      this.application = {
+        ...oldApplication,
+        ...newApplication,
         step: this.step
       }
 
-      sessionStorage.setItem('FRI_UMSOKN', JSON.stringify(this.data))
+      sessionStorage.setItem('FRI_UMSOKN', JSON.stringify(this.application))
     },
     back () {
       this.step = this.step - 1
       this.updateSession({})
     },
-    next (data) {
-      if (data.type) {
-        this.type = data.type
-        window.location.replace('#/?tegund=' + data.type)
+    next (application) {
+      if (application.type) {
+        this.type = application.type
+        window.location.replace('#/?tegund=' + application.type)
       }
       this.step = this.step + 1
-      this.updateSession(data)
+      this.updateSession(application)
     }
   }
 }
