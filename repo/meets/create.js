@@ -17,7 +17,7 @@ function makeCreateMeet (makeInsertMeet, makeInsertCompetition, db) {
         eventId: c.eventId,
         ageFrom: c.ageFrom,
         ageTo: c.ageTo,
-        gender: c.gender && c.gender.value
+        gender: c.gender
       }))
 
       await insertCompetition(competitionList, user)
