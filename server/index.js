@@ -20,6 +20,7 @@ const makeRegions = require('../composition/regions')
 const makeUsers = require('../composition/users')
 const makeVenues = require('../composition/venues')
 const makeThor = require('../composition/thor')
+const makeSendMail = require('./sendmail')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -44,6 +45,8 @@ const sqlPool = new sql.ConnectionPool({
   }
 })
 
+const sendMail = makeSendMail(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN, isProduction)
+
 const sqlConnection = sqlPool.connect()
 
 const app = createApp(isProduction)
@@ -57,7 +60,7 @@ app.use('/events', makeEvents(pgPool))
 app.use('/eventtypes', makeEventTypes(pgPool))
 app.use('/judges', makeJudges(pgPool))
 app.use('/judgetypes', makeJudgeTypes(pgPool))
-app.use('/meets', makeMeets(pgPool))
+app.use('/meets', makeMeets(pgPool, sendMail))
 app.use('/membership', makeMembership(pgPool))
 app.use('/regions', makeRegions(pgPool))
 app.use('/users', makeUsers(pgPool, redisClient))

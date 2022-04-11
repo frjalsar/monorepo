@@ -1,4 +1,4 @@
-function makeCreateMeet (makeInsertMeet, makeInsertCompetition, db) {
+function makeCreateMeet (makeInsertMeet, makeInsertCompetition, db, sendMail) {
   return async function makeCreateMeet (meet, user) {
     const client = await db.connect()
 
@@ -21,6 +21,11 @@ function makeCreateMeet (makeInsertMeet, makeInsertCompetition, db) {
       }))
 
       await insertCompetition(competitionList, user)
+
+      await sendMail(
+        'Mót skráð: ' + meet.name,
+        'Sjá: <a href="https://admin.fri.is/#/umsoknir">https://admin.fri.is/#/umsoknir</a>'
+      )
 
       await client.query('COMMIT')
       return { meetId }

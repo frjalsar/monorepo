@@ -1,4 +1,4 @@
-function makeMeets (db) {
+function makeMeets (db, sendMail) {
   const makeSelectMeets = require('../repo/meets/select')
   const makeUpdateMeet = require('../repo/meets/update')
   const makeInsertMeet = require('../repo/meets/insert')
@@ -8,7 +8,7 @@ function makeMeets (db) {
 
   const selectMeets = makeSelectMeets(db)  
   const updateMeet = makeUpdateMeet(db)
-  const createMeet = makeCreateMeet(makeInsertMeet, makeInsertCompetition, db)
+  const createMeet = makeCreateMeet(makeInsertMeet, makeInsertCompetition, db, sendMail) 
 
   return makeMeetsRouter(selectMeets, updateMeet, createMeet)
 }
