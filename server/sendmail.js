@@ -11,7 +11,7 @@ function makeSendMail (apiKey, domain) {
   return function sendMail(subject, html) {
     const data =  {
       from: 'skraningarnefnd@fri.is',
-      to: isProduction ? 'iris@fr.is;bergurhallgrims@gmail.com',
+      to: 'iris@fr.is;bergurhallgrims@gmail.com',
       subject,
       html,
     }
