@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="lead mb-4">
-      Næst þarf að skrá mótssjóra. Mótsstjóri er einstaklingur sem sér um framkvæmd mótsins og bæði keppendur og FRÍ geta leitað til sé eitthvað óljóst eða þarfnast úrlausnar.
+      Næst þarf að skrá {{ isRun ? 'hlaupstjóra' : 'mótsstjóra' }}. {{ isRun ? 'Hlaupstjóri' : 'Mótsstjóri' }} er einstaklingur sem sér um framkvæmd hlaupsins og bæði keppendur og FRÍ geta leitað til sé eitthvað óljóst eða þarfnast úrlausnar.
     </p>
 
     <div class="row">
@@ -87,7 +87,7 @@
 <script>
 
 export default {
-  name: 'TrackContact',
+  name: 'ContactStep',
   props: {
     application: {
       type: Object,
@@ -104,6 +104,9 @@ export default {
     }
   },
   computed: {
+    isRun () {
+      return this.application.type === 'hlaup'
+    },
     validContactName () {
       return this.contactName && this.contactName.length > 3
     },

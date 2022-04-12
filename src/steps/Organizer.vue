@@ -67,7 +67,7 @@
 import { isValid as isValidKt } from 'kennitala-utility'
 
 export default {
-  name: 'TrackOrganizer',
+  name: 'OrganizerStep',
   props: {
     application: {
       type: Object,

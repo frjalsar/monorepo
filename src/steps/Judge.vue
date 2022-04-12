@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="lead mb-4">
-      Dómari sem er viðurkenndur af FRÍ er nauðsynlegur til að fá árangurinn staðfestan. Dómari gætir þess að framkvæmd mótsins hafi verið í samræmi við reglur FRÍ og World Athletics og leysir úr ágreiningsatriðum sem upp koma á mótinu.
+      Dómari sem er viðurkenndur af FRÍ er nauðsynlegur til að fá árangurinn staðfestan. Dómari gætir þess að framkvæmd mótsins hafi verið í samræmi við reglur FRÍ og World Athletics og leysir úr ágreiningsatriðum sem upp koma í {{ isRun ? 'hlaupinu' : 'mótinu' }}.
     </p>
     <div class="row">
       <div class="col-md-8 offset-md-2">
@@ -74,6 +74,9 @@ export default {
     }
   },
   computed: {
+    isRun () {
+      return this.application.type === 'hlaup'
+    },
     validJudge () {
       return this.selectedJudge && this.selectedJudge.id
     },

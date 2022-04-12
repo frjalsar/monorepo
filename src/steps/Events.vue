@@ -20,6 +20,10 @@
             :id="'event-' + event.id"
             v-model="selectedEvents"
             class="form-check-input"
+            :class="{
+              'is-invalid': !validSelectedEvents && shake,
+              'shake': !validSelectedEvents && shake
+            }"
             type="checkbox"
             :value="event"
           >
@@ -34,10 +38,17 @@
     </div>
 
     <div class="row">
-      <div class="col">
+      <div class="col mx">
         <button
           type="button"
-          class="btn btn-primary btn-lg py-3 my-3"
+          class="btn btn-secondary btn-lg py-3 my-3"
+          @click="back"
+        >
+          Til baka
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-lg py-3 my-3 mx-3"
           @click="next"
         >
           Áfram
@@ -52,7 +63,7 @@ import groupBy from 'lodash.groupby'
 import agent from 'superagent'
 
 export default {
-  name: 'RunEvents',
+  name: 'TrackEvents',
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
   props: {
     application: {
@@ -60,21 +71,33 @@ export default {
       required: true
     }
   },
-  emits: ['next'],
+  emits: ['back', 'next'],
   data () {
     return {
       events: [],
       eventTypes: [],
-      selectedEvents: []
+      selectedEvents: [],
+      shake: false
     }
   },
   computed: {
+    isRun () {
+      return this.application.type === 'hlaup'
+    },
+    validSelectedEvents () {
+      return this.selectedEvents.length > 0
+    },
+    isValid () {
+      return this.validSelectedEvents
+    },
     eventsByType () {
       const eventsByType = groupBy(this.events, 'typeId')
       return eventsByType
     }
   },
   created () {
+    this.selectedEvents = this.application.selectedEvents || []
+
     agent
       .get(this.FRI_API_URL + '/events')
       .auth(this.FRI_API_TOKEN, { type: 'bearer' })
@@ -90,15 +113,28 @@ export default {
           const hasRoad = type.name.includes('Götu')
           const hasOff = type.name.includes('Utan')
 
-          return (hasRoad || hasOff)
+          if (this.isRun) {
+            return hasRoad || hasOff
+          }
+
+          return !(hasRoad || hasOff)
         })
       })
   },
   methods: {
+    back () {
+      this.$emit('back')
+    },
     next () {
-      this.$emit('next', {
-        selectedEvents: this.selectedEvents
-      })
+      this.shake = false
+
+      if (this.isValid) {
+        this.$emit('next', {
+          selectedEvents: this.selectedEvents
+        })
+      } else {
+        this.shake = true
+      }
     }
   }
 }

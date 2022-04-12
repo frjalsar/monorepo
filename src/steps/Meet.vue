@@ -1,11 +1,16 @@
 <template>
   <div>
     <p class="lead mb-4">
-      Þá eru það almennar upplýsingar um mótið sjálft.
+      Þá eru það almennar upplýsingar um {{ isRun ? 'hlaupið' : 'mótið' }} sjálft.
     </p>
 
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+      <div
+        :class="{
+          'col-md-4 offset-md-2': isRun,
+          'col-md-8 offset-md-2': !isRun
+        }"
+      >
         <div class="form-floating mb-3">
           <input
             id="meetName"
@@ -19,26 +24,37 @@
             }"
             placeholder="Heiti móts"
           >
-          <label for="meetName">Heiti móts</label>
+          <label for="meetName">Heiti {{ isRun ? 'hlaups' : 'móts' }}</label>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-4 offset-md-2">
+      <div
+        :class="{
+          'col-md-4': isRun,
+          'col-md-4 offset-md-2': !isRun
+        }"
+      >
         <div class="form-floating mb-3">
           <input
             id="meetLocation"
             v-model="meetLocation"
             type="text"
             class="form-control"
+            :class="{
+              'is-valid': validMeetLocation,
+              'is-invalid': !validMeetLocation && shake && isRun,
+              'shake': !validMeetLocation && shake && isRun
+            }"
             placeholder="Staðsetning"
           >
-          <label for="meetLocation">Staðsetning</label>
+          <label for="meetLocation">Staðsetning {{ isRun ? ' / ræst frá' : '' }}</label>
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div
+        v-if="!isRun"
+        class="col-md-4"
+      >
         <div class="form-floating">
           <select
             id="meetVenues"
@@ -78,8 +94,8 @@
             class="form-control"
             :class="{
               'is-valid': validMeetStart,
-              'is-invalid': !validMeetStart && shake,
-              'shake': !validMeetStart && shake
+              'is-invalid': !validMeetStart && shake && !isRun,
+              'shake': !validMeetStart && shake && !isRun
             }"
             placeholder="Hefst"
           >
@@ -153,21 +169,31 @@ export default {
     }
   },
   computed: {
+    isRun () {
+      return this.application.type === 'hlaup'
+    },
     validMeetName () {
       return this.meetName && this.meetName.length > 3
+    },
+    validMeetLocation () {
+      return this.meetLocation && this.meetLocation.length > 3
     },
     validMeetVenue () {
       return this.meetVenue && this.meetVenue.id
     },
     validMeetStart () {
-      const d = this.toDate(this.meetStart)
+      const d = this.strToDate(this.meetStart)
       return !isNaN(d)
     },
     validMeetEnd () {
-      const d = this.toDate(this.meetEnd)
+      const d = this.strToDate(this.meetEnd)
       return !isNaN(d)
     },
     isValid () {
+      if (this.isRun) {
+        return this.validMeetName && this.validMeetLocation && this.validMeetStart
+      }
+
       return this.validMeetName && this.validMeetVenue && this.validMeetStart && this.validMeetEnd
     }
   },
@@ -175,6 +201,7 @@ export default {
     this.meetName = this.application.meetName || undefined
     this.meetLocation = this.application.meetLocation || undefined
     this.meetVenue = this.application.meetVenue || undefined
+    this.meetStart = this.dateToStr(this.application.meetStart) || undefined
 
     agent
       .get(this.FRI_API_URL + '/venues')
@@ -195,16 +222,16 @@ export default {
           meetName: this.meetName,
           meetLocation: this.meetLocation,
           meetVenue: this.meetVenue,
-          meetStart: this.toDate(this.meetStart),
-          meetEnd: this.toDate(this.meetEnd)
+          meetStart: this.strToDate(this.meetStart),
+          meetEnd: this.strToDate(this.meetEnd)
         })
       } else {
         this.shake = true
       }
     },
-    toDate (date) {
-      if (date) {
-        const meetStartParts = date.split(' ')
+    strToDate (str) {
+      if (str) {
+        const meetStartParts = str.split(' ')
         if (meetStartParts.length === 3) {
           const date = meetStartParts[0].split('.')
           const time = meetStartParts[2].split(':')
@@ -224,6 +251,23 @@ export default {
       }
 
       return undefined
+    },
+    twoDigit (d) {
+      if (d < 10) {
+        return '0' + d
+      }
+
+      return d
+    },
+    dateToStr (date) {
+      const d = new Date(date)
+      const dd = this.twoDigit(d.getDate())
+      const mm = this.twoDigit(d.getMonth() + 1)
+      const yyyy = this.twoDigit(d.getFullYear())
+      const hh = this.twoDigit(d.getHours())
+      const mi = this.twoDigit(d.getMinutes())
+
+      return dd + '.' + mm + '.' + yyyy + 'kl. ' + hh + ':' + mi
     }
   }
 }

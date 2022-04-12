@@ -12,7 +12,7 @@
         {{ application.organizerKt }}
       </div>
       <div class="col-md-4">
-        <h2>Hlaupstjóri</h2>
+        <h2>{{ isRun ? 'Hlaupstjóri' : 'Mótsstjóri' }}</h2>
         {{ application.contactName }}<br>
         {{ application.contactEmail }}<br>
         {{ application.contactPhone }}
@@ -21,8 +21,9 @@
 
     <div class="row mb-3">
       <div class="col-md-4 offset-md-2">
-        <h2>Hlaup</h2>
+        <h2>{{ isRun ? 'Hlaup' : 'Mót' }}</h2>
         {{ application.meetName }}<br>
+        {{ application.meetVenue && application.meetVenue.fullName }}<br>
         {{ application.meetLocation }}
       </div>
       <div class="col-md-4">
@@ -33,31 +34,33 @@
 
     <div class="row mb-3">
       <div class="col-md-4 offset-md-2">
-        <h2>Greinar</h2>
+        <h2>Keppni</h2>
         <div
-          v-for="event in application.selectedEvents"
-          :key="event.id"
+          v-for="item in application.competition"
+          :key="item"
         >
-          {{ event.name }}
+          {{ item.event && item.event.name }}, {{ item.ageFrom }} - {{ item.ageTo }} ára, {{ item.gender && item.gender.text }}
         </div>
       </div>
     </div>
 
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-      <button
-        type="button"
-        class="btn btn-outline-secondary btn-lg py-3 px-4 my-3"
-        @click="back"
-      >
-        Til baka
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary btn-lg py-3 px-4 my-3"
-        @click="next"
-      >
-        Staðfesta
-      </button>
+    <div class="row">
+      <div class="col mx">
+        <button
+          type="button"
+          class="btn btn-secondary btn-lg py-3 my-3"
+          @click="back"
+        >
+          Til baka
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-lg py-3 my-3 mx-3"
+          @click="next"
+        >
+          Staðfesta
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -65,7 +68,7 @@
 <script>
 import agent from 'superagent'
 export default {
-  name: 'RunConfirm',
+  name: 'TrackConfirm',
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
   props: {
     application: {
@@ -73,8 +76,16 @@ export default {
       required: true
     }
   },
-  emits: ['next'],
+  emits: ['back', 'next'],
+  computed: {
+    isRun () {
+      return this.application.type === 'hlaup'
+    }
+  },
   methods: {
+    back () {
+      this.$emit('back')
+    },
     next () {
       agent
         .post(this.FRI_API_URL + '/meets')
@@ -86,14 +97,17 @@ export default {
           contactEmail: this.application.contactEmail,
           contactPhone: this.application.contactPhone,
           location: this.application.meetLocation,
-          venueId: undefined,
+          venueId: this.application.meetVenue ? this.application.meetVenue.id : undefined,
           judgeId: this.application.judge ? this.application.judge.id : undefined,
           startDate: this.application.meetStart,
-          endDate: undefined,
-          competition: this.application.selectedEvents.map(event => ({
-            eventId: event.id
+          endDate: this.application.meetEnd,
+          competition: this.application.competition.map(item => ({
+            eventId: item.event ? item.event.id : undefined,
+            ageFrom: item.ageFrom,
+            ageTo: item.ageTo,
+            gender: item.gender ? item.gender.id : undefined
           })),
-          base64Attachment: undefined
+          base64Attachment: this.application.base64Attachment
         })
         .auth(this.FRI_API_TOKEN, { type: 'bearer' })
         .then(() => {

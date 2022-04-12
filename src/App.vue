@@ -24,44 +24,29 @@
 </template>
 
 <script>
-import Intro from './shared/Intro.vue'
-import TrackOrganizer from './track/Organizer.vue'
-import TrackContact from './track/Contact.vue'
-import TrackMeet from './track/Meet.vue'
-import TrackJudge from './track/Judge.vue'
-import TrackEvents from './track/Events.vue'
-import TrackCompetition from './track/Competition.vue'
-import TrackAttachment from './track/Attachment.vue'
-import TrackConfirm from './track/Confirm.vue'
-import TrackThanks from './track/Thanks.vue'
-
-import RunOrganizer from './run/Organizer.vue'
-import RunContact from './run/Contact.vue'
-import RunMeet from './run/Meet.vue'
-import RunJudge from './run/Judge.vue'
-import RunEvents from './run/Events.vue'
-import RunConfirm from './run/Confirm.vue'
-import RunThanks from './run/Thanks.vue'
+import IntroStep from './steps/Intro.vue'
+import OrganizerStep from './steps/Organizer.vue'
+import ContactStep from './steps/Contact.vue'
+import MeetStep from './steps/Meet.vue'
+import JudgeStep from './steps/Judge.vue'
+import EventsStep from './steps/Events.vue'
+import CompetitionStep from './steps/Competition.vue'
+import AttachmentStep from './steps/Attachment.vue'
+import ConfirmStep from './steps/Confirm.vue'
+import ThanksStep from './steps/Thanks.vue'
 
 export default {
   components: {
-    Intro,
-    TrackOrganizer,
-    TrackContact,
-    TrackMeet,
-    TrackJudge,
-    TrackEvents,
-    TrackCompetition,
-    TrackAttachment,
-    TrackConfirm,
-    TrackThanks,
-    RunOrganizer,
-    RunContact,
-    RunMeet,
-    RunJudge,
-    RunEvents,
-    RunConfirm,
-    RunThanks
+    IntroStep,
+    OrganizerStep,
+    ContactStep,
+    MeetStep,
+    JudgeStep,
+    EventsStep,
+    CompetitionStep,
+    AttachmentStep,
+    ConfirmStep,
+    ThanksStep
   },
   provide: {
     FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
@@ -72,100 +57,57 @@ export default {
       application: undefined,
       type: undefined,
       step: 0,
-      trackSteps: [
+      steps: [
         {
           title: 'Umsókn vegna mótahalds',
-          component: 'Intro'
+          component: 'IntroStep'
         },
         {
           title: 'Ábyrgðaraðili',
-          component: 'TrackOrganizer'
-        },
-        {
-          title: 'Mótsstjóri',
-          component: 'TrackContact'
-        },
-        {
-          title: 'Mótið',
-          component: 'TrackMeet'
-        },
-        {
-          title: 'Dómari',
-          component: 'TrackJudge'
-        },
-        {
-          title: 'Greinar',
-          component: 'TrackEvents'
-        },
-        {
-          title: 'Aldursflokkar og kyn',
-          component: 'TrackCompetition'
-        },
-        {
-          title: 'Boðsbréf',
-          component: 'TrackAttachment'
-        },
-        {
-          title: 'Staðfesting',
-          component: 'TrackConfirm'
-        },
-        {
-          title: 'Takk',
-          component: 'TrackThanks'
-        }
-      ],
-      runSteps: [
-        {
-          title: 'Umsókn vegna mótahalds',
-          component: 'Intro'
-        },
-        {
-          title: 'Ábyrgðaraðili',
-          component: 'RunOrganizer'
+          component: 'OrganizerStep'
         },
         {
           title: 'Hlaupstjóri',
-          component: 'RunContact'
+          component: 'ContactStep'
         },
         {
           title: 'Hlaupið',
-          component: 'RunMeet'
+          component: 'MeetStep'
         },
         {
           title: 'Dómari',
-          component: 'RunJudge'
+          component: 'JudgeStep'
         },
         {
           title: 'Greinar',
-          component: 'RunEvents'
+          component: 'EventsStep'
+        },
+        {
+          title: 'Aldursflokkar og kyn',
+          component: 'CompetitionStep'
         },
         {
           title: 'Boðsbréf',
-          component: 'TrackAttachment'
+          component: 'AttachmentStep'
         },
         {
           title: 'Staðfesting',
-          component: 'RunConfirm'
+          component: 'ConfirmStep'
         },
         {
           title: 'Takk',
-          component: 'RunThanks'
+          component: 'ThanksStep'
         }
       ]
     }
   },
   computed: {
     current () {
-      if (this.type === 'mot') {
-        return this.trackSteps[this.step]
-      } else if (this.type === 'hlaup') {
-        return this.runSteps[this.step]
-      } else {
-        return {
-          title: 'Umsókn vegna mótahalds',
-          component: 'Intro'
-        }
+      if (this.step < 0 || this.step > this.steps.length) {
+        return this.steps[0]
       }
+
+      return this.steps[this.step]
     }
   },
   created () {

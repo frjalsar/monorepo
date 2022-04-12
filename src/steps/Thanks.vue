@@ -9,10 +9,7 @@
 
 <script>
 export default {
-  name: 'TrackThanks',
-  created () {
-    sessionStorage.removeItem('FRI_UMSOKN')
-  }
+  name: 'TrackThanks'
 }
 </script>
 

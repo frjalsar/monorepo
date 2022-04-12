@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="lead mb-4">
-      Í boðsbréfi koma fram ítarlegar upplýsingar um mótið fyrir keppendur t.d. upplýsingar um skráningar, þáttökugjöld, nafnakall og verðlaun.
+      Í boðsbréfi koma fram ítarlegar upplýsingar um {{ isRun ? 'hlaupið' : 'mótið' }} fyrir keppendur t.d. upplýsingar um skráningar, þáttökugjöld, nafnakall og verðlaun.
     </p>
     <div class="row">
       <div class="col-md-8 offset-md-2">
@@ -47,6 +47,11 @@ export default {
   data () {
     return {
       base64Attachment: undefined
+    }
+  },
+  computed: {
+    isRun () {
+      return this.application.type === 'hlaup'
     }
   },
   methods: {
