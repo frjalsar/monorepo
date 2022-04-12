@@ -94,8 +94,8 @@
             class="form-control"
             :class="{
               'is-valid': validMeetStart,
-              'is-invalid': !validMeetStart && shake && !isRun,
-              'shake': !validMeetStart && shake && !isRun
+              'is-invalid': !validMeetStart && shake,
+              'shake': !validMeetStart && shake,
             }"
             placeholder="Hefst"
           >
@@ -113,8 +113,8 @@
             class="form-control"
             :class="{
               'is-valid': validMeetEnd,
-              'is-invalid': !validMeetEnd && shake,
-              'shake': !validMeetEnd && shake
+              'is-invalid': !validMeetEnd && shake && !isRun,
+              'shake': !validMeetEnd && shake && !isRun,
             }"
             placeholder="Lýkur"
           >
