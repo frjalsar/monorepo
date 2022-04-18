@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="lead mb-4">
-      Veldu þær greinar sem verða á mótinu.
+      Veldu þær greinar sem verða {{ isRun ? 'í hlaupinu' : 'á mótinu' }}.
     </p>
     <div class="row">
       <div
@@ -80,7 +80,7 @@ export default {
       shake: false
     }
   },
-  computed: {
+  computed: {    
     isRun () {
       return this.application.type === 'hlaup'
     },

@@ -1,12 +1,13 @@
 <template>
   <main class="container">
-    <div class="py-5 my-sm-5 text-center">
+    <div class="py-4 my-sm-5 text-center">
       <img
         class="d-block mx-auto mb-4"
-        src="./assets/logo.png"
+        
+        src="https://fri.is/wp-content/uploads/2022/04/fri-logo-med-texta.svg"
         alt="FRI"
-        width="100"
-        height="90"
+        width="256"
+        height="120"
       >
       <h1 class="display-5 fw-bold mb-4">
         {{ current.title }}

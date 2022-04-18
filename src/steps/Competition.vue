@@ -207,7 +207,7 @@ export default {
       if (this.validEvent && this.validGender) {
         this.competition.push({
           event: this.selectedEvent,
-          selectedGender: this.gender,
+          gender: this.selectedGender,
           ageFrom: this.ageFrom,
           ageTo: this.ageTo
         })

@@ -202,6 +202,7 @@ export default {
     this.meetLocation = this.application.meetLocation || undefined
     this.meetVenue = this.application.meetVenue || undefined
     this.meetStart = this.dateToStr(this.application.meetStart) || undefined
+    this.meetEnd = this.dateToStr(this.application.meetEnd) || undefined
 
     agent
       .get(this.FRI_API_URL + '/venues')
