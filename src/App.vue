@@ -34,6 +34,9 @@
       <li class="nav-item">
         <router-link to="/mannvirki" class="nav-link link-dark text-decoration-none" active-class="active">Mannvirki</router-link>
       </li>
+       <li class="nav-item">
+        <router-link to="/ahold" class="nav-link link-dark text-decoration-none" active-class="active">Áhöld</router-link>
+      </li>
     </ul>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">

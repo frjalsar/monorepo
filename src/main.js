@@ -35,6 +35,10 @@ const router = createRouter({
       component: () => import('./venues/List.vue')
     },
     {
+      path: '/ahold',
+      component: () => import('./equipment/List.vue')
+    },
+    {
       path: '/greinar',
       component: () => import('./events/List.vue')
     },
