@@ -84,7 +84,7 @@
         >
       </div>
 
-      <div class="col-md-3 text-start">
+      <div class="col-md-3 offset-md-1 text-start">
         <button
           type="button"
           class="btn btn-primary add"
@@ -103,7 +103,6 @@
           Skrá allt
         </button>
       </div>
-      <div class="col-md-2 text-start" />
     </div>
 
     <div
@@ -122,6 +121,9 @@
       </div>
       <div class="col-md-1">
         {{ item.ageTo }}
+      </div>
+      <div class="col-md-1">
+        {{ item.equipment?.value }} {{ item.equipment?.unit}}
       </div>
       <div class="col-md-2 text-start">
         <button
@@ -156,6 +158,8 @@
 </template>
 
 <script>
+import agent from 'superagent'
+
 export default {
   name: 'TrackConfirm',
   inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
@@ -180,6 +184,7 @@ export default {
         id: 2,
         text: 'Konur'
       }],
+      equipment: [],
       shake: false
     }
   },
@@ -201,6 +206,24 @@ export default {
     this.competition = this.application.competition || []
   },
   methods: {
+    getEquipment (event, gender, age) {
+      const foundEquipment = this.equipment.filter(eq => {
+          const correctEvent = eq.eventId === event.id
+          const correctGender = eq.gender === gender.id
+          let correctAge = true
+          if (age) {
+            correctAge = eq.age <= this.ageTo
+          }
+
+          return correctEvent && correctGender && correctAge
+        })
+
+      if (foundEquipment.length) {
+        return foundEquipment[foundEquipment.length -1]
+      }
+
+      return undefined
+    },
     add () {
       this.shake = false
 
@@ -209,7 +232,8 @@ export default {
           event: this.selectedEvent,
           gender: this.selectedGender,
           ageFrom: this.ageFrom,
-          ageTo: this.ageTo
+          ageTo: this.ageTo,
+          equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
         })
 
         this.selectedEvent = undefined
@@ -225,7 +249,8 @@ export default {
         this.genders.forEach(gender => {
           this.competition.push({
             event,
-            gender
+            gender,
+            equipment: this.getEquipment(event, gender)
           })
         })
       })
@@ -245,7 +270,15 @@ export default {
         this.shake = true
       }
     }
-  }
+  },
+  created () {
+    agent
+      .get(this.FRI_API_URL + '/equipment')
+      .auth(this.FRI_API_TOKEN, { type: 'bearer' })
+      .then(res => {
+        this.equipment = res.body
+      })
+  },
 }
 </script>
 
