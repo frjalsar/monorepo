@@ -84,7 +84,7 @@
         >
       </div>
 
-      <div class="col-md-3 offset-md-1 text-start">
+      <div class="col-md-3 text-start">
         <button
           type="button"
           class="btn btn-primary add"
@@ -103,6 +103,7 @@
           Skrá allt
         </button>
       </div>
+      <div class="col-md-1 text-start" />
     </div>
 
     <div
@@ -112,6 +113,9 @@
     >
       <div class="col-md-3 offset-md-1">
         {{ item.event.name }}
+        <small v-if="item.equipment" style="margin-left: .5rem;">
+          {{ item.equipment?.value }} {{ item.equipment?.unit}}
+        </small>
       </div>
       <div class="col-md-2">
         {{ item.gender && item.gender.text }}
@@ -121,9 +125,6 @@
       </div>
       <div class="col-md-1">
         {{ item.ageTo }}
-      </div>
-      <div class="col-md-1">
-        {{ item.equipment?.value }} {{ item.equipment?.unit}}
       </div>
       <div class="col-md-2 text-start">
         <button
