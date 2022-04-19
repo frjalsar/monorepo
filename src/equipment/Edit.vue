@@ -10,6 +10,11 @@
     </div>
 
     <div class="col-md-2">
+      <label for="age" class="form-label">Aldur</label>
+      <input type="number" class="form-control" id="age" v-model="currentItem.age" :disabled="busy">
+    </div>
+
+    <div class="col-md-2">
       <label for="gender" class="form-label">Kyn</label>
       <select class="form-select" v-model="currentItem.gender" :disabled="busy">
         <option :value="undefined"></option>
@@ -17,14 +22,9 @@
       </select>
     </div>
 
-    <div class="col-md-2">
-      <label for="age" class="form-label">Aldur</label>
-      <input type="number" class="form-control" id="age" v-model="currentItem.age" :disabled="busy">
-    </div>
-
      <div class="col-md-2">
       <label for="value" class="form-label">Gildi</label>
-      <input type="number" class="form-control" id="value" v-model="currentItem.value" :disabled="busy">
+      <input type="text" class="form-control" id="value" v-model="currentItem.value" :disabled="busy">
     </div>
 
     <div class="col-md-2">

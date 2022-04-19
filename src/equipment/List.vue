@@ -57,13 +57,13 @@ export default {
           display: 'xs'
         },
         {
-          field: 'genderName',
-          label: 'Kyn',
+          field: 'age',
+          label: 'Aldur',
           display: 'md'
         },
         {
-          field: 'age',
-          label: 'Aldur',
+          field: 'genderName',
+          label: 'Kyn',
           display: 'md'
         },
         {
@@ -98,7 +98,12 @@ export default {
       .get(this.FRI_API_URL + '/events')
       .withCredentials()
       .then(res => {
-        this.events = res.body.filter(event => event.typeId === 9) // Todo: StrId
+        this.events = res.body.filter(event => {
+          const isThrow = event.typeId === 9 // Todo: StrId
+          const isHurdles = event.typeId === 6
+
+          return isThrow || isHurdles
+        })
       })   
   }
 }
