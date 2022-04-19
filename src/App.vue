@@ -4,7 +4,7 @@
       <img
         class="d-block mx-auto mb-4"
         
-        src="https://fri.is/wp-content/uploads/2022/04/fri-logo-med-texta.svg"
+        src="./assets/fri-logo-med-texta.svg"
         alt="FRI"
         width="256"
         height="120"
