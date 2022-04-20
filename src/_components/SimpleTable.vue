@@ -28,7 +28,7 @@
         </td>
       </tr>
       <tr        
-        v-for="item in data"
+        v-for="item in filteredData"
         :key="item.id"
         @click="$emit('click', item)"
       >
@@ -62,8 +62,8 @@ export default {
       default: () => []
     },
     filter: {
-      type: String | Number,
-      default: undefined
+      type: Boolean,
+      default: false,
     },
     busy: {
       type: Boolean,
@@ -88,22 +88,21 @@ export default {
       return []
     },
     filteredData () {
+      if (!this.filter) {
+        return this.data
+      }
+
       return this.data.filter(item => {
-        return this.definition.reduce((acc, def) => {
-          const value = item[def.field]
-          const valueType = typeof value
-
-          if (valueType === 'string') {
-            return acc || value.toUpperCase().includes(this.query.toUpperCase())
-          }
-
-          if (valueType === 'number') {
-            return acc || Number(value).toString().includes(this.query)
-          }
-
-          return acc
-        }, false)
+        const filters = Object.keys(this.filter)
+        return filters.every(key => this.filter[key] === item[key]        )
       })
+    }
+  },
+  methods: {
+    uniqueValues(header) {
+      return this.data
+        .map(obj => obj[header])
+        .filter((val, index, arr) => arr.indexOf(val) === index) // unique list
     }
   }
 }
@@ -114,5 +113,16 @@ tr:hover td {
   cursor: pointer;
   background-color: #fa5c34;
   color: #fff;
+}
+
+.form-select {
+  border: none;
+  font-weight: bold;
+  padding: 0;  
+}
+
+.form-select:focus {
+  outline: none;
+  box-shadow: none;
 }
 </style>
