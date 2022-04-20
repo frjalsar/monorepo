@@ -135,7 +135,6 @@ export default {
       .get(this.FRI_API_URL + '/venues')
       .withCredentials()
       .then(res => {
-        console.log('res')
         this.venues = res.body
       })
   }
