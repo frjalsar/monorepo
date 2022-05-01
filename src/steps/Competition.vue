@@ -204,9 +204,13 @@ export default {
     },
     validEvent () {
       return this.selectedEvent && this.selectedEvent.id
+      console.log(valid)
+      return valid
     },
     validGender () {
-      return this.selectedGender && this.selectedGender.id
+      const valid = this.selectedGender && this.selectedGender.id
+      console.log(valid)
+      return valid
     },
     isValid () {
       return this.validCompetition
@@ -244,38 +248,45 @@ export default {
     add () {
       this.shake = false
 
-      if (this.selectedGender.id === -1 && this.validEvent) {
-        this.competition.push({
-          event: this.selectedEvent,
-          gender: this.genders[0],
-          ageFrom: this.ageFrom,
-          ageTo: this.ageTo,
-          equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
-        })
+      if (this.validGender && this.validEvent) {
+        if (this.selectedGender.id === -1) {
+          this.competition.push({
+            event: this.selectedEvent,
+            gender: this.genders[0],
+            ageFrom: this.ageFrom,
+            ageTo: this.ageTo,
+            equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
+          })
 
-        this.competition.push({
-          event: this.selectedEvent,
-          gender: this.genders[1],
-          ageFrom: this.ageFrom,
-          ageTo: this.ageTo,
-          equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
-        })
-      } else if (this.validEvent && this.validGender) {
-        this.competition.push({
-          event: this.selectedEvent,
-          gender: this.selectedGender,
-          ageFrom: this.ageFrom,
-          ageTo: this.ageTo,
-          equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
-        })
+          this.competition.push({
+            event: this.selectedEvent,
+            gender: this.genders[1],
+            ageFrom: this.ageFrom,
+            ageTo: this.ageTo,
+            equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
+          })
+
+          this.selectedEvent = undefined
+          this.selectedGender = undefined
+          this.ageFrom = undefined
+          this.ageTo = undefined
+        } else {
+          this.competition.push({
+            event: this.selectedEvent,
+            gender: this.selectedGender,
+            ageFrom: this.ageFrom,
+            ageTo: this.ageTo,
+            equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
+          })
+
+          this.selectedEvent = undefined
+          this.selectedGender = undefined
+          this.ageFrom = undefined
+          this.ageTo = undefined
+        }
       } else {
         this.shake = true
-      }
-
-      this.selectedEvent = undefined
-      this.selectedGender = undefined
-      this.ageFrom = undefined
-      this.ageTo = undefined
+      }      
     },
     addAll () {
       this.application.selectedEvents.forEach(event => {
