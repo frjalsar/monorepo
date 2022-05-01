@@ -208,7 +208,7 @@ export default {
 
     agent
       .get(this.FRI_API_URL + '/venues')
-      .auth(this.FRI_API_TOKEN, { type: 'bearer' })
+      .withCredentials()
       .then(res => {
         this.venues = res.body
       })

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const compression = require('compression')
 const bodyParser = require('body-parser')
@@ -6,6 +7,23 @@ const enforceHttps = require('express-sslify').HTTPS
 const app = express()
 
 const isProduction = process.env.NODE_ENV === 'production'
+
+app.use((_, res, next) => {
+  res.cookie(
+    'FRI_API',
+    process.env.FRI_API_TOKEN,
+    {
+      domain: '.fri.is',
+      secure: isProduction,
+      maxAge: 2147483647000,
+      httpOnly: true,
+      sameSite: true,
+      path: '/'
+    }
+  )
+
+  return next()
+})
 
 if (isProduction) {
   app.use(enforceHttps({

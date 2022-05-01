@@ -215,7 +215,7 @@ export default {
   created () {
     agent
       .get(this.FRI_API_URL + '/equipment')
-      .auth(this.FRI_API_TOKEN, { type: 'bearer' })
+      .withCredentials()
       .then(res => {
         this.equipment = res.body
       })
