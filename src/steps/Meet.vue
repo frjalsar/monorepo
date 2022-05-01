@@ -182,12 +182,14 @@ export default {
       return this.meetVenue && this.meetVenue.id
     },
     validMeetStart () {
-      const d = this.strToDate(this.meetStart)
-      return !isNaN(d)
+      const meetStart = this.strToDate(this.meetStart)
+      const today = new Date()
+      return meetStart >= today && !isNaN(meetStart)
     },
     validMeetEnd () {
-      const d = this.strToDate(this.meetEnd)
-      return !isNaN(d)
+      const meetStart = this.strToDate(this.meetStart)
+      const meetEnd = this.strToDate(this.meetEnd)      
+      return meetEnd >= meetStart && !isNaN(meetEnd)
     },
     isValid () {
       if (this.isRun) {

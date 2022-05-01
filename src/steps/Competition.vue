@@ -204,13 +204,9 @@ export default {
     },
     validEvent () {
       return this.selectedEvent && this.selectedEvent.id
-      console.log(valid)
-      return valid
     },
     validGender () {
-      const valid = this.selectedGender && this.selectedGender.id
-      console.log(valid)
-      return valid
+      return this.selectedGender && this.selectedGender.id
     },
     isValid () {
       return this.validCompetition
