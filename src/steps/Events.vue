@@ -80,7 +80,7 @@ export default {
       shake: false
     }
   },
-  computed: {    
+  computed: {
     isRun () {
       return this.application.type === 'hlaup'
     },

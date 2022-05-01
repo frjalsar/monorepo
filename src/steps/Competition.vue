@@ -113,8 +113,11 @@
     >
       <div class="col-md-3 offset-md-1">
         {{ item.event.name }}
-        <small v-if="item.equipment" style="margin-left: .5rem;">
-          {{ item.equipment?.value }} {{ item.equipment?.unit}}
+        <small
+          v-if="item.equipment"
+          style="margin-left: .5rem;"
+        >
+          {{ item.equipment?.value }} {{ item.equipment?.unit }}
         </small>
       </div>
       <div class="col-md-2">
@@ -184,6 +187,9 @@ export default {
       }, {
         id: 2,
         text: 'Konur'
+      }, {
+        id: -1,
+        text: 'Bæði kyn'
       }],
       equipment: [],
       shake: false
@@ -204,23 +210,30 @@ export default {
     }
   },
   created () {
-    this.competition = this.application.competition || []
+    agent
+      .get(this.FRI_API_URL + '/equipment')
+      .auth(this.FRI_API_TOKEN, { type: 'bearer' })
+      .then(res => {
+        this.equipment = res.body
+      })
+
+    this.competition = this.application ? this.application.competition : []
   },
   methods: {
     getEquipment (event, gender, age) {
       const foundEquipment = this.equipment.filter(eq => {
-          const correctEvent = eq.eventId === event.id
-          const correctGender = eq.gender === gender.id
-          let correctAge = true
-          if (age) {
-            correctAge = eq.age <= this.ageTo
-          }
+        const correctEvent = eq.eventId === event.id
+        const correctGender = eq.gender === gender.id
+        let correctAge = true
+        if (age) {
+          correctAge = eq.age <= this.ageTo
+        }
 
-          return correctEvent && correctGender && correctAge
-        })
+        return correctEvent && correctGender && correctAge
+      })
 
       if (foundEquipment.length) {
-        return foundEquipment[foundEquipment.length -1]
+        return foundEquipment[foundEquipment.length - 1]
       }
 
       return undefined
@@ -228,7 +241,23 @@ export default {
     add () {
       this.shake = false
 
-      if (this.validEvent && this.validGender) {
+      if (this.selectedGender.id === -1 && this.validEvent) {
+        this.competition.push({
+          event: this.selectedEvent,
+          gender: this.genders[0],
+          ageFrom: this.ageFrom,
+          ageTo: this.ageTo,
+          equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
+        })
+
+        this.competition.push({
+          event: this.selectedEvent,
+          gender: this.genders[1],
+          ageFrom: this.ageFrom,
+          ageTo: this.ageTo,
+          equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
+        })
+      } else if (this.validEvent && this.validGender) {
         this.competition.push({
           event: this.selectedEvent,
           gender: this.selectedGender,
@@ -236,24 +265,26 @@ export default {
           ageTo: this.ageTo,
           equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
         })
-
-        this.selectedEvent = undefined
-        this.selectedGender = undefined
-        this.ageFrom = undefined
-        this.ageTo = undefined
       } else {
         this.shake = true
       }
+
+      this.selectedEvent = undefined
+      this.selectedGender = undefined
+      this.ageFrom = undefined
+      this.ageTo = undefined
     },
     addAll () {
       this.application.selectedEvents.forEach(event => {
-        this.genders.forEach(gender => {
-          this.competition.push({
-            event,
-            gender,
-            equipment: this.getEquipment(event, gender)
+        this.genders
+          .filter(gender => gender.id !== -1)
+          .forEach(gender => {
+            this.competition.push({
+              event,
+              gender,
+              equipment: this.getEquipment(event, gender)
+            })
           })
-        })
       })
     },
     remove (index) {
@@ -271,15 +302,7 @@ export default {
         this.shake = true
       }
     }
-  },
-  created () {
-    agent
-      .get(this.FRI_API_URL + '/equipment')
-      .auth(this.FRI_API_TOKEN, { type: 'bearer' })
-      .then(res => {
-        this.equipment = res.body
-      })
-  },
+  }
 }
 </script>
 

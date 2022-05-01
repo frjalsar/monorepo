@@ -3,7 +3,6 @@
     <div class="py-4 my-sm-5 text-center">
       <img
         class="d-block mx-auto mb-4"
-        
         src="./assets/fri-logo-med-texta.svg"
         alt="FRI"
         width="256"
@@ -56,9 +55,8 @@ export default {
   data () {
     return {
       application: undefined,
-      type: undefined,
       step: 0,
-      steps: [
+      run: [
         {
           title: 'Umsókn vegna mótahalds',
           component: 'IntroStep'
@@ -84,11 +82,53 @@ export default {
           component: 'EventsStep'
         },
         {
-          title: 'Aldursflokkar og kyn',
+          title: 'Uppsetning hlaups',
           component: 'CompetitionStep'
         },
         {
-          title: 'Boðsbréf',
+          title: 'Samantekt á hlaupi',
+          component: 'AttachmentStep'
+        },
+        {
+          title: 'Staðfesting',
+          component: 'ConfirmStep'
+        },
+        {
+          title: 'Takk',
+          component: 'ThanksStep'
+        }
+      ],
+      meet: [
+        {
+          title: 'Umsókn vegna mótahalds',
+          component: 'IntroStep'
+        },
+        {
+          title: 'Ábyrgðaraðili',
+          component: 'OrganizerStep'
+        },
+        {
+          title: 'Mótsstjóri',
+          component: 'ContactStep'
+        },
+        {
+          title: 'Mótið',
+          component: 'MeetStep'
+        },
+        {
+          title: 'Dómari',
+          component: 'JudgeStep'
+        },
+        {
+          title: 'Greinar',
+          component: 'EventsStep'
+        },
+        {
+          title: 'Uppsetning móts',
+          component: 'CompetitionStep'
+        },
+        {
+          title: 'Samantekt á hlaupi',
           component: 'AttachmentStep'
         },
         {
@@ -103,18 +143,28 @@ export default {
     }
   },
   computed: {
+    isRun () {
+      return this.application.type === 'hlaup'
+    },
     current () {
-      if (this.step < 0 || this.step > this.steps.length) {
-        return this.steps[0]
+      if (this.application && this.application.type === 'hlaup') {
+        if (this.step >= 0 || this.step <= this.steps.length) {
+          return this.run[this.step]
+        }
       }
 
-      return this.steps[this.step]
+      if (this.application && this.application.type === 'mot') {
+        if (this.step >= 0 || this.step <= this.steps.length) {
+          return this.meet[this.step]
+        }
+      }
+
+      return this.meet[0]
     }
   },
   created () {
     this.application = JSON.parse(sessionStorage.getItem('FRI_UMSOKN'))
     this.step = this.application ? this.application.step : 0
-    this.type = this.application ? this.application.type : undefined
   },
   methods: {
     updateSession (newApplication) {
@@ -132,10 +182,6 @@ export default {
       this.updateSession({})
     },
     next (application) {
-      if (application.type) {
-        this.type = application.type
-        window.location.replace('#/?tegund=' + application.type)
-      }
       this.step = this.step + 1
       this.updateSession(application)
     }
