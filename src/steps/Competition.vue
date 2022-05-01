@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="lead mb-4">
-      Keppnisgreinar þurfa að vera flokkaðar niður á aldurshópa og kyn. Settu saman úr listanum og smelltu á "Bæta við" til að bæta við keppni. Ef þú gerir vitleysu geturðu fjarlægt línuna.
+      {{ isRun ? 'Hlaupagreinar' : 'Keppnisgreinar' }} þurfa að vera flokkaðar niður á aldurshópa og kyn. Settu saman úr listanum og smelltu á "Bæta við" til að bæta við keppni. Ef þú gerir vitleysu geturðu fjarlægt línuna.
       Þegar er mótið er uppsett geturðu smellt á áfram og yfirfarið skráninguna.
     </p>
 
@@ -196,6 +196,9 @@ export default {
     }
   },
   computed: {
+    isRun() {
+      return this.application.type === 'hlaup'
+    },
     validCompetition () {
       return this.competition.length > 0
     },
@@ -217,7 +220,7 @@ export default {
         this.equipment = res.body
       })
 
-    this.competition = this.application ? this.application.competition : []
+    this.competition = this.application && this.application.competition ? this.application.competition : []
   },
   methods: {
     getEquipment (event, gender, age) {
