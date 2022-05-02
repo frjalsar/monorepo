@@ -128,7 +128,7 @@ export default {
           component: 'CompetitionStep'
         },
         {
-          title: 'Samantekt á hlaupi',
+          title: 'Boðsbréf',
           component: 'AttachmentStep'
         },
         {
