@@ -8,7 +8,7 @@ Kerfið er byggt upp sem einfalt REST API og er skrifað í nodeJS með Postgres
 
 1. Settu upp nodeJS og npm á tölvunni
 2. Afritaðu (e. clone) þetta kóðasafn (e. repository)
-3. Fáðu umhverfisbreyturnar sendar frá einhverjum úr hópnum.
+3. Sóttu umhverfisbreyturnar frá Heroku.
 4. Sláðu inn npm install í terminal
 4. Sláðu inn npm run start terminal
 5. Settu 127.0.0.1  local.fri.is í hosts skrána hjá þér
