@@ -30,7 +30,7 @@ import ContactStep from './steps/Contact.vue'
 import MeetStep from './steps/Meet.vue'
 import JudgeStep from './steps/Judge.vue'
 import EventsStep from './steps/Events.vue'
-import CompetitionStep from './steps/Competition.vue'
+import CompetitionStep from './steps/CompetitionMeet.vue'
 import AttachmentStep from './steps/Attachment.vue'
 import ConfirmStep from './steps/Confirm.vue'
 import ThanksStep from './steps/Thanks.vue'
@@ -49,8 +49,7 @@ export default {
     ThanksStep
   },
   provide: {
-    FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
-    FRI_API_TOKEN: import.meta.env.VITE_FRI_API_TOKEN
+    FRI_API_URL: import.meta.env.VITE_FRI_API_URL
   },
   data () {
     return {
