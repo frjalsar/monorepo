@@ -1,12 +1,23 @@
 <template>
   <div>
     <p class="lead mb-4">
-      {{ isRun ? 'Hlaupagreinar' : 'Keppnisgreinar' }} þurfa að vera flokkaðar niður á aldurshópa og kyn. Settu saman úr listanum og smelltu á "Bæta við" til að bæta við keppni. Ef þú gerir vitleysu geturðu fjarlægt línuna.
-      Þegar er mótið er uppsett geturðu smellt á áfram og yfirfarið skráninguna.
+      {{ isRun ? 'Hlaupagreinar' : 'Keppnisgreinar' }} þurfa að vera flokkaðar niður á aldurshópa og kyn. Til að flýta fyrir skráningu getur þú smellt
+      á fyrirfram skilgreinda aldurshópa og kerfið setur þá upp fyrir þig samkvæmt reglugerð.
+      Þú getur líka sett saman úr listanum eftir hentugleika og smellt á "Bæta við" til að bæta keppni við.
     </p>
 
+    <div class="row mb-4">      
+      <div class="col">        
+        <button class="btn btn-outline-primary mx-3 my-2" @click="addAge(0, 10)">10 ára og yngri</button>        
+        <button class="btn btn-outline-primary mx-3 my-2" @click="addAge(11, 15)">11 - 15 ára</button>                
+        <button class="btn btn-outline-primary mx-3 my-2" @click="addAge(16, 22)">16-22 ára</button>                
+        <button class="btn btn-outline-primary mx-3 my-2" @click="addAdults()">Fullorðnir (án aldursflokka)</button>        
+        <button class="btn btn-outline-primary mx-3 my-2" @click="addAge(30, 100)">30+ (öldungar)</button>
+      </div>      
+    </div> 
+      
     <div class="row mb-4">
-      <div class="col-md-3 offset-md-1">
+      <div class="col-md-3 offset-md-2">
         <label
           for="event"
           class="form-label"
@@ -95,13 +106,7 @@
         >
           Bæta við
         </button>
-        <button
-          type="button"
-          class="btn btn-outline-primary add ms-3"
-          @click="addAll"
-        >
-          Skrá allt
-        </button>
+        
       </div>
       <div class="col-md-1 text-start" />
     </div>
@@ -111,7 +116,7 @@
       :key="item"
       class="row mb-3"
     >
-      <div class="col-md-3 offset-md-1">
+      <div class="col-md-3 offset-md-2">
         {{ item.event.name }}
         <small
           v-if="item.equipment"
@@ -166,7 +171,7 @@ import agent from 'superagent'
 
 export default {
   name: 'TrackConfirm',
-  inject: ['FRI_API_URL', 'FRI_API_TOKEN'],
+  inject: ['FRI_API_URL'],
   props: {
     application: {
       type: Object,
@@ -192,6 +197,7 @@ export default {
         text: 'Bæði kyn'
       }],
       equipment: [],
+      ageGroups: [],
       shake: false
     }
   },
@@ -220,26 +226,35 @@ export default {
         this.equipment = res.body
       })
 
+    agent
+      .get(this.FRI_API_URL + '/agegroups')
+      .withCredentials()
+      .then(res => {
+        this.ageGroups = res.body
+      })
+
     this.competition = this.application && this.application.competition ? this.application.competition : []
   },
   methods: {
-    getEquipment (event, gender, age) {
+    getEquipment (event, gender, ageFrom, ageTo) {
+      const adultAge = 23
+      const minAge = ageFrom || 0
       const foundEquipment = this.equipment.filter(eq => {
         const correctEvent = eq.eventId === event.id
         const correctGender = eq.gender === gender.id
-        let correctAge = true
-        if (age) {
-          correctAge = eq.age <= this.ageTo
+
+        // default to adult unless age is given
+        let correctAge = eq.age === adultAge
+        if (ageTo) {
+          correctAge = eq.age >= minAge && eq.age <= ageTo          
         }
 
         return correctEvent && correctGender && correctAge
       })
-
-      if (foundEquipment.length) {
-        return foundEquipment[foundEquipment.length - 1]
-      }
-
-      return undefined
+            
+      return foundEquipment.reduce((max, element) => {          
+        return element.value > max.value ? element : max
+      }, foundEquipment[0])            
     },
     add () {
       this.shake = false
@@ -251,7 +266,7 @@ export default {
             gender: this.genders[0],
             ageFrom: this.ageFrom,
             ageTo: this.ageTo,
-            equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
+            equipment: this.getEquipment(this.selectedEvent, this.genders[0], this.ageFrom, this.ageTo)
           })
 
           this.competition.push({
@@ -259,7 +274,7 @@ export default {
             gender: this.genders[1],
             ageFrom: this.ageFrom,
             ageTo: this.ageTo,
-            equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
+            equipment: this.getEquipment(this.selectedEvent, this.genders[0], this.ageFrom, this.ageTo)
           })
 
           this.selectedEvent = undefined
@@ -272,7 +287,7 @@ export default {
             gender: this.selectedGender,
             ageFrom: this.ageFrom,
             ageTo: this.ageTo,
-            equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageTo)
+            equipment: this.getEquipment(this.selectedEvent, this.selectedGender, this.ageFrom, this.ageTo)
           })
 
           this.selectedEvent = undefined
@@ -284,7 +299,26 @@ export default {
         this.shake = true
       }      
     },
-    addAll () {
+    addAge (min, max) {
+      this.application.selectedEvents.forEach(event => {
+        this.ageGroups
+          .filter(ageGroup => ageGroup.from >= min && ageGroup.from <= max)
+          .forEach(ageGroup => {
+            this.genders
+              .filter(gender => gender.id !== -1)
+              .forEach(gender => {            
+                this.competition.push({
+                  event,
+                  gender,
+                  equipment: this.getEquipment(event, gender, ageGroup.from, ageGroup.to),
+                  ageFrom: ageGroup.from,
+                  ageTo: ageGroup.to
+                })
+            })
+        })
+      })
+    },
+    addAdults () {
       this.application.selectedEvents.forEach(event => {
         this.genders
           .filter(gender => gender.id !== -1)
