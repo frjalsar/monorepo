@@ -15,6 +15,7 @@
     "express": "^4.17.2",
     "express-sslify": "^1.2.0",
     "helmet": "^5.0.1",
+    "js-file-download": "^0.4.12",
     "lodash.debounce": "^4.0.8",
     "superagent": "^7.0.2",
     "vue": "^3.2.25",

@@ -53,36 +53,49 @@
       </div>
 
       <div class="row g-3 mb-3">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="location" class="form-label">Staðsetning</label>
           <input id="location" type="text" class="form-control"  v-model="currentItem.location" :disabled="busy">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="name" class="form-label">Mannvirki</label>      
           <select class="form-select" v-model="currentItem.venueId" :disabled="busy">
             <option v-for="venue in venues" :key="venue.id" :value="venue.id">{{ venue.fullName }}</option>        
           </select>
         </div>
-      </div>
-
-      <div class="row g-3 mb-3">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="name" class="form-label">Dómari</label>      
           <select class="form-select" v-model="currentItem.judgeId" :disabled="busy">
             <option v-for="judge in judges" :key="judge.id" :value="judge.id">{{ judge.fullName }}</option>        
           </select>
         </div>
+      </div>
 
-        <div class="col-md-4">
+      <div class="row g-3 mb-3">
+        <div class="col-md-1">
+          <label for="id" class="form-label">Númer</label>
+          <input type="name" class="form-control-plaintext" readonly id="id" v-model="currentItem.id" :disabled="busy">
+        </div>
+
+        <div class="col-md-2">
+          <label for="sent" class="form-label">Sent inn</label>
+          <input type="name" class="form-control-plaintext" readonly id="sent" :value="formatDate(currentItem.sent)" :disabled="busy">
+        </div>
+
+         <div class="col-md-2">
+          <label for="sent" class="form-label">Dags. móts</label>
+          <input type="name" class="form-control-plaintext" readonly id="sent" :value="formatDate(currentItem.startDate)" :disabled="busy">
+        </div>
+
+         <div class="col-md-4">
           <label for="name" class="form-label">Staða</label>      
           <select class="form-select" v-model="currentItem.status" :disabled="busy">
             <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.name }}</option>        
           </select>
         </div>
 
-        <div class="col-md-1">
-          <label for="id" class="form-label">Númer</label>
-          <input type="name" class="form-control-plaintext" readonly id="id" v-model="currentItem.id" :disabled="busy">
+        <div class="offset-md-1 col-md-2">
+          <button type="button" class="btn btn-secondary btn-attachment" @click="getFile()" :disabled="!currentItem.hasAttachment">Sækja boðsbréf</button>
         </div>
       </div>
     </div>
@@ -116,6 +129,9 @@
 </template>
 
 <script>
+import agent from 'superagent'
+import fileDownload from 'js-file-download'
+import { format } from 'date-fns'
 import EditMixin from '../_mixins/EditMixin.vue'
 export default {
   name: 'EditMeet',
@@ -141,7 +157,24 @@ export default {
     apiUrl() {
       return this.FRI_API_URL + '/meets'
     }
-  },  
+  },
+  methods: {
+    formatDate (d) {
+      const date = new Date(d)
+      if (!isNaN(date)) {
+        return format(new Date(d), 'dd.MM.yyyy')  
+      }
+
+      return ''
+    },
+    getFile () {
+      return agent
+        .get(this.apiUrl + '/' + this.currentItem.id + '/file')
+        .responseType('blob')
+        .withCredentials()
+        .then(res => fileDownload(res.body, this.currentItem.name + '.docx'))        
+    }
+  },
   watch: {
     meet (val) {
       if (val && val.id) {
@@ -162,5 +195,9 @@ export default {
   border-right: 1px solid #dee2e6;
   border-bottom: 1px solid #dee2e6;
   border-left: 1px solid #dee2e6;
+}
+
+.btn-attachment {
+  margin-top: 2rem;
 }
 </style>
