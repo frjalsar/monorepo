@@ -25,6 +25,7 @@ function mapMeets (list) {
         endDate: item.endate,
         status: item.status,
         sent: item.sent,
+        hasAttachment: item.hasattachment,
         competition: []
       }
 

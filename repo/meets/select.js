@@ -23,6 +23,7 @@ function makeSelectMeets (db) {
         m.enddate,
         m.status,
         m.sent,
+        (m.attachment IS NOT NULL) hasattachment,
         c.id competitionid,
         c.agefrom,
         c.ageto,
