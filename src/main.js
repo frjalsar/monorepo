@@ -55,9 +55,13 @@ const router = createRouter({
       component: () => import('./applications/List.vue')
     },
     {
+      path: '/hlauparar',
+      component: () => import('./missingrunners/List.vue')
+    },
+    {
       path: '/notendur',
       component: () => import('./users/List.vue')
-    },
+    },     
   ]
 })
 const app = createApp(App)

@@ -46,6 +46,9 @@
       <li class="nav-item">
         <router-link to="/umsoknir" class="nav-link link-dark text-decoration-none" active-class="active">Umsóknir</router-link>
       </li>
+      <li class="nav-item">
+        <router-link to="/hlauparar" class="nav-link link-dark text-decoration-none" active-class="active">Hlauparar án keppnisnúmers</router-link>
+      </li>
     </ul>
     <hr />
     <ul class="nav nav-pills flex-column mb-auto">
