@@ -1,12 +1,12 @@
 function makeSelectMissingRunners (sqlPoolConnection) {
   return function selectMissingRunners () {
     let sql = `
-      SELECT [Mót] as Meet
-        ,[Rásnúmer] as StartPosition
-        ,[Nafn] as Name
-        ,[Kyn] as Gender
-        ,[Félag] as Club
-        ,[Fæð_ár] as DateOfBirth        
+      SELECT [Mót] as meet
+        ,[Rásnúmer] as startPosition
+        ,[Nafn] as name
+        ,[Kyn] as gender
+        ,[Félag] as club
+        ,[Fæð_ár] as dateOfBirth        
       FROM
         [Athletics].[dbo].[Athl$Hlauparar án keppandanúmers]`      
     
