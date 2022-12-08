@@ -20,15 +20,13 @@ function makeEditAthlete (makeUpdateAthlete, makeSelectClubs, makeDisableMembers
       if (!sameMembership) {
         await disableMembership(athlete.id)
         await insertMembership(membershipList, user)
-      }
-      
-      console.log('athlete.thorId', athlete.thorId)
+      }            
 
       // THOR - always update Thor. TODO refactor away
       const latestClub = membershipList[membershipList.length - 1]
       const clubs = await selectClubs({ id: latestClub.clubId })
       if (clubs.length === 1) {
-        await updateCompetitor(athlete.thorId, clubs[0].thorId)
+        await updateCompetitor(athlete.thorId, clubs[0].thorId, athlete.fullName)
       }
 
       await client.query('COMMIT')
