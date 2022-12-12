@@ -11,9 +11,10 @@ function createApp (isProduction) {
   const app = express()
 
   if (isProduction) {
-    app.use(enforceHttps({
+    /*app.use(enforceHttps({
       trustProtoHeader: true
     }))
+    */
     app.use(compression())
     app.use(helmet({
       contentSecurityPolicy: false
