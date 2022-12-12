@@ -69,7 +69,7 @@ sqlConnection
     logger.info('Finished', { count: res.rowCount, time })
     process.exit(0)
   })
-  .catch(e => {
-    logger.error('Error came up', e)
+  .catch(e => {    
+    logger.error(e)
     process.exit(1)
   })
