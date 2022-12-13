@@ -4,6 +4,7 @@ services:
   - type: web
     name: fri-api
     env: node
+    rootDir: api
     region: frankfurt
     plan: starter
     previewPlan: starter    
@@ -24,6 +25,7 @@ services:
   - type: web
     name: fri-admin
     env: static
+    rootDir: admin
     buildCommand: npm ci; npm run build
     staticPublishPath: ./dist
   - type: redis
