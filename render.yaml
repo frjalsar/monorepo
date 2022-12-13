@@ -6,6 +6,7 @@ services:
     previewPlan: starter
     name: api-service
     env: node
+    buildCommand: npm ci
     startCommand: node ./server/index.js
     envVars:
       - key: DATABASE_URL
