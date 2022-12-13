@@ -1,0 +1,16 @@
+previewsEnabled: true
+services:
+- type: web
+  plan: starter
+  previewPlan: starter
+  name: api-service
+  env: node
+  envVars:
+   - key: DATABASE_URL
+   fromDatabase:
+     name: postgres
+     property: connectionString
+databases:
+- name: postgres
+  plan: starter
+  previewPlan: starter
