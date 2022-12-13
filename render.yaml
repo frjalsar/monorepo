@@ -24,7 +24,6 @@ services:
   - type: web
     name: fri-admin
     env: static
-    region: frankfurt
     buildCommand: npm ci; npm run build
     staticPublishPath: ./dist
   - type: redis
