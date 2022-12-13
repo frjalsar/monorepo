@@ -2,11 +2,11 @@ previewsEnabled: true
 previewsExpireAfterDays: 3
 services:
   - type: web
-    plan: starter
-    previewPlan: starter
-    region: frankfurt
     name: fri-api
     env: node
+    region: frankfurt
+    plan: starter
+    previewPlan: starter    
     buildCommand: npm ci
     startCommand: node ./server/index.js
     envVars:
@@ -20,11 +20,17 @@ services:
           name: fri-api-store
           property: connectionString
       - fromGroup: Thor
-      - fromGroup: Mailgun
+      - fromGroup: Mailgun    
+  - type: web
+    name: fri-admin
+    env: static
+    region: frankfurt
+    buildCommand: npm ci; npm run build
+    staticPublishPath: ./dist
   - type: redis
     name: fri-api-store
-    plan: starter
     region: frankfurt
+    plan: starter    
     ipAllowList:
       - source: 0.0.0.0/0
         description: everywhere
