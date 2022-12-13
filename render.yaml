@@ -1,10 +1,12 @@
 previewsEnabled: true
+previewsExpireAfterDays: 3
 services:
   - type: web
     plan: starter
     previewPlan: starter
     name: api-service
     env: node
+    startCommand: node ./server/index.js
     envVars:
       - key: DATABASE_URL
         fromDatabase:
