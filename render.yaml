@@ -4,7 +4,7 @@ services:
   - type: web
     name: fri-api
     env: node
-    rootDir: api
+    rootDir: api-service
     region: frankfurt
     plan: starter
     previewPlan: starter    
