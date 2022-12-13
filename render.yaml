@@ -19,6 +19,8 @@ services:
           type: redis
           name: api-store
           property: connectionString
+      - fromGroup: Thor
+      - fromGroup: Mailgun
   - type: redis
     name: api-store
     plan: starter
