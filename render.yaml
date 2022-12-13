@@ -5,7 +5,7 @@ services:
     plan: starter
     previewPlan: starter
     region: frankfurt
-    name: api-service
+    name: fri-api
     env: node
     buildCommand: npm ci
     startCommand: node ./server/index.js
