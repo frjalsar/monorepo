@@ -22,14 +22,14 @@ services:
       - fromGroup: Thor
       - fromGroup: Mailgun
   - type: redis
-    name: api-store
+    name: fri-api-store
     plan: starter
     region: frankfurt
     ipAllowList:
       - source: 0.0.0.0/0
         description: everywhere
 databases:
-  - name: api-db
+  - name: fri-api-db
     plan: starter
     previewPlan: starter
     region: frankfurt
