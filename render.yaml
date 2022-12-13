@@ -23,7 +23,7 @@ services:
     plan: starter
     ipAllowList:
       - source: 0.0.0.0/0
-      description: everywhere
+        description: everywhere
 databases:
   - name: api-db
     plan: starter
