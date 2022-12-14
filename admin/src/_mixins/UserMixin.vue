@@ -8,17 +8,16 @@ export default {
       loggedInUser: undefined
     }
   },
+  inject: ['FRI_API_URL'],
   methods: {
-    getUser() {      
-      const apiUrl = import.meta.env.VITE_FRI_API_URL
-
+    getUser() {
       const userSession = sessionStorage.getItem('FRI_ADMIN')            
       if (userSession) {
         const user = JSON.parse(userSession)
         return Promise.resolve(user)
       } else {
         return agent
-          .get(apiUrl + '/user')
+          .get(this.FRI_API_URL + '/user')
           .withCredentials()
           .then(res => {
             this.setUser(res.body)
