@@ -71,7 +71,7 @@ console.log('onRender', onRender)
 console.log('VITE_RENDER_API_HOST', import.meta.env.VITE_RENDER_API_HOST)
 console.log('VITE_FRI_API_URL', import.meta.env.VITE_FRI_API_URL)
 const friApiUrl = onRender ? 'https://' + import.meta.env.VITE_RENDER_API_HOST + onRenderDomain : import.meta.env.VITE_FRI_API_URL
-console.log('FRI_API_URL', FRI_API_URL)
+console.log('FRI_API_URL', friApiUrl)
 
 export default {
   name: 'admin',

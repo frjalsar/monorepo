@@ -26,7 +26,7 @@ services:
     name: fri-admin
     env: static
     rootDir: admin
-    buildCommand: npm ci; npm run build
+    buildCommand: npm run build
     staticPublishPath: ./dist
     envVars:
       - key: VITE_FRI_API_URL
