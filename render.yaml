@@ -30,6 +30,8 @@ services:
     staticPublishPath: ./dist
     envVars:
       - key: VITE_FRI_API_URL
+        value: https://api.fri.is
+      - key: VITE_RENDER_API_HOST
         fromService:
           type: web
           name: fri-api

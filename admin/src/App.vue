@@ -65,6 +65,10 @@
 </template>
 
 <script>
+const onRenderDomain = 'onrender.com'
+const onRender = location.host.includes(onRenderDomain)
+const FRI_API_URL = onRender ? location.protocol + import.meta.env.VITE_RENDER_API_HOST + onRenderDomain : import.meta.env.VITE_FRI_API_URL
+
 export default {
   name: 'admin',
   data() {
@@ -73,7 +77,7 @@ export default {
     }
   },
   provide: {
-    FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
+    FRI_API_URL,
     COUNTRIES_API_URL: import.meta.env.VITE_COUNTRIES_API_URL
   }, 
   methods: {
