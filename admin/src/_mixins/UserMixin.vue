@@ -16,8 +16,10 @@ export default {
         const user = JSON.parse(userSession)
         return Promise.resolve(user)
       } else {
+        const url = this.FRI_API_URL + '/user'
+        console.log('url', url)
         return agent
-          .get(this.FRI_API_URL + '/user')
+          .get(url)
           .withCredentials()
           .then(res => {
             this.setUser(res.body)
