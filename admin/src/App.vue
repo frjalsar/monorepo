@@ -65,8 +65,11 @@
 </template>
 
 <script>
-const onRenderDomain = 'onrender.com'
+const onRenderDomain = '.onrender.com'
 const onRender = location.host.includes(onRenderDomain)
+console.log('onRender', onRender)
+console.log('VITE_RENDER_API_HOST', import.meta.env.VITE_RENDER_API_HOST)
+console.log('VITE_FRI_API_URL', import.meta.env.VITE_FRI_API_URL)
 const FRI_API_URL = onRender ? location.protocol + import.meta.env.VITE_RENDER_API_HOST + onRenderDomain : import.meta.env.VITE_FRI_API_URL
 
 export default {
