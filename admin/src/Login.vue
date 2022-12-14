@@ -24,12 +24,6 @@
 </template>
 
 <script>
-console.log(import.meta.env.VITE_FRI_API_URL)
-console.log(import.meta.env.VITE_RENDER_EXTERNAL_HOSTNAME)
-console.log(import.meta.env.VITE_RENDER_EXTERNAL_URL)
-console.log(import.meta.env.VITE_RENDER_GIT_BRANCH)
-console.log(import.meta.env.VITE_RENDER_SERVICE_ID)
-console.log(import.meta.env.VITE_RENDER_SERVICE_NAME)
 import agent from 'superagent'
 import Card from './_components/Card.vue'
 export default {
