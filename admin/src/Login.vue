@@ -24,6 +24,7 @@
 </template>
 
 <script>
+console.log(import.meta.env.BASE_URL)
 import agent from 'superagent'
 import Card from './_components/Card.vue'
 export default {

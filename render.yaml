@@ -30,7 +30,10 @@ services:
     staticPublishPath: ./dist
     envVars:
       - key: VITE_FRI_API_URL
-        value: https://fri-api.onrender.com
+        fromService:
+          type: web
+          name: fri-api
+          property: host
   - type: redis
     name: fri-api-store
     region: frankfurt
