@@ -18,7 +18,7 @@ function makeLoginRoute (loginHandler, isProduction) {
                 secure: isProduction,
                 maxAge: 2147483647000,
                 httpOnly: true,
-                sameSite: true,
+                sameSite: 'none',
                 path: '/'
               }
             )
