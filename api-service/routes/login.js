@@ -7,9 +7,11 @@ function makeLoginRoute (loginHandler, isProduction) {
     const username = req.body.username
     const password = req.body.password
     
-    const host = req.get('host')
-    const dot = host.indexOf('.')
-    const domain = host.substring(dot + 1)
+    /*
+      const host = req.get('host')
+      const dot = host.indexOf('.')
+      const domain = host.substring(dot + 1)
+    */
     return loginHandler(username, password)
       .then(({ token, user }) => {
         if (token && user) {
