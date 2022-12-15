@@ -9,7 +9,7 @@ function makeLoginRoute (loginHandler, isProduction) {
     
     const host = req.get('host')
     const dot = host.indexOf('.')
-    const domain = host.substring(dot + 1)
+    const domain = dot > -1 ? host.substring(dot + 1) : undefined
 
     return loginHandler(username, password)
       .then(({ token, user }) => {
