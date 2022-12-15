@@ -10,6 +10,7 @@ function makeLoginRoute (loginHandler, isProduction) {
     const host = req.get('host')
     const dot = host.indexOf('.')
     const domain = dot > -1 ? host.substring(dot) : undefined
+    console.log(domain)
 
     return loginHandler(username, password)
       .then(({ token, user }) => {
@@ -23,7 +24,7 @@ function makeLoginRoute (loginHandler, isProduction) {
                 secure: isProduction,
                 maxAge: 2147483647000,
                 httpOnly: true,
-                sameSite: 'none',
+                sameSite: 'strict',
                 path: '/'
               }
             )
