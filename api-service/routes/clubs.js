@@ -5,6 +5,7 @@ function makeClubsRoute (selectClubs, updateClub, insertClub) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
+    console.log('clubs')
     selectClubs()
       .then(res.json.bind(res))
       .catch(next)
