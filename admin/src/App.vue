@@ -92,10 +92,10 @@ export default {
           .then(res => {
             const user = res.body
             if (user && user.id) {              
-              sessionStorage.setItem(sessionName, JSON.stringify(user))
+              sessionStorage.setItem('FRI_ADMIN', JSON.stringify(user))
               return user
             } else {      
-              sessionStorage.removeItem(sessionName)        
+              sessionStorage.removeItem('FRI_ADMIN')        
               return undefined
             }
           })
