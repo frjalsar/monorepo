@@ -1,3 +1,5 @@
+previewsEnabled: true
+previewsExpireAfterDays: 3
 services:
   - type: web
     name: fri-api
@@ -8,7 +10,6 @@ services:
     previewPlan: starter    
     buildCommand: npm ci
     startCommand: node ./server/index.js
-    pullRequestPreviewsEnabled: true
     domains:
       - api.fri.is
     envVars:
@@ -29,17 +30,11 @@ services:
     rootDir: admin
     buildCommand: npm run build
     staticPublishPath: ./dist
-    pullRequestPreviewsEnabled: true
     domains:
       - admin.fri.is
     envVars:
-      - key: API_FRIDOMAIN_URL
+      - key: VITE_FRI_API_URL
         value: https://api.fri.is
-      - key: API_ONRENDER_URL
-        fromService:
-          type: web
-          name: fri-api
-          envVarKey: RENDER_EXTERNAL_URL          
   - type: redis
     name: fri-api-store
     region: frankfurt
