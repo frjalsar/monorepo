@@ -6,6 +6,9 @@ function makeLoginRoute (loginHandler, isProduction) {
   router.post('/', (req, res, next) => {
     const username = req.body.username
     const password = req.body.password
+    console.log('host', req.get('host'))
+    console.log('origin', req.get('origin'))
+    console.log('referrer', req.get('referrer'))
 
     return loginHandler(username, password)
       .then(({ token, user }) => {
