@@ -6,18 +6,16 @@ function makeLoginRoute (loginHandler, isProduction) {
   router.post('/', (req, res, next) => {
     const username = req.body.username
     const password = req.body.password
-    
-    console.log('refer', req.get('referrer'))
-    console.log('host', req.get('host'))
-    console.log('origin', req.get('origin'))
-    console.log('authority', req.get('authority'))
-    const host = req.get('origin')
-    /*
+        
+    const host = req.get('host')
     const dot = host.indexOf('.')
     const domain = dot > -1 ? host.substring(dot + 1) : undefined
-    */
+    
+    /*
+    const host = req.get('origin')
     const dot = host.indexOf('://')
     const domain = dot > -1 ? host.substring(dot + 3) : undefined
+    */
 
     return loginHandler(username, password)
       .then(({ token, user }) => {
