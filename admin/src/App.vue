@@ -103,7 +103,7 @@ export default {
     },    
     login(user) {
       this.loggedInUser = user
-      this.setUser(user)
+      this.authorize() // double hit, need to fix
       this.$router.push({ path: '/idkendur'})
     },
     toggleNav() {
