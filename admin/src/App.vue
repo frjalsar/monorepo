@@ -85,6 +85,8 @@ export default {
         const user = JSON.parse(userSession)
         return Promise.resolve(user)
       } else {
+        console.log('import.meta.env.VITE_FRI_API_URL', import.meta.env.VITE_FRI_API_URL)
+        console.log('FRI_API_URL', this.FRI_API_URL)
         const url = this.FRI_API_URL + '/user'
         return agent
           .get(url)
