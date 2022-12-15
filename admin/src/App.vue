@@ -65,26 +65,42 @@
 </template>
 
 <script>
-const onRenderDomain = '.onrender.com'
-const onRender = location.host.includes(onRenderDomain)
-console.log('onRender', onRender)
-console.log('VITE_RENDER_API_HOST', import.meta.env.VITE_RENDER_API_HOST)
-console.log('VITE_FRI_API_URL', import.meta.env.VITE_FRI_API_URL)
-const friApiUrl = onRender ? 'https://' + import.meta.env.VITE_RENDER_API_HOST + onRenderDomain : import.meta.env.VITE_FRI_API_URL
-console.log('FRI_API_URL', friApiUrl)
-
+import agent from 'superagent'
 export default {
   name: 'admin',
   data() {
     return {
-      fullview: false
+      fullview: false,
+      loggedInUser: undefined
     }
   },
   provide: {
-    FRI_API_URL: friApiUrl,
+    FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
     COUNTRIES_API_URL: import.meta.env.VITE_COUNTRIES_API_URL
   }, 
   methods: {
+     authorize () {
+      const userSession = sessionStorage.getItem('FRI_ADMIN')            
+      if (userSession) {
+        const user = JSON.parse(userSession)
+        return Promise.resolve(user)
+      } else {
+        const url = this.FRI_API_URL + '/user'
+        return agent
+          .get(url)
+          .withCredentials()
+          .then(res => {
+            const user = res.body
+            if (user && user.id) {              
+              sessionStorage.setItem(sessionName, JSON.stringify(user))
+              return user
+            } else {      
+              sessionStorage.removeItem(sessionName)        
+              return undefined
+            }
+          })
+      }
+    },    
     login(user) {
       this.loggedInUser = user
       this.setUser(user)
@@ -94,8 +110,13 @@ export default {
       this.fullview = !this.fullview
     }
   },
-  created() {
-    this.getUser().then(user => {
+  mounted() {    
+    this.authorize().then(user => {
+      if (!user) {
+        this.$router.push({ path: '/' })
+        this.loggedInUser = undefined
+      }
+
       this.loggedInUser = user
     })
   }

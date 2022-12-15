@@ -22,7 +22,7 @@ function createApp (isProduction) {
   }
 
   app.use(cors({
-    origin: corsOrigin(isProduction),
+    origin: true,
     credentials: true
   }))
   app.use(bodyParser.json({ limit: '40mb' }))

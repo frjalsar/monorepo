@@ -32,7 +32,7 @@ function makeSelectEvents (db) {
       params.push(opt.typeId)
     }
 
-    sql += 'ORDER BY e.name ASC, et.name ASC'
+    sql += ' ORDER BY e.name ASC, et.name ASC'
 
     return db
       .query(sql, params)
