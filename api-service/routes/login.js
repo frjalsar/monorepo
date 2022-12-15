@@ -18,11 +18,10 @@ function makeLoginRoute (loginHandler, isProduction) {
               'FRI_API',
               token,
               {
-                domain,
                 secure: isProduction,
                 maxAge: 2147483647000,
                 httpOnly: true,
-                sameSite: 'strict',
+                sameSite: true,
                 path: '/'
               }
             )
