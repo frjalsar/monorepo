@@ -7,7 +7,11 @@ function makeLoginRoute (loginHandler, isProduction) {
     const username = req.body.username
     const password = req.body.password
     
-    const host = req.get('host')
+    console.log('refer', req.get('referrer'))
+    console.log('host', req.get('host'))
+    console.log('origin', req.get('origin'))
+    console.log('authority', req.get('authority'))
+    const host = req.get('origin')
     const dot = host.indexOf('.')
     const domain = dot > -1 ? host.substring(dot + 1) : undefined
 
@@ -39,3 +43,4 @@ function makeLoginRoute (loginHandler, isProduction) {
 }
 
 module.exports = makeLoginRoute
+

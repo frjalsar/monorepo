@@ -65,6 +65,10 @@
 </template>
 
 <script>
+// const FRI_API_URL = import.meta.env.VITE_FRI_API_URL
+const FRI_API_URL = 'https://api.fri.is'
+const COUNTRIES_API_URL = import.meta.env.VITE_COUNTRIES_API_URL
+
 import agent from 'superagent'
 export default {
   name: 'admin',
@@ -75,8 +79,8 @@ export default {
     }
   },
   provide: {
-    FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
-    COUNTRIES_API_URL: import.meta.env.VITE_COUNTRIES_API_URL
+    FRI_API_URL,
+    COUNTRIES_API_URL
   }, 
   methods: {
      authorize () {
@@ -85,7 +89,7 @@ export default {
         const user = JSON.parse(userSession)
         return Promise.resolve(user)
       } else {
-        const url = import.meta.env.VITE_FRI_API_URL + '/user'
+        const url = FRI_API_URL + '/user'
         return agent
           .get(url)
           .withCredentials()
