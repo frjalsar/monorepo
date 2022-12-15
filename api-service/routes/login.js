@@ -6,12 +6,7 @@ function makeLoginRoute (loginHandler, isProduction) {
   router.post('/', (req, res, next) => {
     const username = req.body.username
     const password = req.body.password
-
-    const host = req.get('host')
-    const dot = host.indexOf('.')
-    const domain = dot > -1 ? host.substring(dot+1) : undefined
-    console.log(domain)
-
+    
     return loginHandler(username, password)
       .then(({ token, user }) => {
         if (token && user) {
@@ -20,7 +15,6 @@ function makeLoginRoute (loginHandler, isProduction) {
               'FRI_API',
               token,
               {
-                domain,
                 secure: isProduction,
                 maxAge: 2147483647000,
                 httpOnly: true,
