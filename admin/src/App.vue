@@ -65,8 +65,7 @@
 </template>
 
 <script>
-// const FRI_API_URL = import.meta.env.VITE_FRI_API_URL
-const FRI_API_URL = 'https://api.fri.is'
+const FRI_API_URL = import.meta.env.VITE_FRI_API_URL
 const COUNTRIES_API_URL = import.meta.env.VITE_COUNTRIES_API_URL
 
 import agent from 'superagent'
