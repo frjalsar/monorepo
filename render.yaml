@@ -38,7 +38,6 @@ services:
     repo: https://github.com/frjalsar/monorepo.git
     env: static        
     rootDir: admin
-    initialDeployHook: ../preview-domains.sh
     buildCommand: vite-url.sh; npm run build
     staticPublishPath: ./dist
     autoDeploy: true
