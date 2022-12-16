@@ -4,4 +4,11 @@ curl --request POST \
      --header "accept: application/json" \
      --header "Authorization: Bearer $RENDER_API_KEY" \
      --header "content-type: application/json" \
-     --data-raw "{ \"name\": \"$RENDER_GIT_BRANCH.$FRI_HOST\" }"
+     --data-raw "{ \"name\": \"$RENDER_GIT_BRANCH.api-test.fri.is\" }"
+
+curl --request POST \
+     --url "https://api.render.com/v1/services/$ADMIN_RENDER_SERVICE_ID/custom-domains" \
+     --header "accept: application/json" \
+     --header "Authorization: Bearer $RENDER_API_KEY" \
+     --header "content-type: application/json" \
+     --data-raw "{ \"name\": \"$RENDER_GIT_BRANCH.admin-test.fri.is\" }"

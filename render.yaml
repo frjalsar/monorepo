@@ -16,8 +16,11 @@ services:
     domains:
       - api-test.fri.is
     envVars:
-      - key: FRI_HOST
-        value: api-test.fri.is
+      - key: ADMIN_RENDER_SERVICE_ID
+        fromService:
+          type: web
+          name: fri-admin-test
+          envVarKey: RENDER_SERVICE_ID
       - key: DATABASE_URL
         fromDatabase:
           name: fri-db-test
@@ -42,8 +45,6 @@ services:
     domains:
       - admin-test.fri.is
     envVars:
-      - key: FRI_HOST
-        value: admin-test.fri.is
       - key: FRI_API_HOST
         value: api-test.fri.is      
       - fromGroup: renderApi
