@@ -72,6 +72,7 @@ app.use('/venues', makeVenues(pgPool))
 app.use('/thor', makeThor(sqlConnection))
 
 app.get('/user', (req, res) => {
+  console.log('checking user')
   if (req.user) {
     return res.json(req.user)
   }

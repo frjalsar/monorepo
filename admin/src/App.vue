@@ -113,7 +113,8 @@ export default {
       this.fullview = !this.fullview
     }
   },
-  mounted() {    
+  mounted() {
+    console.log('mount')
     this.authorize().then(user => {
       if (!user) {
         this.$router.push({ path: '/' })
