@@ -2,7 +2,7 @@ previewsEnabled: true
 previewsExpireAfterDays: 3
 services:
   - type: web
-    name: fri-api
+    name: fri-api-test
     repo: https://github.com/frjalsar/monorepo.git
     env: node    
     rootDir: api-service
@@ -27,7 +27,7 @@ services:
       - fromGroup: Thor
       - fromGroup: Mailgun    
   - type: web    
-    name: fri-admin
+    name: fri-admin-test
     repo: https://github.com/frjalsar/monorepo.git
     env: static        
     rootDir: admin
