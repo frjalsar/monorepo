@@ -3,47 +3,51 @@ previewsExpireAfterDays: 3
 services:
   - type: web
     name: fri-api
-    env: node
+    repo: https://github.com/frjalsar/monorepo.git
+    env: node    
     rootDir: api-service
     region: frankfurt
     plan: starter
     previewPlan: starter    
     buildCommand: npm ci
     startCommand: node ./server/index.js
+    autoDeploy: true
     domains:
       - api.fri.is
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: fri-api-db
+          name: fri-db-test
           property: connectionString
       - key: REDIS_URL
         fromService:
           type: redis
-          name: fri-api-store
+          name: fri-store-test
           property: connectionString
       - fromGroup: Thor
       - fromGroup: Mailgun    
-  - type: web
+  - type: web    
     name: fri-admin
-    env: static
+    repo: https://github.com/frjalsar/monorepo.git
+    env: static        
     rootDir: admin
     buildCommand: npm run build
     staticPublishPath: ./dist
+    autoDeploy: true
     domains:
-      - admin.fri.is
+      - admin-test.fri.is
     envVars:
       - key: VITE_FRI_API_URL
-        value: https://api.fri.is
+        value: https://api-test.fri.is
   - type: redis
-    name: fri-api-store
+    name: fri-store-test
     region: frankfurt
     plan: starter    
     ipAllowList:
       - source: 0.0.0.0/0
         description: everywhere
 databases:
-  - name: fri-api-db
+  - name: fri-db-test
     plan: starter
     previewPlan: starter
     region: frankfurt
