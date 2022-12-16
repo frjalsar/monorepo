@@ -1,6 +1,20 @@
 previewsEnabled: true
 previewsExpireAfterDays: 3
-services:
+services:  
+  - type: web    
+    name: fri-admin-test
+    repo: https://github.com/frjalsar/monorepo.git
+    env: static        
+    rootDir: admin
+    buildCommand: vite-url.sh; npm run build
+    staticPublishPath: ./dist
+    autoDeploy: true
+    domains:
+      - admin-test.fri.is
+    envVars:
+      - key: FRI_API_HOST
+        value: api-test.fri.is      
+      - fromGroup: renderApi
   - type: web
     name: fri-api-test
     repo: https://github.com/frjalsar/monorepo.git
@@ -32,20 +46,6 @@ services:
           property: connectionString
       - fromGroup: Thor
       - fromGroup: Mailgun
-      - fromGroup: renderApi
-  - type: web    
-    name: fri-admin-test
-    repo: https://github.com/frjalsar/monorepo.git
-    env: static        
-    rootDir: admin
-    buildCommand: vite-url.sh; npm run build
-    staticPublishPath: ./dist
-    autoDeploy: true
-    domains:
-      - admin-test.fri.is
-    envVars:
-      - key: FRI_API_HOST
-        value: api-test.fri.is      
       - fromGroup: renderApi
   - type: redis
     name: fri-store-test
