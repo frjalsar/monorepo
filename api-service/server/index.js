@@ -80,6 +80,11 @@ app.get('/user', (req, res) => {
   return res.json()
 })
 
+console.log('RENDER_SERVICE_ID', process.env.RENDER_SERVICE_ID)
+console.log('RENDER_SERVICE_NAME', process.env.RENDER_SERVICE_NAME)
+console.log('IS_PULL_REQUEST', process.env.IS_PULL_REQUEST)
+console.log('RENDER_API_KEY', process.env.RENDER_API_KEY)
+
 const port = process.env.PORT || 3000
 app.listen(port, () => {
   logger.info('server running on port ' + port)
