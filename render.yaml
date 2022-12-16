@@ -8,13 +8,16 @@ services:
     rootDir: api-service
     region: frankfurt
     plan: starter
-    previewPlan: starter    
+    previewPlan: starter
+    initialDeployHook: ../preview-domains.sh
     buildCommand: npm ci
     startCommand: node ./server/index.js
     autoDeploy: true
     domains:
       - api-test.fri.is
     envVars:
+      - key: FRI_HOST
+        value: api-test.fri.is
       - key: DATABASE_URL
         fromDatabase:
           name: fri-db-test
@@ -25,20 +28,25 @@ services:
           name: fri-store-test
           property: connectionString
       - fromGroup: Thor
-      - fromGroup: Mailgun    
+      - fromGroup: Mailgun
+      - fromGroup: renderApi
   - type: web    
     name: fri-admin-test
     repo: https://github.com/frjalsar/monorepo.git
     env: static        
     rootDir: admin
-    buildCommand: npm run build
+    initialDeployHook: ../preview-domains.sh
+    buildCommand: vite-url.sh; npm run build
     staticPublishPath: ./dist
     autoDeploy: true
     domains:
       - admin-test.fri.is
     envVars:
-      - key: VITE_FRI_API_URL
-        value: https://api-test.fri.is
+      - key: FRI_HOST
+        value: admin-test.fri.is
+      - key: FRI_API_HOST
+        value: api-test.fri.is      
+      - fromGroup: renderApi
   - type: redis
     name: fri-store-test
     region: frankfurt
