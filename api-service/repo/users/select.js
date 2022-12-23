@@ -38,7 +38,7 @@ function makeSelectUsers (db) {
       params.push(opt.id)
     }
 
-    sql += ` ORDER BY u.fullname ASC`
+    sql += ' ORDER BY u.fullname ASC'
 
     return db
       .query(toOrdinal(sql), params)

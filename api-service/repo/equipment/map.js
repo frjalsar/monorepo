@@ -13,8 +13,8 @@ function mapEquipment (list) {
 
     if (item.eventid !== null) {
       equipmentObj.event = {
-        id: item.eventid,        
-        name: item.eventname,
+        id: item.eventid,
+        name: item.eventname
       }
     }
     result.push(equipmentObj)

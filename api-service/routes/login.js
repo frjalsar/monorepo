@@ -6,11 +6,11 @@ function makeLoginRoute (loginHandler, isProduction) {
   router.post('/', (req, res, next) => {
     const username = req.body.username
     const password = req.body.password
-        
+
     const host = req.get('host')
     const dot = host.indexOf('.')
     const domain = dot > -1 ? host.substring(dot + 1) : undefined
-    
+
     /*
     const host = req.get('origin')
     const dot = host.indexOf('://')
@@ -45,4 +45,3 @@ function makeLoginRoute (loginHandler, isProduction) {
 }
 
 module.exports = makeLoginRoute
-

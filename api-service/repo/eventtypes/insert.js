@@ -15,7 +15,7 @@ function makeInsertEventType (db) {
       eventType.name,
       eventType.ordering,
       user.id
-    ]    
+    ]
 
     return db
       .query(sql, params)

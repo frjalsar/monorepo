@@ -1,43 +1,46 @@
 <template>
-<div>
-  <Title text="Iðkendur" @addNewItem="openEditModal()" />
-
-  <Card>
-    <SearchPanel
-      :regions="regions"
-      :clubs="clubs"
-      :legacy="legacy"
-      :settings="settings"
-      @search="setQueryParams"
+  <div>
+    <PageTitle
+      text="Iðkendur"
+      @add-new-item="openEditModal()"
     />
-  </Card>
 
-  <Card>
-    <SimpleTable
-      :data="athletes"
-      :definition="tableDefinition"
-      :busy="busy"
-      @click="openEditModal"
-    />
-  </Card>
+    <CardComponent>
+      <SearchPanel
+        :regions="regions"
+        :clubs="clubs"
+        :legacy="legacy"
+        :settings="settings"
+        @search="setQueryParams"
+      />
+    </CardComponent>
 
-  <ModalEdit v-slot="{ confirm, callback }">
-    <EditAthlete
-      :athlete="selectedModalItem"
-      :clubs="clubs"
-      :countries="countries"
-      :confirm="confirm"
-      @done="(isDone) => closeEditModal(isDone, callback)"
-    />
-  </ModalEdit>
-</div>
+    <CardComponent>
+      <SimpleTable
+        :data="athletes"
+        :definition="tableDefinition"
+        :busy="busy"
+        @click="openEditModal"
+      />
+    </CardComponent>
+
+    <ModalEdit v-slot="{ confirm, callback }">
+      <EditAthlete
+        :athlete="selectedModalItem"
+        :clubs="clubs"
+        :countries="countries"
+        :confirm="confirm"
+        @done="(isDone) => closeEditModal(isDone, callback)"
+      />
+    </ModalEdit>
+  </div>
 </template>
 
 <script>
 import agent from 'superagent'
 import { format } from 'date-fns'
-import Title from '../_components/Title.vue'
-import Card from '../_components/Card.vue'
+import PageTitle from '../_components/PageTitle.vue'
+import CardComponent from '../_components/CardComponent.vue'
 import SearchPanel from './SearchPanel.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
@@ -46,17 +49,17 @@ import EditAthlete from './Edit.vue'
 
 export default {
   name: 'ListAthlete',
-  mixins: [ModalMixin],
   components: {
-    Title,
-    Card,
+    PageTitle,
+    CardComponent,
     SearchPanel,
     SimpleTable,
     ModalEdit,
     EditAthlete
   },
+  mixins: [ModalMixin],
   inject: ['FRI_API_URL', 'COUNTRIES_API_URL'],
-  data() {
+  data () {
     return {
       busy: false,
       athletes: [],
@@ -99,7 +102,7 @@ export default {
           field: 'country',
           label: 'Land',
           display: 'lg'
-        },
+        }
       ]
     }
   },
@@ -108,32 +111,7 @@ export default {
       return this.$route.query
     }
   },
-  methods: {
-    setQueryParams (query) {
-      this.$router.replace({ query }).then(() => {
-        this.search()
-      })
-    },
-    search () {
-      this.busy = true
-      this.athletes = []
-      return agent
-        .get(this.FRI_API_URL + '/athletes')
-        .withCredentials()
-        .query(this.$route.query)
-        .then(res => {
-          this.athletes = res.body.map(athlete => ({
-            ...athlete,
-            newMembership: athlete.membership.map(m => ({...m})), // cloning to avoid assign by ref
-            clubFullName: athlete.club?.fullName,
-            lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy'),
-          }))
-
-          this.busy = false
-        })
-    },
-  },
-  created() {
+  created () {
     this.search()
 
     agent
@@ -156,7 +134,7 @@ export default {
       .then(res => {
         this.legacy = res.body
       })
-    
+
     agent
       .get(this.COUNTRIES_API_URL + '/v2/all')
       .withCredentials()
@@ -171,6 +149,31 @@ export default {
           text: 'Velja land'
         })
       })
+  },
+  methods: {
+    setQueryParams (query) {
+      this.$router.replace({ query }).then(() => {
+        this.search()
+      })
+    },
+    search () {
+      this.busy = true
+      this.athletes = []
+      return agent
+        .get(this.FRI_API_URL + '/athletes')
+        .withCredentials()
+        .query(this.$route.query)
+        .then(res => {
+          this.athletes = res.body.map(athlete => ({
+            ...athlete,
+            newMembership: athlete.membership.map(m => ({ ...m })), // cloning to avoid assign by ref
+            clubFullName: athlete.club?.fullName,
+            lastCompeted: format(new Date(athlete.lastCompeted), 'dd.MM.yyyy')
+          }))
+
+          this.busy = false
+        })
+    }
   }
 }
 </script>

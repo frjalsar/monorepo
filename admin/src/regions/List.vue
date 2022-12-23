@@ -1,29 +1,32 @@
 <template>
-<div>
-  <Title text="Íþróttahéruð" @addNewItem="openEditModal()" />
-
-  <Card>
-    <SimpleTable
-      :data="regions"     
-      :definition="tableDefinition"
-      @click="openEditModal"
+  <div>
+    <PageTitle
+      text="Íþróttahéruð"
+      @add-new-item="openEditModal()"
     />
-  </Card>
 
-  <ModalEdit v-slot="{ confirm, callback }"> 
-    <EditRegion
-      :region="selectedModalItem"
-      :confirm="confirm"
-      @done="(isDone) => closeEditModal(isDone, callback)"
-    />
-  </ModalEdit>
-</div>
+    <CardComponent>
+      <SimpleTable
+        :data="regions"
+        :definition="tableDefinition"
+        @click="openEditModal"
+      />
+    </CardComponent>
+
+    <ModalEdit v-slot="{ confirm, callback }">
+      <EditRegion
+        :region="selectedModalItem"
+        :confirm="confirm"
+        @done="(isDone) => closeEditModal(isDone, callback)"
+      />
+    </ModalEdit>
+  </div>
 </template>
 
 <script>
 import agent from 'superagent'
-import Title from '../_components/Title.vue'
-import Card from '../_components/Card.vue'
+import PageTitle from '../_components/PageTitle.vue'
+import CardComponent from '../_components/CardComponent.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
 import ModalEditMixin from '../_mixins/ModalMixin.vue'
@@ -31,18 +34,18 @@ import EditRegion from './Edit.vue'
 
 export default {
   name: 'RegionList',
-  mixins: [ModalEditMixin],
   components: {
-    Title,
-    Card,
+    PageTitle,
+    CardComponent,
     SimpleTable,
     ModalEdit,
     EditRegion
   },
+  mixins: [ModalEditMixin],
   inject: ['FRI_API_URL'],
-  data() {
+  data () {
     return {
-      busy: false,      
+      busy: false,
       regions: [],
       tableDefinition: [
         {
@@ -59,11 +62,11 @@ export default {
           field: 'abbreviation',
           label: 'Skammstöfun',
           display: 'lg'
-        },        
+        }
       ]
     }
-  },  
-  created() {
+  },
+  created () {
     agent
       .get(this.FRI_API_URL + '/regions')
       .withCredentials()
@@ -71,9 +74,9 @@ export default {
         this.regions = res.body.map(region => ({
           id: region.id,
           fullName: region.fullName,
-          abbreviation: region.abbreviation,          
+          abbreviation: region.abbreviation
         }))
-      })   
+      })
   }
 }
 </script>

@@ -11,7 +11,7 @@
             'd-none d-md-table-cell': header.display === 'md'
           }"
         >
-        {{ header.label }}
+          {{ header.label }}
         </th>
       </tr>
     </thead>
@@ -22,17 +22,19 @@
           align="center"
         >
           <div class="text-center">
-            <div class="spinner-border" role="status"></div>
+            <div
+              class="spinner-border"
+              role="status"
+            />
           </div>
-
         </td>
       </tr>
-      <tr        
+      <tr
         v-for="item in filteredData"
         :key="item.id"
         @click="$emit('click', item)"
       >
-        <td          
+        <td
           v-for="header in headers"
           :key="header.field"
           :class="{
@@ -50,8 +52,7 @@
 
 <script>
 export default {
-  name: 'SimpleTable', 
-  emits: ['click'],
+  name: 'SimpleTable',
   props: {
     definition: {
       type: Array,
@@ -63,13 +64,14 @@ export default {
     },
     filter: {
       type: Boolean,
-      default: false,
+      default: false
     },
     busy: {
       type: Boolean,
       default: false
     }
   },
+  emits: ['click'],
   computed: {
     headers () {
       if (this.definition.length) {
@@ -94,12 +96,12 @@ export default {
 
       return this.data.filter(item => {
         const filters = Object.keys(this.filter)
-        return filters.every(key => this.filter[key] === item[key]        )
+        return filters.every(key => this.filter[key] === item[key])
       })
     }
   },
   methods: {
-    uniqueValues(header) {
+    uniqueValues (header) {
       return this.data
         .map(obj => obj[header])
         .filter((val, index, arr) => arr.indexOf(val) === index) // unique list
@@ -118,7 +120,7 @@ tr:hover td {
 .form-select {
   border: none;
   font-weight: bold;
-  padding: 0;  
+  padding: 0;
 }
 
 .form-select:focus {

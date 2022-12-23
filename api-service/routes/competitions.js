@@ -16,11 +16,13 @@ function makeCompetitionsRoute (selectCompetitions, insertCompetition) {
       .catch(next)
   })
 
+  /*
   router.put('/', authorize(['admin']), (req, res, next) => {
     return updateCompetitions(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
+  */
 
   router.post('/', authorize(['admin']), (req, res, next) => {
     return insertCompetition(req.body, req.user)

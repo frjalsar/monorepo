@@ -20,7 +20,7 @@ function makeEditAthlete (makeUpdateAthlete, makeSelectClubs, makeDisableMembers
       if (!sameMembership) {
         await disableMembership(athlete.id)
         await insertMembership(membershipList, user)
-      }            
+      }
 
       // THOR - always update Thor. TODO refactor away
       const latestClub = membershipList[membershipList.length - 1]

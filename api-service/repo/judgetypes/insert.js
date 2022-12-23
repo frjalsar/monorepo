@@ -15,7 +15,7 @@ function makeInsertJudgeType (db) {
       judgeType.name,
       judgeType.stage,
       user.id
-    ]    
+    ]
 
     return db
       .query(sql, params)

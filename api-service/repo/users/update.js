@@ -1,8 +1,6 @@
-const { genSaltSync, hashSync } = require('bcryptjs')
-
 function makeUpdatetUser (db) {
   return function insertUser (userObj, user) {
-    let sql = `
+    const sql = `
       UPDATE users SET
         fullname = $1,
         admin = $2,
@@ -24,7 +22,7 @@ function makeUpdatetUser (db) {
       userObj.regionId,
       user.id,
       userObj.id
-    ]    
+    ]
 
     return db
       .query(sql, params)

@@ -4,7 +4,7 @@ function makeUsers (db, redis) {
   const makeInsertUser = require('../repo/users/insert')
   const makeCreateUser = require('../repo/users/create')
   const makeSetUser = require('../userstore/set')
-  const makeUsersRouter = require('../routes/users')  
+  const makeUsersRouter = require('../routes/users')
 
   const selectUsers = makeSelectUsers(db)
   const updateUser = makeUpdateUser(db)

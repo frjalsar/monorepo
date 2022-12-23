@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "standard",
+    "plugin:vue/vue3-recommended",
+  ],
+  "env": {        
+    "mocha": true
+  }
+}

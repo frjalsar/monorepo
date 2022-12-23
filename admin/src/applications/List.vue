@@ -1,33 +1,39 @@
 <template>
-<div>
-  <Title text="Umsóknir vegna móthalds" @addNewItem="openEditModal({})" />
-
-  <Card>
-    <SimpleTable
-      :data="meets"
-      :definition="tableDefinition"
-      @click="openEditModal"
+  <div>
+    <PageTitle
+      text="Umsóknir vegna móthalds"
+      @add-new-item="openEditModal({})"
     />
-  </Card>
 
-  <ModalEdit v-slot="{ confirm, callback }" size="extra-large"> 
-    <EditMeet
-      :meet="selectedModalItem"
-      :venues="venues"
-      :judges="judges"
-      :statuses="statuses"
-      :confirm="confirm"
-      @done="(isDone) => closeEditModal(isDone, callback)"
-    />
-  </ModalEdit>
-</div>
+    <CardComponent>
+      <SimpleTable
+        :data="meets"
+        :definition="tableDefinition"
+        @click="openEditModal"
+      />
+    </CardComponent>
+
+    <ModalEdit
+      v-slot="{ confirm, callback }"
+      size="extra-large"
+    >
+      <EditMeet
+        :meet="selectedModalItem"
+        :venues="venues"
+        :judges="judges"
+        :statuses="statuses"
+        :confirm="confirm"
+        @done="(isDone) => closeEditModal(isDone, callback)"
+      />
+    </ModalEdit>
+  </div>
 </template>
 
 <script>
 import agent from 'superagent'
 import { format } from 'date-fns'
-import Title from '../_components/Title.vue'
-import Card from '../_components/Card.vue'
+import PageTitle from '../_components/PageTitle.vue'
+import CardComponent from '../_components/CardComponent.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
 import ModalEditMixin from '../_mixins/ModalMixin.vue'
@@ -35,16 +41,16 @@ import EditMeet from './Edit.vue'
 
 export default {
   name: 'MeetList',
-  mixins: [ModalEditMixin],
   components: {
-    Title,
-    Card,
+    PageTitle,
+    CardComponent,
     SimpleTable,
     ModalEdit,
     EditMeet
   },
+  mixins: [ModalEditMixin],
   inject: ['FRI_API_URL'],
-  data() {
+  data () {
     return {
       meets: [],
       judges: [],
@@ -61,7 +67,7 @@ export default {
         {
           id: 1,
           name: 'Samþykkt'
-        },        
+        },
         {
           id: 2,
           name: 'Í gangi'
@@ -73,7 +79,7 @@ export default {
         {
           id: 4,
           name: 'Staðfest'
-        },
+        }
       ],
       tableDefinition: [
         {
@@ -100,7 +106,7 @@ export default {
           field: 'organizerName',
           label: 'Ábyrgðaraðili',
           display: 'lg'
-        },       
+        },
         {
           field: 'contactName',
           label: 'Mótsstjóri',
@@ -116,11 +122,11 @@ export default {
           label: 'Greinar',
           display: 'lg'
         }
-        
+
       ]
     }
   },
-  created() {
+  created () {
     agent
       .get(this.FRI_API_URL + '/meets')
       .query({ status: 0 })
@@ -143,7 +149,7 @@ export default {
       .then(res => {
         this.judges = res.body
       })
-    
+
     agent
       .get(this.FRI_API_URL + '/venues')
       .withCredentials()

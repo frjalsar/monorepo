@@ -1,11 +1,11 @@
 function mapMeets (list) {
   const genderMap = {
-    '1': 'Karlar',    
-    '2': 'Konur',
+    1: 'Karlar',
+    2: 'Konur'
   }
 
   let currentId
-  const result = []  
+  const result = []
   list.forEach(item => {
     if (item.id !== currentId) {
       const meetObj = {
@@ -15,7 +15,7 @@ function mapMeets (list) {
         organizerKt: item.organizerkt,
         contactName: item.contactname,
         contactEmail: item.contactemail,
-        contactPhone: item.contactphone,      
+        contactPhone: item.contactphone,
         location: item.location,
         venueId: item.venueid,
         venueName: item.venuename,
@@ -34,23 +34,25 @@ function mapMeets (list) {
     }
 
     const currentMeet = result[result.length - 1]
-    if (item.competitionid ) {
+    if (item.competitionid) {
       // Create membership
       const competitionObj = {
         id: item.competitionid,
-        eventId: item.eventid,        
+        eventId: item.eventid,
         eventName: item.eventname,
         meetId: item.id,
         ageFrom: item.agefrom,
         ageTo: item.ageto,
-        gender: item.gender ? {
-          value: item.gender,
-          text: genderMap[item.gender]
-        } : undefined,
+        gender: item.gender
+          ? {
+              value: item.gender,
+              text: genderMap[item.gender]
+            }
+          : undefined
       }
 
       currentMeet.competition.push(competitionObj)
-    }    
+    }
   })
 
   return result

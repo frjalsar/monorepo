@@ -1,29 +1,32 @@
 <template>
-<div>
-  <Title text="Mannvirki" @addNewItem="openEditModal({})" />
-
-  <Card>
-    <SimpleTable
-      :data="venues"
-      :definition="tableDefinition"
-      @click="openEditModal"
+  <div>
+    <PageTitle
+      text="Mannvirki"
+      @add-new-item="openEditModal({})"
     />
-  </Card>
 
-  <ModalEdit v-slot="{ confirm, callback }"> 
-    <EditVenue
-      :venue="selectedModalItem"
-      :confirm="confirm"
-      @done="(isDone) => closeEditModal(isDone, callback)"
-    />
-  </ModalEdit>
-</div>
+    <CardComponent>
+      <SimpleTable
+        :data="venues"
+        :definition="tableDefinition"
+        @click="openEditModal"
+      />
+    </CardComponent>
+
+    <ModalEdit v-slot="{ confirm, callback }">
+      <EditVenue
+        :venue="selectedModalItem"
+        :confirm="confirm"
+        @done="(isDone) => closeEditModal(isDone, callback)"
+      />
+    </ModalEdit>
+  </div>
 </template>
 
 <script>
 import agent from 'superagent'
-import Title from '../_components/Title.vue'
-import Card from '../_components/Card.vue'
+import PageTitle from '../_components/PageTitle.vue'
+import CardComponent from '../_components/CardComponent.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
 import ModalEditMixin from '../_mixins/ModalMixin.vue'
@@ -31,16 +34,16 @@ import EditVenue from './Edit.vue'
 
 export default {
   name: 'ClubList',
-  mixins: [ModalEditMixin],
   components: {
-    Title,
-    Card,
+    PageTitle,
+    CardComponent,
     SimpleTable,
     ModalEdit,
     EditVenue
   },
+  mixins: [ModalEditMixin],
   inject: ['FRI_API_URL'],
-  data() {
+  data () {
     return {
       venues: [],
       tableDefinition: [
@@ -58,21 +61,21 @@ export default {
           field: 'indoorText',
           label: 'Innanhús',
           display: 'lg'
-        },       
+        },
         {
           field: 'straightLanes',
           label: 'Beinar brauta',
           display: 'md'
         },
-         {
+        {
           field: 'ovalLanes',
           label: 'Hringbrautir',
           display: 'md'
-        },
+        }
       ]
     }
   },
-  created() {
+  created () {
     agent
       .get(this.FRI_API_URL + '/venues')
       .withCredentials()

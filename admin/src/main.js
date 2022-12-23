@@ -60,10 +60,9 @@ const router = createRouter({
     {
       path: '/notendur',
       component: () => import('./users/List.vue')
-    },     
+    }
   ]
 })
-
 
 const app = createApp(App)
 app.use(router)

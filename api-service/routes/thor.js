@@ -21,8 +21,6 @@ function makeThorRoute (selectThorEvents, selectThorAchievements, selectMissingR
       .catch(next)
   })
 
-  selectMissingRunners
-
   return router
 }
 

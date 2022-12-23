@@ -20,7 +20,7 @@ function makeInsertUser (db) {
         $1, $2, $3, $4, $5, $6, $7, $8, $9, true, CURRENT_TIMESTAMP(3)
       )
       RETURNING id`
-      
+
     let password
     if (userObj.password) {
       const salt = genSaltSync(10)

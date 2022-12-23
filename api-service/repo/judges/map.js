@@ -19,7 +19,7 @@ function mapJudges (list) {
       judgeObj.type = {
         id: item.typeid,
         name: item.typename,
-        stage: item.typestage,
+        stage: item.typestage
       }
     }
 
@@ -29,7 +29,7 @@ function mapJudges (list) {
         fullName: item.clubfullname,
         thorId: item.thorclubid
       }
-    }    
+    }
 
     result.push(judgeObj)
   })

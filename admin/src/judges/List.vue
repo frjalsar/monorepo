@@ -1,31 +1,34 @@
 <template>
-<div>
-  <Title text="Dómarar" @addNewItem="openEditModal({})" />
-
-  <Card>
-    <SimpleTable
-      :data="judges"
-      :definition="tableDefinition"
-      @click="openEditModal"
+  <div>
+    <PageTitle
+      text="Dómarar"
+      @add-new-item="openEditModal({})"
     />
-  </Card>
 
-  <ModalEdit v-slot="{ confirm, callback }"> 
-    <EditJudge
-      :judge="selectedModalItem"
-      :judgeTypes="judgeTypes"
-      :clubs="clubs"
-      :confirm="confirm"
-      @done="(isDone) => closeEditModal(isDone, callback)"
-    />
-  </ModalEdit>
-</div>
+    <CardComponent>
+      <SimpleTable
+        :data="judges"
+        :definition="tableDefinition"
+        @click="openEditModal"
+      />
+    </CardComponent>
+
+    <ModalEdit v-slot="{ confirm, callback }">
+      <EditJudge
+        :judge="selectedModalItem"
+        :judge-types="judgeTypes"
+        :clubs="clubs"
+        :confirm="confirm"
+        @done="(isDone) => closeEditModal(isDone, callback)"
+      />
+    </ModalEdit>
+  </div>
 </template>
 
 <script>
 import agent from 'superagent'
-import Title from '../_components/Title.vue'
-import Card from '../_components/Card.vue'
+import PageTitle from '../_components/PageTitle.vue'
+import CardComponent from '../_components/CardComponent.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
 import ModalEditMixin from '../_mixins/ModalMixin.vue'
@@ -33,20 +36,20 @@ import EditJudge from './Edit.vue'
 
 export default {
   name: 'ListJudges',
-  mixins: [ModalEditMixin],
   components: {
-    Title,
-    Card,
+    PageTitle,
+    CardComponent,
     SimpleTable,
     ModalEdit,
     EditJudge
   },
+  mixins: [ModalEditMixin],
   inject: ['FRI_API_URL'],
-  data() {
+  data () {
     return {
       judges: [],
       judgeTypes: [],
-      clubs: [],      
+      clubs: [],
       tableDefinition: [
         {
           field: 'id',
@@ -77,11 +80,11 @@ export default {
           field: 'clubFullName',
           label: 'Félag',
           display: 'md'
-        },
+        }
       ]
     }
   },
-  created() {
+  created () {
     agent
       .get(this.FRI_API_URL + '/judges')
       .withCredentials()

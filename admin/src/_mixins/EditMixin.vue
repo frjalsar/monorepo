@@ -1,16 +1,28 @@
 <script>
 import agent from 'superagent'
 export default {
-  props: ['confirm'],
+  props: {
+    confirm: {
+      type: Boolean,
+      required: true
+    }
+  },
   emits: ['done'],
-  data() {
+  data () {
     return {
-      busy: false,      
-      currentItem: {},
+      busy: false,
+      currentItem: {}
+    }
+  },
+  watch: {
+    confirm (val) {
+      if (val) {
+        this.save()
+      }
     }
   },
   methods: {
-    save() {
+    save () {
       this.busy = true
       const method = this.currentItem.id ? 'put' : 'post'
       agent(method, this.apiUrl)
@@ -23,13 +35,6 @@ export default {
         .catch(e => {
           this.$emit('done', false)
         })
-    }
-  },
-  watch: {
-    confirm (val) {
-      if (val) {
-        this.save()
-      }
     }
   }
 }

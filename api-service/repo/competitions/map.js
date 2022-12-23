@@ -1,5 +1,4 @@
 function mapCompetitions (list) {
-  let currentId
   const result = []
   list.forEach(item => {
     const competitionObj = {
@@ -12,7 +11,7 @@ function mapCompetitions (list) {
       indoor: item.indoor
 
     }
-    
+
     result.push(competitionObj)
   })
   return result

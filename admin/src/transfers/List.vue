@@ -1,12 +1,11 @@
 <template>
-<div>
-  <h2>Félagaskipti</h2>
-  <hr />
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">      
+  <div>
+    <h2>Félagaskipti</h2>
+    <hr>
+    <div class="card shadow-sm mb-3">
+      <div class="card-body" />
     </div>
   </div>
-</div>
 </template>
 
 <script>

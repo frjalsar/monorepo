@@ -1,4 +1,4 @@
-function makeEquipment(db) {
+function makeEquipment (db) {
   const makeSelectEquipment = require('../repo/equipment/select')
   const makeUpdateEquipment = require('../repo/equipment/update')
   const makeInsertEquipment = require('../repo/equipment/insert')

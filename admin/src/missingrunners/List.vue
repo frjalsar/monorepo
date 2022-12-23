@@ -1,35 +1,37 @@
 <template>
-<div>
-  <Title text="Hlauparar án keppnisnúmer" @addNewItem="openEditModal({})" />
-
-  <Card>
-    <SimpleTable
-      :data="missingRunners"
-      :definition="tableDefinition"
-      @click="openThor"
+  <div>
+    <PageTitle
+      text="Hlauparar án keppnisnúmer"
+      @add-new-item="openEditModal({})"
     />
-  </Card>
-    
-</div>
+
+    <CardComponent>
+      <SimpleTable
+        :data="missingRunners"
+        :definition="tableDefinition"
+        @click="openThor"
+      />
+    </CardComponent>
+  </div>
 </template>
 
 <script>
 import agent from 'superagent'
-import Title from '../_components/Title.vue'
-import Card from '../_components/Card.vue'
+import PageTitle from '../_components/PageTitle.vue'
+import CardComponent from '../_components/CardComponent.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 
 export default {
-  name: 'MissingRunnersList',  
+  name: 'MissingRunnersList',
   components: {
-    Title,
-    Card,
-    SimpleTable,      
+    PageTitle,
+    CardComponent,
+    SimpleTable
   },
   inject: ['FRI_API_URL'],
-  data() {
+  data () {
     return {
-      missingRunners: [],      
+      missingRunners: [],
       tableDefinition: [
         {
           field: 'meet',
@@ -45,17 +47,17 @@ export default {
           field: 'name',
           label: 'Fullt nafn',
           display: 'lg'
-        },       
+        },
         {
           field: 'genderName',
           label: 'Kyn',
           display: 'md'
         },
-         {
+        {
           field: 'dateOfBirth',
           label: 'Fæðingarár',
           display: 'md'
-        },
+        }
       ],
       genders: [{
         id: 1,
@@ -63,25 +65,25 @@ export default {
       }, {
         id: 2,
         name: 'Konur'
-      }],
+      }]
     }
   },
-  methods: {
-    openThor(missingRunner) {
-      const path = 'http://mot.fri.is/MotFRI/SelectedCompetitionResults.aspx?Code='
-      window.open(path + missingRunner.meet)
-    }
-  },
-  created() {
+  created () {
     agent
       .get(this.FRI_API_URL + '/thor/missingrunners')
       .withCredentials()
       .then(res => {
         this.missingRunners = res.body.map(item => ({
           ...item,
-          genderName: this.genders.find(g => g.id === item.gender)?.name,          
+          genderName: this.genders.find(g => g.id === item.gender)?.name
         }))
       })
+  },
+  methods: {
+    openThor (missingRunner) {
+      const path = 'http://mot.fri.is/MotFRI/SelectedCompetitionResults.aspx?Code='
+      window.open(path + missingRunner.meet)
+    }
   }
 }
 </script>

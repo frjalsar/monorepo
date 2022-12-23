@@ -26,9 +26,9 @@
       <div class="col-md-4 col-lg-3 mb-3">
         <select
           :value="clubId"
-          class="form-select"          
+          class="form-select"
           @change="changeClub"
-        > 
+        >
           <option :value="''">
             Félag
           </option>
@@ -96,7 +96,6 @@ import debounce from 'lodash.debounce'
 
 export default {
   name: 'AthleteSearchPanel',
-  emits: ['click', 'input', 'change', 'search'],
   props: {
     regions: {
       type: Array,
@@ -115,6 +114,7 @@ export default {
       default: () => {}
     }
   },
+  emits: ['click', 'input', 'change', 'search'],
   data () {
     return {
       startsWith: this.settings.startsWith,
@@ -175,7 +175,7 @@ export default {
         this.$emit('search', this.selected)
       }
     }, 300),
-    changeRegion (e) {      
+    changeRegion (e) {
       this.regionId = e.target.value
       this.clubId = undefined
       this.$emit('search', this.selected)
@@ -190,7 +190,7 @@ export default {
       this.clubId = undefined
       this.$emit('search', this.selected)
     }
-  },
+  }
 }
 </script>
 <style scoped>

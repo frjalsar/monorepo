@@ -14,7 +14,7 @@ function makeUpdateCompetitor (sqlPoolConnection) {
     return sqlPoolConnection.then(pool => {
       const request = pool.request()
 
-      request.input('id', VarChar(20), id + '')      
+      request.input('id', VarChar(20), id + '')
       request.input('clubName', VarChar(10), clubName + '')
       request.input('fullName', VarChar(35), fullName + '')
 

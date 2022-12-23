@@ -1,5 +1,5 @@
 function makeCompetitions (db) {
-  const makeSelectCompetitions = require('../repo/competitions/select')  
+  const makeSelectCompetitions = require('../repo/competitions/select')
   const makeInsertCompetition = require('../repo/competitions/insert')
   const makeCompetitionsRouter = require('../routes/competitions')
 

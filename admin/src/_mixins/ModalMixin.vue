@@ -1,28 +1,28 @@
 <script>
 export default {
-  data() {
+  data () {
     return {
       selectedModalItem: undefined,
       modal: undefined
     }
   },
+  mounted () {
+    const el = document.getElementById('ModalEdit')
+    this.modal = new bootstrap.Modal(el) // eslint-disable-line
+  },
   methods: {
-    openEditModal(item) {
-        this.selectedModalItem = item
-        this.modal.show()
-    },      
-    closeEditModal(isDone, callback) {      
+    openEditModal (item) {
+      this.selectedModalItem = item
+      this.modal.show()
+    },
+    closeEditModal (isDone, callback) {
       if (isDone) {
-        this.modal.hide()        
+        this.modal.hide()
         this.$router.go()
       }
 
-      callback(isDone)      
-    },
-  },
-  mounted() {    
-    const el = document.getElementById('ModalEdit')
-    this.modal = new bootstrap.Modal(el)
+      callback(isDone)
+    }
   }
 }
 </script>

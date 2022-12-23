@@ -7,10 +7,10 @@ function makeMeets (db, sendMail) {
   const makeInsertCompetition = require('../repo/competitions/insert')
   const makeMeetsRouter = require('../routes/meets')
 
-  const selectMeets = makeSelectMeets(db)  
+  const selectMeets = makeSelectMeets(db)
   const selectMeetAttachment = makeSelectMeetAttachment(db)
   const updateMeet = makeUpdateMeet(db)
-  const createMeet = makeCreateMeet(makeInsertMeet, makeInsertCompetition, db, sendMail) 
+  const createMeet = makeCreateMeet(makeInsertMeet, makeInsertCompetition, db, sendMail)
 
   return makeMeetsRouter(selectMeets, selectMeetAttachment, updateMeet, createMeet)
 }

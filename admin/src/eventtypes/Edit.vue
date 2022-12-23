@@ -1,37 +1,69 @@
 <template>
-<form>
-  <div class="row g-3 mb-3">
-    <div class="col-md-4">
-      <label for="name" class="form-label">Heiti</label>
-      <input id="name" type="text" class="form-control" v-model="currentItem.name" :disabled="busy">
-    </div>
+  <form>
+    <div class="row g-3 mb-3">
+      <div class="col-md-4">
+        <label
+          for="name"
+          class="form-label"
+        >Heiti</label>
+        <input
+          id="name"
+          v-model="currentItem.name"
+          type="text"
+          class="form-control"
+          :disabled="busy"
+        >
+      </div>
 
-    <div class="col-md-2">
-      <label for="order" class="form-label">Röðun</label>
-      <input id="order" type="text" class="form-control" v-model="currentItem.ordering" :disabled="busy">
-    </div>
+      <div class="col-md-2">
+        <label
+          for="order"
+          class="form-label"
+        >Röðun</label>
+        <input
+          id="order"
+          v-model="currentItem.ordering"
+          type="text"
+          class="form-control"
+          :disabled="busy"
+        >
+      </div>
 
-    <div class="col-md-1 offset-md-1">
-      <label for="id" class="form-label">Númer</label>
-      <input type="name" class="form-control-plaintext" readonly id="id" v-model="currentItem.id" :disabled="busy">
+      <div class="col-md-1 offset-md-1">
+        <label
+          for="id"
+          class="form-label"
+        >Númer</label>
+        <input
+          id="id"
+          v-model="currentItem.id"
+          type="name"
+          class="form-control-plaintext"
+          readonly
+          :disabled="busy"
+        >
+      </div>
     </div>
-  </div>
-
-</form>
+  </form>
 </template>
 
 <script>
 import EditMixin from '../_mixins/EditMixin.vue'
 export default {
   name: 'EditEvent',
-  inject: ['FRI_API_URL'],
   mixins: [EditMixin],
-  props: ['eventtype'],
+  inject: ['FRI_API_URL'],
+  props: {
+    eventtype: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
-    apiUrl() {
+    apiUrl () {
       return this.FRI_API_URL + '/eventtypes'
     }
-  },  
+  },
   watch: {
     eventtype (val) {
       if (val && val.id) {
@@ -39,7 +71,7 @@ export default {
       } else {
         this.currentItem = {}
       }
-    },    
-  },  
+    }
+  }
 }
 </script>

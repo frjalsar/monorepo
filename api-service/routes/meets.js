@@ -12,15 +12,15 @@ function makeMeetsRoute (selectMeets, selectMeetAttachment, updateMeet, createMe
 
   router.get('/:id/file', (req, res, next) => {
     const meetId = req.params.id
-    res.setHeader('Content-disposition', 'attachment; filename=bodsbref-' + meetId + '.docx' )    
+    res.setHeader('Content-disposition', 'attachment; filename=bodsbref-' + meetId + '.docx')
 
     selectMeetAttachment(req.params.id)
-      .then(attachment => {        
+      .then(attachment => {
         if (!attachment) {
-          return res.sendStatus(404)          
+          return res.sendStatus(404)
         }
 
-        return res.send(attachment)        
+        return res.send(attachment)
       })
       .catch(next)
   })

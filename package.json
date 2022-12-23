@@ -1,0 +1,31 @@
+{
+  "name": "frjalsar",
+  "version": "1.0.0",
+  "description": "Monorepo for the Icelandic Athletic Federation",
+  "main": "index.js",  
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.8.0",
+    "husky": "^8.0.2"
+  },
+  "scripts": {
+    "lint": "eslint . --fix --ext .js,.vue",
+    "test": "echo \"No test specified\"",
+    "ci": "npm run lint && npm run test",
+    "prepare": "husky.install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frjalsar/monorepo.git"
+  },
+  "author": "Bergur Hallgrimsson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frjalsar/monorepo/issues"
+  },
+  "homepage": "https://github.com/frjalsar/monorepo#readme"
+}

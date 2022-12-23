@@ -1,9 +1,9 @@
 function corsOrigin () {
   const whitelist = {
-    production: [    
-      'https://admin.fri.is',  
+    production: [
+      'https://admin.fri.is',
       'https://felagaskipti.fri.is',
-      'https://umsokn.fri.is',            
+      'https://umsokn.fri.is'
     ],
     development: [
       'http://local.fri.is:3001',

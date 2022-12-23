@@ -8,12 +8,12 @@ function makeSendMail (apiKey, domain) {
     key: apiKey
   })
 
-  return function sendMail(subject, html) {
-    const data =  {
+  return function sendMail (subject, html) {
+    const data = {
       from: 'skraningarnefnd@fri.is',
       to: 'iris@fri.is;bergurhallgrims@gmail.com',
       subject,
-      html,
+      html
     }
 
     return client.messages.create(domain, data)
