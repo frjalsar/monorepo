@@ -21,7 +21,6 @@ function makeThorRoute (selectThorEvents, selectThorAchievements, selectMissingR
       .catch(next)
   })
 
-  selectMissingRunners
   router.get('/competitor/:id', (req, res, next) => {
     selectCompetitor({ id: req.params.id })
       .then(res.json.bind(res))

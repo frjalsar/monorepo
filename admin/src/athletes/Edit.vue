@@ -1,6 +1,12 @@
 <template>
   <form>
-    <div class="alert alert-danger" role="alert" v-if="errorMessage"> {{ errorMessage }} </div>
+    <div
+      v-if="errorMessage"
+      class="alert alert-danger"
+      role="alert"
+    >
+      {{ errorMessage }}
+    </div>
     <div class="row g-3 mb-3">
       <div class="col-md-6">
         <label
@@ -22,11 +28,24 @@
           class="form-label"
         >Kennitala</label>
         <div class="input-group">
-        <input type="text" class="form-control" id="kt" v-model="currentItem.kt" :disabled="busy" @input="event => userId = event.target.value">
-        <div class="input-group-prepend">        
-          <button class="btn btn-outline-secondary" type="button" @click="search()"><i class="bi bi-search"></i></button>
+          <input
+            id="kt"
+            v-model="currentItem.kt"
+            type="text"
+            class="form-control"
+            :disabled="busy"
+            @input="event => userId = event.target.value"
+          >
+          <div class="input-group-prepend">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              @click="search()"
+            >
+              <i class="bi bi-search" />
+            </button>
+          </div>
         </div>
-      </div>
       </div>
 
       <div class="col-md-2">
@@ -274,8 +293,8 @@ export default {
   data () {
     return {
       membershipIsConfirmed: false,
-      userId:undefined,
-      errorMessage:undefined,
+      userId: undefined,
+      errorMessage: undefined,
       genders: [{
         value: 1,
         text: 'Karl'
@@ -346,52 +365,48 @@ export default {
       const findClub = this.clubs.find(club => club.id === lastMembership.clubId)
       this.currentItem.newMembership[lastIndex].thorId = findClub.thorId
     },
-   search(){
-      if([10,11].includes(this.userId?.length)){
-      this.errorMessage=undefined
-      this.busy=true
-      return agent
-          .get(this.FRI_API_URL + `/athletes`)
+    search () {
+      if ([10, 11].includes(this.userId?.length)) {
+        this.errorMessage = undefined
+        this.busy = true
+        return agent
+          .get(this.FRI_API_URL + '/athletes')
           .withCredentials()
-          .query({kt:this.userId.replace('-','')})
+          .query({ kt: this.userId.replace('-', '') })
           .then(res => {
-            if(res.body?.length > 0){
-              this.errorMessage='Iðkandi er þegar til'
-              this.busy=false
-            }
-            else{
+            if (res.body?.length > 0) {
+              this.errorMessage = 'Iðkandi er þegar til'
+              this.busy = false
+            } else {
               this.searchThor()
             }
-          }).catch(()=>{
-            this.busy=false
+          }).catch(() => {
+            this.busy = false
           })
-        }
-        else{
-          this.errorMessage=this.userId?.length?'ógilt kennitala':'kennitala er krafist'
-        }
+      } else {
+        this.errorMessage = this.userId?.length ? 'ógilt kennitala' : 'kennitala er krafist'
+      }
     },
-    searchThor() {
-      
+    searchThor () {
       return agent
-          .get(this.FRI_API_URL + `/thor/competitor/${this.userId}`)
-          .withCredentials()
-          .then(res => {
-            if(res.body.length===1){
-              this.currentItem={
-                ...res.body[0],
-                kt:res.body[0].kt.replace('-',''),
-                newMembership:[]
-              }
-              this.busy=false
-            }else{
-              this.errorMessage="Íþróttamaður fannst ekki"
-              this.busy=false
-              this.currentItem={kt:this.userId}
+        .get(this.FRI_API_URL + `/thor/competitor/${this.userId}`)
+        .withCredentials()
+        .then(res => {
+          if (res.body.length === 1) {
+            this.currentItem = {
+              ...res.body[0],
+              kt: res.body[0].kt.replace('-', ''),
+              newMembership: []
             }
-            
-          }).catch(()=>{
-            this.busy=false
-          })
+            this.busy = false
+          } else {
+            this.errorMessage = 'Íþróttamaður fannst ekki'
+            this.busy = false
+            this.currentItem = { kt: this.userId }
+          }
+        }).catch(() => {
+          this.busy = false
+        })
     }
   }
 }
