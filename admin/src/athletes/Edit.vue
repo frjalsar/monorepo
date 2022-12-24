@@ -1,5 +1,6 @@
 <template>
   <form>
+    <div class="alert alert-danger" role="alert" v-if="errorMessage"> {{ errorMessage }} </div>
     <div class="row g-3 mb-3">
       <div class="col-md-6">
         <label
@@ -20,13 +21,12 @@
           for="kt"
           class="form-label"
         >Kennitala</label>
-        <input
-          id="kt"
-          v-model="currentItem.kt"
-          type="text"
-          class="form-control"
-          :disabled="busy"
-        >
+        <div class="input-group">
+        <input type="text" class="form-control" id="kt" v-model="currentItem.kt" :disabled="busy" @input="event => userId = event.target.value">
+        <div class="input-group-prepend">        
+          <button class="btn btn-outline-secondary" type="button" @click="search()"><i class="bi bi-search"></i></button>
+        </div>
+      </div>
       </div>
 
       <div class="col-md-2">
@@ -252,6 +252,7 @@
 
 <script>
 import EditMixin from '../_mixins/EditMixin.vue'
+import agent from 'superagent'
 export default {
   name: 'EditAthlete',
   mixins: [EditMixin],
@@ -273,6 +274,8 @@ export default {
   data () {
     return {
       membershipIsConfirmed: false,
+      userId:undefined,
+      errorMessage:undefined,
       genders: [{
         value: 1,
         text: 'Karl'
@@ -342,6 +345,53 @@ export default {
       const lastMembership = this.currentItem.newMembership[lastIndex]
       const findClub = this.clubs.find(club => club.id === lastMembership.clubId)
       this.currentItem.newMembership[lastIndex].thorId = findClub.thorId
+    },
+   search(){
+      if([10,11].includes(this.userId?.length)){
+      this.errorMessage=undefined
+      this.busy=true
+      return agent
+          .get(this.FRI_API_URL + `/athletes`)
+          .withCredentials()
+          .query({kt:this.userId.replace('-','')})
+          .then(res => {
+            if(res.body?.length > 0){
+              this.errorMessage='Iðkandi er þegar til'
+              this.busy=false
+            }
+            else{
+              this.searchThor()
+            }
+          }).catch(()=>{
+            this.busy=false
+          })
+        }
+        else{
+          this.errorMessage=this.userId?.length?'ógilt kennitala':'kennitala er krafist'
+        }
+    },
+    searchThor() {
+      
+      return agent
+          .get(this.FRI_API_URL + `/thor/competitor/${this.userId}`)
+          .withCredentials()
+          .then(res => {
+            if(res.body.length===1){
+              this.currentItem={
+                ...res.body[0],
+                kt:res.body[0].kt.replace('-',''),
+                newMembership:[]
+              }
+              this.busy=false
+            }else{
+              this.errorMessage="Íþróttamaður fannst ekki"
+              this.busy=false
+              this.currentItem={kt:this.userId}
+            }
+            
+          }).catch(()=>{
+            this.busy=false
+          })
     }
   }
 }
