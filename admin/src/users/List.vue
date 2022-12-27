@@ -27,7 +27,7 @@
 
 <script>
 import agent from 'superagent'
-import PageTitle from '../_components/PagleTitle.vue'
+import PageTitle from '../_components/PageTitle.vue'
 import CardComponent from '../_components/CardComponent.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
