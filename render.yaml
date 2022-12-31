@@ -1,5 +1,5 @@
 previewsEnabled: true
-previewsExpireAfterDays: 3
+previewsExpireAfterDays: 30
 services:  
   - type: web    
     name: fri-admin-test
@@ -23,7 +23,7 @@ services:
     region: frankfurt
     plan: starter
     previewPlan: starter
-    initialDeployHook: ./preview-domains.sh
+    initialDeployHook: ./preview-domains.sh; node ./migrations.js
     buildCommand: npm ci
     startCommand: node ./server/index.js
     autoDeploy: true
