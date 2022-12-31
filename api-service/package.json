@@ -10,9 +10,7 @@
   "scripts": {
     "start": "node ./server/index.js",
     "test": "mocha ./test/",
-    "tdd": "mocha ./test/ --reporter dot --watch",
-    "lint": "eslint . --fix",
-    "ci": "npm run lint && npm run test"
+    "tdd": "mocha ./test/ --reporter dot --watch"
   },
   "repository": {
     "type": "git",
@@ -49,8 +47,9 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "chai": "^4.3.6",    
+    "chai": "^4.3.6",
     "mocha": "^10.0.0",
+    "postgres-migrations": "^5.3.0",
     "supertest": "^6.2.3"
   }
 }

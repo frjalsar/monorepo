@@ -16,7 +16,7 @@
     "lint": "eslint . --fix --ext .js,.vue",
     "test": "echo \"No test specified\"",
     "ci": "npm run lint && npm run test",
-    "prepare": "husky.install"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
