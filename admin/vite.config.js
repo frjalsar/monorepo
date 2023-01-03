@@ -13,6 +13,10 @@ export default defineConfig(({ command, mode }) => {
     plugins: [vue()],
     server: {
       port: 3001
+    },
+    define: {
+      VITE_TEST: process.env.RENDER_GIT_BRANCH,
+      TEST: process.env.RENDER_GIT_BRANCH
     }
   }
 })
