@@ -1,10 +1,12 @@
 const { VarChar } = require('mssql')
 function makeSelectCompetitor (sqlPoolConnection) {
   return async function selectCompetitor (options) {
-    const { id } = options
+    const { kt } = options
+    const ktWithHyphen = (kt.indexOf('-') === -1) ? kt.substring(0, 6) + '-' + kt.substring(6) : kt
+
     const sql = `
         SELECT [Númer] as thorId
-          ,[Kennitala] as kt
+          ,Replace([Kennitala], '-', '') as kt
           ,[Nafn] as fullName
           ,[Land] as country
           ,[Fæðingarár] as birthyear
@@ -12,11 +14,12 @@ function makeSelectCompetitor (sqlPoolConnection) {
           ,[E-Mail] as email
           ,[Fæðingardagur] as dateOfBirth
         FROM
-        [Athletics].[dbo].[Athl$Competitors] WHERE [Kennitala]=@id`
+        [Athletics].[dbo].[Athl$Competitors] WHERE [Kennitala]=@kt`
 
     return sqlPoolConnection.then(pool => {
       const request = pool.request()
-      request.input('id', VarChar(20), id + '')
+      request.input('kt', VarChar(20), ktWithHyphen + '')
+
       return request
         .query(sql)
         .then(res => res.recordset)
