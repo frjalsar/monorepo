@@ -6,7 +6,7 @@ services:
     repo: https://github.com/frjalsar/monorepo.git
     env: static        
     rootDir: admin
-    buildCommand: ./vite-url.sh; npm run build
+    buildCommand: ./vite-url.sh; npm run build --mode test
     staticPublishPath: ./dist
     autoDeploy: true
     domains:
