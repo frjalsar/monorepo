@@ -170,6 +170,10 @@ export default {
     }
   },
   mounted () {
+    console.log('import.meta.env.VITE_FRI_API_URL', import.meta.env.VITE_FRI_API_URL)
+    console.log('import.meta.env.VITE_COUNTRIES_API_URL', import.meta.env.VITE_COUNTRIES_API_URL)
+    console.log('process.env.VITE_FRI_API_URL', process.env.VITE_FRI_API_URL)
+    console.log('process.env.VITE_COUNTRIES_API_URL', process.env.VITE_COUNTRIES_API_URL)
     this.authorize().then(user => {
       if (!user) {
         this.$router.push({ path: '/' })
