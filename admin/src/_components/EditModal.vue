@@ -22,15 +22,15 @@
         </div>
         <div class="modal-body">
           <div
-            v-if="error"
+            v-if="alertType === 'error'"
             class="alert alert-danger"
             role="alert"
           >
-            Villa koma upp. Lokið vafranum og prófið aftur eða hafið samband við skráningarnefnd.
+            {{ alertMessage }}
           </div>
           <slot
             :confirm="shouldConfirm"
-            :callback="callback"
+            :alert="alert"
           />
         </div>
         <div class="modal-footer">
@@ -71,7 +71,8 @@ export default {
   data () {
     return {
       shouldConfirm: false,
-      error: false
+      alertType: undefined,
+      alertMessage: ''
     }
   },
   computed: {
@@ -93,9 +94,10 @@ export default {
     confirm () {
       this.shouldConfirm = true
     },
-    callback (success) {
-      this.error = !success
-      this.shouldConfirm = !success
+    alert (type, message) {
+      this.alertType = type
+      this.alertMessage = message
+      this.shouldConfirm = false
     }
   }
 }

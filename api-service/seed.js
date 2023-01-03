@@ -9,7 +9,7 @@ const client = new Client({
   }
 })
 
-const runSeed = async function () {  
+const runSeed = async function () {
   client.connect()
   // User
   const insertUser = makeInsertUser(client)

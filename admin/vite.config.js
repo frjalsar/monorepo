@@ -9,7 +9,7 @@ export default defineConfig(() => {
   */
   if (process.env.IS_PULL_REQUEST === 'true') {
     const pos = process.env.VITE_FRI_API_URL.indexOf('api')
-    
+
     process.env.VITE_FRI_API_URL = process.env.VITE_FRI_API_URL.substring(0, pos) + process.env.RENDER_GIT_BRANCH + '.' + process.env.VITE_FRI_API_URL.substring(pos)
   }
 

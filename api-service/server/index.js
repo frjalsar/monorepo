@@ -47,11 +47,6 @@ const sqlPool = new sql.ConnectionPool({
   }
 })
 
-console.log('RENDER_SERVICE_ID', process.env.RENDER_SERVICE_ID)
-console.log('RENDER_SERVICE_NAME', process.env.RENDER_SERVICE_NAME)
-console.log('IS_PULL_REQUEST', process.env.IS_PULL_REQUEST)
-console.log('RENDER_API_KEY', process.env.RENDER_API_KEY)
-
 const sendMail = makeSendMail(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN, isProduction)
 
 const sqlConnection = sqlPool.connect()
