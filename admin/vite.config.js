@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig(({ command, mode }) => {
   if (command === 'build' && mode === 'test') {
     console.log('building test')
-    console.log(process.env.$RENDER_GIT_BRANCH)
+    console.log(process.env.RENDER_GIT_BRANCH)
     console.log(process.env.VITE_FRI_API_URL)
   }
 
