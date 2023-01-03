@@ -172,6 +172,7 @@ export default {
   mounted () {
     console.log(FRI_API_URL)
     console.log(COUNTRIES_API_URL)
+
     this.authorize().then(user => {
       if (!user) {
         this.$router.push({ path: '/' })
