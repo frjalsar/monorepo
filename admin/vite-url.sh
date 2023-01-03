@@ -1,6 +1,6 @@
 #!/bin/bash
-echo "vite-url"
-if [$IS_PULL_REQUEST == 'true']
+echo "setting vite env variable for api"
+if [ "$IS_PULL_REQUEST" == 'true' ]
 then
   export VITE_FRI_API_URL="https://$RENDER_GIT_BRANCH.$FRI_API_HOST"
 else 
