@@ -12,10 +12,6 @@ services:
     domains:
       - admin-test.fri.is
     envVars:
-      - key: VITE_BRANCH1
-        value: RENDER_GIT_BRANCH
-      - key: VITE_BRANCH2
-        value: $RENDER_GIT_BRANCH
       - key: VITE_COUNTRIES_API_URL
         value: https://restcountries.com
       - key: FRI_API_HOST
