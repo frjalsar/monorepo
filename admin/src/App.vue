@@ -171,7 +171,7 @@ export default {
   },
   mounted () {
     console.log('import meta vite test', import.meta.env.VITE_TEST)
-    console.log('import meta test', import.meta.env.TEST)    
+    console.log('import meta test', import.meta.env.TEST)
     this.authorize().then(user => {
       if (!user) {
         this.$router.push({ path: '/' })
