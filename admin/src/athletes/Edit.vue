@@ -1,27 +1,6 @@
 <template>
   <form>
-    <div
-      v-if="errorMessage"
-      class="alert alert-danger"
-      role="alert"
-    >
-      {{ errorMessage }}
-    </div>
     <div class="row g-3 mb-3">
-      <div class="col-md-6">
-        <label
-          for="fullName"
-          class="form-label"
-        >Nafn</label>
-        <input
-          id="fullName"
-          v-model="currentItem.fullName"
-          type="text"
-          class="form-control"
-          :disabled="busy"
-        >
-      </div>
-
       <div class="col-md-4">
         <label
           for="kt"
@@ -46,6 +25,20 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <div class="col-md-6">
+        <label
+          for="fullName"
+          class="form-label"
+        >Nafn</label>
+        <input
+          id="fullName"
+          v-model="currentItem.fullName"
+          type="text"
+          class="form-control"
+          :disabled="busy"
+        >
       </div>
 
       <div class="col-md-2">
@@ -290,6 +283,7 @@ export default {
       required: true
     }
   },
+  emits: ['alert'],
   data () {
     return {
       membershipIsConfirmed: false,
@@ -366,43 +360,43 @@ export default {
       this.currentItem.newMembership[lastIndex].thorId = findClub.thorId
     },
     search () {
-      if ([10, 11].includes(this.userId?.length)) {
-        this.errorMessage = undefined
-        this.busy = true
-        return agent
-          .get(this.FRI_API_URL + '/athletes')
-          .withCredentials()
-          .query({ kt: this.userId.replace('-', '') })
-          .then(res => {
-            if (res.body?.length > 0) {
-              this.errorMessage = 'Iðkandi er þegar til'
-              this.busy = false
-            } else {
-              this.searchThor()
-            }
-          }).catch(() => {
-            this.busy = false
-          })
-      } else {
-        this.errorMessage = this.userId?.length ? 'ógilt kennitala' : 'kennitala er krafist'
+      this.busy = true
+
+      if (this.currentItem.kt.length !== 10) {
+        this.busy = false
+        return this.$emit('alert', { type: 'error', message: 'Kennitala passar ekki' })
       }
+
+      return agent
+        .get(this.FRI_API_URL + '/athletes')
+        .withCredentials()
+        .query({ kt: this.currentItem.kt })
+        .then(res => {
+          if (res.body.length > 0) {
+            this.$emit('alert', { type: 'error', message: 'Iðkandi er þegar til í félagatalinu.' })
+            this.busy = false
+          } else {
+            return this.searchThor()
+          }
+        }).catch(() => {
+          this.busy = false
+        })
     },
     searchThor () {
       return agent
-        .get(this.FRI_API_URL + `/thor/competitor/${this.userId}`)
+        .get(this.FRI_API_URL + `/thor/competitor/${this.currentItem.kt}`)
         .withCredentials()
         .then(res => {
           if (res.body.length === 1) {
             this.currentItem = {
               ...res.body[0],
-              kt: res.body[0].kt.replace('-', ''),
               newMembership: []
             }
             this.busy = false
+            this.$emit('alert', {})
           } else {
-            this.errorMessage = 'Íþróttamaður fannst ekki'
+            this.$emit('alert', { type: 'error', message: 'Iðkandi fannst ekki í Þór' })
             this.busy = false
-            this.currentItem = { kt: this.userId }
           }
         }).catch(() => {
           this.busy = false
