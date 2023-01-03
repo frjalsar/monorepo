@@ -12,9 +12,11 @@ services:
     domains:
       - admin-test.fri.is
     envVars:
+      - key: VITE_COUNTRIES_API_URL
+        value: https://restcountries.com
       - key: FRI_API_HOST
         value: api-test.fri.is      
-      - fromGroup: renderApi
+      - fromGroup: RenderApi
   - type: web
     name: fri-api-test
     repo: https://github.com/frjalsar/monorepo.git
@@ -41,7 +43,7 @@ services:
           property: connectionString
       - fromGroup: Thor
       - fromGroup: Mailgun
-      - fromGroup: renderApi
+      - fromGroup: RenderApi
   - type: redis
     name: fri-store-test
     region: frankfurt
