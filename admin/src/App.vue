@@ -169,7 +169,7 @@ export default {
       loggedInUser: undefined
     }
   },
-  mounted () {    
+  mounted () {
     this.authorize().then(user => {
       if (!user) {
         this.$router.push({ path: '/' })
