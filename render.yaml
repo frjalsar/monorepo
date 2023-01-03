@@ -12,10 +12,10 @@ services:
     domains:
       - admin-test.fri.is
     envVars:
+      - key: VITE_FRI_API_URL
+        value: https://api-test.fri.is      
       - key: VITE_COUNTRIES_API_URL
-        value: https://restcountries.com
-      - key: FRI_API_HOST
-        value: api-test.fri.is      
+        value: https://restcountries.com     
       - fromGroup: RenderApi
   - type: web
     name: fri-api-test
