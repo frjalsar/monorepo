@@ -169,11 +169,7 @@ export default {
       loggedInUser: undefined
     }
   },
-  mounted () {
-    console.log('import meta', import.meta.env.VITE_FRI_API_URL)
-    console.log('import meta', import.meta.env.VITE_COUNTRIES_API_URL)
-    console.log('process env', process.env.VITE_FRI_API_URL)
-    console.log('process env', process.env.VITE_COUNTRIES_API_URL)
+  mounted () {    
     this.authorize().then(user => {
       if (!user) {
         this.$router.push({ path: '/' })
