@@ -6,15 +6,16 @@ services:
     repo: https://github.com/frjalsar/monorepo.git
     env: static        
     rootDir: admin
-    buildCommand: vite-url.sh; npm run build
+    buildCommand: npm run build
     staticPublishPath: ./dist
     autoDeploy: true
     domains:
       - admin-test.fri.is
     envVars:
-      - key: FRI_API_HOST
-        value: api-test.fri.is      
-      - fromGroup: renderApi
+      - key: VITE_FRI_API_URL
+        value: https://api-test.fri.is      
+      - key: VITE_COUNTRIES_API_URL
+        value: https://restcountries.com
   - type: web
     name: fri-api-test
     repo: https://github.com/frjalsar/monorepo.git
@@ -23,7 +24,7 @@ services:
     region: frankfurt
     plan: starter
     previewPlan: starter
-    initialDeployHook: ./preview-domains.sh; node ./migrations.js
+    initialDeployHook: ./preview-domains.sh; node ./migrations.js; node ./seed.js
     buildCommand: npm ci
     startCommand: node ./server/index.js
     autoDeploy: true
@@ -41,7 +42,7 @@ services:
           property: connectionString
       - fromGroup: Thor
       - fromGroup: Mailgun
-      - fromGroup: renderApi
+      - fromGroup: RenderApi
   - type: redis
     name: fri-store-test
     region: frankfurt
