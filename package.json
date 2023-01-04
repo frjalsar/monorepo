@@ -13,7 +13,8 @@
     "husky": "^8.0.2"
   },
   "scripts": {
-    "lint": "eslint . --fix --ext .js,.vue",
+    "lint": "eslint . --ext .js,.vue",
+    "lint-fix": "eslint . --fix --ext .js,.vue",
     "test": "echo \"No test specified\"",
     "ci": "npm run lint && npm run test",
     "prepare": "husky install"
