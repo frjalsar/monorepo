@@ -3,7 +3,7 @@ require('dotenv').config()
 const pg = require('pg')
 const sql = require('mssql')
 const redis = require('redis')
-const logger = require('heroku-logger')
+const logger = require('pino')()
 const createApp = require('./app')
 const makeAgeGroups = require('../composition/agegroups')
 const makeAuthenticate = require('../composition/authenticate')
@@ -46,11 +46,6 @@ const sqlPool = new sql.ConnectionPool({
     trustServerCertificate: true
   }
 })
-
-console.log('RENDER_SERVICE_ID', process.env.RENDER_SERVICE_ID)
-console.log('RENDER_SERVICE_NAME', process.env.RENDER_SERVICE_NAME)
-console.log('IS_PULL_REQUEST', process.env.IS_PULL_REQUEST)
-console.log('RENDER_API_KEY', process.env.RENDER_API_KEY)
 
 const sendMail = makeSendMail(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN, isProduction)
 
