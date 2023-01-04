@@ -1,14 +1,19 @@
 function makeSelectMissingRunners (sqlPoolConnection) {
   return function selectMissingRunners () {
     const sql = `
-      SELECT [Mót] as meet
-        ,[Rásnúmer] as startPosition
-        ,[Nafn] as name
-        ,[Kyn] as gender
-        ,[Félag] as club
-        ,[Fæð_ár] as dateOfBirth        
+      SELECT
+        hak.[Mót] as meetCode,
+        hak.[Rásnúmer] as startPosition,
+        hak.[Nafn] as fullName,
+        hak.[Kyn] as gender,
+        hak.[Félag] as club,
+        hak.[Fæð_ár] as birthyear,
+        hak.[Skráð kennitala] as kt,
+        c.[Name] as meetName
       FROM
-        [Athletics].[dbo].[Athl$Hlauparar án keppandanúmers]`
+        [Athletics].[dbo].[Athl$Hlauparar án keppandanúmers] hak
+      LEFT JOIN 
+        [Athletics].[dbo].[Athl$Competition] c ON hak.[Mót] = c.[Code]`
 
     return sqlPoolConnection.then(pool => {
       const request = pool.request()
