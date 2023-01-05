@@ -1,8 +1,8 @@
 # Table of contents
 
 * [Welcome](README.md)
-  * [API Service for FRÍ](api/readme-en.md)
 
-## Endpoints
+## Getting started
 
-* [Athletes](endpoints/athletes.md)
+* [Code](getting-started/code.md)
+* [API Service for FRÍ](api/readme-en.md)
