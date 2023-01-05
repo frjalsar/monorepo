@@ -3,12 +3,14 @@ function makeSelectMissingRunners (sqlPoolConnection) {
     const sql = `
       SELECT
         hak.[Mót] as meetCode,
-        hak.[Rásnúmer] as startPosition,
+        hak.[Rásnúmer] as bibNo,
         hak.[Nafn] as fullName,
         hak.[Kyn] as gender,
         hak.[Félag] as club,
         hak.[Fæð_ár] as birthyear,
-        hak.[Skráð kennitala] as kt,
+        hak.[Leiðrétt kennitala] as kt,
+        hak.[Skráð kennitala] as ktOriginal,
+        hak.[Keppandanúmer] as competitorId,
         c.[Name] as meetName
       FROM
         [Athletics].[dbo].[Athl$Hlauparar án keppandanúmers] hak

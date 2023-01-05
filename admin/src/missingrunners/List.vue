@@ -53,7 +53,7 @@ export default {
           display: 'lg'
         },
         {
-          field: 'startPosition',
+          field: 'bibNo',
           label: 'Rásnúmer',
           display: 'md'
         },
@@ -63,14 +63,24 @@ export default {
           display: 'lg'
         },
         {
+          field: 'ktOriginal',
+          label: 'Kennitala (skráð)',
+          display: 'sm'
+        },
+        {
           field: 'kt',
-          label: 'Kennitala',
+          label: 'Kennitala (leiðrétt)',
+          display: 'md'
+        },
+        {
+          field: 'competitorId',
+          label: 'Keppendanúmer',
           display: 'md'
         },
         {
           field: 'genderName',
           label: 'Kyn',
-          display: 'md'
+          display: 'sm'
         },
         {
           field: 'birthyear',
