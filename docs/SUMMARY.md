@@ -1,22 +1,8 @@
 # Table of contents
 
-* [api](README.md)
-  * [API Service for FRÍ](api/readme-en.md)
-* [developers](developers/README.md)
-  * [getting-started](developers/getting-started/README.md)
-    * [Code](developers/getting-started/code.md)
-    * [API Service for FRÍ](developers/getting-started/readme-en.md)
-* [kb](kb/README.md)
-  * [about-us](kb/about-us/README.md)
-    * [Values](kb/about-us/values.md)
-    * [Vision, Mission & Focus](kb/about-us/vision-mission-and-focus/README.md)
-      * [Focus](kb/about-us/vision-mission-and-focus/focus.md)
-      * [Mission](kb/about-us/vision-mission-and-focus/mission.md)
-      * [Vision](kb/about-us/vision-mission-and-focus/vision.md)
-  * [collaborating](kb/collaborating/README.md)
-    * [How we Work Together](kb/collaborating/how-we-work-together.md)
-    * [Meetings](kb/collaborating/meetings.md)
-  * [policies](kb/policies/README.md)
-    * [Requesting Time Off](kb/policies/requesting-time-off.md)
-  * [team](kb/team/README.md)
-    * [Meet the Team!](kb/team/meet-the-team.md)
+* [Welcome](README.md)
+
+## Getting started
+
+* [Code](getting-started/code.md)
+* [API Service for FRÍ](getting-started/readme-en.md)
