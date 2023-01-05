@@ -1,11 +1,11 @@
 ---
 description: >-
-  This space is for developers who are contributing to The Icelandic Athletic
-  Federation's digital products.
+  This space is for customers wanting to connect to The Icelandic Athletic
+  Association's digital products.
 ---
 
 # Welcome
 
 {% hint style="info" %}
-Note: If you are writing your own solutions to connect with The Icelandic Athletic Federation systems, like meets, competition, athletes and results then check out the API documentation.
+Note: If you are a developer working for The Athletic Association then check out the developer space.
 {% endhint %}
