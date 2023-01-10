@@ -9,6 +9,7 @@
 ## 📒 Leiðbeiningar
 
 * [Inngangur](leidbeiningar/fyrstu-skref.md)
+* [Stjórnkerfi](leidbeiningar/stjornkerfi.md)
 
 ## 🧑💻 Þróun
 
