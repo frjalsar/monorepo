@@ -15,3 +15,7 @@
 ## 🧑💻 Þróun
 
 * [Fyrstu skref](throun/fyrstu-skref.md)
+
+***
+
+* [Úrslit hlaupa í afrekaskrá](urslit-hlaupa-i-afrekaskra.md)
