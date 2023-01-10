@@ -1,8 +1,15 @@
 # Table of contents
 
-* [Welcome](README.md)
+* [Velkomin](README.md)
 
-## Getting started
+## 🚀 API
 
-* [Code](getting-started/code.md)
-* [API Service for FRÍ](api/readme-en.md)
+* [Fyrstu skref](api/fyrstu-skref.md)
+
+## 📒 Leiðbeiningar
+
+* [Fyrstu skref](leidbeiningar/fyrstu-skref.md)
+
+## 🧑💻 Þróun
+
+* [Fyrstu skref](throun/fyrstu-skref.md)
