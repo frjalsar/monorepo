@@ -8,7 +8,7 @@
 
 ## 📒 Leiðbeiningar
 
-* [Fyrstu skref](leidbeiningar/fyrstu-skref.md)
+* [Inngangur](leidbeiningar/fyrstu-skref.md)
 
 ## 🧑💻 Þróun
 
