@@ -8,10 +8,14 @@
 
 ## 📒 Leiðbeiningar
 
-* [Inngangur](leidbeiningar/inngangur.md)
+* [Inngangur](leidbeiningar/fyrstu-skref.md)
 * [Stjórnkerfi](leidbeiningar/stjornkerfi.md)
 * [Umsóknir](leidbeiningar/umsoknir.md)
 
 ## 🧑💻 Þróun
 
-* [Inngangur](throun/inngangur.md)
+* [Inngangur](throun/fyrstu-skref.md)
+
+***
+
+* [Úrslit hlaupa í afrekaskrá](urslit-hlaupa-i-afrekaskra.md)
