@@ -10,6 +10,7 @@
 
 * [Inngangur](leidbeiningar/fyrstu-skref.md)
 * [Stjórnkerfi](leidbeiningar/stjornkerfi.md)
+* [Umsóknir](leidbeiningar/umsoknir.md)
 
 ## 🧑💻 Þróun
 
