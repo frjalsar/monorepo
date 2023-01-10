@@ -4,8 +4,8 @@ description: Þetta svæði innheldur leiðbeingar fyrir þá sem nota stafræna
 
 # Inngangur
 
-{% content-ref url="stjornkerfi.md" %}
-[stjornkerfi.md](stjornkerfi.md)
+{% content-ref url="stjornkerfi/" %}
+[stjornkerfi](stjornkerfi/)
 {% endcontent-ref %}
 
 {% content-ref url="umsoknir.md" %}
