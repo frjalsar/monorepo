@@ -1,7 +1,7 @@
 ---
 description: >-
   Þetta svæði inniheldur skjölun og leiðbeiningar fyrir stafrænar lausnir
-  Frjálsíþróttasambs Íslands.
+  Frjálsíþróttasambands Íslands.
 cover: .gitbook/assets/fri-hilmar-orn.jpg
 coverY: 0
 ---
