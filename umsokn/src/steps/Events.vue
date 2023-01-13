@@ -100,14 +100,14 @@ export default {
 
     agent
       .get(this.FRI_API_URL + '/events')
-      .auth(this.FRI_API_KEY, { type: 'bearer'})
+      .auth(this.FRI_API_KEY, { type: 'bearer' })
       .then(res => {
         this.events = res.body
       })
 
     agent
       .get(this.FRI_API_URL + '/eventtypes')
-      .auth(this.FRI_API_KEY, { type: 'bearer'})
+      .auth(this.FRI_API_KEY, { type: 'bearer' })
       .then(res => {
         this.eventTypes = res.body.filter(type => {
           const hasRoad = type.name.includes('Götu')

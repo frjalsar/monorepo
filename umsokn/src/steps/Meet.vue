@@ -188,7 +188,7 @@ export default {
     },
     validMeetEnd () {
       const meetStart = this.strToDate(this.meetStart)
-      const meetEnd = this.strToDate(this.meetEnd)      
+      const meetEnd = this.strToDate(this.meetEnd)
       return meetEnd >= meetStart && !isNaN(meetEnd)
     },
     isValid () {
@@ -208,7 +208,7 @@ export default {
 
     agent
       .get(this.FRI_API_URL + '/venues')
-      .auth(this.FRI_API_KEY, { type: 'bearer'})
+      .auth(this.FRI_API_KEY, { type: 'bearer' })
       .then(res => {
         this.venues = res.body
       })

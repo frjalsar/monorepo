@@ -50,7 +50,7 @@ export default {
   },
   provide: {
     FRI_API_URL: import.meta.env.VITE_FRI_API_URL,
-    FRI_API_KEY: import.meta.env.VITE_FRI_API_KEY,
+    FRI_API_KEY: import.meta.env.VITE_FRI_API_KEY
   },
   data () {
     return {

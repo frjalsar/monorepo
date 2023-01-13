@@ -6,16 +6,41 @@
       Þú getur líka sett saman úr listanum eftir hentugleika og smellt á "Bæta við" til að bæta keppni við.
     </p>
 
-    <div class="row mb-4">      
-      <div class="col">        
-        <button class="btn btn-outline-primary mx-3 my-2" @click="addAge(0, 10)">10 ára og yngri</button>        
-        <button class="btn btn-outline-primary mx-3 my-2" @click="addAge(11, 15)">11 - 15 ára</button>                
-        <button class="btn btn-outline-primary mx-3 my-2" @click="addAge(16, 22)">16-22 ára</button>                
-        <button class="btn btn-outline-primary mx-3 my-2" @click="addAdults()">Fullorðnir (án aldursflokka)</button>        
-        <button class="btn btn-outline-primary mx-3 my-2" @click="addAge(30, 100)">30+ (öldungar)</button>
-      </div>      
-    </div> 
-      
+    <div class="row mb-4">
+      <div class="col">
+        <button
+          class="btn btn-outline-primary mx-3 my-2"
+          @click="addAge(0, 10)"
+        >
+          10 ára og yngri
+        </button>
+        <button
+          class="btn btn-outline-primary mx-3 my-2"
+          @click="addAge(11, 15)"
+        >
+          11 - 15 ára
+        </button>
+        <button
+          class="btn btn-outline-primary mx-3 my-2"
+          @click="addAge(16, 22)"
+        >
+          16-22 ára
+        </button>
+        <button
+          class="btn btn-outline-primary mx-3 my-2"
+          @click="addAdults()"
+        >
+          Fullorðnir (án aldursflokka)
+        </button>
+        <button
+          class="btn btn-outline-primary mx-3 my-2"
+          @click="addAge(30, 100)"
+        >
+          30+ (öldungar)
+        </button>
+      </div>
+    </div>
+
     <div class="row mb-4">
       <div class="col-md-3 offset-md-2">
         <label
@@ -106,7 +131,6 @@
         >
           Bæta við
         </button>
-        
       </div>
       <div class="col-md-1 text-start" />
     </div>
@@ -202,7 +226,7 @@ export default {
     }
   },
   computed: {
-    isRun() {
+    isRun () {
       return this.application.type === 'hlaup'
     },
     validCompetition () {
@@ -221,14 +245,14 @@ export default {
   created () {
     agent
       .get(this.FRI_API_URL + '/equipment')
-      .auth(this.FRI_API_KEY, { type: 'bearer'})
+      .auth(this.FRI_API_KEY, { type: 'bearer' })
       .then(res => {
         this.equipment = res.body
       })
 
     agent
       .get(this.FRI_API_URL + '/agegroups')
-      .auth(this.FRI_API_KEY, { type: 'bearer'})
+      .auth(this.FRI_API_KEY, { type: 'bearer' })
       .then(res => {
         this.ageGroups = res.body
       })
@@ -246,15 +270,15 @@ export default {
         // default to adult unless age is given
         let correctAge = eq.age === adultAge
         if (ageTo) {
-          correctAge = eq.age >= minAge && eq.age <= ageTo          
+          correctAge = eq.age >= minAge && eq.age <= ageTo
         }
 
         return correctEvent && correctGender && correctAge
       })
-            
-      return foundEquipment.reduce((max, element) => {          
+
+      return foundEquipment.reduce((max, element) => {
         return element.value > max.value ? element : max
-      }, foundEquipment[0])            
+      }, foundEquipment[0])
     },
     add () {
       this.shake = false
@@ -297,7 +321,7 @@ export default {
         }
       } else {
         this.shake = true
-      }      
+      }
     },
     addAge (min, max) {
       this.application.selectedEvents.forEach(event => {
@@ -306,7 +330,7 @@ export default {
           .forEach(ageGroup => {
             this.genders
               .filter(gender => gender.id !== -1)
-              .forEach(gender => {            
+              .forEach(gender => {
                 this.competition.push({
                   event,
                   gender,
@@ -314,8 +338,8 @@ export default {
                   ageFrom: ageGroup.from,
                   ageTo: ageGroup.to
                 })
-            })
-        })
+              })
+          })
       })
     },
     addAdults () {

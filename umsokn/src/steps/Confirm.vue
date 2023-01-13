@@ -109,7 +109,7 @@ export default {
           })),
           base64Attachment: this.application.base64Attachment
         })
-        .auth(this.FRI_API_KEY, { type: 'bearer'})
+        .auth(this.FRI_API_KEY, { type: 'bearer' })
         .then(() => {
           this.$emit('next', { success: true })
         })
