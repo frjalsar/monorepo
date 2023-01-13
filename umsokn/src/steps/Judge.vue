@@ -89,7 +89,7 @@ export default {
 
     agent
       .get(this.FRI_API_URL + '/judges')
-      .withCredentials()
+      .auth(this.FRI_API_KEY, { type: 'bearer'})
       .then(res => {
         this.judges = res.body.filter(judge => judge.valid)
       })

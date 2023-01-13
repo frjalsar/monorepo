@@ -64,7 +64,7 @@ import agent from 'superagent'
 
 export default {
   name: 'TrackEvents',
-  inject: ['FRI_API_URL'],
+  inject: ['FRI_API_URL', 'FRI_API_KEY'],
   props: {
     application: {
       type: Object,
@@ -100,14 +100,14 @@ export default {
 
     agent
       .get(this.FRI_API_URL + '/events')
-      .withCredentials()
+      .auth(this.FRI_API_KEY, { type: 'bearer'})
       .then(res => {
         this.events = res.body
       })
 
     agent
       .get(this.FRI_API_URL + '/eventtypes')
-      .withCredentials()
+      .auth(this.FRI_API_KEY, { type: 'bearer'})
       .then(res => {
         this.eventTypes = res.body.filter(type => {
           const hasRoad = type.name.includes('Götu')

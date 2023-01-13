@@ -171,7 +171,7 @@ import agent from 'superagent'
 
 export default {
   name: 'TrackConfirm',
-  inject: ['FRI_API_URL'],
+  inject: ['FRI_API_URL', 'FRI_API_KEY'],
   props: {
     application: {
       type: Object,
@@ -221,14 +221,14 @@ export default {
   created () {
     agent
       .get(this.FRI_API_URL + '/equipment')
-      .withCredentials()
+      .auth(this.FRI_API_KEY, { type: 'bearer'})
       .then(res => {
         this.equipment = res.body
       })
 
     agent
       .get(this.FRI_API_URL + '/agegroups')
-      .withCredentials()
+      .auth(this.FRI_API_KEY, { type: 'bearer'})
       .then(res => {
         this.ageGroups = res.body
       })

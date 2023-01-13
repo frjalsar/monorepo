@@ -69,7 +69,7 @@
 import agent from 'superagent'
 export default {
   name: 'TrackConfirm',
-  inject: ['FRI_API_URL'],
+  inject: ['FRI_API_URL', 'FRI_API_KEY'],
   props: {
     application: {
       type: Object,
@@ -109,7 +109,7 @@ export default {
           })),
           base64Attachment: this.application.base64Attachment
         })
-        .withCredentials()
+        .auth(this.FRI_API_KEY, { type: 'bearer'})
         .then(() => {
           this.$emit('next', { success: true })
         })
