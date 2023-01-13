@@ -13,6 +13,7 @@ function makeSelectCompetitor (sqlPoolConnection) {
           ,[Kyn] as gender  
           ,[E-Mail] as email
           ,[Fæðingardagur] as dateOfBirth
+          ,[Félag] as club
         FROM
         [Athletics].[dbo].[Athl$Competitors] WHERE [Kennitala]=@kt`
 

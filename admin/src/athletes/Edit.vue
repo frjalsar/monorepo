@@ -13,7 +13,6 @@
             type="text"
             class="form-control"
             :disabled="busy"
-            @input="event => userId = event.target.value"
           >
           <div class="input-group-prepend">
             <button
@@ -287,8 +286,6 @@ export default {
   data () {
     return {
       membershipIsConfirmed: false,
-      userId: undefined,
-      errorMessage: undefined,
       genders: [{
         value: 1,
         text: 'Karl'
@@ -390,7 +387,7 @@ export default {
           if (res.body.length === 1) {
             this.currentItem = {
               ...res.body[0],
-              newMembership: []
+              newMembership: this.clubs.filter(club => club.thorId === this.currentItem.club)
             }
             this.busy = false
             this.$emit('alert', {})
