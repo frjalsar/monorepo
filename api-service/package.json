@@ -33,7 +33,6 @@
     "express-sslify": "^1.2.0",
     "form-data": "^4.0.0",
     "helmet": "^5.0.2",
-    "heroku-logger": "^0.3.3",
     "kennitala-utility": "^5.0.0",
     "lodash.isempty": "^4.4.0",
     "lodash.isequal": "^4.5.0",
@@ -41,6 +40,7 @@
     "mssql": "^8.1.0",
     "pg": "^8.7.3",
     "pg-parameterize": "^2.0.7",
+    "pino": "^8.8.0",
     "redis": "^3.1.2",
     "superagent": "^8.0.6",
     "uid-safe": "^2.1.5",
@@ -49,6 +49,7 @@
   "devDependencies": {
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
+    "pino-pretty": "^9.1.1",
     "postgres-migrations": "^5.3.0",
     "supertest": "^6.2.3"
   }

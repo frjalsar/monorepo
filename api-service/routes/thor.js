@@ -1,6 +1,6 @@
 const { Router } = require('express')
 
-function makeThorRoute (selectThorEvents, selectThorAchievements, selectMissingRunners, selectCompetitor) {
+function makeThorRoute (selectThorEvents, selectThorAchievements, selectMissingRunners, updateMissingRunner, selectCompetitor) {
   const router = Router()
 
   router.get('/events', (req, res, next) => {
@@ -26,6 +26,12 @@ function makeThorRoute (selectThorEvents, selectThorAchievements, selectMissingR
       .then(res.json.bind(res))
       .catch(next)
   })
+  router.put('/missingrunners', (req, res, next) => {
+    updateMissingRunner(req.body)
+      .then(res.json.bind(res))
+      .catch(next)
+  })
+
   return router
 }
 
