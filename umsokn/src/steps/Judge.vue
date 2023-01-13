@@ -58,7 +58,7 @@
 import agent from 'superagent'
 export default {
   name: 'TrackJudge',
-  inject: ['FRI_API_URL'],
+  inject: ['FRI_API_URL', 'FRI_API_KEY'],
   props: {
     application: {
       type: Object,
