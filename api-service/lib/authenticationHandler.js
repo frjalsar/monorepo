@@ -2,7 +2,6 @@ function makeAuthenticationHandler (getToken, getUser, setUser, selectUser, logg
   return function authenticate () {
     return (req, res, next) => {
       const token = getToken(req.headers)
-
       if (token) {
         return getUser(token)
           .then(reply => {

@@ -38,6 +38,11 @@ function makeSelectUsers (db) {
       params.push(opt.id)
     }
 
+    if (opt.token) {
+      sql += ' AND u.token = ?'
+      params.push(opt.token)
+    }
+
     sql += ' ORDER BY u.fullname ASC'
 
     return db

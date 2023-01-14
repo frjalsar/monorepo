@@ -4,6 +4,7 @@ const pg = require('pg')
 const sql = require('mssql')
 const redis = require('redis')
 const logger = require('pino')()
+const pinoHTTP = require('pino-http')
 const createApp = require('./app')
 const makeAgeGroups = require('../composition/agegroups')
 const makeAuthenticate = require('../composition/authenticate')
@@ -48,11 +49,24 @@ const sqlPool = new sql.ConnectionPool({
 })
 
 const sendMail = makeSendMail(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN, isProduction)
+const authenticate = makeAuthenticate(pgPool, redisClient, logger)
 
 const sqlConnection = sqlPool.connect()
 
 const app = createApp(isProduction)
-const authenticate = makeAuthenticate(pgPool, redisClient, logger)
+app.use(pinoHTTP({
+  logger,
+  serializers: {
+    req: (req) => ({
+      method: req.method,
+      url: req.url
+    }),
+    res: (res) => ({
+      statusCode: res.statusCode
+    })
+  }
+}))
+
 app.use('/login', makeLogin(pgPool, redisClient, isProduction))
 app.use(authenticate())
 app.use('/agegroups', makeAgeGroups())
