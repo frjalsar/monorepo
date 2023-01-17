@@ -1,10 +1,10 @@
 previewsEnabled: true
 previewsExpireAfterDays: 30
-services:  
-  - type: web    
+services:
+  - type: web
     name: fri-admin-test
     repo: https://github.com/frjalsar/monorepo.git
-    env: static        
+    env: static
     rootDir: admin
     buildCommand: npm run build
     staticPublishPath: ./dist
@@ -13,13 +13,27 @@ services:
       - admin-test.fri.is
     envVars:
       - key: VITE_FRI_API_URL
-        value: https://api-test.fri.is      
+        value: https://api-test.fri.is
       - key: VITE_COUNTRIES_API_URL
         value: https://restcountries.com
   - type: web
+    name: fri-umsokn-test
+    repo: https://github.com/frjalsar/monorepo.git
+    env: static
+    rootDir: umsokn
+    buildCommand: npm run build
+    staticPublishPath: ./dist
+    autoDeploy: true
+    domains:
+      - umsokn-test.fri.is
+    envVars:
+      - key: VITE_FRI_API_URL
+        value: https://api-test.fri.is
+      - fromGroup: ApiServiceKey
+  - type: web
     name: fri-api-test
     repo: https://github.com/frjalsar/monorepo.git
-    env: node    
+    env: node 
     rootDir: api-service
     region: frankfurt
     plan: starter
@@ -46,7 +60,7 @@ services:
   - type: redis
     name: fri-store-test
     region: frankfurt
-    plan: starter    
+    plan: starter
     ipAllowList:
       - source: 0.0.0.0/0
         description: everywhere
