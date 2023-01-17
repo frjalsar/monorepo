@@ -387,7 +387,7 @@ export default {
           if (res.body.length === 1) {
             this.currentItem = {
               ...res.body[0],
-              newMembership: this.clubs.filter(club => club.thorId === this.currentItem.club)
+              newMembership: this.clubs.filter(club => club.thorId === res.body[0].club)
             }
             this.busy = false
             this.$emit('alert', {})
