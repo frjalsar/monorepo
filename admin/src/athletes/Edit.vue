@@ -387,7 +387,14 @@ export default {
           if (res.body.length === 1) {
             this.currentItem = {
               ...res.body[0],
-              newMembership: this.clubs.filter(club => club.thorId === res.body[0].club)
+              newMembership: this.clubs
+                .filter(club => club.thorId === res.body[0].club)
+                .map(club => ({
+                  clubId: club.id,
+                  thorId: club.thorId,
+                  clubFullName: club.fullName,
+                  yearFrom: res.body[0].firstCompetition
+                }))
             }
             this.busy = false
             this.$emit('alert', {})
