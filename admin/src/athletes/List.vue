@@ -24,13 +24,14 @@
       />
     </CardComponent>
 
-    <ModalEdit v-slot="{ confirm, callback }">
+    <ModalEdit v-slot="{ confirm, alert }">
       <EditAthlete
         :athlete="selectedModalItem"
         :clubs="clubs"
         :countries="countries"
         :confirm="confirm"
-        @done="(isDone) => closeEditModal(isDone, callback)"
+        @done="(isDone) => closeEditModal()"
+        @alert="({ type, message }) => alert(type, message)"
       />
     </ModalEdit>
   </div>

@@ -1,6 +1,31 @@
 <template>
   <form>
     <div class="row g-3 mb-3">
+      <div class="col-md-4">
+        <label
+          for="kt"
+          class="form-label"
+        >Kennitala</label>
+        <div class="input-group">
+          <input
+            id="kt"
+            v-model="currentItem.kt"
+            type="text"
+            class="form-control"
+            :disabled="busy"
+          >
+          <div class="input-group-prepend">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              @click="search()"
+            >
+              <i class="bi bi-search" />
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div class="col-md-6">
         <label
           for="fullName"
@@ -9,20 +34,6 @@
         <input
           id="fullName"
           v-model="currentItem.fullName"
-          type="text"
-          class="form-control"
-          :disabled="busy"
-        >
-      </div>
-
-      <div class="col-md-4">
-        <label
-          for="kt"
-          class="form-label"
-        >Kennitala</label>
-        <input
-          id="kt"
-          v-model="currentItem.kt"
           type="text"
           class="form-control"
           :disabled="busy"
@@ -252,6 +263,7 @@
 
 <script>
 import EditMixin from '../_mixins/EditMixin.vue'
+import agent from 'superagent'
 export default {
   name: 'EditAthlete',
   mixins: [EditMixin],
@@ -270,6 +282,7 @@ export default {
       required: true
     }
   },
+  emits: ['alert'],
   data () {
     return {
       membershipIsConfirmed: false,
@@ -342,6 +355,49 @@ export default {
       const lastMembership = this.currentItem.newMembership[lastIndex]
       const findClub = this.clubs.find(club => club.id === lastMembership.clubId)
       this.currentItem.newMembership[lastIndex].thorId = findClub.thorId
+    },
+    search () {
+      this.busy = true
+
+      if (this.currentItem.kt.length !== 10) {
+        this.busy = false
+        return this.$emit('alert', { type: 'error', message: 'Kennitala passar ekki' })
+      }
+
+      return agent
+        .get(this.FRI_API_URL + '/athletes')
+        .withCredentials()
+        .query({ kt: this.currentItem.kt })
+        .then(res => {
+          if (res.body.length > 0) {
+            this.$emit('alert', { type: 'error', message: 'Iðkandi er þegar til í félagatalinu.' })
+            this.busy = false
+          } else {
+            return this.searchThor()
+          }
+        }).catch(() => {
+          this.busy = false
+        })
+    },
+    searchThor () {
+      return agent
+        .get(this.FRI_API_URL + `/thor/competitor/${this.currentItem.kt}`)
+        .withCredentials()
+        .then(res => {
+          if (res.body.length === 1) {
+            this.currentItem = {
+              ...res.body[0],
+              newMembership: this.clubs.filter(club => club.thorId === res.body[0].club)
+            }
+            this.busy = false
+            this.$emit('alert', {})
+          } else {
+            this.$emit('alert', { type: 'error', message: 'Iðkandi fannst ekki í Þór' })
+            this.busy = false
+          }
+        }).catch(() => {
+          this.busy = false
+        })
     }
   }
 }

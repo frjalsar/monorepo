@@ -7,7 +7,7 @@ export default {
       required: true
     }
   },
-  emits: ['done'],
+  emits: ['alert'],
   data () {
     return {
       busy: false,
@@ -30,10 +30,11 @@ export default {
         .withCredentials()
         .then(() => {
           this.busy = false
-          this.$emit('done', true)
+          this.$emit('alert', undefined)
         })
         .catch(e => {
-          this.$emit('done', false)
+          console.log(e)
+          this.$emit('alert', { type: 'error', message: 'Villa kom upp við að vista. Lokið vafranum og prófið aftur.' })
         })
     }
   }
