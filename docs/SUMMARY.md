@@ -16,3 +16,7 @@
 ## 🧑💻 Þróun
 
 * [Inngangur](throun/fyrstu-skref.md)
+
+***
+
+* [Afrita iðkanda úr Þór í félagatal](afrita-idkanda-ur-thor-i-felagatal.md)
