@@ -28,11 +28,11 @@ Undir flokknum _Hlauparar án keppnisnúmers_ má sjá lista af keppendum þar s
 
 Með því að smella á línuna opnast gluggi þar sem skrifstofa FRÍ getur lagfært skráningu.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p>Gluggi til að leiðrétta skráningu</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption><p>Gluggi til að leiðrétta skráningu</p></figcaption></figure>
 
 Þegar búið er að skrá inn rétta kennitölu og vista þá uppfærist listinn og leiðrétt kennitala og keppendanúmer er sýnilegt.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Taflan sýnir nú leiðrétta kennitölu og keppendanúmer.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Taflan sýnir nú leiðrétta kennitölu og keppendanúmer.</p></figcaption></figure>
 
 Við þessa aðgerð uppfærði kerfið bæði villulistann og skráninguna á mótinu. Hlauparinn er nú með rétta kennitölu og keppendanúmer á mótinu.
 
