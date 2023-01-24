@@ -17,3 +17,7 @@
 ## 🧑💻 Þróun
 
 * [Inngangur](throun/fyrstu-skref.md)
+
+***
+
+* [Félagaskipti í Þór](felagaskipti-i-thor.md)
