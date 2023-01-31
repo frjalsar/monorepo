@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2016",    
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "strict": true,
+    "noImplicitAny": false,
+    "allowJs": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "workers",
+    "test"    
+  ],
+}
