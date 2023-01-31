@@ -1,4 +1,9 @@
-function makeUpdateRegion (db) {
+import { PoolClient } from 'pg'
+import { UpdateRegion } from 'types/region'
+
+export type MakeUpdateRegion = (db: PoolClient) => UpdateRegion
+
+export const makeUpdateRegion: MakeUpdateRegion = function (db) {
   return function updateRegion (region, user) {
     const sql = `
       UPDATE regions SET
@@ -8,8 +13,7 @@ function makeUpdateRegion (db) {
         _enabled = true,
         _time = CURRENT_TIMESTAMP(3)
       WHERE
-        id = $4
-      RETURNING id`
+        id = $4`
 
     const params = [
       region.fullName,
@@ -20,8 +24,6 @@ function makeUpdateRegion (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows[0].id)
+      .then(res => res.rowCount)
   }
 }
-
-module.exports = makeUpdateRegion

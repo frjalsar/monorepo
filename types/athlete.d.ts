@@ -1,4 +1,4 @@
-interface Athlete {
+export type Athlete = {
     id: string;
     fullName: string
     kt: string

@@ -6,12 +6,15 @@
     "outDir": "./dist",
     "strict": true,
     "noImplicitAny": false,
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "types/*": ["../../types/*"]
+    }
   },
   "exclude": [
     "node_modules",
     "dist",
     "workers",
-    "test"    
+    "test",
   ],
 }
