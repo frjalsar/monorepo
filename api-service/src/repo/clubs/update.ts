@@ -1,4 +1,9 @@
-function makeUpdateClub (db) {
+import { PoolClient } from 'pg'
+import { UpdateClub } from 'types/club'
+
+export type MakeUpdateClub = (db: PoolClient) => UpdateClub
+
+export const makeUpdateClub:MakeUpdateClub=function (db) {
   return function updateClub (club, user) {
     const sql = `
       UPDATE clubs SET
@@ -28,4 +33,3 @@ function makeUpdateClub (db) {
   }
 }
 
-module.exports = makeUpdateClub

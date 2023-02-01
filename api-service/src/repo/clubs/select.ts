@@ -1,10 +1,12 @@
-const mapClubs = require('./map')
+import { PoolClient } from 'pg'
+import {SelectClubs} from 'types/club'
+import { mapToClub } from './map'
 
-function makeSelectClubs (db) {
-  return function selectClubs (options) {
-    const opt = options || {}
+export type MakeSelectClubs = (db: PoolClient) => SelectClubs
+export const makeSelectClubs:MakeSelectClubs=function (db) {
+  return function selectClubs (opt) {
 
-    const params = []
+    const params: Array<number | string> = []
     let sql = `
       SELECT
         c.id,
@@ -19,7 +21,7 @@ function makeSelectClubs (db) {
       LEFT JOIN
         regions r ON r.id = c.regionid`
 
-    if (opt.id) {
+    if (opt && opt.id) {
       sql += ' WHERE c.id = $1'
       params.push(opt.id)
     }
@@ -28,8 +30,8 @@ function makeSelectClubs (db) {
 
     return db
       .query(sql, params)
-      .then(res => mapClubs(res.rows))
+      .then(res =>res.rows.map(mapToClub))
   }
 }
 
-module.exports = makeSelectClubs
+

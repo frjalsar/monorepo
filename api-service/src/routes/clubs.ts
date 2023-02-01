@@ -1,7 +1,15 @@
-const { Router } = require('express')
-const { authorize } = require('../lib/authorizeHandler')
+import { IRouter, Router } from 'express'
+import {authorize} from '../lib/authorizeHandler'
 
-function makeClubsRoute (selectClubs, updateClub, insertClub) {
+import { InsertClub, SelectClubs, UpdateClub } from 'types/club'
+
+export type MakeClubsRouter = (
+  selectClubs: SelectClubs,
+  updateClub: UpdateClub,
+  insertClub: InsertClub
+) => IRouter
+
+export const makeClubsRouter:MakeClubsRouter=function (selectClubs, updateClub, insertClub) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -74,4 +82,3 @@ function createAccess () {
 }
 */
 
-module.exports = makeClubsRoute
