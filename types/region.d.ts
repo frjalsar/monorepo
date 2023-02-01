@@ -7,7 +7,7 @@ export type Region = {
 export type MapToRegion = (row: any) => Region
 
 export type SelectRegionOptions = {
-  id?: number
+  id: number | string
 }
 
 export type SelectRegions = (options?: SelectRegionOptions) => Promise<Region[]>

@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const authorize = require('../lib/authorizeHandler')
+const { authorize } = require('../lib/authorizeHandler')
 
 function makeJudgeTypesRouter (selectJudgeTypes, updateJudgeType, insertJudgeType) {
   const router = Router()

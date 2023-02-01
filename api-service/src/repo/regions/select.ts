@@ -7,7 +7,7 @@ export type MakeSelectRegions = (db: PoolClient) => SelectRegions
 
 export const makeSelectRegions: MakeSelectRegions = function (db) {
   return function selectRegions (opt) {
-    const params: Array<number> = []
+    const params: Array<number | string> = []
 
     let sql = `
       SELECT

@@ -1,10 +1,17 @@
-const { Router } = require('express')
-const authorize = require('../lib/authorizeHandler')
+import { IRouter, Router } from 'express'
+import { authorize } from '../lib/authorizeHandler'
+import { InsertRegion, SelectRegions, UpdateRegion } from 'types/region'
 
-function makeRegionsRoute (selectRegions, updateRegion, insertRegion) {
+export type MakeRegionsRouter = (
+  selectRegions: SelectRegions,
+  updateRegion: UpdateRegion,
+  insertRegion: InsertRegion
+) => IRouter
+
+export const makeRegionsRouter: MakeRegionsRouter = function (selectRegions, updateRegion, insertRegion) {
   const router = Router()
 
-  router.get('/', (req, res, next) => {
+  router.get('/', (_, res, next) => {
     return selectRegions()
       .then(res.json.bind(res))
       .catch(next)
@@ -30,23 +37,3 @@ function makeRegionsRoute (selectRegions, updateRegion, insertRegion) {
 
   return router
 }
-
-/*
-function hasAccess () {
-  return (req, res, next) => {
-    if (req.user) {
-      if (req.user.admin) {
-        return next()
-      }
-
-      if (req.user.regionId === req.body.id) {
-        return next()
-      }
-    }
-
-    return res.sendStatus(401)
-  }
-}
-*/
-
-module.exports = makeRegionsRoute

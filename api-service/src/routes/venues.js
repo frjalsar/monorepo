@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const authorize = require('../lib/authorizeHandler')
+const { authorize } = require('../lib/authorizeHandler')
 
 function makeVenuesRoute (selectVenues, updateVenue, insertVenue) {
   const router = new Router()
