@@ -8,7 +8,7 @@ import { PoolClient } from 'pg'
 import { IRouter } from 'express'
 import { InsertClub, SelectClubs, UpdateClub } from 'types/club'
 
-export type MakeRegions = (db: PoolClient) => IRouter
+export type MakeClubs = (db: PoolClient) => IRouter
 
 export function makeClubs (db) {
   const selectClubs:SelectClubs = makeSelectClubs(db)

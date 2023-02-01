@@ -5,9 +5,9 @@ export const mapToClub: MapToClub = function (row) {
     id: row.id,
     fullName: row.fullname,
     abbreviation: row.abbreviation,
-    shortName:row.shortName,
-    thorId:row.thorId,
-    regionId:row.regioId,
+    shortName:row.shortname,
+    thorId:row.thorid,
+    regionId:row.regioid,
     region:row.region && {
       id: row.regionid,
       fullName: row.regionname,
