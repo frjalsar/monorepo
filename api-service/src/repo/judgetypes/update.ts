@@ -1,5 +1,10 @@
-function makeUpdateJudgeTypes (db) {
-  return function updateJudgeType (judgeType, user) {
+import { PoolClient } from 'pg'
+import { updateJudgeType } from 'types/JudgeType'
+
+export type MakeUpdateJudgeType = (db: PoolClient) => updateJudgeType
+  
+export const makeUpdateJudgeType: MakeUpdateJudgeType = function (db) {
+  return function updateJudgeType(judgeType, user) {
     const sql = `
       UPDATE judgetypes SET
         name = $1,
@@ -23,5 +28,3 @@ function makeUpdateJudgeTypes (db) {
       .then(res => res.rows[0].id)
   }
 }
-
-module.exports = makeUpdateJudgeTypes

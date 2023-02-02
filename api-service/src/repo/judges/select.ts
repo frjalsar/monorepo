@@ -1,11 +1,16 @@
 
-const { toOrdinal } = require('pg-parameterize')
-const mapJudges = require('./map')
-function makeSelectJudges (db) {
-  return function selectJudges (options) {
-    const opt = options || {}
+import { toOrdinal } from 'pg-parameterize'
+import { PoolClient } from 'pg'
+import { selectJudges } from 'types/judges'
+import { mapToJudges } from "./map"
 
-    const params = []
+export type MakeSelectJudges = (db: PoolClient) => selectJudges
+
+export const makeSelectJudges: MakeSelectJudges = function (db) {
+  return function selectJudges(opt) {
+
+   const params: Array<number | string> = []
+
     let sql = `
       SELECT
         j.id,
@@ -25,17 +30,17 @@ function makeSelectJudges (db) {
         clubs c ON c.id = j.clubid
       WHERE 1 = 1`
 
-    if (opt.id) {
+    if (opt && opt.id) {
       sql += ' AND j.id = ?'
       params.push(opt.id)
     }
 
-    if (opt.clubId) {
+    if (opt && opt.clubId) {
       sql += ' AND c.id = ?'
       params.push(opt.clubId)
     }
 
-    if (opt.typeId) {
+    if (opt && opt.typeId) {
       sql += ' AND jt.id = ?'
       params.push(opt.typeId)
     }
@@ -45,18 +50,16 @@ function makeSelectJudges (db) {
         j.fullname ASC,
         jt.stage ASC`
 
-    if (opt.offset) {
+    if (opt && opt.offset) {
       sql += ' OFFSET ' + opt.offset
     }
 
-    if (opt.limit) {
+    if (opt && opt.limit) {
       sql += ' LIMIT ' + opt.limit
     }
 
     return db
       .query(toOrdinal(sql), params)
-      .then(res => mapJudges(res.rows))
+      .then(res => res.rows.map(mapToJudges))
   }
 }
-
-module.exports = makeSelectJudges

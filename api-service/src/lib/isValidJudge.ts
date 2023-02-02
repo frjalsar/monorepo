@@ -1,8 +1,8 @@
 
-const startOfToday = require('date-fns/startOfToday')
-const differenceInCalendarYears = require('date-fns/differenceInCalendarYears')
+import  startOfToday  from 'date-fns/startOfToday'
+import  differenceInCalendarYears from 'date-fns/differenceInCalendarYears'
 
-const isValidJudge = function (date) {
+export const isValidJudge = function (date) {
   const VALID_YEARS = 5
   const today = startOfToday()
 
@@ -10,7 +10,6 @@ const isValidJudge = function (date) {
   return yearDiff < VALID_YEARS
 }
 
-module.exports = isValidJudge
 
 /** * same day 5 years later logic
 

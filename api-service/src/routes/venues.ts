@@ -1,8 +1,16 @@
-const { Router } = require('express')
-const { authorize } = require('../lib/authorizeHandler')
+import { Router } from 'express'
+import { IRouter } from 'express'
+import { authorize } from '../lib/authorizeHandler'
+import { insertVenue, updateVenue, selectVenues } from 'types/venue'
 
-function makeVenuesRoute (selectVenues, updateVenue, insertVenue) {
-  const router = new Router()
+export type MakeVenuesRoute = (
+  insertVenue: insertVenue,
+  updateVenue: updateVenue,
+  selectVenues: selectVenues
+) => IRouter
+
+export const makeVenuesRouter: MakeVenuesRoute = function (insertVenue,updateVenue,selectVenues) {
+  const router =  Router()
 
   router.get('/:id?', (req, res, next) => {
     return selectVenues(req.params)
@@ -37,4 +45,3 @@ function hasAccess () {
 }
 */
 
-module.exports = makeVenuesRoute
