@@ -1,7 +1,12 @@
 
-const { flatten, toTuple } = require('pg-parameterize')
+import { type } from 'os'
+import { flatten, toTuple } from 'pg-parameterize'
+import { insertCombinedEvent } from 'types/combined-events'
+import {PoolClient} from 'pg'
 
-function makeInsertCombinedEvents (db) {
+export type MakeInsertCombinedEvent = (dp:PoolClient)=>insertCombinedEvent
+
+export const makeInsertCombinedEvents:MakeInsertCombinedEvent=function (db) {
   return function insertMembership (combinedEvents, user) {
     if (combinedEvents.length === 0) {
       return Promise.resolve()
@@ -27,4 +32,3 @@ function makeInsertCombinedEvents (db) {
   }
 }
 
-module.exports = makeInsertCombinedEvents

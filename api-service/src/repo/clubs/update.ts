@@ -1,7 +1,7 @@
 import { PoolClient } from 'pg'
-import { UpdateClub } from 'types/club'
+import { updateClub } from 'types/club'
 
-export type MakeUpdateClub = (db: PoolClient) => UpdateClub
+export type MakeUpdateClub = (db: PoolClient) => updateClub
 
 export const makeUpdateClub:MakeUpdateClub=function (db) {
   return function updateClub (club, user) {

@@ -1,4 +1,9 @@
-function makeInsertEventType (db) {
+import {insertEventType} from 'types/event-type'
+import {PoolClient} from 'pg'
+
+export type MakeInsertEventType=(db:PoolClient)=>insertEventType
+
+export const makeInsertEventType:MakeInsertEventType= function (db) {
   return function insertEventType (eventType, user) {
     const sql = `
       INSERT INTO eventtypes (
@@ -23,4 +28,3 @@ function makeInsertEventType (db) {
   }
 }
 
-module.exports = makeInsertEventType

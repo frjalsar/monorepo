@@ -1,6 +1,12 @@
-const mapCombinedEvents = require('../combinedevents/map')
+import {mapCombinedEvents} from '../combinedevents/map'
+import { createEvent } from 'types/event'
+import {Poolclient} from 'pg'
+import {makeInsertEvent} from './insert'
+import { makeDeleteCombinedEvents } from '../combinedevents/delete'
+import { makeInsertCombinedEvents } from '../combinedevents/insert'
+export type MakeCreateEvent=(db:Poolclient)=>createEvent
 
-function makeCreateEvent (makeInsertEvent, makeDeleteCombinedEvents, makeInsertCombinedEvents, db) {
+export const makeCreateEvent:MakeCreateEvent= function (db) {
   return async function makeCreateEvent (event, user) {
     const client = await db.connect()
 
@@ -13,9 +19,9 @@ function makeCreateEvent (makeInsertEvent, makeDeleteCombinedEvents, makeInsertC
       const eventId = await insertEvents(event, user)
 
       if (event.typeId === 10 && event.childEvents && event.childEvents.length > 0) {
-        const combinedEvents = mapCombinedEvents(event.childEvents, eventId)
+        const combinedEvents =event.childEvents.map(el=>mapCombinedEvents(el, eventId)) 
 
-        await deleteCombinedEvents(event.id)
+        await deleteCombinedEvents(event.id,user)
         await insertCombinedEvents(combinedEvents, user)
       }
 
@@ -30,4 +36,3 @@ function makeCreateEvent (makeInsertEvent, makeDeleteCombinedEvents, makeInsertC
   }
 }
 
-module.exports = makeCreateEvent

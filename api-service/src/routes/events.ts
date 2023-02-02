@@ -1,10 +1,17 @@
-const { Router } = require('express')
-const { authorize } = require('../lib/authorizeHandler')
+import { IRouter, Router } from 'express'
+import { insertEvent, selectEvents, updateEvent } from 'types/event'
+import { authorize } from '../lib/authorizeHandler'
 
-function makeEventsRoute (selectEvents, updateEvent, insertEvent) {
+export type MakeEventsRoute = (
+  selectEvents: selectEvents,
+  updateEvent: updateEvent,
+  insertEvent: insertEvent
+) => IRouter
+
+export const makeEventsRouter:MakeEventsRoute=function (selectEvents, updateEvent, insertEvent) {
   const router = Router()
 
-  router.get('/', (req, res, next) => {
+  router.get('/', (_,req, res, next) => {
     return selectEvents(req.query)
       .then(res.json.bind(res))
       .catch(next)
@@ -25,4 +32,4 @@ function makeEventsRoute (selectEvents, updateEvent, insertEvent) {
   return router
 }
 
-module.exports = makeEventsRoute
+

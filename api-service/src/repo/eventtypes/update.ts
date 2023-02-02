@@ -1,4 +1,9 @@
-function makeUpdateEventType (db) {
+import { updateEventType } from 'types/event-type'
+import {PoolClient} from 'pg'
+
+export type MakeUpdateEventType=(db:PoolClient)=>updateEventType
+
+export const makeUpdateEventType:MakeUpdateEventType= function (db) {
   return function updateEventType (eventType, user) {
     const sql = `
       UPDATE eventtypes SET
@@ -12,7 +17,7 @@ function makeUpdateEventType (db) {
       RETURNING id`
 
     const params = [
-      eventType.name,
+      eventType,
       eventType.ordering,
       user.id,
       eventType.id
@@ -24,4 +29,3 @@ function makeUpdateEventType (db) {
   }
 }
 
-module.exports = makeUpdateEventType
