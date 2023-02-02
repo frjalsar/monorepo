@@ -1,4 +1,4 @@
-const {format} = require('date-fns/format') //Noted
+import * as df from 'date-fns'
 import {isValidJudge} from '../../lib/isValidJudge'
 import { MapToJudge } from 'types/judges'
 
@@ -7,7 +7,7 @@ export const mapToJudges: MapToJudge = function (row) {
   return {
      id: row.id,
       fullName: row.fullname,
-      date: row.date ? format(row.date, 'yyyy-MM-dd') : null,
+      date: row.date ? df.format(row.date, 'yyyy-MM-dd') : null,
       typeId: row.typeid,
       type: row.typeid?{
         id: row.typeid,

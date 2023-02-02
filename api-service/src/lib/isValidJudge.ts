@@ -1,12 +1,10 @@
 
-import  startOfToday  from 'date-fns/startOfToday'
-import  differenceInCalendarYears from 'date-fns/differenceInCalendarYears'
-
+import * as df from 'date-fns'
 export const isValidJudge = function (date) {
   const VALID_YEARS = 5
-  const today = startOfToday()
+  const today = df.startOfToday()
 
-  const yearDiff = differenceInCalendarYears(today, date)
+  const yearDiff = df.differenceInCalendarYears(today, date)
   return yearDiff < VALID_YEARS
 }
 

@@ -1,4 +1,3 @@
-
 import { toOrdinal } from 'pg-parameterize'
 import { PoolClient } from 'pg'
 import { selectJudges } from 'types/judges'

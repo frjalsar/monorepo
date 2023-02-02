@@ -2,7 +2,7 @@
 export type judge=  {
       id: number,
       fullName: string,
-      date: Date,
+      date: any,
       typeId: number,
       clubId: number,
       type?: judgetypes,
