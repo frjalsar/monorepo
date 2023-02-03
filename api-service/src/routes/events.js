@@ -1,5 +1,5 @@
+import { authorize } from '../lib/authorizeHandler'
 const { Router } = require('express')
-import {authorize} from '../lib/authorizeHandler'
 
 function makeEventsRoute (selectEvents, updateEvent, insertEvent) {
   const router = Router()
