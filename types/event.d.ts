@@ -1,4 +1,3 @@
-import {deleteCombinedEvent,insertCombinedEvent} from './combined-events'
 export type event = {
   id: number,
   name: string,

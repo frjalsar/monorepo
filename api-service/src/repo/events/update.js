@@ -1,8 +1,4 @@
-import {updateEvent} from 'types/event'
-import {PoolClient} from 'pg'
-export type MakeUpdateEvent = (db:PoolClient)=>updateEvent
-
-export const makeUpdateEvent:MakeUpdateEvent=function (db) {
+function makeUpdateEvent (db) {
   return function updateEvent (event, user) {
     const sql = `
       UPDATE events SET
@@ -32,3 +28,4 @@ export const makeUpdateEvent:MakeUpdateEvent=function (db) {
   }
 }
 
+module.exports = makeUpdateEvent

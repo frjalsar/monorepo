@@ -1,4 +1,9 @@
-function makeInsertJudgeType (db) {
+import { PoolClient } from 'pg'
+import { insertJudgeType } from 'types/JudgeType'
+
+export type MakeInsertJudgeType = (db: PoolClient) => insertJudgeType
+
+export const makeInsertJudgeType: MakeInsertJudgeType = function (db) {
   return function insertJudgeType (judgeType, user) {
     const sql = `
       INSERT INTO judgetypes (
@@ -23,4 +28,3 @@ function makeInsertJudgeType (db) {
   }
 }
 
-module.exports = makeInsertJudgeType

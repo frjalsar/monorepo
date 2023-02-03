@@ -1,12 +1,15 @@
 
-const { toOrdinal } = require('pg-parameterize')
-const mapVenues = require('./map')
+import { toOrdinal } from 'pg-parameterize'
+import { mapVenues } from './map'
+import {PoolClient} from 'pg'
+import { selectVenues } from 'types/venue'
 
-function makeSelectVenues (db) {
-  return function selectVenues (options) {
-    const opt = options || {}
+export type MakeSelectVenues=(db:PoolClient) => selectVenues
 
-    const params = []
+export const makeSelectVenues:MakeSelectVenues = function (db) {
+  return function selectVenues(opt) {
+
+    const params:Array<string | number> = []
     let sql = `
       SELECT
         v.id,
@@ -30,7 +33,7 @@ function makeSelectVenues (db) {
         venues v
       WHERE _enabled = true`
 
-    if (opt.id) {
+    if (opt && opt.id) {
       sql += ' AND v.id = ?'
       params.push(opt.id)
     }
@@ -39,18 +42,17 @@ function makeSelectVenues (db) {
       ORDER BY
         v.fullname ASC`
 
-    if (opt.offset) {
+    if (opt && opt.offset) {
       sql += ' OFFSET ' + opt.offset
     }
 
-    if (opt.limit) {
+    if (opt && opt.limit) {
       sql += ' LIMIT ' + opt.limit
     }
 
     return db
       .query(toOrdinal(sql), params)
-      .then(res => mapVenues(res.rows))
+      .then(res => res.rows.map(mapVenues))
   }
 }
 
-module.exports = makeSelectVenues

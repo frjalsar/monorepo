@@ -1,23 +1,23 @@
 const { Router } = require('express')
-const { authorize } = require('../lib/authorizeHandler')
+import {authorize} from '../lib/authorizeHandler'
 
-function makeJudgesRoute (selectJudges, updateJudge, insertJudge) {
+function makeEventsRoute (selectEvents, updateEvent, insertEvent) {
   const router = Router()
 
-  router.get('/:id?', (req, res, next) => {
-    return selectJudges(req.params)
+  router.get('/', (req, res, next) => {
+    return selectEvents(req.query)
       .then(res.json.bind(res))
       .catch(next)
   })
 
   router.put('/', authorize(['admin']), (req, res, next) => {
-    return updateJudge(req.body, req.user)
+    return updateEvent(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
 
   router.post('/', authorize(['admin']), (req, res, next) => {
-    return insertJudge(req.body, req.user)
+    return insertEvent(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
   })
@@ -25,4 +25,4 @@ function makeJudgesRoute (selectJudges, updateJudge, insertJudge) {
   return router
 }
 
-module.exports = makeJudgesRoute
+module.exports = makeEventsRoute

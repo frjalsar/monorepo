@@ -1,4 +1,6 @@
-function mapJudgeTypes (list) {
+import { mapToJudgeType } from 'types/JudgeType'
+
+export const mapJudgeTypes:mapToJudgeType= function(list) {
   return list.map(item => {
     return {
       id: item.id,
@@ -8,4 +10,3 @@ function mapJudgeTypes (list) {
   })
 }
 
-module.exports = mapJudgeTypes

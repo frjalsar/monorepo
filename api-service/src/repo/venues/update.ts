@@ -1,5 +1,10 @@
-function makeUpdateVenue (db) {
-  return function updateVenue (venue, user) {
+import { PoolClient } from 'pg'
+import { updateVenue } from 'types/venue'
+
+export type MakeUpdateVenue = (db: PoolClient) => updateVenue
+
+export const makeUpdateVenue: MakeUpdateVenue = function (db) {
+  return function updateVenue(venue, user) {
     const sql = `
       UPDATE venues SET
         fullname = $1,
@@ -51,5 +56,3 @@ function makeUpdateVenue (db) {
       .then(res => res.rows[0].id)
   }
 }
-
-module.exports = makeUpdateVenue
