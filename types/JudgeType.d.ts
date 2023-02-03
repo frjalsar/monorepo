@@ -2,7 +2,6 @@
 export type judgeType = {
     name:string,
     stage:number,
-    _userid: number,
     id?:number
 }
 

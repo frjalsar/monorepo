@@ -1,12 +1,10 @@
 import { mapToJudgeType } from 'types/JudgeType'
 
-export const mapJudgeTypes:mapToJudgeType= function(list) {
-  return list.map(item => {
+export const mapJudgeTypes:mapToJudgeType= function(row) {
     return {
-      id: item.id,
-      name: item.name,
-      stage: item.stage
+      id: row.id,
+      name: row.name,
+      stage: row.stage
     }
-  })
 }
 
