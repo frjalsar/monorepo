@@ -1,7 +1,7 @@
 
 import { type } from 'os'
 import { flatten, toTuple } from 'pg-parameterize'
-import { InsertCombinedEvent } from 'types/combined-events'
+import { InsertCombinedEvent } from 'types/combinedevent'
 import {PoolClient} from 'pg'
 
 export type MakeInsertCombinedEvent = (dp:PoolClient)=>InsertCombinedEvent

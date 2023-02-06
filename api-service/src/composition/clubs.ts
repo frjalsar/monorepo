@@ -4,14 +4,14 @@ import {makeInsertClub} from '../repo/clubs/insert'
 import {makeClubsRouter} from '../routes/clubs'
 import { PoolClient } from 'pg'
 import { IRouter } from 'express'
-import { insertClub, selectClubs, updateClub } from 'types/club'
+import { InsertClub, SelectClubs, UpdateClub } from 'types/club'
 
 export type MakeClubs = (db: PoolClient) => IRouter
 
 export function makeClubs (db) {
-  const selectClubs:selectClubs = makeSelectClubs(db)
-  const insertClub:insertClub = makeInsertClub(db)
-  const updateClub :updateClub= makeUpdateClub(db)
+  const selectClubs:SelectClubs = makeSelectClubs(db)
+  const insertClub:InsertClub = makeInsertClub(db)
+  const updateClub :UpdateClub= makeUpdateClub(db)
 
   return makeClubsRouter(selectClubs, updateClub, insertClub)
 }

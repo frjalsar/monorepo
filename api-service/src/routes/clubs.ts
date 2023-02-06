@@ -1,12 +1,12 @@
 import { IRouter, Router } from 'express'
 import {authorize} from '../lib/authorizeHandler'
 
-import { insertClub, selectClubs, updateClub } from 'types/club'
+import { InsertClub, SelectClubs, UpdateClub } from 'types/club'
 
 export type MakeClubsRouter = (
-  selectClubs: selectClubs,
-  updateClub: updateClub,
-  insertClub: insertClub
+  selectClubs: SelectClubs,
+  updateClub: UpdateClub,
+  insertClub: InsertClub
 ) => IRouter
 
 export const makeClubsRouter:MakeClubsRouter=function (selectClubs, updateClub, insertClub) {

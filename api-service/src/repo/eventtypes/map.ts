@@ -1,4 +1,4 @@
-import { MapToEventType } from "types/event-type"
+import { MapToEventType } from "types/eventtype"
 
 export const mapEventTypes:MapToEventType= function (row) {
     return {

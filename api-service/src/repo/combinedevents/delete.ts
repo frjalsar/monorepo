@@ -1,4 +1,4 @@
-import { DeleteCombinedEvent } from "types/combined-events"
+import { DeleteCombinedEvent } from "types/combinedevent"
 import {PoolClient} from 'pg'
 
 export type MakeDeleteCombinedEvents=(dp:PoolClient)=>DeleteCombinedEvent

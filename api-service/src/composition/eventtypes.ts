@@ -4,7 +4,7 @@ import {makeSelectEventTypes} from '../repo/eventtypes/select'
 import {makeUpdateEventType} from '../repo/eventtypes/update'
 import {makeInsertEventType} from '../repo/eventtypes/insert'
 import {makeEventTypesRouter} from '../routes/eventtypes'
-import { InsertEventType, SelectEventTypes, UpdateEventType } from 'types/event-type'
+import { InsertEventType, SelectEventTypes, UpdateEventType } from 'types/eventtype'
 
 export type MakeEventTypes = (db: PoolClient) => IRouter
 

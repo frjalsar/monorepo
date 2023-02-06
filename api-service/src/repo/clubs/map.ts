@@ -1,6 +1,6 @@
 import { MapToClub } from 'types/club'
 
-export const mapToClub: MapToClub = function (row) {  
+export const mapClub: MapToClub = function (row) {  
   return {
     id: row.id,
     fullName: row.fullname,
