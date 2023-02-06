@@ -18,4 +18,4 @@
 ## 🧑💻 Þróun
 
 * [Inngangur](throun/fyrstu-skref.md)
-* [Kóði](throun/kodi.md)
+* [Api-Service](throun/api-service.md)
