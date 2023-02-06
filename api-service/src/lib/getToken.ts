@@ -1,9 +1,9 @@
-import {parseCookie} from 'cookie'
+import * as parseCookie from 'cookie'
 
 export function getToken (headers) {
   let token
   if (headers.cookie) {
-    token = parseCookie(headers.cookie).FRI_API
+    token = parseCookie.parse(headers.cookie).FRI_API
   }
 
   if (headers.authorization) {
