@@ -1,4 +1,4 @@
-const makeSelectAgeGroups = function () {
+export const makeSelectAgeGroups = function () {
   return () => {
     return Promise.resolve([
       {
@@ -90,4 +90,3 @@ const makeSelectAgeGroups = function () {
   }
 }
 
-module.exports = makeSelectAgeGroups
