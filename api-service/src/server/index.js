@@ -98,15 +98,4 @@ app.listen(port, () => {
   logger.info('server running on port ' + port)
 })
 
-/*
-   ISSUES FOUND ON MONOREPO
------------------------------
 
-  1. On membership unused js files found /repo
-  2. competitions select method (mssql statement problem) and Make sure type datatypes
-  3. Venues (same method/function naming in repo insert.js & update.js) -- FIXED
-  4. Thor unused .js files found inside repo (insert and update)
-  5. On Meets SelectMeetAttachment.js function name error  -- FIXED
-  5. ? ? ? ?
-
-*/
