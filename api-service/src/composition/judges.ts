@@ -4,15 +4,15 @@ import { makeSelectJudges } from '../repo/judges/select'
 import { makeUpdateJudge } from '../repo/judges/update'
 import { makeInsertJudge } from '../repo/judges/insert'
 import { makeJudgesRouter } from '../routes/judges'
-import { selectJudges, updateJudge, insertJudge } from 'types/judges'
+import { SelectJudges, UpdateJudge, InsertJudge } from 'types/judges'
 
-export type makeJudges = (db: PoolClient) => IRouter
+export type MakeJudges = (db: PoolClient) => IRouter
 
 export function makeJudges(db) {
 
-  const selectJudges:selectJudges = makeSelectJudges(db)
-  const updateJudge:updateJudge = makeUpdateJudge(db)
-  const insertJudge:insertJudge = makeInsertJudge(db)
+  const selectJudges:SelectJudges = makeSelectJudges(db)
+  const updateJudge:UpdateJudge = makeUpdateJudge(db)
+  const insertJudge:InsertJudge = makeInsertJudge(db)
 
   return makeJudgesRouter(selectJudges, updateJudge, insertJudge)
 }

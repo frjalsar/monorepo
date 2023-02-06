@@ -1,9 +1,9 @@
 import { toOrdinal } from 'pg-parameterize'
 import { PoolClient } from 'pg'
-import { selectJudges } from 'types/judges'
+import { SelectJudges } from 'types/judges'
 import { mapToJudges } from "./map"
 
-export type MakeSelectJudges = (db: PoolClient) => selectJudges
+export type MakeSelectJudges = (db: PoolClient) => SelectJudges
 
 export const makeSelectJudges: MakeSelectJudges = function (db) {
   return function selectJudges(opt) {

@@ -1,5 +1,9 @@
-function makeUpdateMeet (db) {
-  return function updateMeet (meet, user) {
+import { PoolClient } from 'pg'
+import { UpdateMeet } from 'types/meets'
+
+export type MakeUpdateMeet=(db:PoolClient)=>UpdateMeet
+export const makeUpdateMeet:MakeUpdateMeet=function(db) {
+  return function updateMeet(meet, user) {
     const sql = `
       UPDATE meets SET
         name = $1,
@@ -43,5 +47,3 @@ function makeUpdateMeet (db) {
       .then(res => res.rows[0].id)
   }
 }
-
-module.exports = makeUpdateMeet

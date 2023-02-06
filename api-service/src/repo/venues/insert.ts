@@ -1,7 +1,7 @@
 import { PoolClient } from 'pg'
-import { insertVenue } from "types/venue"
+import { InsertVenue } from "types/venue"
 
-export type MakeInsertVenue=(db:PoolClient)=>insertVenue
+export type MakeInsertVenue=(db:PoolClient)=>InsertVenue
 
 export const makeInsertVenue:MakeInsertVenue=function(db) {
   return function insertVenue (venue, user) {

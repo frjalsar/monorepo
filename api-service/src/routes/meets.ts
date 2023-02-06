@@ -1,7 +1,13 @@
-const { Router } = require('express')
-const { authorize } = require('../lib/authorizeHandler')
+import { Router,IRouter } from 'express'
+import { authorize } from '../lib/authorizeHandler'
+import { SelectMeets, SelectMeetAttachment, UpdateMeet } from 'types/meets'
+import { CreateMeet } from 'repo/meets/create'
 
-function makeMeetsRoute (selectMeets, selectMeetAttachment, updateMeet, createMeet) {
+export type MakeMeetsRoute = (
+  SelectMeets, SelectMeetAttachment, UpdateMeet, CreateMeet
+) => IRouter
+
+export const makeMeetsRouter: MakeMeetsRoute = function (selectMeets, selectMeetAttachment, updateMeet, createMeet) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -39,5 +45,3 @@ function makeMeetsRoute (selectMeets, selectMeetAttachment, updateMeet, createMe
 
   return router
 }
-
-module.exports = makeMeetsRoute

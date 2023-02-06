@@ -1,12 +1,12 @@
 import { Router } from 'express'
 import { IRouter } from 'express'
 import { authorize } from '../lib/authorizeHandler'
-import { insertVenue, updateVenue, selectVenues } from 'types/venue'
+import { InsertVenue, UpdateVenue, SelectVenues } from 'types/venue'
 
 export type MakeVenuesRoute = (
-  insertVenue: insertVenue,
-  updateVenue: updateVenue,
-  selectVenues: selectVenues
+  insertVenue: InsertVenue,
+  updateVenue: UpdateVenue,
+  selectVenues: SelectVenues
 ) => IRouter
 
 export const makeVenuesRouter: MakeVenuesRoute = function (insertVenue,updateVenue,selectVenues) {

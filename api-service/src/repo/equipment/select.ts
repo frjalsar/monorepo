@@ -1,10 +1,13 @@
-const mapEquipment = require('./map')
+import { mapEquipment } from './map'
+import { PoolClient } from 'pg'
+import { SelectEquipment } from 'types/equipment'
 
-function makeSelectEquipment (db) {
-  return function selectEqiupment (options) {
-    const opt = options || {}
+export type MakeSelectEquipment = (db: PoolClient) => SelectEquipment
 
-    const params = []
+export const makeSelectEquipment: MakeSelectEquipment = function (db) {
+  return function selectEqiupment(opt) {
+
+    const params:Array<number|string> = []
     let sql = `
       SELECT
         eq.id,
@@ -18,7 +21,7 @@ function makeSelectEquipment (db) {
       LEFT JOIN
         events ev ON ev.id = eq.eventid`
 
-    if (opt.id) {
+    if (opt && opt.id) {
       sql += ' WHERE eq.id = $1'
       params.push(opt.id)
     }
@@ -27,8 +30,6 @@ function makeSelectEquipment (db) {
 
     return db
       .query(sql, params)
-      .then(res => mapEquipment(res.rows))
+      .then(res => res.rows.map(mapEquipment))
   }
 }
-
-module.exports = makeSelectEquipment

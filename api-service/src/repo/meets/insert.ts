@@ -1,5 +1,10 @@
-function makeInsertMeet (db) {
-  return function insertMeet (meet, user) {
+import { PoolClient } from 'pg'
+import { InsertMeet } from 'types/meets'
+
+export type MakeInsertMeet = (db: PoolClient) => InsertMeet
+
+export const makeInsertMeet: MakeInsertMeet = function (db) {
+  return function insertMeet(meet, user) {
     const sql = `
       INSERT INTO meets (
         name,
@@ -47,5 +52,3 @@ function makeInsertMeet (db) {
       .then(res => res.rows[0].id)
   }
 }
-
-module.exports = makeInsertMeet

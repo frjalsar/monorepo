@@ -1,6 +1,6 @@
-import { mapToJudgeType } from 'types/JudgeType'
+import { MapToJudgeType } from 'types/judgetype'
 
-export const mapJudgeTypes:mapToJudgeType= function(row) {
+export const mapJudgeTypes:MapToJudgeType= function(row) {
     return {
       id: row.id,
       name: row.name,

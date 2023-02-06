@@ -1,7 +1,12 @@
-const { toTuple, flatten } = require('pg-parameterize')
-function makeInsertCompetition (db) {
-  return function insertCompetition (competition, user) {
-    if (competition.length === 0) {
+import { toTuple, flatten } from 'pg-parameterize'
+import { PoolClient } from 'pg'
+import { InsertCompetition } from 'types/competitions'
+
+export type MakeInsertCompetition= (db: PoolClient) => InsertCompetition
+
+export const makeInsertCompetition:MakeInsertCompetition= function (db) {
+  return function insertCompetition(competition, user) {
+    if ((competition.length) === 0) {
       return Promise.resolve()
     }
 
@@ -11,7 +16,7 @@ function makeInsertCompetition (db) {
       obj.ageFrom,
       obj.ageTo,
       obj.gender,
-      obj.indodr
+      obj.indoor
     ])
 
     const sql = `
@@ -30,5 +35,3 @@ function makeInsertCompetition (db) {
     return db.query(sql, params)
   }
 }
-
-module.exports = makeInsertCompetition

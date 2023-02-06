@@ -1,7 +1,10 @@
-const { Int, Bit } = require('mssql')
+import { Int, Bit, mssqlPool } from 'mssql'
+import { SelectThorEvents } from 'types/thor'
 
-function makeSelectThorEvents (sqlPoolConnection) {
-  return function selectThorEvents (options) {
+export type MakeSelectThorEvents = (sqlPoolConnection: mssqlPool) => SelectThorEvents
+
+export const makeSelectThorEvents:MakeSelectThorEvents=function(sqlPoolConnection) {
+  return function selectThorEvents(options) {
     let sql = `
       SELECT [Grein] as Id
         ,[Kyn] as Gender
@@ -15,22 +18,22 @@ function makeSelectThorEvents (sqlPoolConnection) {
         [Athletics].[dbo].[Athl$Events]
       WHERE 1 = 1`
 
-    if (options.gender) {
+    if (options && options.gender) {
       sql += ' AND [Kyn] = @gender'
     }
 
-    if (options.outside) {
+    if (options && options.outside) {
       sql += ' AND [Úti_Inni] = @outside'
     }
 
     return sqlPoolConnection.then(pool => {
       const request = pool.request()
 
-      if (options.gender) {
+      if (options &&  options.gender) {
         request.input('gender', Int, options.gender)
       }
 
-      if (options.outside) {
+      if (options &&  options.outside) {
         request.input('outside', Bit, options.outside)
       }
 
@@ -40,5 +43,3 @@ function makeSelectThorEvents (sqlPoolConnection) {
     })
   }
 }
-
-module.exports = makeSelectThorEvents

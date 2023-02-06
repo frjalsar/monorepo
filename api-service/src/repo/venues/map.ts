@@ -1,6 +1,6 @@
-import { mapToVenues } from 'types/venue'
+import { MapToVenues } from 'types/venue'
 
-export const mapVenues: mapToVenues = function (item) {
+export const mapVenues: MapToVenues = function (item) {
   return {
     id: item.id,
     fullName: item.fullname,

@@ -1,5 +1,10 @@
-function makeSelectMissingRunners (sqlPoolConnection) {
-  return function selectMissingRunners () {
+
+import { mssqlPool } from 'mssql'
+import { SelectMissingRunners } from 'types/thor'
+
+export type MakeSelectMissingRunners = (sqlPoolConnection: mssqlPool) => SelectMissingRunners
+export const makeSelectMissingRunners: MakeSelectMissingRunners = function (sqlPoolConnection) {
+  return function selectMissingRunners() {
     const sql = `
       SELECT
         hak.[Mót] as meetCode,
@@ -26,5 +31,3 @@ function makeSelectMissingRunners (sqlPoolConnection) {
     })
   }
 }
-
-module.exports = makeSelectMissingRunners

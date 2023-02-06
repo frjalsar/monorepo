@@ -1,10 +1,13 @@
-const mapMeets = require('./map')
+import { mapMeets } from './map'
+import { PoolClient } from 'pg'
+import { SelectMeets } from 'types/meets'
 
-function makeSelectMeets (db) {
-  return function selectMeets (options) {
-    const opt = options || {}
+export type MakeSelectMeets = (db: PoolClient) => SelectMeets
 
-    const params = []
+export const makeSelectMeets: MakeSelectMeets = function (db) {
+  return function selectMeets(opt) {
+
+    const params:Array<string|number> = []
     let sql = `
       SELECT
         m.id,
@@ -42,10 +45,10 @@ function makeSelectMeets (db) {
         judges j ON j.id = m.judgeid
       WHERE 1=1`
 
-    if (opt.id) {
+    if (opt && opt.id) {
       sql += ' AND m.id = $1'
       params.push(opt.id)
-    } else if (opt.status) {
+    } else if (opt && opt.status) {
       sql += ' AND m.status = $1'
       params.push(opt.status)
     }
@@ -54,8 +57,6 @@ function makeSelectMeets (db) {
 
     return db
       .query(sql, params)
-      .then(res => mapMeets(res.rows))
+      .then(res => res.rows.map(mapMeets))
   }
 }
-
-module.exports = makeSelectMeets

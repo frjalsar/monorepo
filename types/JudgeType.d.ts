@@ -1,12 +1,12 @@
 
-export type judgeType = {
+export type JudgeType = {
     name:string,
     stage:number,
     id?:number
 }
 
-export type mapToJudgeType=(row:any)=>judgeType
+export type MapToJudgeType=(row:any)=>JudgeType
 
-export type selectJudgeTypes=()=>Promise<judgeType[]>
-export type insertJudgeType=(judgeType:judgeType,user:any)=>Promise<number>
-export type updateJudgeType=(judgeType:judgeType,user:any)=>Promise<number>
+export type SelectJudgeTypes=()=>Promise<JudgeType[]>
+export type InsertJudgeType=(judgeType:JudgeType,user:any)=>Promise<number>
+export type UpdateJudgeType=(judgeType:JudgeType,user:any)=>Promise<number>

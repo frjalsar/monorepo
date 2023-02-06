@@ -1,5 +1,23 @@
-function makeCreateMeet (makeInsertMeet, makeInsertCompetition, db, sendMail) {
-  return async function makeCreateMeet (meet, user) {
+
+import { PoolClient } from 'pg'
+import { MakeInsertCompetition } from 'repo/competitions/insert'
+import { MakeInsertMeet } from './insert'
+import {MakeSendMail} from 'types/meets'
+import { MakeCreateMeets } from 'types/meets'
+
+export type CreateMeet = (
+  
+)=>Promise<number>
+
+export type makeCreateMeet = (
+  makeInsertMeet: MakeInsertMeet,
+  makeInsertCompetition: MakeInsertCompetition,
+  db:PoolClient,
+  sendMail:MakeSendMail
+)=>MakeCreateMeets
+
+export const makeCreateMeet: makeCreateMeet= function(makeInsertMeet, makeInsertCompetition, db, sendMail) {
+  return async function makeCreateMeets(meet, user) {
     const client = await db.connect()
 
     const insertMeet = makeInsertMeet(client)
@@ -12,7 +30,7 @@ function makeCreateMeet (makeInsertMeet, makeInsertCompetition, db, sendMail) {
       }
       const meetId = await insertMeet(meet, user)
 
-      const competitionList = meet.competition.map(c => ({
+      const competitionList:Array<any> = meet.competition.map(c => ({
         meetId,
         eventId: c.eventId,
         ageFrom: c.ageFrom,
@@ -37,5 +55,3 @@ function makeCreateMeet (makeInsertMeet, makeInsertCompetition, db, sendMail) {
     }
   }
 }
-
-module.exports = makeCreateMeet

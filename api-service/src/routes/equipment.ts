@@ -1,7 +1,14 @@
-const { Router } = require('express')
-const { authorize } = require('../lib/authorizeHandler')
+import { Router, IRouter } from 'express'
+import { authorize } from '../lib/authorizeHandler'
+import { SelectEquipment, InsertEquipment, UpdateEquipment } from 'types/equipment'
 
-function makeEquipmentRoute (selectEquipment, updateEquipment, insertEquipment) {
+export type MakeEquipmentRoute = (
+  selectEquipment: SelectEquipment,
+  updateEquipment: UpdateEquipment,
+  insertEquipment: InsertEquipment
+) => IRouter
+
+export const makeEquipmentRouter: MakeEquipmentRoute = function (selectEquipment, updateEquipment, insertEquipment) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -31,4 +38,3 @@ function makeEquipmentRoute (selectEquipment, updateEquipment, insertEquipment) 
   return router
 }
 
-module.exports = makeEquipmentRoute

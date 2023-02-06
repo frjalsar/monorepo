@@ -1,6 +1,11 @@
-const { VarChar } = require('mssql')
-function makeSelectCompetitor (sqlPoolConnection) {
-  return async function selectCompetitor (options) {
+import { VarChar } from 'mssql'
+import { mssqlPool } from 'mssql'
+import { SelectCompetitor } from 'types/thor'
+
+export type MakeSelectCompetitor = (sqlPoolConnection: mssqlPool) => SelectCompetitor
+
+export const makeSelectCompetitor: MakeSelectCompetitor = function (sqlPoolConnection) {
+  return async function selectCompetitor(options) {
     const { kt } = options
     const ktWithHyphen = (kt.indexOf('-') === -1) ? kt.substring(0, 6) + '-' + kt.substring(6) : kt
 
@@ -43,4 +48,3 @@ function makeSelectCompetitor (sqlPoolConnection) {
   }
 }
 
-module.exports = makeSelectCompetitor

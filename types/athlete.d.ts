@@ -1,3 +1,4 @@
+
 export type Athlete = {
     id: string;
     fullName: string

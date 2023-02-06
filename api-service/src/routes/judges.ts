@@ -2,12 +2,12 @@
 
 import { IRouter, Router } from 'express'
 import { authorize } from '../lib/authorizeHandler'
-import { insertJudge, selectJudges, updateJudge } from 'types/judges'
+import { InsertJudge, SelectJudges, UpdateJudge } from 'types/judges'
 
 export type MakeRegionsRouter = (
-  selectJudges: selectJudges,
-  updateJudge: updateJudge,
-  insertJudge: insertJudge
+  selectJudges: SelectJudges,
+  updateJudge: UpdateJudge,
+  insertJudge: InsertJudge
 ) => IRouter
 
 

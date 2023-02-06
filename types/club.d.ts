@@ -1,6 +1,6 @@
 import { Region } from './region'
 
-export type club = {
+export type Club = {
   id: Number,
   fullName: String,
   shortName: String,
@@ -10,12 +10,12 @@ export type club = {
   region: Region
 }
 
-export type MapToClub = (row: any) => club
+export type MapToClub = (row: any) => Club
 
 export type SelectClubOptions = {
   id: number | string
 }
 
-export type SelectClubs = (options?: SelectClubOptions) => Promise<club[]>
-export type InsertClub = (club: club, user: any) => Promise<number>
-export type UpdateClub = (club: club, user: any) => Promise<number>
+export type SelectClubs = (options?: SelectClubOptions) => Promise<Club[]>
+export type InsertClub = (club: Club, user: any) => Promise<number>
+export type UpdateClub = (club: Club, user: any) => Promise<number>

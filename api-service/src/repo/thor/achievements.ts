@@ -1,14 +1,19 @@
-const { Int, Bit } = require('mssql')
-const isEmpty = require('lodash.isempty')
+import { Int, Bit } from 'mssql'
+import { isEmpty } from 'lodash.isempty'
+import { mssqlPool } from 'mssql'
+import { SelectThorAchievements } from 'types/thor'
 
-function makeSelectThorAchievements (sqlPoolConnection) {
-  return function selectThorAchievements (options) {
+
+export type MakeSelectThorAchievements = (sqlPoolConnection: mssqlPool) => SelectThorAchievements
+
+export const makeSelectThorAchievements:MakeSelectThorAchievements= function(sqlPoolConnection) {
+  return function selectThorAchievements(options) {
     if (isEmpty(options)) {
       return Promise.resolve([])
     }
     let top = ''
 
-    if (!options.thorAthleteId) {
+    if (options && !options.thorAthleteId) {
       if (options.limit && options.limit > 0) {
         top = 'TOP ' + options.limit
       } else {
@@ -48,41 +53,41 @@ function makeSelectThorAchievements (sqlPoolConnection) {
     return sqlPoolConnection.then(pool => {
       const request = pool.request()
 
-      if (options.gender) {
+      if (options && options.gender) {
         sql += ' AND [Kyn] = @gender'
         request.input('gender', Int, options.gender)
       }
 
-      if (options.inside) {
+      if (options && options.inside) {
         const inside = options.inside === 'true'
         sql += ' AND [Úti_Inni] = @outside'
         // 1 is inside, 0 is outside
         request.input('outside', Bit, inside)
       }
 
-      if (options.thorAthleteId) {
+      if (options && options.thorAthleteId) {
         sql += ' AND [Keppandanúmer] = @thorAthleteId'
         request.input('thorAthleteId', options.thorAthleteId)
       }
 
-      if (options.thorEventId) {
+      if (options && options.thorEventId) {
         sql += ' AND [Grein] = @thorEventId'
         request.input('thorEventId', options.thorEventId)
       }
 
-      if (options.dateFrom) {
+      if (options && options.dateFrom) {
         sql += ' AND [Dagsetning] >= @dateFrom'
         request.input('dateFrom', options.dateFrom)
       }
 
-      if (options.dateTo) {
+      if (options && options.dateTo) {
         sql += ' AND [Dagsetning] <= @dateTo'
         request.input('dateTo', options.dateTo)
       }
 
       sql += ' AND [Erlendur ríkisborgari] IN (0'
 
-      if (options.includeForeigners) {
+      if (options && options.includeForeigners) {
         const includeForeigners = options.includeForeigners === 'true' ? 1 : 0
         sql += ', @includeForeigners'
         request.input('includeForeigners', Int, includeForeigners)
@@ -90,7 +95,7 @@ function makeSelectThorAchievements (sqlPoolConnection) {
 
       sql += ')) AS TopList'
 
-      if (options.byAthlete) {
+      if (options && options.byAthlete) {
         sql += ' WHERE [Röðun árangurs] = 1'
       }
 
@@ -108,4 +113,3 @@ function makeSelectThorAchievements (sqlPoolConnection) {
   }
 }
 
-module.exports = makeSelectThorAchievements

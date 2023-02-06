@@ -2,9 +2,9 @@
 import { toOrdinal } from 'pg-parameterize'
 import { mapVenues } from './map'
 import {PoolClient} from 'pg'
-import { selectVenues } from 'types/venue'
+import { SelectVenues } from 'types/venue'
 
-export type MakeSelectVenues=(db:PoolClient) => selectVenues
+export type MakeSelectVenues=(db:PoolClient) => SelectVenues
 
 export const makeSelectVenues:MakeSelectVenues = function (db) {
   return function selectVenues(opt) {

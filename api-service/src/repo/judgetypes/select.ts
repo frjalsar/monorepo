@@ -1,9 +1,9 @@
 import { PoolClient } from 'pg'
-import { selectJudgeTypes} from 'types/JudgeType'
+import { SelectJudgeTypes} from 'types/judgetype'
 import { mapJudgeTypes } from './map'
 
 
-export type MakeSelectJudgeTypes = (db: PoolClient) => selectJudgeTypes
+export type MakeSelectJudgeTypes = (db: PoolClient) => SelectJudgeTypes
 
 export const makeSelectJudgeTypes:MakeSelectJudgeTypes = function(db) {
   return function selectJudgeTypes() {

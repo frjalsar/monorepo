@@ -1,5 +1,5 @@
 
-export type venue = {
+export type Venue = {
     id?: number,
     fullName: string,
     indoor: boolean,
@@ -25,8 +25,8 @@ export type SelectVunuesOptions = {
     limit?: number|string
 }
 
-export type mapToVenues=(row:any) => venue
+export type MapToVenues=(row:any) => Venue
 
-export type insertVenue = (venue:venue,user:any) => Promise<venue[]>
-export type selectVenues = (options?: SelectVunuesOptions)=>Promise<number>
-export type updateVenue = (venue:venue,user:any)=>Promise<number>
+export type InsertVenue = (venue:Venue,user:any) => Promise<Venue[]>
+export type SelectVenues = (options?: SelectVunuesOptions)=>Promise<number>
+export type UpdateVenue = (venue:Venue,user:any)=>Promise<number>

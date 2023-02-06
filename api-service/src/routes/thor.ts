@@ -1,6 +1,17 @@
-const { Router } = require('express')
+import { Router } from 'express'
 
-function makeThorRoute (selectThorEvents, selectThorAchievements, selectMissingRunners, updateMissingRunner, selectCompetitor) {
+import { SelectThorEvents, SelectThorAchievements, SelectMissingRunners, UpdateMissingRunner, SelectCompetitor} from 'types/thor'
+
+export type MakeThorRoute = (
+  SelectThorEvents,
+  SelectThorAchievements,
+  SelectMissingRunners,
+  UpdateMissingRunner,
+  SelectCompetitor
+) => import('express').IRouter
+
+
+export const makeThorRoute: MakeThorRoute = function (selectThorEvents, selectThorAchievements, selectMissingRunners, updateMissingRunner, selectCompetitor) {
   const router = Router()
 
   router.get('/events', (req, res, next) => {
@@ -35,4 +46,3 @@ function makeThorRoute (selectThorEvents, selectThorAchievements, selectMissingR
   return router
 }
 
-module.exports = makeThorRoute

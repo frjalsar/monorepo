@@ -1,7 +1,7 @@
 import { PoolClient } from 'pg'
-import { updateJudgeType } from 'types/JudgeType'
+import { UpdateJudgeType } from 'types/judgetype'
 
-export type MakeUpdateJudgeType = (db: PoolClient) => updateJudgeType
+export type MakeUpdateJudgeType = (db: PoolClient) => UpdateJudgeType
   
 export const makeUpdateJudgeType: MakeUpdateJudgeType = function (db) {
   return function updateJudgeType(judgeType, user) {

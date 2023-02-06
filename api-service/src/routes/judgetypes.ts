@@ -1,11 +1,11 @@
 import { IRouter, Router } from 'express'
 import { authorize } from '../lib/authorizeHandler'
-import { updateJudgeType, selectJudgeTypes, insertJudgeType } from 'types/JudgeType'
+import { UpdateJudgeType, SelectJudgeTypes, InsertJudgeType } from 'types/judgetype'
 
 export type MakeJudgeTypesRouter = (
-  selectJudgeTypes: selectJudgeTypes,
-  updateJudgeType: updateJudgeType,
-  insertJudgeType: insertJudgeType
+  selectJudgeTypes: SelectJudgeTypes,
+  updateJudgeType: UpdateJudgeType,
+  insertJudgeType: InsertJudgeType
 ) => IRouter
 
 export const makeJudgeTypesRouter: MakeJudgeTypesRouter = function(selectJudgeTypes, updateJudgeType, insertJudgeType) {

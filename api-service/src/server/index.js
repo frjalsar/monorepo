@@ -10,19 +10,19 @@ const makeAgeGroups = require('../composition/agegroups')
 const makeAuthenticate = require('../composition/authenticate')
 const makeAthletes = require('../composition/athletes')
 const { makeClubs } = require('../composition/clubs')
-const makeCompetitions = require('../composition/competitions')
-const makeEquipment = require('../composition/equipment')
+const { makeCompetitions } = require('../composition/competitions')
+const { makeEquipment } = require('../composition/equipment')
 const makeEvents = require('../composition/events')
 const makeEventTypes = require('../composition/eventtypes')
 const { makeJudges } = require('../composition/judges')
 const { makeJudgeTypes } = require('../composition/judgetypes')
-const makeMeets = require('../composition/meets')
+const { makeMeets } = require('../composition/meets')
 const makeLogin = require('../composition/login')
 const makeMembership = require('../composition/membership')
 const { makeRegions } = require('../composition/regions')
 const makeUsers = require('../composition/users')
 const { makeVenues } = require('../composition/venues')
-const makeThor = require('../composition/thor')
+const { makeThor } = require('../composition/thor')
 const makeSendMail = require('../lib/sendmail')
 
 const isProduction = process.env.NODE_ENV === 'production'
@@ -72,7 +72,7 @@ app.use(authenticate())
 app.use('/agegroups', makeAgeGroups())
 app.use('/athletes', makeAthletes(pgPool, sqlConnection))
 app.use('/clubs', makeClubs(pgPool))
-app.use('/competitions', makeCompetitions(pgPool))
+app.use('/competitions', makeCompetitions(pgPool, logger))
 app.use('/equipment', makeEquipment(pgPool))
 app.use('/events', makeEvents(pgPool))
 app.use('/eventtypes', makeEventTypes(pgPool))
@@ -97,3 +97,16 @@ const port = process.env.PORT || 3000
 app.listen(port, () => {
   logger.info('server running on port ' + port)
 })
+
+/*
+   ISSUES FOUND ON MONOREPO
+-----------------------------
+
+  1. On membership unused js files found /repo
+  2. competitions select method (mssql statement problem) and Make sure type datatypes
+  3. Venues (same method/function naming in repo insert.js & update.js) -- FIXED
+  4. Thor unused .js files found inside repo (insert and update)
+  5. On Meets SelectMeetAttachment.js function name error  -- FIXED
+  5. ? ? ? ?
+
+*/

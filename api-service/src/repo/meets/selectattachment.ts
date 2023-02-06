@@ -1,5 +1,10 @@
-function makeSelectMeetAttachment (db) {
-  return function selectMeetttachmen (meetId) {
+import { PoolClient } from 'pg'
+import { SelectMeetAttachment } from 'types/meets'
+
+export type MakeSelectMeetAttachment=(db:PoolClient)=>SelectMeetAttachment
+
+export const makeSelectMeetAttachment:MakeSelectMeetAttachment= function(db) {
+  return function selectMeetAttachment(meetId) {
     const params = [meetId]
     const sql = `
       SELECT
@@ -19,5 +24,3 @@ function makeSelectMeetAttachment (db) {
       })
   }
 }
-
-module.exports = makeSelectMeetAttachment

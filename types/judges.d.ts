@@ -1,29 +1,29 @@
 
-export type judge=  {
+export type Judge=  {
       id: number,
       fullName: string,
       date: any,
       typeId: number,
       clubId: number,
-      type?: judgetypes,
-      club?: judgeclub,
+      type?: JudgeTypes,
+      club?: JudgeClub,
       valid?: boolean
 
     }
 
-export type judgetypes=  {
+export type JudgeTypes=  {
         id?: string,
         name?: string,
         stage?: string,
      }
 
-export type judgeclub = {
+export type JudgeClub = {
         id?: number,
         fullName?: string,
         thorId?: string
 }
 
-export type selectJudgeOptions = {
+export type SelectJudgeOptions = {
       id?: string | number | undefined,
       clubId?: number|string,
       typeId?: string | number,
@@ -31,8 +31,8 @@ export type selectJudgeOptions = {
       limit?: number | string
 }
 
-export type MapToJudge = (row:any) => judge
+export type MapToJudge = (row:any) => Judge
 
-export type selectJudges = (options?: selectJudgeOptions) => Promise<judge[]>
-export type insertJudge = (judge: judge, user: any) => Promise<number>
-export type updateJudge = (judge: judge, user: any) => Promise<number>
+export type SelectJudges = (options?: SelectJudgeOptions) => Promise<Judge[]>
+export type InsertJudge = (judge: Judge, user: any) => Promise<number>
+export type UpdateJudge = (judge: Judge, user: any) => Promise<number>

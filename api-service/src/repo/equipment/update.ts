@@ -1,5 +1,10 @@
-function makeUpdateEquipment (db) {
-  return function updateEquipment (equipment, user) {
+import { PoolClient } from 'pg'
+import { UpdateEquipment } from 'types/equipment' 
+
+export type MakeUpdateEquipment = (db: PoolClient) => UpdateEquipment
+
+export const makeUpdateEquipment: MakeUpdateEquipment = function (db) {
+  return function updateEquipment(equipment, user) {
     const sql = `
       UPDATE equipment SET
         eventid = $1,
@@ -27,5 +32,3 @@ function makeUpdateEquipment (db) {
       .then(res => res.rows[0].id)
   }
 }
-
-module.exports = makeUpdateEquipment
