@@ -18,3 +18,4 @@
 ## 🧑💻 Þróun
 
 * [Inngangur](throun/fyrstu-skref.md)
+* [Kóði](throun/kodi.md)
