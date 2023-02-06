@@ -1,7 +1,7 @@
-import {insertEventType} from 'types/event-type'
+import {InsertEventType} from 'types/event-type'
 import {PoolClient} from 'pg'
 
-export type MakeInsertEventType=(db:PoolClient)=>insertEventType
+export type MakeInsertEventType=(db:PoolClient)=>InsertEventType
 
 export const makeInsertEventType:MakeInsertEventType= function (db) {
   return function insertEventType (eventType, user) {

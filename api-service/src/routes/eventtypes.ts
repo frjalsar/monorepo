@@ -1,11 +1,11 @@
 import { IRouter, Router } from 'express'
-import { insertEventType, selectEventTypes, updateEventType } from 'types/event-type'
+import { InsertEventType,SelectEventTypes, UpdateEventType } from 'types/event-type'
 import { authorize } from '../lib/authorizeHandler'
 
 export type MakeEventTypesRoute = (
-  selectEvents: selectEventTypes,
-  updateEvent: updateEventType,
-  insertEvent: insertEventType
+  selectEventTypess:SelectEventTypes,
+  updateEventType: UpdateEventType,
+  insertEventType: InsertEventType
 ) => IRouter
 
 export const makeEventTypesRouter:MakeEventTypesRoute=function (selectEventTypes, updateEventType, insertEventType) {

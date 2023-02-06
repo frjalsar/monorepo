@@ -1,7 +1,14 @@
 import { authorize } from '../lib/authorizeHandler'
-const { Router } = require('express')
+import { IRouter, Router } from 'express'
+import { InsertEvent, SelectEvents, UpdateEvent } from 'types/events'
 
-function makeEventsRoute (selectEvents, updateEvent, insertEvent) {
+export type MakeEventsRouter = (
+  selectEvents:SelectEvents,
+  updateEvent: UpdateEvent,
+  insertEvent: InsertEvent
+) => IRouter
+
+export const makeEventsRouter:MakeEventsRouter= function (selectEvents, updateEvent, insertEvent) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -25,4 +32,3 @@ function makeEventsRoute (selectEvents, updateEvent, insertEvent) {
   return router
 }
 
-module.exports = makeEventsRoute

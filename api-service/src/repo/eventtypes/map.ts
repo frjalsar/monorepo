@@ -1,6 +1,6 @@
-import { mapToEventType } from "types/event-type"
+import { MapToEventType } from "types/event-type"
 
-export const mapEventTypes:mapToEventType= function (row) {
+export const mapEventTypes:MapToEventType= function (row) {
     return {
       id: row.id,
       name: row.name,

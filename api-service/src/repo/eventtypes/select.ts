@@ -1,8 +1,8 @@
 import {mapEventTypes} from './map'
-import { selectEventTypes } from 'types/event-type'
+import { SelectEventTypes } from 'types/event-type'
 import {PoolClient} from 'pg'
 
-export type MakeSelectEventTypes=(db:PoolClient)=>selectEventTypes
+export type MakeSelectEventTypes=(db:PoolClient)=>SelectEventTypes
 
 export const makeSelectEventTypes:MakeSelectEventTypes= function (db) {
   return function selectEventTypes () {

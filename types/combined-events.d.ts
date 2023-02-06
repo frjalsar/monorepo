@@ -1,12 +1,12 @@
-export type combinedevent= {
+export type Combinedevent= {
     parentEventId: number,
 	childEventId: number,
 }
 
 
-export type MapToCombinedEvent=(row:any, parentEventId:number)=>combinedevent
+export type MapToCombinedEvent=(row:any, parentEventId:number)=>Combinedevent
 
 
 
-export type insertCombinedEvent=(combinedEvents:combinedevent[],user:any)=> Promise<number>
-export type deleteCombinedEvent=(parentEventId:number,user:any)=> Promise<number>
+export type InsertCombinedEvent=(combinedEvents:Combinedevent[],user:any)=> Promise<number>
+export type DeleteCombinedEvent=(parentEventId:number,user:any)=> Promise<number>

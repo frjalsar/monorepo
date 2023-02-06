@@ -1,10 +1,13 @@
-const mapEvents = require('./map')
+import { SelectEvents } from "types/events"
+import { PoolClient } from 'pg'
+import {mapEvents} from './map'
 
-function makeSelectEvents (db) {
-  return function selectEvents (options) {
-    const opt = options || {}
+export type MakeSelectEvents=(db:PoolClient)=>SelectEvents
 
-    const params = []
+export const makeSelectEvents:MakeSelectEvents=function (db) {
+  return function selectEvents (opt) {
+
+    const params:Array<number|string>= []
     let sql = `
       SELECT
         e.id,
@@ -27,7 +30,7 @@ function makeSelectEvents (db) {
         ON ce.parenteventid = e.id
       WHERE 1 = 1`
 
-    if (opt.typeId) {
+    if (opt && opt.typeId) {
       sql += ' AND e.typeid = $1'
       params.push(opt.typeId)
     }
@@ -36,8 +39,7 @@ function makeSelectEvents (db) {
 
     return db
       .query(sql, params)
-      .then(res => mapEvents(res.rows))
+      .then(res => res.rows.map(mapEvents))
   }
 }
 
-module.exports = makeSelectEvents

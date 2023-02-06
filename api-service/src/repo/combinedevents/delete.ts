@@ -1,7 +1,7 @@
-import { deleteCombinedEvent } from "types/combined-events"
+import { DeleteCombinedEvent } from "types/combined-events"
 import {PoolClient} from 'pg'
 
-export type MakeDeleteCombinedEvents=(dp:PoolClient)=>deleteCombinedEvent
+export type MakeDeleteCombinedEvents=(dp:PoolClient)=>DeleteCombinedEvent
 
 export const makeDeleteCombinedEvents:MakeDeleteCombinedEvents= function (db) {
   return function deleteCombinedEvents (parentEventId) {

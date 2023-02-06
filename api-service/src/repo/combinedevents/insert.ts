@@ -1,10 +1,10 @@
 
 import { type } from 'os'
 import { flatten, toTuple } from 'pg-parameterize'
-import { insertCombinedEvent } from 'types/combined-events'
+import { InsertCombinedEvent } from 'types/combined-events'
 import {PoolClient} from 'pg'
 
-export type MakeInsertCombinedEvent = (dp:PoolClient)=>insertCombinedEvent
+export type MakeInsertCombinedEvent = (dp:PoolClient)=>InsertCombinedEvent
 
 export const makeInsertCombinedEvents:MakeInsertCombinedEvent=function (db) {
   return function insertMembership (combinedEvents, user) {
