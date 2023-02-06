@@ -2,8 +2,6 @@ import { makeSelectClubs } from '../repo/clubs/select'
 import { makeUpdateClub } from '../repo/clubs/update'
 import { makeInsertClub } from '../repo/clubs/insert'
 import { makeClubsRouter } from '../routes/clubs'
-
-
 import { PoolClient } from 'pg'
 import { IRouter } from 'express'
 import { InsertClub, SelectClubs, UpdateClub } from 'types/club'
