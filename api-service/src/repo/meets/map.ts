@@ -1,43 +1,60 @@
-export  const mapMeets =function(row) {
+import {MapToMeet, Meet} from 'types/meets'
+export const mapMeets:MapToMeet=function(list) {
   const genderMap = {
     1: 'Karlar',
     2: 'Konur'
   }
 
-  return {
-        id: row.id,
-        name: row.name,
-        organizerName: row.organizername,
-        organizerKt: row.organizerkt,
-        contactName: row.contactname,
-        contactEmail: row.contactemail,
-        contactPhone: row.contactphone,
-        location: row.location,
-        venueId: row.venueid,
-        venueName: row.venuename,
-        judgeId: row.judgeid,
-        judgeName: row.judgename,
-        startDate: row.startdate,
-        endDate: row.endate,
-        status: row.status,
-        sent: row.sent,
-        hasAttachment: row.hasattachment,
-    competition: row.competitionid ? [
-           {
-        id: row.competitionid,
-        eventId: row.eventid,
-        eventName: row.eventname,
-        meetId: row.id,
-        ageFrom: row.agefrom,
-        ageTo: row.ageto,
-        gender: row.gender
+  let currentId
+  const result:Meet[] = []
+  list.forEach(item => {
+    if (item.id !== currentId) {
+      const meetObj:any = {
+        id: item.id,
+        name: item.name,
+        organizerName: item.organizername,
+        organizerKt: item.organizerkt,
+        contactName: item.contactname,
+        contactEmail: item.contactemail,
+        contactPhone: item.contactphone,
+        location: item.location,
+        venueId: item.venueid,
+        venueName: item.venuename,
+        judgeId: item.judgeid,
+        judgeName: item.judgename,
+        startDate: item.startdate,
+        endDate: item.endate,
+        status: item.status,
+        sent: item.sent,
+        hasAttachment: item.hasattachment,
+        competition: []
+      }
+
+      result.push(meetObj)
+      currentId = item.id
+    }
+
+    const currentMeet = result[result.length - 1]
+    if (item.competitionid) {
+      // Create membership
+      const competitionObj = {
+        id: item.competitionid,
+        eventId: item.eventid,
+        eventName: item.eventname,
+        meetId: item.id,
+        ageFrom: item.agefrom,
+        ageTo: item.ageto,
+        gender: item.gender
           ? {
-              value: row.gender,
-              text: genderMap[row.gender]
+              value: item.gender,
+              text: genderMap[item.gender]
             }
           : undefined
       }
-        ]:[]
-  }
-}
 
+      currentMeet.competition.push(competitionObj)
+    }
+  })
+
+  return result
+}

@@ -57,6 +57,6 @@ export const makeSelectMeets: MakeSelectMeets = function (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows.map(mapMeets))
+      .then(res => mapMeets(res.rows))
   }
 }
