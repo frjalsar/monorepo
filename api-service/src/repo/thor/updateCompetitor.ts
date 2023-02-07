@@ -1,6 +1,6 @@
-const { VarChar } = require('mssql')
+import { VarChar } from 'mssql'
 
-function makeUpdateCompetitor (sqlPoolConnection) {
+export const makeUpdateCompetitor=function (sqlPoolConnection) {
   return function updateCompetitor (id, clubName, fullName) {
     const sql = `
       UPDATE
@@ -27,4 +27,3 @@ function makeUpdateCompetitor (sqlPoolConnection) {
   }
 }
 
-module.exports = makeUpdateCompetitor

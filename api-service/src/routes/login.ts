@@ -1,14 +1,14 @@
-const { Router } = require('express')
+import { Router } from 'express'
 
-function makeLoginRoute (loginHandler, isProduction) {
+export const makeLoginRouter= function (loginHandler, isProduction) {
   const router = Router()
 
   router.post('/', (req, res, next) => {
     const username = req.body.username
     const password = req.body.password
 
-    const host = req.get('host')
-    const dot = host.indexOf('.')
+    const host = req.get('host')!
+    const dot = host.indexOf('.') || -1
     const domain = dot > -1 ? host.substring(dot + 1) : undefined
 
     /*
@@ -44,4 +44,3 @@ function makeLoginRoute (loginHandler, isProduction) {
   return router
 }
 
-module.exports = makeLoginRoute
