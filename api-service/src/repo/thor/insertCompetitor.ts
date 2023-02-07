@@ -1,4 +1,4 @@
-export const makeInsertCompetitor=function () {
+export const makeInsertCompetitor=function (sqlConnection) {
   return () => {
     return Promise.resolve(true)
   }

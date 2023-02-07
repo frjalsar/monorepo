@@ -15,6 +15,7 @@ export type Achievement = {
     Staður?:string|number
 }
 
+
 export type SelectThorEventOptions = {
     gender:any,
     outside:any
@@ -40,8 +41,16 @@ export type MissingRunner = {
     meetCode:string|number
 }
 
+
+export type UpdateThorCompetitor = {
+    id?: number | string,
+    clubName?: number | string,
+    fullName?: number|string
+}
+
 export type SelectThorEvents=(options?:SelectThorEventOptions)=>Promise<Achievement[]>
 export type SelectThorAchievements=(options?:SelectAchievementOptions)=>Promise<Achievement[]>
 export type SelectMissingRunners=()=>Promise<Achievement[]>
 export type SelectCompetitor=(options:SelectCompetitorOptions)=>Promise<Achievement[]>
 export type UpdateMissingRunner=(missingRunner:MissingRunner)=>Promise<string>
+export type UpdateCompetitor=(id:UpdateThorCompetitor, clubName:UpdateThorCompetitor, fullName:UpdateThorCompetitor)=>Promise<number>

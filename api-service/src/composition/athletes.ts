@@ -5,8 +5,8 @@ import {makeAthleteRoute} from '../routes/athletes'
 import { PoolClient } from 'pg'
 import { IRouter } from 'express'
 import { CreateAthlete, EditAthlete, SelectAthletes } from 'types/athlete'
-const makeUpdateCompetitor = require('../repo/thor/updateCompetitor')
-const makeInsertCompetitor = require('../repo/thor/insertCompetitor')
+import {makeUpdateCompetitor} from '../repo/thor/updateCompetitor'
+import {makeInsertCompetitor} from '../repo/thor/insertCompetitor'
 
 
 export type MakeAthletes = (db: PoolClient) => IRouter
