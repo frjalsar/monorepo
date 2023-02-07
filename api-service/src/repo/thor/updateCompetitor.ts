@@ -1,7 +1,10 @@
-const { VarChar } = require('mssql')
+import { VarChar, sqlPool } from 'mssql'
+import {UpdateCompetitor} from 'types/thor'
 
-function makeUpdateCompetitor (sqlPoolConnection) {
-  return function updateCompetitor (id, clubName, fullName) {
+export type MakeUpdateCompetitor = (sqlPoolConnection: sqlPool) => UpdateCompetitor
+
+export const makeUpdateCompetitor: MakeUpdateCompetitor = function (sqlPoolConnection) {
+  return function updateCompetitor(id, clubName, fullName) {
     const sql = `
       UPDATE
         [Athletics].[dbo].[Athl$Competitors]
@@ -26,5 +29,3 @@ function makeUpdateCompetitor (sqlPoolConnection) {
     })
   }
 }
-
-module.exports = makeUpdateCompetitor
