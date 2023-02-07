@@ -1,11 +1,11 @@
 
-const express = require('express')
-const compression = require('compression')
-const bodyParser = require('body-parser')
-const helmet = require('helmet')
-const cors = require('cors')
+import express from 'express'
+import compression from 'compression'
+import  bodyParser from 'body-parser'
+import  helmet  from 'helmet'
+import cors from 'cors'
 
-function createApp (isProduction) {
+export function createApp (isProduction) {
   const app = express()
 
   if (isProduction) {
@@ -25,4 +25,3 @@ function createApp (isProduction) {
   return app
 }
 
-module.exports = createApp

@@ -8,9 +8,9 @@ import { InsertCompetition, SelectCompetitions } from 'types/competitions'
 
 export type MakeCompetitions = ( db:PoolClient )=>IRouter
 
-export function makeCompetitions(db,logger) {
+export function makeCompetitions(db) {
 
-  const selectCompetitions:SelectCompetitions = makeSelectCompetitions(db,logger)
+  const selectCompetitions:SelectCompetitions = makeSelectCompetitions(db)
   const insertCompetition:InsertCompetition = makeInsertCompetition(db)
 
   return makeCompetitionsRouter(selectCompetitions, insertCompetition)

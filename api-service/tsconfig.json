@@ -7,6 +7,7 @@
     "strict": true,
     "noImplicitAny": false,
     "allowJs": true,
+    "esModuleInterop": true,
     "paths": {
       "types/*": ["../../types/*"]
     }

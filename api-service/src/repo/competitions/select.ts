@@ -2,15 +2,10 @@ import { mapCompetitions } from './map'
 import { PoolClient } from 'pg'
 import {SelectCompetitions} from 'types/competitions'
 
-export type MakeSelectCompetitions=(db:PoolClient,logger) => SelectCompetitions
+export type MakeSelectCompetitions=(db:PoolClient) => SelectCompetitions
 
-export const makeSelectCompetitions:MakeSelectCompetitions = function (db,logger) {
+export const makeSelectCompetitions:MakeSelectCompetitions = function (db) {
   return function selectCompetitions(opt) {
-
-    logger.info("...................................")
-    logger.info(opt)
-    logger.info('...................................')
-    
     const params:Array<string|number> = []
     let sql = `
       SELECT

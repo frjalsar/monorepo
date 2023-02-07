@@ -13,7 +13,7 @@ function corsOrigin () {
   }
 
   return function (origin, cb) {
-    if (whitelist[process.env.NODE_ENV].indexOf(origin) !== -1 || !origin) {
+    if (process.env.NODE_ENV && whitelist[process.env.NODE_ENV].indexOf(origin) !== -1 || !origin) {
       cb(null, true)
     } else {
       cb(new Error('Not allowed'))

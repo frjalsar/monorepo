@@ -1,31 +1,36 @@
 require('dotenv').config()
 
-const pg = require('pg')
-const sql = require('mssql')
-const redis = require('redis')
-const logger = require('pino')()
-const pinoHTTP = require('pino-http')
-const createApp = require('./app')
-const { makeAgeGroups } = require('../composition/agegroups')
-const { makeAuthenticate } = require('../composition/authenticate')
-const { makeAthletes } = require('../composition/athletes')
-const { makeClubs } = require('../composition/clubs')
-const { makeCompetitions } = require('../composition/competitions')
-const { makeEquipment } = require('../composition/equipment')
-const { makeEvents } = require('../composition/events')
-const { makeEventTypes } = require('../composition/eventtypes')
-const { makeJudges } = require('../composition/judges')
-const { makeJudgeTypes } = require('../composition/judgetypes')
-const { makeMeets } = require('../composition/meets')
-const { makeLogin } = require('../composition/login')
-const { makeMembership } = require('../composition/membership')
-const { makeRegions } = require('../composition/regions')
-const { makeUsers } = require('../composition/users')
-const { makeVenues } = require('../composition/venues')
+import pg from 'pg'
+import sql from 'mssql'
+import redis from 'redis'
+import {pino} from 'pino'
+import pinoHTTP from 'pino-http'
+import {createApp} from './app'
+import { makeAgeGroups } from '../composition/agegroups'
+import { makeAuthenticate } from '../composition/authenticate'
+import { makeAthletes } from '../composition/athletes'
+import { makeClubs } from '../composition/clubs'
+import { makeCompetitions } from '../composition/competitions'
+import { makeEquipment } from '../composition/equipment'
+import { makeEvents } from '../composition/events'
+import { makeEventTypes } from '../composition/eventtypes'
+import { makeJudges } from '../composition/judges'
+import { makeJudgeTypes } from '../composition/judgetypes'
+import { makeMeets } from '../composition/meets'
+import { makeLogin } from '../composition/login'
+import { makeMembership } from '../composition/membership'
+import { makeRegions } from '../composition/regions'
+import { makeUsers } from '../composition/users'
+import { makeVenues } from '../composition/venues'
 const { makeThor } = require('../composition/thor')
 const { makeSendMail } = require('../lib/sendmail')
 
 const isProduction = process.env.NODE_ENV === 'production'
+
+const logger = pino({
+  name: 'api-service',
+  level: 'debug'
+});
 
 const pgPool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -74,7 +79,7 @@ app.use('/athletes', makeAthletes(pgPool, sqlConnection))
 app.use('/clubs', makeClubs(pgPool))
 app.use('/competitions', makeCompetitions(pgPool))
 app.use('/equipment', makeEquipment(pgPool))
-app.use('/events', makeEvents(pgPool, logger))
+app.use('/events', makeEvents(pgPool))
 app.use('/eventtypes', makeEventTypes(pgPool))
 app.use('/judges', makeJudges(pgPool))
 app.use('/judgetypes', makeJudgeTypes(pgPool))
