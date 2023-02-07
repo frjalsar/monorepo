@@ -1,7 +1,15 @@
-const isEqual = require('lodash.isequal')
-const mapMembership = require('../membership/map')
+import {isEqual} from 'lodash.isequal'
+import {mapMembership} from '../membership/map'
+import { PoolClient } from 'pg'
+import { EditAthlete } from 'types/athlete'
+import { makeUpdateAthlete } from './update'
+import { makeSelectClubs } from '../clubs/select'
+import { makeDisableMembership } from '../membership/disable'
+import { makeInsertMembership } from '../membership/insert'
 
-function makeEditAthlete (makeUpdateAthlete, makeSelectClubs, makeDisableMembership, makeInsertMembership, db, updateCompetitor) {
+export type MakeEditAthlete = (db: PoolClient,updateCompetitor) => EditAthlete
+
+export const makeEditAthlete:MakeEditAthlete=function (db,updateCompetitor) {
   return async function editAthlete (athlete, user) {
     const client = await db.connect()
 
@@ -15,7 +23,7 @@ function makeEditAthlete (makeUpdateAthlete, makeSelectClubs, makeDisableMembers
       await updateAthlete(athlete, user)
 
       const sameMembership = isEqual(athlete.membership, athlete.newMembership)
-      const membershipList = mapMembership(athlete.newMembership, athlete.id)
+      const membershipList =athlete.newMembership? athlete.newMembership.map(member=>mapMembership(member, athlete.id)):[] 
 
       if (!sameMembership) {
         await disableMembership(athlete.id)
@@ -40,4 +48,3 @@ function makeEditAthlete (makeUpdateAthlete, makeSelectClubs, makeDisableMembers
   }
 }
 
-module.exports = makeEditAthlete

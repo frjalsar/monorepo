@@ -1,18 +1,21 @@
-const toOrdinal = require('pg-parameterize').toOrdinal
-const isEmpty = require('lodash.isempty')
-const mapToAthletes = require('./map')
+import { PoolClient } from 'pg'
+import { SelectAthletes } from 'types/athlete'
+import * as toOrdinal from 'pg-parameterize'
+import * as lodash from 'lodash'
+import {mapAthletes} from './map'
 
-function makeSelectAthletes (db) {
-  return function selectAthletes (options, user) {
-    const opt = options || {}
+export type MakeSelectAthletes = (db: PoolClient) => SelectAthletes
+
+export const makeSelectAthletes:MakeSelectAthletes=function (db) {
+  return function selectAthletes (opt, user) {
 
     const hasEmptyProperties = Object.values(opt).every(i => i === '')
-    if (isEmpty(opt) || hasEmptyProperties) {
+    if (lodash.isEmpty(opt) || hasEmptyProperties) {
       return Promise.resolve([])
     }
 
     const canViewKt = user || !!opt.kt
-    const params = []
+    const params:Array<number| string> = []
     let sql = `
       SELECT
         a.id,
@@ -122,9 +125,8 @@ function makeSelectAthletes (db) {
     }
 
     return db
-      .query(toOrdinal(sql), params)
-      .then(res => mapToAthletes(res.rows))
+      .query(toOrdinal.toOrdinal(sql), params)
+      .then(res => mapAthletes(res.rows))
   }
 }
 
-module.exports = makeSelectAthletes

@@ -1,5 +1,5 @@
 export type Athlete = {
-    id: string;
+    id: number;
     fullName: string
     kt: string
     birthyear: number
@@ -10,16 +10,31 @@ export type Athlete = {
     club: any,
     region: any,
     membership: any[]
+    newMembership?: any[]
+
   }
 
-  export type MapToAthlete = (row: any) => Athlete
+  export type MapToAthlete = (row: any) => Athlete[]
 
 export type SelectAthleteOptions = {
   id?: number | string
   typeId?: number | string
+  kt?: number | string
+  gender?: number | string
+  startsWith?: number | string
+  search?: number | string
+  regionId?: number 
+  clubId?: number 
+  thorClubId?: number | string
+  legacyClub?: number | string
+  birthyearFrom?: number 
+  birthyearTo?: number 
+  lastCompeted?: string
+  offset?: number 
+  limit?: number 
 }
 
-export type SelectAthletes = (options?: SelectAthleteOptions) => Promise<Athlete[]>
+export type SelectAthletes = (options: SelectAthleteOptions,user:any) => Promise<Athlete[]>
 export type InsertAthlete  = (athlete: Athlete, user: any) => Promise<number>
 export type UpdateAthlete  = (athlete: Athlete, user: any) => Promise<number>
 export type CreateAthlete  = (athlete:Athlete,user:any)=>Promise<any>

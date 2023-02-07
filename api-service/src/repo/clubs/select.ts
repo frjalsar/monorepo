@@ -3,6 +3,7 @@ import {SelectClubs} from 'types/club'
 import { mapClub } from './map'
 
 export type MakeSelectClubs = (db: PoolClient) => SelectClubs
+
 export const makeSelectClubs:MakeSelectClubs=function (db) {
   return function selectClubs (opt) {
 

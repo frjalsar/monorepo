@@ -1,6 +1,14 @@
-const mapMembership = require('../membership/map')
+import {mapMembership} from '../membership/map'
+import { PoolClient } from 'pg'
+import { CreateAthlete } from 'types/athlete'
+import { makeInsertAthlete } from './insert'
+import { makeSelectClubs } from '../clubs/select'
+import { makeInsertMembership } from '../membership/insert'
 
-function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeInsertMembership, db, insertCompetitor) {
+
+export type MakeEditOrCreateAthlete = (db: PoolClient,insertCompetitor) => CreateAthlete
+
+export const makeEditOrCreateAthlete:MakeEditOrCreateAthlete=function (db,insertCompetitor) {
   return async function editAthlete (athlete, user) {
     const client = await db.connect()
 
@@ -12,7 +20,7 @@ function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeInsert
       await client.query('BEGIN')
       const id = await insertAthlete(athlete, user)
 
-      const membershipList = mapMembership(athlete.newMembership, id)
+      const membershipList =athlete.newMembership?athlete.newMembership.map(member=>mapMembership(member, id)):[]
       await insertMembership(membershipList, user)
 
       // THOR - always update Thor. TODO refactor away
@@ -33,4 +41,3 @@ function makeEditOrCreateAthlete (makeInsertAthlete, makeSelectClubs, makeInsert
   }
 }
 
-module.exports = makeEditOrCreateAthlete

@@ -1,7 +1,16 @@
-const { Router } = require('express')
-const { authorize } = require('../lib/authorizeHandler')
+import { authorize } from '../lib/authorizeHandler'
+import { IRouter, Router } from 'express'
 
-function makeAthleteRoute (selectAthlete, editAthlete, createAthlete) {
+import { SelectAthletes, EditAthlete, CreateAthlete } from 'types/athlete'
+
+export type MakeAthleteRoute = (
+  selectAthlete: SelectAthletes,
+  editAthlete: EditAthlete,
+  createAthlete: CreateAthlete
+) => IRouter
+
+
+export const makeAthleteRoute:MakeAthleteRoute=function (selectAthlete, editAthlete, createAthlete) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -80,4 +89,3 @@ function createAccess () {
   }
 }
 */
-module.exports = makeAthleteRoute
