@@ -1,4 +1,9 @@
-function makeDisableMembership (db) {
+import { PoolClient } from 'pg'
+import {DisabledMembership} from 'types/membership'
+
+export type MakeDisableMembership = (db: PoolClient) => DisabledMembership
+
+export const makeDisableMembership:MakeDisableMembership=function (db) {
   return function updateMembership (athleteId) {
     const sql = `
       UPDATE
@@ -14,4 +19,3 @@ function makeDisableMembership (db) {
   }
 }
 
-module.exports = makeDisableMembership

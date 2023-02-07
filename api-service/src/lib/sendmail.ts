@@ -1,7 +1,7 @@
 import Mailgun from 'mailgun.js'
 import * as formData from 'form-data'
 
-function makeSendMail (apiKey, domain) {
+export function makeSendMail (apiKey, domain) {
   const mailgun = new Mailgun(formData)
   const client = mailgun.client({
     username: 'api',
@@ -20,4 +20,3 @@ function makeSendMail (apiKey, domain) {
   }
 }
 
-module.exports = makeSendMail
