@@ -19,7 +19,7 @@ export type Meet = {
 }
 
 
-export type optionMeetSelect = {
+export type SelectMeetOptions = {
     id: number|string,
     status:number|string
 }
@@ -30,10 +30,8 @@ export type SelectMeetAttachmentParams = {
 
 
 
-export type SelectMeets=(opt?:optionMeetSelect)=>Promise<Meet[]>
+export type SelectMeets=(opt?:SelectMeetOptions)=>Promise<Meet[]>
 export type SelectMeetAttachment=(meetId:SelectMeetAttachmentParams)=>Promise<any>
 export type UpdateMeet=(meet:Meet, user:any)=>Promise<number>
 export type InsertMeet = (meets: Meet, user: any) => Promise<number>
-
 export type MakeCreateMeets=(meets:Meet, user:any)=>Promise<any>
-export type MakeSendMail=(name:any,jncd:any)=>Promise<number>

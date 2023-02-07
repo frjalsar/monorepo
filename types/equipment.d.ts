@@ -1,4 +1,3 @@
-
 export type Equipment = {
       id: number,
       eventId: number,
@@ -14,13 +13,13 @@ export type EventType = {
     name?: string
 }
 
-export type OptionEquipmentSelect = {
+export type SelectEquipmentOption = {
     id: string | number
 }
 
 
 export type MapToEquipment = (item:any) => Equipment
 
-export type SelectEquipment = (opt?:OptionEquipmentSelect) =>Promise<Equipment[]>
+export type SelectEquipment = (opt?:SelectEquipmentOption) =>Promise<Equipment[]>
 export type InsertEquipment = (equipment:Equipment, user:any) =>Promise<number>
 export type UpdateEquipment = (equipment:Equipment, user:any) =>Promise<number>

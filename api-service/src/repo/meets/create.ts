@@ -2,18 +2,13 @@
 import { PoolClient } from 'pg'
 import { MakeInsertCompetition } from 'repo/competitions/insert'
 import { MakeInsertMeet } from './insert'
-import {MakeSendMail} from 'types/meets'
 import { MakeCreateMeets } from 'types/meets'
-
-export type CreateMeet = (
-  
-)=>Promise<number>
 
 export type makeCreateMeet = (
   makeInsertMeet: MakeInsertMeet,
   makeInsertCompetition: MakeInsertCompetition,
   db:PoolClient,
-  sendMail:MakeSendMail
+  sendMail
 )=>MakeCreateMeets
 
 export const makeCreateMeet: makeCreateMeet= function(makeInsertMeet, makeInsertCompetition, db, sendMail) {

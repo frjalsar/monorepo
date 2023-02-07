@@ -1,9 +1,13 @@
 
-const createQrCode = require('./createQrCode')
-const uuidv4 = require('uuid/v4')
+import { createQrCode } from './createQrCode'
+import { uuidv4 } from 'uuid'
+import { PoolClient } from 'pg'
+import { InsertPass } from 'types/pass'
 
-function makeInsertPass (db) {
-  return function insertPass (athleteId) {
+export type MakeInsertPass = (db:PoolClient) => InsertPass
+
+export const makeInsertPass: MakeInsertPass = function (db) {
+  return function insertPass(athleteId) {
     const id = uuidv4()
     const sql = `
       INSERT INTO passes (
@@ -25,5 +29,3 @@ function makeInsertPass (db) {
     })
   }
 }
-
-module.exports = makeInsertPass

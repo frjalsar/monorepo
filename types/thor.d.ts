@@ -1,17 +1,32 @@
-
-export type Achievements = {
-    
+export type Achievement = {
+    Grein?:string|number,
+    Röð?:string|number,
+    Árangur?:string|number,
+    Metrar?:string|number,
+    Tími?:string|number,
+    Vindur?:string|number,
+    Úti_Inni?:string|number,
+    Keppandanúmer?:string|number,
+    Nafn?:string|number,
+    // Erlendur ríkisborgari?:string|number,
+    Félag?:string|number,
+    Kyn?:string|number,
+    Dagsetning?:string|number,
+    // Aldur keppanda?:string|number,
+    // Heiti Móts?:string|number,
+    Mót?:string|number,
+    Staður?:string|number
 }
 
-export type OptionsThorEventSelect = {
+export type SelectThorEventOptions = {
     gender:any,
     outside:any
 }
-export type OptionsCompetitorSelect = {
+export type SelectCompetitorOptions = {
     kt:string
 }
 
-export type OptionsAchievementSelect = {
+export type SelectAchievementOptions = {
     thorAthleteId?: string | number,
     limit?: string | number,
     gender?: string | number,
@@ -28,8 +43,8 @@ export type MissingRunner = {
     meetCode:string|number
 }
 
-export type SelectThorEvents=(options?:OptionsThorEventSelect)=>Promise<Achievements[]>
-export type SelectThorAchievements=(options?:OptionsAchievementSelect)=>Promise<Achievements[]>
-export type SelectMissingRunners=()=>Promise<Achievements[]>
-export type SelectCompetitor=(options:OptionsCompetitorSelect)=>Promise<Achievements[]>
+export type SelectThorEvents=(options?:SelectThorEventOptions)=>Promise<Achievement[]>
+export type SelectThorAchievements=(options?:SelectAchievementOptions)=>Promise<Achievement[]>
+export type SelectMissingRunners=()=>Promise<Achievement[]>
+export type SelectCompetitor=(options:SelectCompetitorOptions)=>Promise<Achievement[]>
 export type UpdateMissingRunner=(missingRunner:MissingRunner)=>Promise<string>

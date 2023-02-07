@@ -1,5 +1,5 @@
 import {mapEventTypes} from './map'
-import { SelectEventTypes } from 'types/event-type'
+import { SelectEventTypes } from 'types/eventtype'
 import {PoolClient} from 'pg'
 
 export type MakeSelectEventTypes=(db:PoolClient)=>SelectEventTypes

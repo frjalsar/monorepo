@@ -1,7 +1,6 @@
 import { Router,IRouter } from 'express'
 import { authorize } from '../lib/authorizeHandler'
 import { SelectMeets, SelectMeetAttachment, UpdateMeet } from 'types/meets'
-import { CreateMeet } from 'repo/meets/create'
 
 export type MakeMeetsRoute = (
   SelectMeets, SelectMeetAttachment, UpdateMeet, CreateMeet

@@ -1,4 +1,4 @@
-import {InsertEventType} from 'types/event-type'
+import {InsertEventType} from 'types/eventtype'
 import {PoolClient} from 'pg'
 
 export type MakeInsertEventType=(db:PoolClient)=>InsertEventType

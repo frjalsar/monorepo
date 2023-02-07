@@ -1,5 +1,5 @@
 import { IRouter, Router } from 'express'
-import { InsertEventType,SelectEventTypes, UpdateEventType } from 'types/event-type'
+import { InsertEventType,SelectEventTypes, UpdateEventType } from 'types/eventtype'
 import { authorize } from '../lib/authorizeHandler'
 
 export type MakeEventTypesRoute = (

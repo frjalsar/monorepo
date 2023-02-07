@@ -9,11 +9,11 @@ export type Competition = {
     id?: number,
 }
 
-export type OptionsCompetitions = {
+export type CompetitionsSelectOptions = {
     meetId?: number | string
 }
 
 export type MapToCompetitions = (item:any)=>Competition
 
 export type InsertCompetition=(competition:Competition[], user:any)=>Promise<number>
-export type SelectCompetitions=(opt?:OptionsCompetitions)=>Promise<Competition[]>
+export type SelectCompetitions=(opt?:CompetitionsSelectOptions)=>Promise<Competition[]>

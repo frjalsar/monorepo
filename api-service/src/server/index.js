@@ -23,7 +23,7 @@ const { makeRegions } = require('../composition/regions')
 const { makeUsers } = require('../composition/users')
 const { makeVenues } = require('../composition/venues')
 const { makeThor } = require('../composition/thor')
-const makeSendMail = require('../lib/sendmail')
+const { makeSendMail } = require('../lib/sendmail')
 
 const isProduction = process.env.NODE_ENV === 'production'
 

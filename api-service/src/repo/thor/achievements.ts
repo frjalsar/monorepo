@@ -3,7 +3,6 @@ import { isEmpty } from 'lodash.isempty'
 import { mssqlPool } from 'mssql'
 import { SelectThorAchievements } from 'types/thor'
 
-
 export type MakeSelectThorAchievements = (sqlPoolConnection: mssqlPool) => SelectThorAchievements
 
 export const makeSelectThorAchievements:MakeSelectThorAchievements= function(sqlPoolConnection) {
