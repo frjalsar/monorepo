@@ -39,7 +39,7 @@ export const makeSelectEvents:MakeSelectEvents=function (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows.map(mapEvents))
+      .then(res => mapEvents(res.rows))
   }
 }
 

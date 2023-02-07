@@ -1,6 +1,8 @@
-function mapAthletes (list) {
+import { Athlete, MapToAthlete } from "types/athlete";
+
+export const mapAthletes:MapToAthlete=function (list) {
   let currentId
-  const result = []
+  const result:Athlete[] = []
   list.forEach(item => {
     if (item.id !== currentId) {
       const atheleteObj = {
@@ -19,8 +21,7 @@ function mapAthletes (list) {
       result.push(atheleteObj)
       currentId = item.id
     }
-
-    const currentAthlete = result[result.length - 1]
+    const currentAthlete:Athlete = result[result.length - 1] 
     if (item.clubid || item.legacyclub) {
       // Create membership
       const membership = {
@@ -33,9 +34,7 @@ function mapAthletes (list) {
         yearTo: item.yearto,
         confirmed: item.confirmed === true
       }
-
       currentAthlete.membership.push(membership)
-
       if (
         item.clubid !== null &&
         new Date().getFullYear() >= item.yearfrom &&
@@ -47,7 +46,6 @@ function mapAthletes (list) {
           fullName: item.clubname,
           thorId: item.thorclubid
         }
-
         currentAthlete.region = {
           id: item.regionid,
           fullName: item.regionfullname,
@@ -59,4 +57,10 @@ function mapAthletes (list) {
   return result
 }
 
-module.exports = mapAthletes
+
+
+
+
+
+
+

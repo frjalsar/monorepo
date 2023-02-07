@@ -1,4 +1,4 @@
-import {MapToCombinedEvent} from 'types/combined-events'
+import {MapToCombinedEvent} from 'types/combinedevent'
 
 export const mapCombinedEvents:MapToCombinedEvent=function (childEvent, parentEventId) {
     return {

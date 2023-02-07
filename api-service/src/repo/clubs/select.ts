@@ -1,8 +1,9 @@
 import { PoolClient } from 'pg'
 import {SelectClubs} from 'types/club'
-import { mapToClub } from './map'
+import { mapClub } from './map'
 
 export type MakeSelectClubs = (db: PoolClient) => SelectClubs
+
 export const makeSelectClubs:MakeSelectClubs=function (db) {
   return function selectClubs (opt) {
 
@@ -30,7 +31,7 @@ export const makeSelectClubs:MakeSelectClubs=function (db) {
 
     return db
       .query(sql, params)
-      .then(res =>res.rows.map(mapToClub))
+      .then(res =>res.rows.map(mapClub))
   }
 }
 

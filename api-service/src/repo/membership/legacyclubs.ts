@@ -1,4 +1,9 @@
-function makeSelectLegacyClubs (db) {
+import { PoolClient } from 'pg'
+import {SelectLegacyClubs} from 'types/membership'
+
+export type MakeSelectLegacyClubs = (db: PoolClient) => SelectLegacyClubs
+
+export const makeSelectLegacyClubs:MakeSelectLegacyClubs=function (db) {
   return function selectLegacyClubs () {
     const sql = `
       SELECT DISTINCT
@@ -14,4 +19,3 @@ function makeSelectLegacyClubs (db) {
   }
 }
 
-module.exports = makeSelectLegacyClubs

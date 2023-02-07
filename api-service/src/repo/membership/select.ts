@@ -1,9 +1,12 @@
-const toOrdinal = require('pg-parameterize').toOrdinal
+import * as toOrdinal from 'pg-parameterize'
+import { PoolClient } from 'pg'
+import {SelectMemberships} from 'types/membership'
 
-function makeSelectMembership (db) {
-  return function selectMembership (options) {
-    const opt = options || {}
-    const params = []
+export type MakeSelectMembership = (db: PoolClient) => SelectMemberships
+
+export const makeSelectMembership:MakeSelectMembership=function (db) {
+  return function selectMembership (opt) {
+    const params:Array<number| string> = []
     let sql = `
       SELECT
         m.athleteid,
@@ -16,17 +19,17 @@ function makeSelectMembership (db) {
       WHERE
         _enabled = true`
 
-    if (opt.athleteId) {
+    if (opt && opt.athleteId) {
       sql += ' AND m.athleteid = ?'
       params.push(opt.athleteId)
     }
 
-    if (opt.clubId) {
+    if (opt && opt.clubId) {
       sql += ' AND m.clubid = ?'
-      params.push(opt.clubid)
+      params.push(opt.clubId)
     }
 
-    if (opt.confirmed !== undefined && opt.confirmed !== null) {
+    if (opt && opt.confirmed !== undefined && opt.confirmed !== null) {
       sql += ' AND m.confirmed = ?'
       params.push(opt.confirmed)
     }
@@ -42,9 +45,8 @@ function makeSelectMembership (db) {
     }
 
     return db
-      .query(toOrdinal(sql), params)
+      .query(toOrdinal.toOrdinal(sql), params)
       .then(res => res.rows)
   }
 }
 
-module.exports = makeSelectMembership

@@ -1,7 +1,12 @@
-import { Router } from 'express'
+import { IRouter, Router } from 'express'
+import {SelectAgeGroups} from 'types/agegroup'
 
-export const makeAgeGroupsRoute = function (selectAgeGroups) {
-  const router = Router()
+export type MakeAgeGroupsRoute = (
+  selectAgeGroups: SelectAgeGroups,
+) => IRouter
+
+export const makeAgeGroupsRoute:MakeAgeGroupsRoute = function (selectAgeGroups) {
+  const router =  Router()
 
   router.get('/', (_, res, next) => {
     return selectAgeGroups()

@@ -8,6 +8,9 @@ export type EventType={
 export type MapToEventType=(row)=>EventType
 
 
-export type SelectEventTypes=()=>Promise<number>
+export type SelectEventOptions={
+    typeId:number|string
+}
+export type SelectEventTypes=(option?:SelectEventOptions)=>Promise<Event>
 export type InsertEventType=(eventType:EventType,user:any)=>Promise<number>
 export type UpdateEventType=(eventType:EventType,user:any)=>Promise<number>

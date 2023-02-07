@@ -1,4 +1,10 @@
-function makeUpdateAthlete (db) {
+import { PoolClient } from 'pg'
+import { UpdateAthlete } from 'types/athlete'
+
+export type MakeUpdateAthlete = (db: PoolClient) => UpdateAthlete
+
+export const makeUpdateAthlete:MakeUpdateAthlete=function (db) {
+
   return function updateAthlete (athlete, user) {
     const sql = `
         UPDATE athletes
@@ -32,4 +38,3 @@ function makeUpdateAthlete (db) {
   }
 }
 
-module.exports = makeUpdateAthlete
