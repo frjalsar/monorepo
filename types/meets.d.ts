@@ -18,6 +18,7 @@ export type Meet = {
     competition:any
 }
 
+export type MapToMeet=(list:any[])=>Meet[]
 
 export type SelectMeetOptions = {
     id: number|string,
