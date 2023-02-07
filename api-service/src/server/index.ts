@@ -1,5 +1,5 @@
-require('dotenv').config()
-
+import * as dotenv from 'dotenv'
+dotenv.config()
 import pg from 'pg'
 import sql from 'mssql'
 import redis from 'redis'

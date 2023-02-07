@@ -1,6 +1,8 @@
-require('dotenv').config()
-const { Client } = require('pg')
-const makeInsertUser = require('./repo/users/insert')
+import * as dotenv from 'dotenv'
+dotenv.config()
+
+import { Client } from 'pg'
+import {makeInsertUser} from './repo/users/insert'
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -14,7 +16,7 @@ const runSeed = async function () {
   // User
   const insertUser = makeInsertUser(client)
   try {
-    const adminUser = {
+    const adminUser:any = {
       fullName: 'admin pr env',
       admin: true,
       application: false,

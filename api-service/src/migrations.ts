@@ -1,8 +1,8 @@
 // Create preview domains
-
-require('dotenv').config()
-const { Client } = require('pg')
-const { loadMigrationFiles, migrate } = require('postgres-migrations')
+import * as dotenv from 'dotenv'
+dotenv.config()
+import { Client } from 'pg'
+import { loadMigrationFiles, migrate } from 'postgres-migrations'
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
