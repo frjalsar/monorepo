@@ -14,7 +14,7 @@ export type Athlete = {
 
   }
 
-  export type MapToAthlete = (row: any) => Athlete[]
+  export type MapToAthlete = (list: any[]) => Athlete[]
 
 export type SelectAthleteOptions = {
   id?: number | string

@@ -6,11 +6,11 @@ export type Event = {
   childeventId:number,
   type: any,
   thorId?:number,
-  childEvents?:any[]
+  childEvents:any[]
 
 }
 
-export type MapToEvent = (row: any) => Event
+export type MapToEvent = (list: any[]) => Event[]
 
 export type SelectEventOptions = {
   id?: number | string
