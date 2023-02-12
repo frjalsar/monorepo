@@ -3,8 +3,8 @@ import { SelectThorEvents } from 'types/thor'
 
 export type MakeSelectThorEvents = (sqlPoolConnection: mssqlPool) => SelectThorEvents
 
-export const makeSelectThorEvents:MakeSelectThorEvents=function(sqlPoolConnection) {
-  return function selectThorEvents(options) {
+export const makeSelectThorEvents:MakeSelectThorEvents = function (sqlPoolConnection) {
+  return function selectThorEvents (options) {
     let sql = `
       SELECT [Grein] as Id
         ,[Kyn] as Gender
@@ -29,11 +29,11 @@ export const makeSelectThorEvents:MakeSelectThorEvents=function(sqlPoolConnectio
     return sqlPoolConnection.then(pool => {
       const request = pool.request()
 
-      if (options &&  options.gender) {
+      if (options && options.gender) {
         request.input('gender', Int, options.gender)
       }
 
-      if (options &&  options.outside) {
+      if (options && options.outside) {
         request.input('outside', Bit, options.outside)
       }
 

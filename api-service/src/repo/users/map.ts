@@ -1,6 +1,6 @@
-import { MapeToUser } from "types/user"
+import { MapeToUser } from 'types/user'
 
-export const mapUsers:MapeToUser=function (row) {
+export const mapUsers:MapeToUser = function (row) {
   return {
     id: row.id,
     username: row.username,
@@ -16,4 +16,3 @@ export const mapUsers:MapeToUser=function (row) {
     token: row.token
   }
 }
-

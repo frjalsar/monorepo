@@ -1,5 +1,5 @@
 import { IRouter, Router } from 'express'
-import { InsertEventType,SelectEventTypes, UpdateEventType } from 'types/eventtype'
+import { InsertEventType, SelectEventTypes, UpdateEventType } from 'types/eventtype'
 import { authorize } from '../lib/authorizeHandler'
 
 export type MakeEventTypesRoute = (
@@ -8,7 +8,7 @@ export type MakeEventTypesRoute = (
   insertEventType: InsertEventType
 ) => IRouter
 
-export const makeEventTypesRouter:MakeEventTypesRoute=function (selectEventTypes, updateEventType, insertEventType) {
+export const makeEventTypesRouter:MakeEventTypesRoute = function (selectEventTypes, updateEventType, insertEventType) {
   const router = Router()
 
   router.get('/', (_, res, next) => {
@@ -31,4 +31,3 @@ export const makeEventTypesRouter:MakeEventTypesRoute=function (selectEventTypes
 
   return router
 }
-

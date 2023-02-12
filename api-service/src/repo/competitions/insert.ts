@@ -4,8 +4,8 @@ import { InsertCompetition } from 'types/competitions'
 
 export type MakeInsertCompetition= (db: PoolClient) => InsertCompetition
 
-export const makeInsertCompetition:MakeInsertCompetition= function (db) {
-  return function insertCompetition(competition, user) {
+export const makeInsertCompetition:MakeInsertCompetition = function (db) {
+  return function insertCompetition (competition, user) {
     if ((competition.length) === 0) {
       return Promise.resolve()
     }

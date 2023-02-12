@@ -1,9 +1,9 @@
 import { PoolClient } from 'pg'
-import {DeleteMembership} from 'types/membership'
+import { DeleteMembership } from 'types/membership'
 
 export type MakeDeleteMembership = (db: PoolClient) => DeleteMembership
 
-export const makeDeleteMembership:MakeDeleteMembership=function (db) {
+export const makeDeleteMembership:MakeDeleteMembership = function (db) {
   return function deleteMembership (athleteId) {
     const sql = `
       DELETE FROM

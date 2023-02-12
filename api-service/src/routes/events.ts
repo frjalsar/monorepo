@@ -8,7 +8,7 @@ export type MakeEventsRouter = (
   insertEvent: InsertEvent
 ) => IRouter
 
-export const makeEventsRouter:MakeEventsRouter= function (selectEvents, updateEvent, insertEvent) {
+export const makeEventsRouter:MakeEventsRouter = function (selectEvents, updateEvent, insertEvent) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -31,4 +31,3 @@ export const makeEventsRouter:MakeEventsRouter= function (selectEvents, updateEv
 
   return router
 }
-

@@ -3,8 +3,8 @@ import { UpdateJudge } from 'types/judges'
 
 export type MakeUpdateJudge = (db: PoolClient) => UpdateJudge
 
-export const makeUpdateJudge:MakeUpdateJudge = function(db) {
-  return function updateJudge(judge, user) {
+export const makeUpdateJudge:MakeUpdateJudge = function (db) {
+  return function updateJudge (judge, user) {
     const sql = `
       UPDATE judges SET
         fullname = $1,
@@ -32,4 +32,3 @@ export const makeUpdateJudge:MakeUpdateJudge = function(db) {
       .then(res => res.rows[0].id)
   }
 }
-

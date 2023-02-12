@@ -4,7 +4,7 @@ import { InsertMeet } from 'types/meets'
 export type MakeInsertMeet = (db: PoolClient) => InsertMeet
 
 export const makeInsertMeet: MakeInsertMeet = function (db) {
-  return function insertMeet(meet, user) {
+  return function insertMeet (meet, user) {
     const sql = `
       INSERT INTO meets (
         name,

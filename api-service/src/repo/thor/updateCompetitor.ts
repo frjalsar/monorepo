@@ -1,10 +1,10 @@
 import { VarChar, sqlPool } from 'mssql'
-import {UpdateCompetitor} from 'types/thor'
+import { UpdateCompetitor } from 'types/thor'
 
 export type MakeUpdateCompetitor = (sqlPoolConnection: sqlPool) => UpdateCompetitor
 
 export const makeUpdateCompetitor: MakeUpdateCompetitor = function (sqlPoolConnection) {
-  return function updateCompetitor(id, clubName, fullName) {
+  return function updateCompetitor (id, clubName, fullName) {
     const sql = `
       UPDATE
         [Athletics].[dbo].[Athl$Competitors]

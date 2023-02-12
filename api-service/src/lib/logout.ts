@@ -14,4 +14,3 @@ export function makeLogout (delUser, logger) {
     return true
   }
 }
-

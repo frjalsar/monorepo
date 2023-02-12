@@ -3,8 +3,8 @@ import { SelectMeetAttachment } from 'types/meets'
 
 export type MakeSelectMeetAttachment=(db:PoolClient)=>SelectMeetAttachment
 
-export const makeSelectMeetAttachment:MakeSelectMeetAttachment= function(db) {
-  return function selectMeetAttachment(meetId) {
+export const makeSelectMeetAttachment:MakeSelectMeetAttachment = function (db) {
+  return function selectMeetAttachment (meetId) {
     const params = [meetId]
     const sql = `
       SELECT

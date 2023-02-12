@@ -2,11 +2,11 @@ import { makeSelectPasses } from 'repo/passes/select'
 import { makeInsertPass } from 'repo/passes/insert'
 import { PoolClient } from 'pg'
 import { IRouter, Router } from 'express'
-import { SelectPasses,InsertPass } from 'types/pass'
+import { SelectPasses, InsertPass } from 'types/pass'
 
 export type MakePassesRoute = (db: PoolClient) =>IRouter
 
-export const makePassesRoute:MakePassesRoute= function (db) {
+export const makePassesRoute:MakePassesRoute = function (db) {
   const router = Router()
 
   router.get('/:athleteId', (req, res, next) => {

@@ -1,12 +1,11 @@
-import { Int, Bit } from 'mssql'
+import { Int, Bit, mssqlPool } from 'mssql'
 import { isEmpty } from 'lodash.isempty'
-import { mssqlPool } from 'mssql'
 import { SelectThorAchievements } from 'types/thor'
 
 export type MakeSelectThorAchievements = (sqlPoolConnection: mssqlPool) => SelectThorAchievements
 
-export const makeSelectThorAchievements:MakeSelectThorAchievements= function(sqlPoolConnection) {
-  return function selectThorAchievements(options) {
+export const makeSelectThorAchievements:MakeSelectThorAchievements = function (sqlPoolConnection) {
+  return function selectThorAchievements (options) {
     if (isEmpty(options)) {
       return Promise.resolve([])
     }
@@ -111,4 +110,3 @@ export const makeSelectThorAchievements:MakeSelectThorAchievements= function(sql
     })
   }
 }
-

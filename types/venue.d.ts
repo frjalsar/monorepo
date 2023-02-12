@@ -20,13 +20,13 @@ export type Venue = {
     _userid?:number
 }
 export type SelectVunuesOptions = {
-    id?: string | number | undefined ,
+    id?: string | number | undefined,
     offset?: number | string,
     limit?: number|string
 }
 
 export type MapToVenues=(row:any) => Venue
 
-export type InsertVenue = (venue:Venue,user:any) => Promise<Venue[]>
+export type InsertVenue = (venue:Venue, user:any) => Promise<Venue[]>
 export type SelectVenues = (options?: SelectVunuesOptions)=>Promise<number>
-export type UpdateVenue = (venue:Venue,user:any)=>Promise<number>
+export type UpdateVenue = (venue:Venue, user:any)=>Promise<number>

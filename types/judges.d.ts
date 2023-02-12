@@ -1,5 +1,5 @@
 
-export type Judge=  {
+export type Judge= {
       id: number,
       fullName: string,
       date: any,
@@ -11,7 +11,7 @@ export type Judge=  {
 
     }
 
-export type JudgeTypes=  {
+export type JudgeTypes= {
         id?: string,
         name?: string,
         stage?: string,

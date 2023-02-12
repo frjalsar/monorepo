@@ -1,13 +1,12 @@
-import { SelectEvents } from "types/events"
+import { SelectEvents } from 'types/events'
 import { PoolClient } from 'pg'
-import {mapEvents} from './map'
+import { mapEvents } from './map'
 
 export type MakeSelectEvents=(db:PoolClient)=>SelectEvents
 
-export const makeSelectEvents:MakeSelectEvents=function (db) {
+export const makeSelectEvents:MakeSelectEvents = function (db) {
   return function selectEvents (opt) {
-
-    const params:Array<number|string>= []
+    const params:Array<number|string> = []
     let sql = `
       SELECT
         e.id,
@@ -42,4 +41,3 @@ export const makeSelectEvents:MakeSelectEvents=function (db) {
       .then(res => mapEvents(res.rows))
   }
 }
-

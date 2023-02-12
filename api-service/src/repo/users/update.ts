@@ -3,7 +3,7 @@ import { UpdateUser } from 'types/user'
 
 export type MakeUpdatetUser=(db:PoolClient)=>UpdateUser
 
-export const makeUpdatetUser:MakeUpdatetUser=function (db) {
+export const makeUpdatetUser:MakeUpdatetUser = function (db) {
   return function insertUser (userObj, user) {
     const sql = `
       UPDATE users SET
@@ -34,4 +34,3 @@ export const makeUpdatetUser:MakeUpdatetUser=function (db) {
       .then(res => res.rows[0].id)
   }
 }
-

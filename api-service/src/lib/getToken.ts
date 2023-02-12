@@ -15,4 +15,3 @@ export function getToken (headers) {
 
   return token
 }
-

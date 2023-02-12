@@ -5,8 +5,7 @@ import { SelectMeets } from 'types/meets'
 export type MakeSelectMeets = (db: PoolClient) => SelectMeets
 
 export const makeSelectMeets: MakeSelectMeets = function (db) {
-  return function selectMeets(opt) {
-
+  return function selectMeets (opt) {
     const params:Array<string|number> = []
     let sql = `
       SELECT

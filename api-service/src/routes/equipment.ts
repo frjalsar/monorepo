@@ -37,4 +37,3 @@ export const makeEquipmentRouter: MakeEquipmentRoute = function (selectEquipment
 
   return router
 }
-

@@ -1,7 +1,7 @@
 
 import { PoolClient } from 'pg'
 import { SelectRegions } from 'types/region'
-import { mapToRegion } from "./map"
+import { mapToRegion } from './map'
 
 export type MakeSelectRegions = (db: PoolClient) => SelectRegions
 

@@ -1,15 +1,14 @@
 
 import { toOrdinal } from 'pg-parameterize'
-import {mapUsers} from './map'
+import { mapUsers } from './map'
 import { PoolClient } from 'pg'
 import { SelectUsers } from 'types/user'
 
 export type MakeSelectUsers=(db:PoolClient)=>SelectUsers
 
-export const makeSelectUsers:MakeSelectUsers=function (db) {
+export const makeSelectUsers:MakeSelectUsers = function (db) {
   return function selectUsers (opt) {
-    
-    const selectPassword =opt?Boolean(opt.username):false
+    const selectPassword = opt ? Boolean(opt.username) : false
     const params:Array<string|number> = []
     let sql = `
       SELECT
@@ -54,4 +53,3 @@ export const makeSelectUsers:MakeSelectUsers=function (db) {
       .then(res => res.rows.map(mapUsers))
   }
 }
-

@@ -3,11 +3,10 @@ export type Event = {
   name: string,
   iaaf: string,
   typeId: number
-  childeventId:number,
+  childeventId: number,
   type: any,
-  thorId?:number,
-  childEvents:any[]
-
+  thorId?: number,
+  childEvents: any[]
 }
 
 export type MapToEvent = (list: any[]) => Event[]
@@ -18,7 +17,7 @@ export type SelectEventOptions = {
 }
 
 export type SelectEvents = (options?: SelectEventOptions) => Promise<Event[]>
-export type InsertEvent  = (event: Event, user: any) => Promise<number>
-export type UpdateEvent  = (event: Event, user: any) => Promise<number>
-export type CreateEvent  = (event:Event,user:any)=>Promise<any>
-export type EditEvent    = (event:Event,user:any)=>Promise<any>
+export type InsertEvent = (event: Event, user: any) => Promise<number>
+export type UpdateEvent = (event: Event, user: any) => Promise<number>
+export type CreateEvent = (event:Event, user:any) => Promise<any>
+export type EditEvent = (event:Event, user:any) => Promise<any>

@@ -1,5 +1,5 @@
 import { VarChar, Int, sqlPool } from 'mssql'
-import {UpdateMissingRunner} from 'types/thor'
+import { UpdateMissingRunner } from 'types/thor'
 
 export type MakeUpdateMissingRunner=(sqlPoolConnection:sqlPool)=>UpdateMissingRunner
 
@@ -23,4 +23,3 @@ export const makeUpdateMissingRunner:MakeUpdateMissingRunner = function (sqlPool
     })
   }
 }
-

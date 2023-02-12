@@ -89,4 +89,3 @@ export const makeSelectAgeGroups = function () {
     ])
   }
 }
-

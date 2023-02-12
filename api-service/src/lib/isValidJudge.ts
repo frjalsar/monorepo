@@ -8,7 +8,6 @@ export const isValidJudge = function (date) {
   return yearDiff < VALID_YEARS
 }
 
-
 /** * same day 5 years later logic
 
   const addYears = require('date-fns/addYears')

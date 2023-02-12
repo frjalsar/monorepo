@@ -2,8 +2,8 @@ import { PoolClient } from 'pg'
 import { UpdateMeet } from 'types/meets'
 
 export type MakeUpdateMeet=(db:PoolClient)=>UpdateMeet
-export const makeUpdateMeet:MakeUpdateMeet=function(db) {
-  return function updateMeet(meet, user) {
+export const makeUpdateMeet:MakeUpdateMeet = function (db) {
+  return function updateMeet (meet, user) {
     const sql = `
       UPDATE meets SET
         name = $1,

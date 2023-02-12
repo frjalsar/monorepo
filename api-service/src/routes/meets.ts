@@ -1,4 +1,4 @@
-import { Router,IRouter } from 'express'
+import { Router, IRouter } from 'express'
 import { authorize } from '../lib/authorizeHandler'
 import { SelectMeets, SelectMeetAttachment, UpdateMeet } from 'types/meets'
 

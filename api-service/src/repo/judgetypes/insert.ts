@@ -27,4 +27,3 @@ export const makeInsertJudgeType: MakeInsertJudgeType = function (db) {
       .then(res => res.rows[0].id)
   }
 }
-

@@ -6,7 +6,7 @@ export type Club = {
   shortName: string,
   abbreviation: string,
   thorId: number,
-  regionId:number;
+  regionId: number;
   region: Region
 }
 

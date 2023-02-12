@@ -1,9 +1,9 @@
 import { PoolClient } from 'pg'
-import { InsertVenue } from "types/venue"
+import { InsertVenue } from 'types/venue'
 
 export type MakeInsertVenue=(db:PoolClient)=>InsertVenue
 
-export const makeInsertVenue:MakeInsertVenue=function(db) {
+export const makeInsertVenue:MakeInsertVenue = function (db) {
   return function insertVenue (venue, user) {
     const sql = `
       INSERT INTO venues (
@@ -54,4 +54,3 @@ export const makeInsertVenue:MakeInsertVenue=function(db) {
       .then(res => res.rows[0].id)
   }
 }
-

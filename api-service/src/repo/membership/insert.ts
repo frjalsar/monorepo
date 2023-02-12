@@ -1,10 +1,10 @@
 import { flatten, toTuple } from 'pg-parameterize'
 import { PoolClient } from 'pg'
-import {InsertMembership} from 'types/membership'
+import { InsertMembership } from 'types/membership'
 
 export type MakeInsertMembership = (db: PoolClient) => InsertMembership
 
-export const makeInsertMembership:MakeInsertMembership=function (db) {
+export const makeInsertMembership:MakeInsertMembership = function (db) {
   return function insertMembership (membership, user) {
     if (membership.length === 0) {
       return Promise.resolve()
@@ -37,4 +37,3 @@ export const makeInsertMembership:MakeInsertMembership=function (db) {
     return db.query(sql, params)
   }
 }
-

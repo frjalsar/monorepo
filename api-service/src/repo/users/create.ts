@@ -2,7 +2,7 @@ import { CreateUser } from 'types/user'
 
 export type MakeCreateUser=(insertUser:any, selectUsers:any, setUser:any)=>CreateUser
 
-export const makeCreateUser:MakeCreateUser=function (insertUser, selectUsers, setUser) {
+export const makeCreateUser:MakeCreateUser = function (insertUser, selectUsers, setUser) {
   return function creatUser (obj, user) {
     return insertUser(obj, user)
       .then(id => selectUsers({ id }))
@@ -18,4 +18,3 @@ export const makeCreateUser:MakeCreateUser=function (insertUser, selectUsers, se
       })
   }
 }
-

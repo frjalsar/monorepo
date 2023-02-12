@@ -2,11 +2,11 @@
 import { type } from 'os'
 import { flatten, toTuple } from 'pg-parameterize'
 import { InsertCombinedEvent } from 'types/combinedevent'
-import {PoolClient} from 'pg'
+import { PoolClient } from 'pg'
 
 export type MakeInsertCombinedEvent = (dp:PoolClient)=>InsertCombinedEvent
 
-export const makeInsertCombinedEvents:MakeInsertCombinedEvent=function (db) {
+export const makeInsertCombinedEvents:MakeInsertCombinedEvent = function (db) {
   return function insertMembership (combinedEvents, user) {
     if (combinedEvents.length === 0) {
       return Promise.resolve()
@@ -31,4 +31,3 @@ export const makeInsertCombinedEvents:MakeInsertCombinedEvent=function (db) {
     return db.query(sql, params)
   }
 }
-

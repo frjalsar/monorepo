@@ -1,10 +1,10 @@
 import * as toOrdinal from 'pg-parameterize'
 import { PoolClient } from 'pg'
-import {SelectMemberships} from 'types/membership'
+import { SelectMemberships } from 'types/membership'
 
 export type MakeSelectMembership = (db: PoolClient) => SelectMemberships
 
-export const makeSelectMembership:MakeSelectMembership=function (db) {
+export const makeSelectMembership:MakeSelectMembership = function (db) {
   return function selectMembership (opt) {
     const params:Array<number| string> = []
     let sql = `
@@ -49,4 +49,3 @@ export const makeSelectMembership:MakeSelectMembership=function (db) {
       .then(res => res.rows)
   }
 }
-

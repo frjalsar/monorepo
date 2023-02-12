@@ -1,5 +1,4 @@
 
-
 import { IRouter, Router } from 'express'
 import { authorize } from '../lib/authorizeHandler'
 import { InsertJudge, SelectJudges, UpdateJudge } from 'types/judges'
@@ -9,7 +8,6 @@ export type MakeRegionsRouter = (
   updateJudge: UpdateJudge,
   insertJudge: InsertJudge
 ) => IRouter
-
 
 export const makeJudgesRouter: MakeRegionsRouter = function (selectJudges, updateJudge, insertJudge) {
   const router = Router()

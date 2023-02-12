@@ -15,7 +15,7 @@ export const makeInsertRegion: MakeInsertRegion = function (db) {
       )
       VALUES ($1, $2, $3, true, CURRENT_TIMESTAMP(3))`
 
-    const params= [
+    const params = [
       region.fullName,
       region.abbreviation,
       user.id

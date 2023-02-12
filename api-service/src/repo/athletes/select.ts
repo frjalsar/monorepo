@@ -2,13 +2,12 @@ import { PoolClient } from 'pg'
 import { SelectAthletes } from 'types/athlete'
 import * as toOrdinal from 'pg-parameterize'
 import * as lodash from 'lodash'
-import {mapAthletes} from './map'
+import { mapAthletes } from './map'
 
 export type MakeSelectAthletes = (db: PoolClient) => SelectAthletes
 
-export const makeSelectAthletes:MakeSelectAthletes=function (db) {
+export const makeSelectAthletes:MakeSelectAthletes = function (db) {
   return function selectAthletes (opt, user) {
-
     const hasEmptyProperties = Object.values(opt).every(i => i === '')
     if (lodash.isEmpty(opt) || hasEmptyProperties) {
       return Promise.resolve([])
@@ -129,4 +128,3 @@ export const makeSelectAthletes:MakeSelectAthletes=function (db) {
       .then(res => mapAthletes(res.rows))
   }
 }
-

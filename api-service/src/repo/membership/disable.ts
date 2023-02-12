@@ -1,9 +1,9 @@
 import { PoolClient } from 'pg'
-import {DisabledMembership} from 'types/membership'
+import { DisabledMembership } from 'types/membership'
 
 export type MakeDisableMembership = (db: PoolClient) => DisabledMembership
 
-export const makeDisableMembership:MakeDisableMembership=function (db) {
+export const makeDisableMembership:MakeDisableMembership = function (db) {
   return function updateMembership (athleteId) {
     const sql = `
       UPDATE
@@ -18,4 +18,3 @@ export const makeDisableMembership:MakeDisableMembership=function (db) {
     return db.query(sql, params)
   }
 }
-

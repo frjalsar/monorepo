@@ -5,7 +5,7 @@ import { InsertUser } from 'types/user'
 
 export type MakeInsertUser=(db:PoolClient)=>InsertUser
 
-export const makeInsertUser:MakeInsertUser=function (db) {
+export const makeInsertUser:MakeInsertUser = function (db) {
   return function insertUser (userObj, user) {
     const sql = `
       INSERT INTO users (
@@ -49,4 +49,3 @@ export const makeInsertUser:MakeInsertUser=function (db) {
       .then(res => res.rows[0].id)
   }
 }
-

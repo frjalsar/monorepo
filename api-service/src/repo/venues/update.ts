@@ -4,7 +4,7 @@ import { UpdateVenue } from 'types/venue'
 export type MakeUpdateVenue = (db: PoolClient) => UpdateVenue
 
 export const makeUpdateVenue: MakeUpdateVenue = function (db) {
-  return function updateVenue(venue, user) {
+  return function updateVenue (venue, user) {
     const sql = `
       UPDATE venues SET
         fullname = $1,

@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv'
-dotenv.config()
 
 import { Client } from 'pg'
-import {makeInsertUser} from './repo/users/insert'
+import { makeInsertUser } from './repo/users/insert'
+dotenv.config()
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,

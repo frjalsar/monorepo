@@ -1,6 +1,6 @@
-import { Athlete, MapToAthlete } from "types/athlete";
+import { Athlete, MapToAthlete } from 'types/athlete'
 
-export const mapAthletes:MapToAthlete=function (list) {
+export const mapAthletes:MapToAthlete = function (list) {
   let currentId
   const result:Athlete[] = []
   list.forEach(item => {
@@ -21,7 +21,7 @@ export const mapAthletes:MapToAthlete=function (list) {
       result.push(atheleteObj)
       currentId = item.id
     }
-    const currentAthlete:Athlete = result[result.length - 1] 
+    const currentAthlete:Athlete = result[result.length - 1]
     if (item.clubid || item.legacyclub) {
       // Create membership
       const membership = {
@@ -56,11 +56,3 @@ export const mapAthletes:MapToAthlete=function (list) {
   })
   return result
 }
-
-
-
-
-
-
-
-

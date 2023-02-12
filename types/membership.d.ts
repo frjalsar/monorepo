@@ -1,18 +1,18 @@
-import { Club } from "./club"
+import { Club } from './club'
 
 export type Membership = {
-    athleteId:number,
-    clubId:number,
-    legacyClub: string,
-    yearFrom: number,
-    yearTo: number,
-    confirmed: boolean,
-	athletesigned?:string,
-	clubsigned?:string,	
+  athleteId: number,
+  clubId: number,
+  legacyClub: string,
+  yearFrom: number,
+  yearTo: number,
+  confirmed: boolean,
+  athletesigned?: boolean,
+  clubsigned?: boolean,
 
 }
 
-export type MapToMembership = (row: any,athleteId:number) => Membership
+export type MapToMembership = (row:any, athleteId:number) => Membership
 
 export type SelectMembershipOptions = {
   athleteId:number | string

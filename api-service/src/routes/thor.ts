@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { SelectThorEvents, SelectThorAchievements, SelectMissingRunners, UpdateMissingRunner, SelectCompetitor} from 'types/thor'
+import { SelectThorEvents, SelectThorAchievements, SelectMissingRunners, UpdateMissingRunner, SelectCompetitor } from 'types/thor'
 
 export type MakeThorRoute = (
   SelectThorEvents,
@@ -9,7 +9,6 @@ export type MakeThorRoute = (
   UpdateMissingRunner,
   SelectCompetitor
 ) => import('express').IRouter
-
 
 export const makeThorRoute: MakeThorRoute = function (selectThorEvents, selectThorAchievements, selectMissingRunners, updateMissingRunner, selectCompetitor) {
   const router = Router()
@@ -45,4 +44,3 @@ export const makeThorRoute: MakeThorRoute = function (selectThorEvents, selectTh
 
   return router
 }
-

@@ -1,7 +1,6 @@
-export type Agegroup= {
-from:number | null
-to:number  | null
+export type AgeGroup= {
+from: number | null
+to: number | null
 }
 
-
-export type SelectAgeGroups=()=>Promise<Agegroup[]>
+export type SelectAgeGroups = () => Promise<AgeGroup[]>

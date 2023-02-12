@@ -1,8 +1,8 @@
 
 import express from 'express'
 import compression from 'compression'
-import  bodyParser from 'body-parser'
-import  helmet  from 'helmet'
+import bodyParser from 'body-parser'
+import helmet from 'helmet'
 import cors from 'cors'
 
 export function createApp (isProduction) {
@@ -24,4 +24,3 @@ export function createApp (isProduction) {
 
   return app
 }
-

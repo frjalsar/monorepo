@@ -1,8 +1,8 @@
 // Create preview domains
 import * as dotenv from 'dotenv'
-dotenv.config()
 import { Client } from 'pg'
 import { loadMigrationFiles, migrate } from 'postgres-migrations'
+dotenv.config()
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,

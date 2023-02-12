@@ -1,5 +1,5 @@
 import { IRouter, Router } from 'express'
-import {authorize} from '../lib/authorizeHandler'
+import { authorize } from '../lib/authorizeHandler'
 
 import { InsertClub, SelectClubs, UpdateClub } from 'types/club'
 
@@ -9,7 +9,7 @@ export type MakeClubsRouter = (
   insertClub: InsertClub
 ) => IRouter
 
-export const makeClubsRouter:MakeClubsRouter=function (selectClubs, updateClub, insertClub) {
+export const makeClubsRouter:MakeClubsRouter = function (selectClubs, updateClub, insertClub) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -81,4 +81,3 @@ function createAccess () {
   }
 }
 */
-

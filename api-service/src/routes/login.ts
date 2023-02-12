@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-export const makeLoginRouter= function (loginHandler, isProduction) {
+export const makeLoginRouter = function (loginHandler, isProduction) {
   const router = Router()
 
   router.post('/', (req, res, next) => {
@@ -43,4 +43,3 @@ export const makeLoginRouter= function (loginHandler, isProduction) {
 
   return router
 }
-

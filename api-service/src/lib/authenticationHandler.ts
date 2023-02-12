@@ -35,4 +35,3 @@ export function makeAuthenticationHandler (getToken, getUser, setUser, selectUse
     }
   }
 }
-

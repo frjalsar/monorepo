@@ -1,6 +1,6 @@
 import { agent } from 'superagent'
 
-export function createQrCode(uuid) {
+export function createQrCode (uuid) {
   const qrApi = 'https://qrcode-monkey.p.rapidapi.com/qr/custom'
   return agent
     .post(qrApi)

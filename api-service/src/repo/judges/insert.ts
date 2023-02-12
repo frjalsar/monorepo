@@ -4,7 +4,7 @@ import { InsertJudge } from 'types/judges'
 export type MakeInsertJudge = (db: PoolClient) => InsertJudge
 
 export const makeInsertJudge: MakeInsertJudge = function (db) {
-  return function insertJudge(judge, user) {
+  return function insertJudge (judge, user) {
     const sql = `
       INSERT INTO judges (
         fullname,

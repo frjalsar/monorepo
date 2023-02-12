@@ -10,9 +10,8 @@ import { SelectMeets, SelectMeetAttachment, UpdateMeet } from 'types/meets'
 import { IRouter } from 'express'
 
 export type MakeMeets = (db: poolClient, sendMail) => IRouter
-  
-export const makeMeets: MakeMeets = function (db, sendMail) {
 
+export const makeMeets: MakeMeets = function (db, sendMail) {
   const selectMeets: SelectMeets = makeSelectMeets(db)
   const selectMeetAttachment: SelectMeetAttachment = makeSelectMeetAttachment(db)
   const updateMeet: UpdateMeet = makeUpdateMeet(db)
@@ -20,4 +19,3 @@ export const makeMeets: MakeMeets = function (db, sendMail) {
 
   return makeMeetsRouter(selectMeets, selectMeetAttachment, updateMeet, createMeet)
 }
-

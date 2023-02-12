@@ -1,12 +1,11 @@
 import { PoolClient } from 'pg'
-import { SelectJudgeTypes} from 'types/judgetype'
+import { SelectJudgeTypes } from 'types/judgetype'
 import { mapJudgeTypes } from './map'
-
 
 export type MakeSelectJudgeTypes = (db: PoolClient) => SelectJudgeTypes
 
-export const makeSelectJudgeTypes:MakeSelectJudgeTypes = function(db) {
-  return function selectJudgeTypes() {
+export const makeSelectJudgeTypes:MakeSelectJudgeTypes = function (db) {
+  return function selectJudgeTypes () {
     const sql = `
       SELECT
         jt.id,
@@ -23,4 +22,3 @@ export const makeSelectJudgeTypes:MakeSelectJudgeTypes = function(db) {
       .then(res => res.rows.map(mapJudgeTypes))
   }
 }
-

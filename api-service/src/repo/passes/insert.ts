@@ -7,7 +7,7 @@ import { InsertPass } from 'types/pass'
 export type MakeInsertPass = (db:PoolClient) => InsertPass
 
 export const makeInsertPass: MakeInsertPass = function (db) {
-  return function insertPass(athleteId) {
+  return function insertPass (athleteId) {
     const id = uuidv4()
     const sql = `
       INSERT INTO passes (

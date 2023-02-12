@@ -8,8 +8,8 @@ export type MakeJudgeTypesRouter = (
   insertJudgeType: InsertJudgeType
 ) => IRouter
 
-export const makeJudgeTypesRouter: MakeJudgeTypesRouter = function(selectJudgeTypes, updateJudgeType, insertJudgeType) {
-    const router = Router()
+export const makeJudgeTypesRouter: MakeJudgeTypesRouter = function (selectJudgeTypes, updateJudgeType, insertJudgeType) {
+  const router = Router()
 
   router.get('/', (_, res, next) => {
     return selectJudgeTypes()

@@ -3,8 +3,7 @@ import { UpdateAthlete } from 'types/athlete'
 
 export type MakeUpdateAthlete = (db: PoolClient) => UpdateAthlete
 
-export const makeUpdateAthlete:MakeUpdateAthlete=function (db) {
-
+export const makeUpdateAthlete:MakeUpdateAthlete = function (db) {
   return function updateAthlete (athlete, user) {
     const sql = `
         UPDATE athletes
@@ -37,4 +36,3 @@ export const makeUpdateAthlete:MakeUpdateAthlete=function (db) {
       .then(res => res.rows[0].id)
   }
 }
-

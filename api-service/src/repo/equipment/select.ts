@@ -5,8 +5,7 @@ import { SelectEquipment } from 'types/equipment'
 export type MakeSelectEquipment = (db: PoolClient) => SelectEquipment
 
 export const makeSelectEquipment: MakeSelectEquipment = function (db) {
-  return function selectEqiupment(opt) {
-
+  return function selectEqiupment (opt) {
     const params:Array<number|string> = []
     let sql = `
       SELECT

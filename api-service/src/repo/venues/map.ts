@@ -21,4 +21,3 @@ export const mapVenues: MapToVenues = function (item) {
     certification: item.certification
   }
 }
-

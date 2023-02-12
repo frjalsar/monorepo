@@ -1,7 +1,7 @@
 export type Region = {
   id: number,
-  fullName: string,  
-  abbreviation: string,  
+  fullName: string,
+  abbreviation: string,
 }
 
 export type MapToRegion = (row: any) => Region

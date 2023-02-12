@@ -1,5 +1,5 @@
 import { IRouter, Router } from 'express'
-import {authorize} from '../lib/authorizeHandler'
+import { authorize } from '../lib/authorizeHandler'
 import { CreateUser, SelectUsers, UpdateUser } from 'types/user'
 
 export type MakeClubsRouter = (
@@ -8,7 +8,7 @@ export type MakeClubsRouter = (
   createUser: CreateUser
 ) => IRouter
 
-export const makeUsersRouter:MakeClubsRouter=function (selectUsers, updateUser, createUser) {
+export const makeUsersRouter:MakeClubsRouter = function (selectUsers, updateUser, createUser) {
   const router = Router()
 
   router.get('/', authorize(['admin']), (req, res, next) => {
@@ -37,4 +37,3 @@ export const makeUsersRouter:MakeClubsRouter=function (selectUsers, updateUser, 
 
   return router
 }
-

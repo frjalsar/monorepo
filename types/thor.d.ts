@@ -15,7 +15,6 @@ export type Achievement = {
     Staður?:string|number
 }
 
-
 export type SelectThorEventOptions = {
     gender:any,
     outside:any
@@ -40,7 +39,6 @@ export type MissingRunner = {
     kt: string,
     meetCode:string|number
 }
-
 
 export type UpdateThorCompetitor = {
     id?: number | string,

@@ -1,4 +1,4 @@
-import { Router,IRouter } from 'express'
+import { Router, IRouter } from 'express'
 import { authorize } from '../lib/authorizeHandler'
 import { SelectCompetitions, InsertCompetition } from 'types/competitions'
 
@@ -7,7 +7,7 @@ export type MakeCompetitionsRoute = (
   insertCompetition: InsertCompetition
 ) =>IRouter
 
-export const makeCompetitionsRouter:MakeCompetitionsRoute= function(selectCompetitions, insertCompetition) {
+export const makeCompetitionsRouter:MakeCompetitionsRoute = function (selectCompetitions, insertCompetition) {
   const router = Router()
 
   router.get('/', (req, res, next) => {
@@ -21,8 +21,8 @@ export const makeCompetitionsRouter:MakeCompetitionsRoute= function(selectCompet
       .then(res.json.bind(res))
       .catch(next)
   })
-  
- /*
+
+  /*
 
   router.put('/', authorize(['admin']), (req, res, next) => {
     return updateCompetitions(req.body, req.user)
@@ -39,4 +39,3 @@ export const makeCompetitionsRouter:MakeCompetitionsRoute= function(selectCompet
 
   return router
 }
-

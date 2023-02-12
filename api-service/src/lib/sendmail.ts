@@ -1,5 +1,5 @@
 import Mailgun from 'mailgun.js'
-import  formData from 'form-data'
+import formData from 'form-data'
 
 export function makeSendMail (apiKey, domain) {
   const mailgun = new Mailgun(formData)

@@ -1,6 +1,6 @@
 export type User = {
   id: number
-  username: string 
+  username: string
   fullName: string
   clubId: number
   clubAbbreviation: string
@@ -10,7 +10,7 @@ export type User = {
   admin: boolean
   application: boolean
   password?: string
-  token?: string  
+  token?: string
 }
 
 export type MapeToUser=(row:any)=>User
@@ -22,6 +22,6 @@ export type SelectUserOptions = {
 }
 
 export type SelectUsers=(option?:SelectUserOptions)=>Promise<User[]>
-export type InsertUser=(data:User,user:any)=>Promise<number>
-export type UpdateUser=(data:User,user:any)=>Promise<number>
-export type CreateUser=(data:User,user:any)=>Promise<any>
+export type InsertUser=(data:User, user:any)=>Promise<number>
+export type UpdateUser=(data:User, user:any)=>Promise<number>
+export type CreateUser=(data:User, user:any)=>Promise<any>

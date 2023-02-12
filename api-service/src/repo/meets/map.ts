@@ -1,5 +1,5 @@
-import {MapToMeet, Meet} from 'types/meets'
-export const mapMeets:MapToMeet=function(list) {
+import { MapToMeet, Meet } from 'types/meets'
+export const mapMeets:MapToMeet = function (list) {
   const genderMap = {
     1: 'Karlar',
     2: 'Konur'

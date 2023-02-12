@@ -1,4 +1,4 @@
-import { InsertEvent } from "types/events"
+import { InsertEvent } from 'types/events'
 import { PoolClient } from 'pg'
 
 export type MakeInsertEvent=(db:PoolClient)=>InsertEvent
@@ -31,4 +31,3 @@ export const makeInsertEvent:MakeInsertEvent = function (db) {
       .then(res => res.rows[0].id)
   }
 }
-

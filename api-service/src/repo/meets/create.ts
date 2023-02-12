@@ -11,8 +11,8 @@ export type makeCreateMeet = (
   sendMail
 )=>MakeCreateMeets
 
-export const makeCreateMeet: makeCreateMeet= function(makeInsertMeet, makeInsertCompetition, db, sendMail) {
-  return async function makeCreateMeets(meet, user) {
+export const makeCreateMeet: makeCreateMeet = function (makeInsertMeet, makeInsertCompetition, db, sendMail) {
+  return async function makeCreateMeets (meet, user) {
     const client = await db.connect()
 
     const insertMeet = makeInsertMeet(client)

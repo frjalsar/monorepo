@@ -8,7 +8,7 @@ import { InsertRegion, SelectRegions, UpdateRegion } from 'types/region'
 
 export type MakeRegions = (db: PoolClient) => IRouter
 
-export function makeRegions (db: PoolClient) {  
+export function makeRegions (db: PoolClient) {
   const selectRegions: SelectRegions = makeSelectRegions(db)
   const updateRegion: UpdateRegion = makeUpdateRegion(db)
   const insertRegion: InsertRegion = makeInsertRegion(db)

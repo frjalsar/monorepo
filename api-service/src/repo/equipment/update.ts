@@ -1,10 +1,10 @@
 import { PoolClient } from 'pg'
-import { UpdateEquipment } from 'types/equipment' 
+import { UpdateEquipment } from 'types/equipment'
 
 export type MakeUpdateEquipment = (db: PoolClient) => UpdateEquipment
 
 export const makeUpdateEquipment: MakeUpdateEquipment = function (db) {
-  return function updateEquipment(equipment, user) {
+  return function updateEquipment (equipment, user) {
     const sql = `
       UPDATE equipment SET
         eventid = $1,

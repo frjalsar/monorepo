@@ -1,11 +1,10 @@
 import * as dotenv from 'dotenv'
-dotenv.config()
 import pg from 'pg'
 import sql from 'mssql'
 import redis from 'redis'
-import {pino} from 'pino'
+import { pino } from 'pino'
 import pinoHTTP from 'pino-http'
-import {createApp} from './app'
+import { createApp } from './app'
 import { makeAgeGroups } from '../composition/agegroups'
 import { makeAuthenticate } from '../composition/authenticate'
 import { makeAthletes } from '../composition/athletes'
@@ -22,6 +21,7 @@ import { makeMembership } from '../composition/membership'
 import { makeRegions } from '../composition/regions'
 import { makeUsers } from '../composition/users'
 import { makeVenues } from '../composition/venues'
+dotenv.config()
 const { makeThor } = require('../composition/thor')
 const { makeSendMail } = require('../lib/sendmail')
 
@@ -30,7 +30,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 const logger = pino({
   name: 'api-service',
   level: 'debug'
-});
+})
 
 const pgPool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
