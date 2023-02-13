@@ -1,6 +1,6 @@
 import { MapToMembership } from 'types/membership'
 
-export const mapMembership:MapToMembership = function (row, athleteId) {
+export const mapMembership: MapToMembership = function (row, athleteId) {
   return {
     athleteId,
     clubId: row.clubId,

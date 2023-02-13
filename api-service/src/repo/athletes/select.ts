@@ -6,7 +6,7 @@ import { mapAthletes } from './map'
 
 export type MakeSelectAthletes = (db: PoolClient) => SelectAthletes
 
-export const makeSelectAthletes:MakeSelectAthletes = function (db) {
+export const makeSelectAthletes: MakeSelectAthletes = function (db) {
   return function selectAthletes (opt, user) {
     const hasEmptyProperties = Object.values(opt).every(i => i === '')
     if (lodash.isEmpty(opt) || hasEmptyProperties) {

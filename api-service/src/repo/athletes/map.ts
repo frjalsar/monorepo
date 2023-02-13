@@ -1,6 +1,6 @@
 import { Athlete, MapToAthlete } from 'types/athlete'
 
-export const mapAthletes:MapToAthlete = function (list) {
+export const mapAthletes: MapToAthlete = function (list) {
   let currentId
   const result:Athlete[] = []
   list.forEach(item => {

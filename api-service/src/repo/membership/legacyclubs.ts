@@ -3,7 +3,7 @@ import { SelectLegacyClubs } from 'types/membership'
 
 export type MakeSelectLegacyClubs = (db: PoolClient) => SelectLegacyClubs
 
-export const makeSelectLegacyClubs:MakeSelectLegacyClubs = function (db) {
+export const makeSelectLegacyClubs: MakeSelectLegacyClubs = function (db) {
   return function selectLegacyClubs () {
     const sql = `
       SELECT DISTINCT

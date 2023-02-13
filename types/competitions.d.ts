@@ -1,4 +1,4 @@
-
+import { User } from './user'
 export type Competition = {
     meetId: number,
     eventId: number,
@@ -15,5 +15,5 @@ export type CompetitionsSelectOptions = {
 
 export type MapToCompetitions = (item:any) => Competition
 
-export type InsertCompetition = (competition:Competition[], user:any) => Promise<number>
-export type SelectCompetitions = (opt?:CompetitionsSelectOptions) => Promise<Competition[]>
+export type InsertCompetition = (competition: Competition[], user: User) => Promise<number>
+export type SelectCompetitions = (opt?: CompetitionsSelectOptions) => Promise<Competition[]>

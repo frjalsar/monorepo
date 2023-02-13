@@ -5,9 +5,9 @@ import { SelectCompetitions, InsertCompetition } from 'types/competitions'
 export type MakeCompetitionsRoute = (
   selectCompetitions: SelectCompetitions,
   insertCompetition: InsertCompetition
-) =>IRouter
+) => IRouter
 
-export const makeCompetitionsRouter:MakeCompetitionsRoute = function (selectCompetitions, insertCompetition) {
+export const makeCompetitionsRouter: MakeCompetitionsRoute = function (selectCompetitions, insertCompetition) {
   const router = Router()
 
   router.get('/', (req, res, next) => {

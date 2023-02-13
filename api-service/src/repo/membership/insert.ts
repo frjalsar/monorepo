@@ -4,7 +4,7 @@ import { InsertMembership } from 'types/membership'
 
 export type MakeInsertMembership = (db: PoolClient) => InsertMembership
 
-export const makeInsertMembership:MakeInsertMembership = function (db) {
+export const makeInsertMembership: MakeInsertMembership = function (db) {
   return function insertMembership (membership, user) {
     if (membership.length === 0) {
       return Promise.resolve()

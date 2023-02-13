@@ -15,9 +15,9 @@ export function makeAthletes (pgPool, sqlConnection) {
   const updateCompetitor = makeUpdateCompetitor(sqlConnection)
   const insertCompetitor = makeInsertCompetitor(sqlConnection)
 
-  const selectAthletes:SelectAthletes = makeSelectAthletes(pgPool)
-  const editAthlete:EditAthlete = makeEditAthlete(pgPool, updateCompetitor)
-  const createAthlete:CreateAthlete = makeEditOrCreateAthlete(pgPool, insertCompetitor)
+  const selectAthletes: SelectAthletes = makeSelectAthletes(pgPool)
+  const editAthlete: EditAthlete = makeEditAthlete(pgPool, updateCompetitor)
+  const createAthlete: CreateAthlete = makeEditOrCreateAthlete(pgPool, insertCompetitor)
 
   return makeAthleteRoute(selectAthletes, editAthlete, createAthlete)
 }

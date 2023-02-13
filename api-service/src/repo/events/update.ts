@@ -1,9 +1,9 @@
 import { PoolClient } from 'pg'
 import { UpdateEvent } from 'types/events'
 
-export type MakeUpdateEvent=(db:PoolClient)=>UpdateEvent
+export type MakeUpdateEvent = (db: PoolClient) => UpdateEvent
 
-export const makeUpdateEvent:MakeUpdateEvent = function (db) {
+export const makeUpdateEvent: MakeUpdateEvent = function (db) {
   return function updateEvent (event, user) {
     const sql = `
       UPDATE events SET

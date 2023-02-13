@@ -4,7 +4,7 @@ import { SelectMemberships } from 'types/membership'
 
 export type MakeSelectMembership = (db: PoolClient) => SelectMemberships
 
-export const makeSelectMembership:MakeSelectMembership = function (db) {
+export const makeSelectMembership: MakeSelectMembership = function (db) {
   return function selectMembership (opt) {
     const params:Array<number| string> = []
     let sql = `

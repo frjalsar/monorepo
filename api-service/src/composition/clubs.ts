@@ -9,9 +9,9 @@ import { InsertClub, SelectClubs, UpdateClub } from 'types/club'
 export type MakeClubs = (db: PoolClient) => IRouter
 
 export function makeClubs (db) {
-  const selectClubs:SelectClubs = makeSelectClubs(db)
-  const insertClub:InsertClub = makeInsertClub(db)
-  const updateClub :UpdateClub = makeUpdateClub(db)
+  const selectClubs: SelectClubs = makeSelectClubs(db)
+  const insertClub: InsertClub = makeInsertClub(db)
+  const updateClub: UpdateClub = makeUpdateClub(db)
 
   return makeClubsRouter(selectClubs, updateClub, insertClub)
 }

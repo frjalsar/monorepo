@@ -7,7 +7,7 @@ import { SelectLegacyClubs } from 'types/membership'
 export type MakeMembership = (db: PoolClient) => IRouter
 
 export function makeMembership (db) {
-  const selectLegacyClubs:SelectLegacyClubs = makeSelectLegacyClubs(db)
+  const selectLegacyClubs: SelectLegacyClubs = makeSelectLegacyClubs(db)
 
   return makeMembershipRouter(selectLegacyClubs)
 }

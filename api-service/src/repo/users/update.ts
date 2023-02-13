@@ -1,9 +1,9 @@
 import { PoolClient } from 'pg'
 import { UpdateUser } from 'types/user'
 
-export type MakeUpdatetUser=(db:PoolClient)=>UpdateUser
+export type MakeUpdatetUser = (db: PoolClient) => UpdateUser
 
-export const makeUpdatetUser:MakeUpdatetUser = function (db) {
+export const makeUpdatetUser: MakeUpdatetUser = function (db) {
   return function insertUser (userObj, user) {
     const sql = `
       UPDATE users SET

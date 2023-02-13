@@ -7,7 +7,7 @@ import { makeInsertMembership } from '../membership/insert'
 
 export type MakeEditOrCreateAthlete = (db: PoolClient, insertCompetitor) => CreateAthlete
 
-export const makeEditOrCreateAthlete:MakeEditOrCreateAthlete = function (db, insertCompetitor) {
+export const makeEditOrCreateAthlete: MakeEditOrCreateAthlete = function (db, insertCompetitor) {
   return async function editAthlete (athlete, user) {
     const client = await db.connect()
 

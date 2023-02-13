@@ -3,7 +3,7 @@ import { InsertAthlete } from 'types/athlete'
 
 export type MakeInsertAthlete = (db: PoolClient) => InsertAthlete
 
-export const makeInsertAthlete:MakeInsertAthlete = function (db) {
+export const makeInsertAthlete: MakeInsertAthlete = function (db) {
   return function insertAthlete (athlete, user) {
     const sql = `
         INSERT INTO athletes (

@@ -9,7 +9,7 @@ import { SelectUsers } from 'types/user'
 export type MakeLogin = (db: PoolClient) => IRouter
 
 export const makeLogin = function (db, redis, isProduction) {
-  const selectUsers:SelectUsers = makeSelectUsers(db)
+  const selectUsers: SelectUsers = makeSelectUsers(db)
   const setUser = makeSetUser(redis)
   const loginHandler = makeLoginHandler(selectUsers, setUser)
 

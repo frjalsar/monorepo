@@ -5,9 +5,9 @@ import { makeDeleteCombinedEvents } from '../combinedevents/delete'
 import { makeInsertCombinedEvents } from '../combinedevents/insert'
 import { makeUpdateEvent } from '../events/update'
 
-export type MakeEditEvent=(db:PoolClient)=>EditEvent
+export type MakeEditEvent = (db: PoolClient) => EditEvent
 
-export const makeEditEvent:MakeEditEvent = function (db) {
+export const makeEditEvent: MakeEditEvent = function (db) {
   return async function makeEditEvent (event, user) {
     const client = await db.connect()
 
@@ -26,7 +26,7 @@ export const makeEditEvent:MakeEditEvent = function (db) {
       }
 
       await client.query('COMMIT')
-      return { eventId: event.id }
+      return event.id
     } catch (e) {
       await client.query('ROLLBACK')
       throw e

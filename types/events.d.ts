@@ -1,3 +1,4 @@
+import { User } from './user'
 export type Event = {
   id: number,
   name: string,
@@ -17,7 +18,7 @@ export type SelectEventOptions = {
 }
 
 export type SelectEvents = (options?: SelectEventOptions) => Promise<Event[]>
-export type InsertEvent = (event: Event, user: any) => Promise<number>
-export type UpdateEvent = (event: Event, user: any) => Promise<number>
-export type CreateEvent = (event:Event, user:any) => Promise<any>
-export type EditEvent = (event:Event, user:any) => Promise<any>
+export type InsertEvent = (event: Event, user: User) => Promise<number>
+export type UpdateEvent = (event: Event, user: User) => Promise<number>
+export type CreateEvent = (event: Event, user: User) => Promise<number>
+export type EditEvent = (event: Event, user: User) => Promise<number>
