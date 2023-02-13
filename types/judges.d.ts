@@ -1,4 +1,4 @@
-import { JudgeType } from "./judgetype";
+import { JudgeType } from './judgetype'
 
 export type JudgeClub = {
   id?: number;
