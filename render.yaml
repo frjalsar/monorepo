@@ -39,7 +39,7 @@ services:
     plan: starter
     previewPlan: starter
     initialDeployHook: ./preview-domains.sh; node ./migrations.js; node ./seed.js
-    buildCommand: npm ci
+    buildCommand: npm ci && npm run build
     startCommand: node ./server/index.js
     autoDeploy: true
     domains:
