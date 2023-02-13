@@ -1,9 +1,14 @@
 import * as dotenv from 'dotenv'
-import * as pg from 'pg'
-import * as sql from 'mssql'
-const logger = require('heroku-logger')
-
+import pg from 'pg'
+import sql from 'mssql'
+import { pino } from 'pino'
 dotenv.config()
+
+const logger = pino({
+  name: 'last-competed',
+  level: 'debug'
+})
+
 logger.info('Worker started')
 const starttime = new Date().getTime()
 const pgPool = new pg.Pool({
