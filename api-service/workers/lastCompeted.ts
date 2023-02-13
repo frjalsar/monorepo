@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv'
 import * as pg from 'pg'
 import * as sql from 'mssql'
-const logger = require('heroku-logger')
+import * as logger from 'heroku-logger'
 
 dotenv.config()
 logger.info('Worker started')

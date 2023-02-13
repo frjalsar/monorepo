@@ -1,4 +1,3 @@
-import { type } from 'os'
 import { PoolClient } from 'pg'
 import { UpdateEvent } from 'types/events'
 

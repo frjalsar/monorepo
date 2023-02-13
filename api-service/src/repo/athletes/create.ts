@@ -30,7 +30,7 @@ export const makeEditOrCreateAthlete:MakeEditOrCreateAthlete = function (db, ins
       }
 
       await client.query('COMMIT')
-      return { athleteId: id }
+      return id
     } catch (e) {
       await client.query('ROLLBACK')
       throw e
