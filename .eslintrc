@@ -1,9 +1,21 @@
 {
   "extends": [
-    "standard",
+    "standard",    
     "plugin:vue/vue3-recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
-  "env": {        
-    "mocha": true
+  "parser": "vue-eslint-parser",
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-var-requires": "warn" 
+  },
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "root": true,
+  "env": {
+    "node": true
   }
 }

@@ -2,19 +2,22 @@
   "name": "frjalsar",
   "version": "1.0.0",
   "description": "Monorepo for the Icelandic Athletic Federation",
-  "main": "index.js",  
+  "main": "index.js",
   "devDependencies": {
-    "eslint": "^8.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.34.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-vue": "^9.8.0",
-    "husky": "^8.0.2"
+    "husky": "^8.0.2",
+    "typescript": "^4.9.5"
   },
   "scripts": {
-    "lint": "eslint . --ext .js,.vue",
-    "lint-fix": "eslint . --fix --ext .js,.vue",
+    "lint": "eslint . --ext .js,.ts,.vue",
+    "lint-fix": "eslint . --fix --ext .js,.ts,.d.ts,.vue",
     "test": "echo \"No test specified\"",
     "ci": "npm run lint && npm run test",
     "prepare": "husky install"
