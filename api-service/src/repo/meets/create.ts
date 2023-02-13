@@ -7,7 +7,7 @@ import { MakeCreateMeets } from 'types/meet'
 export type MakeCreateMeet = (
   makeInsertMeet: MakeInsertMeet,
   makeInsertCompetition: MakeInsertCompetition,
-  db:PoolClient,
+  db: PoolClient,
   sendMail
 ) => MakeCreateMeets
 

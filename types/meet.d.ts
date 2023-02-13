@@ -31,3 +31,4 @@ export type SelectMeetAttachment = (meetId: number | string) => Promise<any>
 export type UpdateMeet = (meet: Meet, user: User) => Promise<number>
 export type InsertMeet = (meets: Meet, user: User) => Promise<number>
 export type MakeCreateMeets = (meets: Meet, user: User) => Promise<any>
+export type CreateMeet = (meets: Meet, user: User) => Promise<number>

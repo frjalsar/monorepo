@@ -4,7 +4,7 @@ import { InsertEquipment } from 'types/equipment'
 
 export type MakeInsertEquipment = (db: PoolClient) => InsertEquipment
 
-export const makeInsertEquipment:MakeInsertEquipment = function (db) {
+export const makeInsertEquipment: MakeInsertEquipment = function (db) {
   return function insertEquipment (equipment, user) {
     const sql = `
       INSERT INTO equipment (
