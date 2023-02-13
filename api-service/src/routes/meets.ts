@@ -1,9 +1,12 @@
 import { Router, IRouter } from 'express'
 import { authorize } from '../lib/authorizeHandler'
-import { SelectMeets, SelectMeetAttachment, UpdateMeet } from 'types/meets'
+import { SelectMeets, SelectMeetAttachment, UpdateMeet } from 'types/meet'
 
 export type MakeMeetsRoute = (
-  SelectMeets, SelectMeetAttachment, UpdateMeet, CreateMeet
+  selectMeets: SelectMeets,
+  selectMeetAttachment: SelectMeetAttachment,
+  updateMeet: UpdateMeet,
+  createMeet: any
 ) => IRouter
 
 export const makeMeetsRouter: MakeMeetsRoute = function (selectMeets, selectMeetAttachment, updateMeet, createMeet) {

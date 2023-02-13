@@ -1,6 +1,6 @@
-import { MapToCompetitions } from 'types/competitions'
+import { MapToCompetitions } from 'types/competition'
 
-export const mapCompetitions:MapToCompetitions = function (item) {
+export const mapCompetitions: MapToCompetitions = function (item) {
   return {
     id: item.id,
     meetId: item.meetid,

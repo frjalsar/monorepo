@@ -1,14 +1,14 @@
-import { Router } from 'express'
+import { Router, IRouter } from 'express'
 
 import { SelectThorEvents, SelectThorAchievements, SelectMissingRunners, UpdateMissingRunner, SelectCompetitor } from 'types/thor'
 
 export type MakeThorRoute = (
-  SelectThorEvents,
-  SelectThorAchievements,
-  SelectMissingRunners,
-  UpdateMissingRunner,
-  SelectCompetitor
-) => import('express').IRouter
+  selectThorEvents: SelectThorEvents,
+  selectThorAchievements: SelectThorAchievements,
+  selectMissingRunners: SelectMissingRunners,
+  updateMissingRunner: UpdateMissingRunner,
+  selectCompetitor: SelectCompetitor
+) => IRouter
 
 export const makeThorRoute: MakeThorRoute = function (selectThorEvents, selectThorAchievements, selectMissingRunners, updateMissingRunner, selectCompetitor) {
   const router = Router()

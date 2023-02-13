@@ -1,3 +1,4 @@
+import { User } from './user'
 
 export type Venue = {
     id?: number,
@@ -16,17 +17,18 @@ export type Venue = {
     renovationYear: number,
     warmupTrack: boolean,
     throwingField: boolean,
-    certification: boolean
-    _userid?:number
+    certification: boolean,
+    _userid?: number
 }
+
 export type SelectVunuesOptions = {
     id?: string | number | undefined,
     offset?: number | string,
-    limit?: number|string
+    limit?: number | string
 }
 
-export type MapToVenues=(row:any) => Venue
+export type MapToVenues = (row: any) => Venue
 
-export type InsertVenue = (venue:Venue, user:any) => Promise<Venue[]>
-export type SelectVenues = (options?: SelectVunuesOptions)=>Promise<number>
-export type UpdateVenue = (venue:Venue, user:any)=>Promise<number>
+export type InsertVenue = (venue: Venue, user: User) => Promise<Venue[]>
+export type SelectVenues = (options?: SelectVunuesOptions) => Promise<number>
+export type UpdateVenue = (venue: Venue, user: User) => Promise<number>

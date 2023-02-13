@@ -1,12 +1,12 @@
 import { mapMeets } from './map'
 import { PoolClient } from 'pg'
-import { SelectMeets } from 'types/meets'
+import { SelectMeets } from 'types/meet'
 
 export type MakeSelectMeets = (db: PoolClient) => SelectMeets
 
 export const makeSelectMeets: MakeSelectMeets = function (db) {
   return function selectMeets (opt) {
-    const params:Array<string|number> = []
+    const params: Array<string | number> = []
     let sql = `
       SELECT
         m.id,

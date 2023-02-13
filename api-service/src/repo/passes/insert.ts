@@ -4,7 +4,7 @@ import { uuidv4 } from 'uuid'
 import { PoolClient } from 'pg'
 import { InsertPass } from 'types/pass'
 
-export type MakeInsertPass = (db:PoolClient) => InsertPass
+export type MakeInsertPass = (db: PoolClient) => InsertPass
 
 export const makeInsertPass: MakeInsertPass = function (db) {
   return function insertPass (athleteId) {

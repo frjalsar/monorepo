@@ -1,9 +1,9 @@
 import { PoolClient } from 'pg'
-import { SelectMeetAttachment } from 'types/meets'
+import { SelectMeetAttachment } from 'types/meet'
 
-export type MakeSelectMeetAttachment=(db:PoolClient)=>SelectMeetAttachment
+export type MakeSelectMeetAttachment = (db: PoolClient) => SelectMeetAttachment
 
-export const makeSelectMeetAttachment:MakeSelectMeetAttachment = function (db) {
+export const makeSelectMeetAttachment: MakeSelectMeetAttachment = function (db) {
   return function selectMeetAttachment (meetId) {
     const params = [meetId]
     const sql = `

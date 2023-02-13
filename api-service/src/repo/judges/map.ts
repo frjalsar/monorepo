@@ -1,6 +1,6 @@
 import * as df from 'date-fns'
 import { isValidJudge } from '../../lib/isValidJudge'
-import { MapToJudge } from 'types/judges'
+import { MapToJudge } from 'types/judge'
 
 export const mapToJudges: MapToJudge = function (row) {
   return {

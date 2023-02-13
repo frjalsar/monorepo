@@ -21,8 +21,8 @@ import { makeMembership } from '../composition/membership'
 import { makeRegions } from '../composition/regions'
 import { makeUsers } from '../composition/users'
 import { makeVenues } from '../composition/venues'
+import { makeThor } from '../composition/thor'
 dotenv.config()
-const { makeThor } = require('../composition/thor')
 const { makeSendMail } = require('../lib/sendmail')
 
 const isProduction = process.env.NODE_ENV === 'production'

@@ -9,9 +9,9 @@ import { SelectVenues, UpdateVenue, InsertVenue } from 'types/venue'
 export type MakeVenues = (db: PoolClient) => IRouter
 
 export function makeVenues (db: PoolClient) {
-  const selectVenues:SelectVenues = makeSelectVenues(db)
-  const updateVenue:UpdateVenue = makeUpdateVenue(db)
-  const insertVenue:InsertVenue = makeInsertVenue(db)
+  const selectVenues: SelectVenues = makeSelectVenues(db)
+  const updateVenue: UpdateVenue = makeUpdateVenue(db)
+  const insertVenue: InsertVenue = makeInsertVenue(db)
 
   return makeVenuesRouter(insertVenue, updateVenue, selectVenues)
 }

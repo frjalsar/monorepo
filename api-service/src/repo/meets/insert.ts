@@ -1,5 +1,5 @@
 import { PoolClient } from 'pg'
-import { InsertMeet } from 'types/meets'
+import { InsertMeet } from 'types/meet'
 
 export type MakeInsertMeet = (db: PoolClient) => InsertMeet
 

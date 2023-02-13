@@ -1,9 +1,9 @@
 import { VarChar, Int, sqlPool } from 'mssql'
 import { UpdateMissingRunner } from 'types/thor'
 
-export type MakeUpdateMissingRunner=(sqlPoolConnection:sqlPool)=>UpdateMissingRunner
+export type MakeUpdateMissingRunner = (sqlPoolConnection: sqlPool) => UpdateMissingRunner
 
-export const makeUpdateMissingRunner:MakeUpdateMissingRunner = function (sqlPoolConnection) {
+export const makeUpdateMissingRunner: MakeUpdateMissingRunner = function (sqlPoolConnection) {
   return function updateMissingRunner (missingRunner) {
     if (missingRunner.kt.length < 10) {
       return Promise.resolve({ MsgOut: 'Vantar kennitölu' })

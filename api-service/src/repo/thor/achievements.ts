@@ -4,7 +4,7 @@ import { SelectThorAchievements } from 'types/thor'
 
 export type MakeSelectThorAchievements = (sqlPoolConnection: mssqlPool) => SelectThorAchievements
 
-export const makeSelectThorAchievements:MakeSelectThorAchievements = function (sqlPoolConnection) {
+export const makeSelectThorAchievements: MakeSelectThorAchievements = function (sqlPoolConnection) {
   return function selectThorAchievements (options) {
     if (isEmpty(options)) {
       return Promise.resolve([])

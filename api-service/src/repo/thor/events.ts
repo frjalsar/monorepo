@@ -3,7 +3,7 @@ import { SelectThorEvents } from 'types/thor'
 
 export type MakeSelectThorEvents = (sqlPoolConnection: mssqlPool) => SelectThorEvents
 
-export const makeSelectThorEvents:MakeSelectThorEvents = function (sqlPoolConnection) {
+export const makeSelectThorEvents: MakeSelectThorEvents = function (sqlPoolConnection) {
   return function selectThorEvents (options) {
     let sql = `
       SELECT [Grein] as Id

@@ -9,9 +9,9 @@ import { SelectJudgeTypes, UpdateJudgeType, InsertJudgeType } from 'types/judget
 export type MakeJudgeTypes = (db: PoolClient) => IRouter
 
 export function makeJudgeTypes (db) {
-  const selectJudgeTypes:SelectJudgeTypes = makeSelectJudgeTypes(db)
-  const updateJudgeType:UpdateJudgeType = makeUpdateJudgeType(db)
-  const insertJudgeType:InsertJudgeType = makeInsertJudgeType(db)
+  const selectJudgeTypes: SelectJudgeTypes = makeSelectJudgeTypes(db)
+  const updateJudgeType: UpdateJudgeType = makeUpdateJudgeType(db)
+  const insertJudgeType: InsertJudgeType = makeInsertJudgeType(db)
 
   return makeJudgeTypesRouter(selectJudgeTypes, updateJudgeType, insertJudgeType)
 }

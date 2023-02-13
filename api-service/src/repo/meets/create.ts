@@ -2,16 +2,16 @@
 import { PoolClient } from 'pg'
 import { MakeInsertCompetition } from 'repo/competitions/insert'
 import { MakeInsertMeet } from './insert'
-import { MakeCreateMeets } from 'types/meets'
+import { MakeCreateMeets } from 'types/meet'
 
-export type makeCreateMeet = (
+export type MakeCreateMeet = (
   makeInsertMeet: MakeInsertMeet,
   makeInsertCompetition: MakeInsertCompetition,
   db:PoolClient,
   sendMail
-)=>MakeCreateMeets
+) => MakeCreateMeets
 
-export const makeCreateMeet: makeCreateMeet = function (makeInsertMeet, makeInsertCompetition, db, sendMail) {
+export const makeCreateMeet: MakeCreateMeet = function (makeInsertMeet, makeInsertCompetition, db, sendMail) {
   return async function makeCreateMeets (meet, user) {
     const client = await db.connect()
 

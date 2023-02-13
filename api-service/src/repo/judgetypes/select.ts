@@ -4,7 +4,7 @@ import { mapJudgeTypes } from './map'
 
 export type MakeSelectJudgeTypes = (db: PoolClient) => SelectJudgeTypes
 
-export const makeSelectJudgeTypes:MakeSelectJudgeTypes = function (db) {
+export const makeSelectJudgeTypes: MakeSelectJudgeTypes = function (db) {
   return function selectJudgeTypes () {
     const sql = `
       SELECT

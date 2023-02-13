@@ -2,7 +2,7 @@ import * as toOrdinal from 'pg-parameterize'
 import { PoolClient } from 'pg'
 import { SelectPasses } from 'types/pass'
 
-export type MakeSelectPasses=(db:PoolClient)=>SelectPasses
+export type MakeSelectPasses = (db: PoolClient) => SelectPasses
 
 export const makeSelectPasses: MakeSelectPasses = function (db) {
   return function selectPasses (options) {

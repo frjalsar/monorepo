@@ -9,9 +9,9 @@ import { SelectEquipment, InsertEquipment, UpdateEquipment } from 'types/equipme
 export type MakeEquipment = (db: PoolClient) => IRouter
 
 export function makeEquipment (db) {
-  const selectEquipment:SelectEquipment = makeSelectEquipment(db)
-  const insertEquipment:InsertEquipment = makeInsertEquipment(db)
-  const updateEquipment:UpdateEquipment = makeUpdateEquipment(db)
+  const selectEquipment: SelectEquipment = makeSelectEquipment(db)
+  const insertEquipment: InsertEquipment = makeInsertEquipment(db)
+  const updateEquipment: UpdateEquipment = makeUpdateEquipment(db)
 
   return makeEquipmentRouter(selectEquipment, insertEquipment, updateEquipment)
 }

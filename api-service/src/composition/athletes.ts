@@ -13,7 +13,7 @@ export type MakeAthletes = (db: PoolClient) => IRouter
 export function makeAthletes (pgPool, sqlConnection) {
   // THOR - Remove in future
   const updateCompetitor = makeUpdateCompetitor(sqlConnection)
-  const insertCompetitor = makeInsertCompetitor(sqlConnection)
+  const insertCompetitor = makeInsertCompetitor()
 
   const selectAthletes:SelectAthletes = makeSelectAthletes(pgPool)
   const editAthlete:EditAthlete = makeEditAthlete(pgPool, updateCompetitor)

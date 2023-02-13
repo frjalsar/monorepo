@@ -1,5 +1,5 @@
 import { PoolClient } from 'pg'
-import { InsertJudge } from 'types/judges'
+import { InsertJudge } from 'types/judge'
 
 export type MakeInsertJudge = (db: PoolClient) => InsertJudge
 

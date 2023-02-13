@@ -1,15 +1,15 @@
-import { MapToMeet, Meet } from 'types/meets'
-export const mapMeets:MapToMeet = function (list) {
+import { MapToMeet, Meet } from 'types/meet'
+export const mapMeets: MapToMeet = function (list) {
   const genderMap = {
     1: 'Karlar',
     2: 'Konur'
   }
 
   let currentId
-  const result:Meet[] = []
+  const result: Meet[] = []
   list.forEach(item => {
     if (item.id !== currentId) {
-      const meetObj:any = {
+      const meetObj: any = {
         id: item.id,
         name: item.name,
         organizerName: item.organizername,

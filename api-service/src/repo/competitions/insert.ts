@@ -1,10 +1,10 @@
 import { toTuple, flatten } from 'pg-parameterize'
 import { PoolClient } from 'pg'
-import { InsertCompetition } from 'types/competitions'
+import { InsertCompetition } from 'types/competition'
 
-export type MakeInsertCompetition= (db: PoolClient) => InsertCompetition
+export type MakeInsertCompetition = (db: PoolClient) => InsertCompetition
 
-export const makeInsertCompetition:MakeInsertCompetition = function (db) {
+export const makeInsertCompetition: MakeInsertCompetition = function (db) {
   return function insertCompetition (competition, user) {
     if ((competition.length) === 0) {
       return Promise.resolve()

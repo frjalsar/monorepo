@@ -4,11 +4,11 @@ import { mapVenues } from './map'
 import { PoolClient } from 'pg'
 import { SelectVenues } from 'types/venue'
 
-export type MakeSelectVenues=(db:PoolClient) => SelectVenues
+export type MakeSelectVenues = (db: PoolClient) => SelectVenues
 
-export const makeSelectVenues:MakeSelectVenues = function (db) {
+export const makeSelectVenues: MakeSelectVenues = function (db) {
   return function selectVenues (opt) {
-    const params:Array<string | number> = []
+    const params: Array<string | number> = []
     let sql = `
       SELECT
         v.id,
