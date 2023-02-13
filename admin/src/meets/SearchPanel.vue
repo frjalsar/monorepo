@@ -111,7 +111,7 @@ export default {
     },
     settings: {
       type: Object,
-      default: () => {}
+      default: () => ({})
     }
   },
   emits: ['click', 'input', 'change', 'search'],
