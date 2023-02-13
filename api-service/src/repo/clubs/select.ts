@@ -6,7 +6,6 @@ export type MakeSelectClubs = (db: PoolClient) => SelectClubs
 
 export const makeSelectClubs:MakeSelectClubs = function (db) {
   return function selectClubs (opt) {
-    const a = 2 + 2
     const params: Array<number | string> = []
     let sql = `
       SELECT

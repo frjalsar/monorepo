@@ -7,9 +7,9 @@ export const makeLoginRouter = function (loginHandler, isProduction) {
     const username = req.body.username
     const password = req.body.password
 
-    const host = req.get('host')!
-    const dot = host.indexOf('.') || -1
-    const domain = dot > -1 ? host.substring(dot + 1) : undefined
+    const host = req.get('host')
+    const dot = host?.indexOf('.') || -1
+    const domain = dot > -1 ? host?.substring(dot + 1) : undefined
 
     /*
     const host = req.get('origin')

@@ -1,5 +1,3 @@
-
-import { type } from 'os'
 import { flatten, toTuple } from 'pg-parameterize'
 import { InsertCombinedEvent } from 'types/combinedevent'
 import { PoolClient } from 'pg'

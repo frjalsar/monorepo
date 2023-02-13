@@ -1,3 +1,4 @@
+import { EventType } from './eventtype'
 export type Equipment = {
       id: number,
       eventId: number,
@@ -6,11 +7,6 @@ export type Equipment = {
       value: number,
       unit: string,
       event?: EventType
-}
-
-export type EventType = {
-    id?: number,
-    name?: string
 }
 
 export type SelectEquipmentOption = {

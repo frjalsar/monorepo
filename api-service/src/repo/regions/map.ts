@@ -7,4 +7,3 @@ export const mapToRegion: MapToRegion = function (row) {
     abbreviation: row.abbreviation
   }
 }
-1

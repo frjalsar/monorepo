@@ -1,7 +1,7 @@
 export type EventType={
-    id: number,
-    name: string,
-    ordering: number
+    id?: number,
+    name?: string,
+    ordering?: number
 }
 
 export type MapToEventType = (row) => EventType
