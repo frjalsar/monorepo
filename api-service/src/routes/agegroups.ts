@@ -5,7 +5,7 @@ export type MakeAgeGroupsRoute = (
   selectAgeGroups: SelectAgeGroups,
 ) => IRouter
 
-export const makeAgeGroupsRoute:MakeAgeGroupsRoute = function (selectAgeGroups) {
+export const makeAgeGroupsRoute: MakeAgeGroupsRoute = function (selectAgeGroups) {
   const router = Router()
 
   router.get('/', (_, res, next) => {

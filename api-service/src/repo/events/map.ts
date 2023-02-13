@@ -1,6 +1,6 @@
 import { MapToEvent, Event } from 'types/events'
 
-export const mapEvents:MapToEvent = function (list) {
+export const mapEvents: MapToEvent = function (list) {
   let currentId
   const result:Event[] = []
   list.forEach(item => {

@@ -9,7 +9,7 @@ export type MakeAthleteRoute = (
   createAthlete: CreateAthlete
 ) => IRouter
 
-export const makeAthleteRoute:MakeAthleteRoute = function (selectAthlete, editAthlete, createAthlete) {
+export const makeAthleteRoute: MakeAthleteRoute = function (selectAthlete, editAthlete, createAthlete) {
   const router = Router()
 
   router.get('/', (req, res, next) => {

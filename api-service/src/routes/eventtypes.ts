@@ -3,12 +3,12 @@ import { InsertEventType, SelectEventTypes, UpdateEventType } from 'types/eventt
 import { authorize } from '../lib/authorizeHandler'
 
 export type MakeEventTypesRoute = (
-  selectEventTypess:SelectEventTypes,
+  selectEventTypess: SelectEventTypes,
   updateEventType: UpdateEventType,
   insertEventType: InsertEventType
 ) => IRouter
 
-export const makeEventTypesRouter:MakeEventTypesRoute = function (selectEventTypes, updateEventType, insertEventType) {
+export const makeEventTypesRouter: MakeEventTypesRoute = function (selectEventTypes, updateEventType, insertEventType) {
   const router = Router()
 
   router.get('/', (_, res, next) => {

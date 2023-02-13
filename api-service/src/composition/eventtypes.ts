@@ -9,9 +9,9 @@ import { InsertEventType, SelectEventTypes, UpdateEventType } from 'types/eventt
 export type MakeEventTypes = (db: PoolClient) => IRouter
 
 export function makeEventTypes (db) {
-  const selectEventTypes:SelectEventTypes = makeSelectEventTypes(db)
-  const updateEventType:UpdateEventType = makeUpdateEventType(db)
-  const insertEventType:InsertEventType = makeInsertEventType(db)
+  const selectEventTypes: SelectEventTypes = makeSelectEventTypes(db)
+  const updateEventType: UpdateEventType = makeUpdateEventType(db)
+  const insertEventType: InsertEventType = makeInsertEventType(db)
 
   return makeEventTypesRouter(selectEventTypes, updateEventType, insertEventType)
 }

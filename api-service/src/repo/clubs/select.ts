@@ -4,7 +4,7 @@ import { mapClub } from './map'
 
 export type MakeSelectClubs = (db: PoolClient) => SelectClubs
 
-export const makeSelectClubs:MakeSelectClubs = function (db) {
+export const makeSelectClubs: MakeSelectClubs = function (db) {
   return function selectClubs (opt) {
     const params: Array<number | string> = []
     let sql = `

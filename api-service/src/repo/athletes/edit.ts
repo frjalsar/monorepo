@@ -9,7 +9,7 @@ import { makeInsertMembership } from '../membership/insert'
 
 export type MakeEditAthlete = (db: PoolClient, updateCompetitor) => EditAthlete
 
-export const makeEditAthlete:MakeEditAthlete = function (db, updateCompetitor) {
+export const makeEditAthlete: MakeEditAthlete = function (db, updateCompetitor) {
   return async function editAthlete (athlete, user) {
     const client = await db.connect()
 
@@ -38,7 +38,7 @@ export const makeEditAthlete:MakeEditAthlete = function (db, updateCompetitor) {
       }
 
       await client.query('COMMIT')
-      return { athleteId: athlete.id }
+      return athlete.id
     } catch (e) {
       await client.query('ROLLBACK')
       throw e

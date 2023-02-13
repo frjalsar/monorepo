@@ -9,7 +9,7 @@ export type MakeClubsRouter = (
   insertClub: InsertClub
 ) => IRouter
 
-export const makeClubsRouter:MakeClubsRouter = function (selectClubs, updateClub, insertClub) {
+export const makeClubsRouter: MakeClubsRouter = function (selectClubs, updateClub, insertClub) {
   const router = Router()
 
   router.get('/', (req, res, next) => {

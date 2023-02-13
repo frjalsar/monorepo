@@ -7,7 +7,7 @@
   "parser": "vue-eslint-parser",
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-var-requires": "warn",    
+    "@typescript-eslint/no-var-requires": "warn" 
   },
   "parserOptions": {
     "parser": "@typescript-eslint/parser",

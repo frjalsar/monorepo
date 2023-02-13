@@ -11,9 +11,9 @@ import { InsertUser, SelectUsers, UpdateUser } from 'types/user'
 export type MakeClubs = (db: PoolClient) => IRouter
 
 export const makeUsers = function (db, redis) {
-  const selectUsers:SelectUsers = makeSelectUsers(db)
-  const updateUser:UpdateUser = makeUpdatetUser(db)
-  const insertUser:InsertUser = makeInsertUser(db)
+  const selectUsers: SelectUsers = makeSelectUsers(db)
+  const updateUser: UpdateUser = makeUpdatetUser(db)
+  const insertUser: InsertUser = makeInsertUser(db)
   const setUser = makeSetUser(redis)
 
   const createUser = makeCreateUser(insertUser, selectUsers, setUser)

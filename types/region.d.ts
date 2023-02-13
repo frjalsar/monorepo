@@ -1,3 +1,5 @@
+import { User } from './user'
+
 export type Region = {
   id: number,
   fullName: string,
@@ -11,5 +13,5 @@ export type SelectRegionOptions = {
 }
 
 export type SelectRegions = (options?: SelectRegionOptions) => Promise<Region[]>
-export type InsertRegion = (region: Region, user: any) => Promise<number>
-export type UpdateRegion = (region: Region, user: any) => Promise<number>
+export type InsertRegion = (region: Region, user: User) => Promise<number>
+export type UpdateRegion = (region: Region, user: User) => Promise<number>

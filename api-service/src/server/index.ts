@@ -22,8 +22,9 @@ import { makeRegions } from '../composition/regions'
 import { makeUsers } from '../composition/users'
 import { makeVenues } from '../composition/venues'
 import { makeThor } from '../composition/thor'
+import { makeSendMail } from '../lib/sendmail'
+
 dotenv.config()
-const { makeSendMail } = require('../lib/sendmail')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -53,7 +54,7 @@ const sqlPool = new sql.ConnectionPool({
   }
 })
 
-const sendMail = makeSendMail(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN, isProduction)
+const sendMail = makeSendMail(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN)
 const authenticate = makeAuthenticate(pgPool, redisClient, logger)
 
 const sqlConnection = sqlPool.connect()

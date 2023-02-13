@@ -9,9 +9,9 @@ import { CreateEvent, EditEvent, SelectEvents } from 'types/events'
 export type MakeEventTypes = (db: PoolClient) => IRouter
 
 export function makeEvents (db) {
-  const selectEvents:SelectEvents = makeSelectEvents(db)
-  const editEvent:EditEvent = makeEditEvent(db)
-  const createEvent:CreateEvent = makeCreateEvent(db)
+  const selectEvents: SelectEvents = makeSelectEvents(db)
+  const editEvent: EditEvent = makeEditEvent(db)
+  const createEvent: CreateEvent = makeCreateEvent(db)
 
   return makeEventsRouter(selectEvents, editEvent, createEvent)
 }

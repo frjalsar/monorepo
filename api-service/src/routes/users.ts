@@ -8,7 +8,7 @@ export type MakeClubsRouter = (
   createUser: CreateUser
 ) => IRouter
 
-export const makeUsersRouter:MakeClubsRouter = function (selectUsers, updateUser, createUser) {
+export const makeUsersRouter: MakeClubsRouter = function (selectUsers, updateUser, createUser) {
   const router = Router()
 
   router.get('/', authorize(['admin']), (req, res, next) => {

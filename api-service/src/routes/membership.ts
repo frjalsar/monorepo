@@ -2,10 +2,10 @@ import { Router, IRouter } from 'express'
 import { SelectLegacyClubs } from 'types/membership'
 
 export type MakeMembershipRoute = (
-  selectLegacyClubs:SelectLegacyClubs
+  selectLegacyClubs: SelectLegacyClubs
 ) => IRouter
 
-export const makeMembershipRouter:MakeMembershipRoute = function (selectLegacyClubs) {
+export const makeMembershipRouter: MakeMembershipRoute = function (selectLegacyClubs) {
   const router = Router()
 
   router.get('/legacy', (req, res, next) => {

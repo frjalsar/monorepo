@@ -23,7 +23,8 @@ const runSeed = async function () {
       username: 'admin',
       password: 'password123'
     }
-    await insertUser(adminUser, { id: 1 })
+    const user:any = { id: 1 }
+    await insertUser(adminUser, user)
   // Athlete
   } catch (e) {
     console.log('error')

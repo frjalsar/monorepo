@@ -1,9 +1,9 @@
 import { InsertEvent } from 'types/events'
 import { PoolClient } from 'pg'
 
-export type MakeInsertEvent=(db:PoolClient)=>InsertEvent
+export type MakeInsertEvent = (db: PoolClient) => InsertEvent
 
-export const makeInsertEvent:MakeInsertEvent = function (db) {
+export const makeInsertEvent: MakeInsertEvent = function (db) {
   return function insertEvent (event, user) {
     const sql = `
       INSERT INTO events (
