@@ -40,7 +40,7 @@ services:
     previewPlan: starter
     initialDeployHook: ./preview-domains.sh; node ./migrations.js; node ./seed.js
     buildCommand: npm ci && npm run build
-    startCommand: node ./server/index.js
+    startCommand: npm run start
     autoDeploy: true
     domains:
       - api-test.fri.is
