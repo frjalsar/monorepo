@@ -1,18 +1,14 @@
 import { MapToEquipment } from 'types/equipment'
+import { mapToEvent } from '../events/map'
 
-export const mapEquipment: MapToEquipment = function (list) {
+export const mapToEquipment: MapToEquipment = function (row) {
   return {
-    id: list.id,
-    eventId: list.eventid,
-    gender: list.gender,
-    age: Number(list.age),
-    value: Number(list.value),
-    unit: list.unit,
-    event: list.eventid
-      ? {
-          id: list.eventid,
-          name: list.eventname
-        }
-      : {}
+    id: row.equipment_id,
+    gender: row.equipment_gender,
+    age: Number(row.equipment_age),
+    value: Number(row.equipment_value),
+    unit: row.equipment_unit,
+    eventId: row.event_id,
+    event: mapToEvent(row)
   }
 }

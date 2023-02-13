@@ -10,15 +10,15 @@ export type Athlete = {
   birthyear: number
   gender: string
   country: string
-  thorId: string
+  thorId: number
   lastCompeted: Date
-  club: Club
+  club: Partial<Club>
   region: Region
   membership: Membership[]
   newMembership?: Membership[]
 }
 
-export type MapToAthlete = (list: any[]) => Athlete[]
+export type MapToAthlete = (row: any) => Athlete
 
 export type SelectAthleteOptions = {
   id?: number | string

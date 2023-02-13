@@ -1,13 +1,13 @@
 import { MapToCompetitions } from 'types/competition'
 
-export const mapCompetitions: MapToCompetitions = function (item) {
+export const mapToCompetition: MapToCompetitions = function (row) {
   return {
-    id: item.id,
-    meetId: item.meetid,
-    eventId: item.eventid,
-    ageFrom: item.agefrom,
-    ageTo: item.ageto,
-    gender: item.gender,
-    indoor: item.indoor
+    id: row.competition_id,
+    meetId: row.meet_id,
+    eventId: row.event_id,
+    ageFrom: row.competition_agefrom,
+    ageTo: row.competition_ageto,
+    gender: row.competition_gender,
+    indoor: row.competition_indoor
   }
 }

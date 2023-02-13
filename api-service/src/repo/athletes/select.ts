@@ -1,7 +1,7 @@
+import isEmpty from 'lodash.isempty'
 import { PoolClient } from 'pg'
 import { SelectAthletes } from 'types/athlete'
-import * as toOrdinal from 'pg-parameterize'
-import * as lodash from 'lodash'
+import { toOrdinal } from 'pg-parameterize'
 import { mapAthletes } from './map'
 
 export type MakeSelectAthletes = (db: PoolClient) => SelectAthletes
@@ -9,7 +9,7 @@ export type MakeSelectAthletes = (db: PoolClient) => SelectAthletes
 export const makeSelectAthletes: MakeSelectAthletes = function (db) {
   return function selectAthletes (opt, user) {
     const hasEmptyProperties = Object.values(opt).every(i => i === '')
-    if (lodash.isEmpty(opt) || hasEmptyProperties) {
+    if (isEmpty(opt) || hasEmptyProperties) {
       return Promise.resolve([])
     }
 
@@ -17,25 +17,27 @@ export const makeSelectAthletes: MakeSelectAthletes = function (db) {
     const params:Array<number| string> = []
     let sql = `
       SELECT
-        a.id,
-        a.fullname,
-        ${canViewKt ? 'a.kt,' : ''}
-        a.birthyear,
-        a.gender,
-        a.country,
-        a.thorid,
-        a.lastcompeted,
-        c.id as clubid,
-        c.fullname as clubname,        
-        c.thorid as thorclubid,
-        c.regionid,
-        r.fullname regionfullname,
-        r.abbreviation regionabbreviation,
-        m.yearfrom,
-        m.yearto,
-        m.legacyclub,
-        m.confirmed,
-        u.fullName as userfullname
+        a.id athlete_id,
+        a.fullname athlete_fullname,
+        ${canViewKt ? 'a.kt' : ''} athlete_kt,
+        a.birthyear athlete_birthyear,
+        a.gender athlete_gender,
+        a.country athlete_country,
+        a.thorid athlete_thorid,
+        a.lastcompeted athlete_lastcompeted,
+        c.id club_id,
+        c.fullname club_fullname,
+        c.shortname club_shortname,
+        c.abbreviation club_abbreviation,
+        c.thorid club_thorid,
+        c.regionid region_id,
+        r.fullname region_fullname,
+        r.abbreviation region_abbreviation,
+        m.yearfrom membership_yearfrom,
+        m.yearto membership_yearto,
+        m.legacyclub membership_legacyclub,
+        m.confirmed membership_confirmed,
+        u.fullName as user_fullname
       FROM
         athletes a
       LEFT JOIN
@@ -124,7 +126,7 @@ export const makeSelectAthletes: MakeSelectAthletes = function (db) {
     }
 
     return db
-      .query(toOrdinal.toOrdinal(sql), params)
+      .query(toOrdinal(sql), params)
       .then(res => mapAthletes(res.rows))
   }
 }

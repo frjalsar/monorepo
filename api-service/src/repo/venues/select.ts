@@ -1,6 +1,6 @@
 
 import { toOrdinal } from 'pg-parameterize'
-import { mapVenues } from './map'
+import { mapToVenues } from './map'
 import { PoolClient } from 'pg'
 import { SelectVenues } from 'types/venue'
 
@@ -11,7 +11,7 @@ export const makeSelectVenues: MakeSelectVenues = function (db) {
     const params: Array<string | number> = []
     let sql = `
       SELECT
-        v.id,
+        v.id ,
         v.fullname,
         v.indoor,
         v.banked,
@@ -51,6 +51,6 @@ export const makeSelectVenues: MakeSelectVenues = function (db) {
 
     return db
       .query(toOrdinal(sql), params)
-      .then(res => res.rows.map(mapVenues))
+      .then(res => res.rows.map(mapToVenues))
   }
 }

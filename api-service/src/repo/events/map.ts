@@ -1,83 +1,44 @@
 import { MapToEvent, Event } from 'types/events'
+import { mapToEventType } from '../eventtypes/map'
 
-export const mapEvents: MapToEvent = function (list) {
+export const mapToEvent: MapToEvent = function (row) {
+  return {
+    id: row.event_id,
+    name: row.event_name,
+    official: row.event_official,
+    worldrecord: row.event_worldrecord,
+    typeId: row.eventtype_id,
+    type: mapToEventType(row),
+    childEvents: row.childevent_id ? [] : undefined
+  }
+}
+
+export const mapEvents = function (list) {
   let currentId
-  const result:Event[] = []
-  list.forEach(item => {
-    if (item.id !== currentId) {
-      const eventObj:any = {
-        id: item.id,
-        name: item.name,
-        iaaf: item.iaaf,
-        typeId: item.typeid,
-        type: {},
-        childEvents: item.childeventid ? [] : undefined
-      }
+  const result: Event[] = []
 
+  list.forEach(item => {
+    if (item.event_id !== currentId) {
+      const eventObj: Event = mapToEvent(item)
       result.push(eventObj)
-      currentId = item.id
+      currentId = item.event_id
     }
 
     const currentEvent = result[result.length - 1]
 
-    if (item.childeventid) {
-      const childEvent = {
-        id: item.childeventid,
-        name: item.childeventname
+    if (currentEvent.childEvents) {
+      const childEvent: Partial<Event> = {
+        id: item.childevent_id,
+        name: item.childevent_name
       }
 
       currentEvent.childEvents.push(childEvent)
     }
 
-    if (item.typeid !== null) {
-      currentEvent.type = {
-        id: item.typeid,
-        name: item.typename
-      }
+    if (item.eventtype_id !== null) {
+      currentEvent.type = mapToEventType(item)
     }
   })
 
   return result
 }
-
-/*
-function mapEvents (list) {
-  return list.map(item => {
-    return {
-      id: item.id,
-      strId: item.strid,
-      name: item.name,
-      iaaf: item.iaaf,
-      worldRecord: item.worldrecord,
-      typeId: item.typeid,
-      type: {
-        id: item.typeid,
-        name: item.typename
-      }
-    }
-  })
-}
-
-module.exports = mapEvents
-*/
-
-/*
-function mapEvents (list) {
-  return list.map(item => {
-    return {
-      id: item.id,
-      strId: item.strid,
-      name: item.name,
-      iaaf: item.iaaf,
-      worldRecord: item.worldrecord,
-      typeId: item.typeid,
-      type: {
-        id: item.typeid,
-        name: item.typename
-      }
-    }
-  })
-}
-
-module.exports = mapEvents
-*/

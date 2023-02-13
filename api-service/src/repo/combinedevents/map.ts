@@ -1,6 +1,6 @@
 import { MapToCombinedEvent } from 'types/combinedevent'
 
-export const mapCombinedEvents: MapToCombinedEvent = function (childEvent, parentEventId) {
+export const mapToCombinedEvents: MapToCombinedEvent = function (childEvent, parentEventId) {
   return {
     parentEventId,
     childEventId: childEvent.id

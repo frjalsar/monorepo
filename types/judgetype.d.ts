@@ -1,9 +1,9 @@
 import { User } from './user'
 
 export type JudgeType = {
-    name?: string,
-    stage?: number,
-    id?: number
+    id: number
+    name: string,
+    stage: number
 }
 
 export type MapToJudgeType = (row: any) => JudgeType

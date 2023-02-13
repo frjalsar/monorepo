@@ -1,11 +1,11 @@
 import { isEqual } from 'lodash.isequal'
-import { mapMembership } from '../membership/map'
 import { PoolClient } from 'pg'
 import { EditAthlete } from 'types/athlete'
 import { makeUpdateAthlete } from './update'
 import { makeSelectClubs } from '../clubs/select'
 import { makeDisableMembership } from '../membership/disable'
 import { makeInsertMembership } from '../membership/insert'
+import { assignMembership } from '../membership/asssign'
 
 export type MakeEditAthlete = (db: PoolClient, updateCompetitor) => EditAthlete
 
@@ -23,7 +23,7 @@ export const makeEditAthlete: MakeEditAthlete = function (db, updateCompetitor) 
       await updateAthlete(athlete, user)
 
       const sameMembership = isEqual(athlete.membership, athlete.newMembership)
-      const membershipList = athlete.newMembership ? athlete.newMembership.map(member => mapMembership(member, athlete.id)) : []
+      const membershipList = athlete.newMembership ? athlete.newMembership.map(ms => assignMembership(ms, athlete.id)) : []
 
       if (!sameMembership) {
         await disableMembership(athlete.id)

@@ -1,9 +1,9 @@
 import { MapToEventType } from 'types/eventtype'
 
-export const mapEventTypes: MapToEventType = function (row) {
+export const mapToEventType: MapToEventType = function (row) {
   return {
-    id: row.id,
-    name: row.name,
-    ordering: row.ordering
+    id: row.eventtype_id,
+    name: row.eventtype_name,
+    ordering: row.eventtype_ordering
   }
 }

@@ -1,17 +1,22 @@
-import { MapToClub } from 'types/club'
+import { MapToClub, MapToClubPartial } from 'types/club'
+import { mapToRegion } from '../regions/map'
 
-export const mapClub: MapToClub = function (row) {
+export const mapToClub: MapToClub = function (row) {
   return {
     id: row.id,
-    fullName: row.fullname,
-    abbreviation: row.abbreviation,
-    shortName: row.shortname,
-    thorId: row.thorid,
-    regionId: row.regioid,
-    region: row.region && {
-      id: row.regionid,
-      fullName: row.regionname,
-      abbreviation: row.regionabbreviation
-    }
+    fullName: row.club_fullname,
+    abbreviation: row.club_abbreviation,
+    shortName: row.club_shortname,
+    thorId: row.club_thorid,
+    regionId: row.region_id,
+    region: mapToRegion(row)
+  }
+}
+
+export const mapToClubPartial: MapToClubPartial = function (row) {
+  return {
+    id: row.id,
+    fullName: row.club_fullname,
+    thorId: row.club_thorid
   }
 }

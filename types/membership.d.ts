@@ -4,15 +4,17 @@ import { User } from './user'
 export type Membership = {
   athleteId: number
   clubId: number
-  legacyClub: string
-  yearFrom: number
-  yearTo: number
+  clubFullName: string
+  legacyClub: string | null
+  yearFrom: number | null
+  yearTo: number | null
   confirmed: boolean
   athletesigned?: boolean
   clubsigned?: boolean
-};
+}
 
-export type MapToMembership = (row: any, athleteId: number) => Membership;
+export type AssignMembership = (membership: Membership, athleteId: number) => Membership
+export type MapToMembership = (row: any) => Membership
 
 export type SelectMembershipOptions = {
   athleteId: number | string;

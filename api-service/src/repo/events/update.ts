@@ -8,7 +8,7 @@ export const makeUpdateEvent: MakeUpdateEvent = function (db) {
     const sql = `
       UPDATE events SET
         name = $1,
-        iaaf = $2,
+        official = $2,
         typeid = $3,
         thorid = $4,
         _userid = $5,
@@ -20,7 +20,7 @@ export const makeUpdateEvent: MakeUpdateEvent = function (db) {
 
     const params = [
       event.name,
-      event.iaaf,
+      event.official,
       event.typeId,
       event.thorId,
       user.id,

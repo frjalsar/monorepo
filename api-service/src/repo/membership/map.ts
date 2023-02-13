@@ -1,12 +1,13 @@
 import { MapToMembership } from 'types/membership'
 
-export const mapMembership: MapToMembership = function (row, athleteId) {
+export const mapToMembership: MapToMembership = function (row) {
   return {
-    athleteId,
-    clubId: row.clubId,
-    legacyClub: row.clubId ? null : row.legacyClub,
-    yearFrom: row.yearFrom ? row.yearFrom : null,
-    yearTo: row.yearTo ? row.yearTo : null,
-    confirmed: row.confirmed
+    athleteId: row.athlete_id,
+    clubId: row.club_id,
+    clubFullName: row.club_fullname,
+    legacyClub: row.membership_legacyclub,
+    yearFrom: row.membership_yearfrom,
+    yearTo: row.membership_yearto,
+    confirmed: row.membership_confirmed
   }
 }

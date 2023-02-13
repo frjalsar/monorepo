@@ -3,7 +3,7 @@ CREATE TABLE public.events (
 	"name" text NULL,
 	"typeid" integer NULL,	
 	"strid" text NULL,
-	"iaaf" boolean NULL,
+	"official" boolean NULL,
 	"worldrecord" boolean NULL,
 	"thorid" text NULL,
 	"_userid" integer NULL,

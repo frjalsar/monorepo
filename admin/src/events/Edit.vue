@@ -17,12 +17,12 @@
 
       <div class="col-md-2">
         <label
-          for="iaaf"
+          for="official"
           class="form-label"
-        >IAAF</label>
+        >Official</label>
         <select
-          id="iaaf"
-          v-model="currentItem.iaaf"
+          id="official"
+          v-model="currentItem.official"
           class="form-select"
           :disabled="busy"
         >

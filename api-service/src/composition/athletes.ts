@@ -1,12 +1,12 @@
-import { makeSelectAthletes } from '../repo/athletes/select'
-import { makeEditAthlete } from '../repo/athletes/edit'
-import { makeEditOrCreateAthlete } from '../repo/athletes/create'
-import { makeAthleteRoute } from '../routes/athletes'
 import { PoolClient } from 'pg'
 import { IRouter } from 'express'
 import { CreateAthlete, EditAthlete, SelectAthletes } from 'types/athlete'
+import { makeSelectAthletes } from '../repo/athletes/select'
+import { makeEditAthlete } from '../repo/athletes/edit'
+import { makeEditOrCreateAthlete } from '../repo/athletes/create'
 import { makeUpdateCompetitor } from '../repo/thor/updateCompetitor'
 import { makeInsertCompetitor } from '../repo/thor/insertCompetitor'
+import { makeAthleteRoute } from '../routes/athletes'
 
 export type MakeAthletes = (db: PoolClient) => IRouter
 

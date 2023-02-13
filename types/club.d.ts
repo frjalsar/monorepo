@@ -12,6 +12,7 @@ export type Club = {
 }
 
 export type MapToClub = (row: any) => Club
+export type MapToClubPartial = (row: any) => Partial<Club>
 
 export type SelectClubOptions = {
   id: number | string

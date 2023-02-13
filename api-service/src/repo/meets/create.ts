@@ -1,8 +1,8 @@
 
 import { PoolClient } from 'pg'
-import { MakeInsertCompetition } from 'repo/competitions/insert'
-import { MakeInsertMeet } from './insert'
 import { MakeCreateMeets } from 'types/meet'
+import { MakeInsertCompetition } from '../competitions/insert'
+import { MakeInsertMeet } from './insert'
 
 export type MakeCreateMeet = (
   makeInsertMeet: MakeInsertMeet,

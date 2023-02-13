@@ -22,10 +22,12 @@ export const makeInsertCombinedEvents: MakeInsertCombinedEvent = function (db) {
         childeventid,
         _userid
       )
-      VALUES ` + toTuple(arr, true)
+      VALUES ${toTuple(arr, true)}`
 
     const params = flatten(arr)
 
-    return db.query(sql, params)
+    return db
+      .query(sql, params)
+      .then(() => combinedEvents[0].parentEventId)
   }
 }

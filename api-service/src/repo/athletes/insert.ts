@@ -18,8 +18,7 @@ export const makeInsertAthlete: MakeInsertAthlete = function (db) {
           _time
         )
         VALUES ($1, $2, $3, $4, $5, $6, $7, true, CURRENT_TIMESTAMP(3))
-        RETURNING id
-      `
+        RETURNING id`
 
     const params = [
       athlete.fullName,

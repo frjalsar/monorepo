@@ -1,17 +1,18 @@
+import { EventType } from './eventtype'
 import { User } from './user'
 
 export type Event = {
   id: number
   name: string
-  iaaf: string
+  official: boolean
+  worldrecord: boolean,
   typeId: number
-  childeventId: number
-  type: any
+  type: EventType
   thorId?: number
-  childEvents: any[]
+  childEvents?: Partial<Event>[]
 }
 
-export type MapToEvent = (list: any[]) => Event[]
+export type MapToEvent = (row: any) => Event
 
 export type SelectEventOptions = {
   id?: number | string

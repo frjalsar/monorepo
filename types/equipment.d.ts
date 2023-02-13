@@ -1,14 +1,14 @@
-import { EventType } from './eventtype'
+import { Event } from './events'
 import { User } from './user'
 
 export type Equipment = {
   id: number
-  eventId: number
   gender: number
   age: number
   value: number
   unit: string
-  event?: EventType
+  eventId: number
+  event?: Partial<Event>
 }
 
 export type SelectEquipmentOption = {

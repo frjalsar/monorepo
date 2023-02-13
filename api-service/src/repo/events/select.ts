@@ -9,15 +9,15 @@ export const makeSelectEvents: MakeSelectEvents = function (db) {
     const params:Array<number|string> = []
     let sql = `
       SELECT
-        e.id,
-        e.strid,
-        e.name,
-        e.iaaf,
-        e.worldrecord,
-        e.typeid,
-        et.name typename,
-        ce.childeventid childeventid,
-        e2.name childeventname
+        e.id event_id,
+        e.strid event_strid,
+        e.name event_name,
+        e.official event_official,
+        e.worldrecord event_worldrecord,
+        e.typeid eventtype_id,
+        et.name eventtype_name,
+        ce.childeventid childevent_id,
+        e2.name childevent_name
       FROM
         events e
       JOIN
