@@ -1,12 +1,13 @@
 import { User } from './user'
+
 export type Event = {
-  id: number,
-  name: string,
-  iaaf: string,
+  id: number
+  name: string
+  iaaf: string
   typeId: number
-  childeventId: number,
-  type: any,
-  thorId?: number,
+  childeventId: number
+  type: any
+  thorId?: number
   childEvents: any[]
 }
 

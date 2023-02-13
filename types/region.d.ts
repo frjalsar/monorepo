@@ -1,9 +1,9 @@
 import { User } from './user'
 
 export type Region = {
-  id: number,
-  fullName: string,
-  abbreviation: string,
+  id: number
+  fullName: string
+  abbreviation: string
 }
 
 export type MapToRegion = (row: any) => Region

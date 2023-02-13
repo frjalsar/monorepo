@@ -6,6 +6,7 @@ export type JudgeClub = {
   fullName?: string
   thorId?: string
 }
+
 export type Judge = {
   id: number
   fullName: string

@@ -2,14 +2,14 @@ import { Club } from './club'
 import { User } from './user'
 
 export type Membership = {
-  athleteId: number;
-  clubId: number;
-  legacyClub: string;
-  yearFrom: number;
-  yearTo: number;
-  confirmed: boolean;
-  athletesigned?: boolean;
-  clubsigned?: boolean;
+  athleteId: number
+  clubId: number
+  legacyClub: string
+  yearFrom: number
+  yearTo: number
+  confirmed: boolean
+  athletesigned?: boolean
+  clubsigned?: boolean
 };
 
 export type MapToMembership = (row: any, athleteId: number) => Membership;

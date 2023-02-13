@@ -1,13 +1,13 @@
 import { User } from './user'
 
 export type Competition = {
-  meetId: number,
-  eventId: number,
-  ageFrom: number,
-  ageTo: number,
-  gender: number,
+  meetId: number
+  eventId: number
+  ageFrom: number
+  ageTo: number
+  gender: number
   indoor: number
-  id?: number,
+  id?: number
 }
 
 export type CompetitionsSelectOptions = {
