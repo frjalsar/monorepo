@@ -9,7 +9,6 @@ export type Competition = {
   indoor?: number
   id?: number
   eventName?: string
-
 }
 
 export type CompetitionsSelectOptions = {
