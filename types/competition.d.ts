@@ -8,6 +8,7 @@ export type Competition = {
   gender: number
   indoor: number
   id?: number
+  eventName?: string
 }
 
 export type CompetitionsSelectOptions = {

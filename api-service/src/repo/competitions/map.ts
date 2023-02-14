@@ -5,7 +5,7 @@ export const mapToCompetition: MapToCompetitions = function (row) {
     id: row.competition_id,
     meetId: row.meet_id,
     eventId: row.event_id,
-    eventName?: row.event_name,
+    eventName: row.event_name,
     ageFrom: row.competition_agefrom,
     ageTo: row.competition_ageto,
     gender: row.competition_gender,
