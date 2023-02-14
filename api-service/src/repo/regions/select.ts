@@ -11,9 +11,9 @@ export const makeSelectRegions: MakeSelectRegions = function (db) {
 
     let sql = `
       SELECT
-        r.id,
-        r.abbreviation,
-        r.fullname
+        r.id region_id,
+        r.abbreviation region_abbreviation,
+        r.fullname region_fullname
       FROM
         regions r
       WHERE 1 = 1`

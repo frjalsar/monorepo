@@ -1,8 +1,8 @@
 
 import { PoolClient } from 'pg'
-import { MakeInsertCompetition } from 'repo/competitions/insert'
-import { MakeInsertMeet } from './insert'
 import { MakeCreateMeets } from 'types/meet'
+import { MakeInsertCompetition } from '../competitions/insert'
+import { MakeInsertMeet } from './insert'
 
 export type MakeCreateMeet = (
   makeInsertMeet: MakeInsertMeet,
@@ -25,7 +25,7 @@ export const makeCreateMeet: MakeCreateMeet = function (makeInsertMeet, makeInse
       }
       const meetId = await insertMeet(meet, user)
 
-      const competitionList:Array<any> = meet.competition.map(c => ({
+      const competitionList:Array<any> = meet.competitions.map(c => ({
         meetId,
         eventId: c.eventId,
         ageFrom: c.ageFrom,
@@ -41,7 +41,7 @@ export const makeCreateMeet: MakeCreateMeet = function (makeInsertMeet, makeInse
       )
 
       await client.query('COMMIT')
-      return { meetId }
+      return meetId
     } catch (e) {
       await client.query('ROLLBACK')
       throw e

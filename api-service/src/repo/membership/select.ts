@@ -1,6 +1,7 @@
-import * as toOrdinal from 'pg-parameterize'
+import { toOrdinal } from 'pg-parameterize'
 import { PoolClient } from 'pg'
 import { SelectMemberships } from 'types/membership'
+import { mapToMembership } from './map'
 
 export type MakeSelectMembership = (db: PoolClient) => SelectMemberships
 
@@ -9,13 +10,17 @@ export const makeSelectMembership: MakeSelectMembership = function (db) {
     const params:Array<number| string> = []
     let sql = `
       SELECT
-        m.athleteid,
-        m.clubid,
-        m.yearfrom,
-        m.yearto,
-        m.legacyclub,
-        m.confirmed
-      FROM membership m
+        m.athleteid athlete_id,
+        m.clubid club_id,
+        m.yearfrom membership_yearfrom,
+        m.yearto membership_yearfrom,
+        m.legacyclub membership_legacyclub,
+        m.confirmed membership_confirmed,
+        c.fullname club_fullname
+      FROM
+        membership m
+      LEFT JOIN
+        clubs c ON c.id = m.clubid
       WHERE
         _enabled = true`
 
@@ -45,7 +50,7 @@ export const makeSelectMembership: MakeSelectMembership = function (db) {
     }
 
     return db
-      .query(toOrdinal.toOrdinal(sql), params)
-      .then(res => res.rows)
+      .query(toOrdinal(sql), params)
+      .then(res => res.rows.map(mapToMembership))
   }
 }

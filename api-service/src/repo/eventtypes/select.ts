@@ -1,4 +1,4 @@
-import { mapEventTypes } from './map'
+import { mapToEventType } from './map'
 import { SelectEventTypes } from 'types/eventtype'
 import { PoolClient } from 'pg'
 
@@ -9,9 +9,9 @@ export const makeSelectEventTypes: MakeSelectEventTypes = function (db) {
     const params = []
     const sql = `
       SELECT
-        et.id,
-        et.name,
-        et.ordering
+        et.id eventtype_id,
+        et.name eventtype_name,
+        et.ordering eventtype_ordering
       FROM
         eventtypes et
       ORDER BY
@@ -20,6 +20,6 @@ export const makeSelectEventTypes: MakeSelectEventTypes = function (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows.map(mapEventTypes))
+      .then(res => res.rows.map(mapToEventType))
   }
 }

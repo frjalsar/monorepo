@@ -1,4 +1,4 @@
-import { mapCompetitions } from './map'
+import { mapToCompetition } from './map'
 import { PoolClient } from 'pg'
 import { SelectCompetitions } from 'types/competition'
 
@@ -9,17 +9,19 @@ export const makeSelectCompetitions: MakeSelectCompetitions = function (db) {
     const params: Array<string | number> = []
     let sql = `
       SELECT
-        c.id,
-        c.meetid,
-        c.eventid,
-        c.agefrom,
-        c.ageto,
-        c.gender,
-        c.indoor
+        c.id competition_id,
+        c.meetid meet_id,
+        c.eventid event_id,
+        c.agefrom competition_agefrom,
+        c.ageto competition_ageto,
+        c.gender competition_gender,
+        c.indoor competition_indoor
       FROM
         competitions c
-      --LEFT JOIN
-        --meets m ON m.id = c.meetid
+      LEFT JOIN
+        meets m ON m.id = c.meetid
+      LEFT JOIN
+        events e ON e.id = c.eventid
       WHERE 1 = 1`
 
     if (opt && opt.meetId) {
@@ -31,6 +33,6 @@ export const makeSelectCompetitions: MakeSelectCompetitions = function (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows.map(mapCompetitions))
+      .then(res => res.rows.map(mapToCompetition))
   }
 }

@@ -1,4 +1,4 @@
-import { mapCombinedEvents } from '../combinedevents/map'
+import { mapToCombinedEvents } from '../combinedevents/map'
 import { EditEvent } from 'types/events'
 import { PoolClient } from 'pg'
 import { makeDeleteCombinedEvents } from '../combinedevents/delete'
@@ -20,7 +20,7 @@ export const makeEditEvent: MakeEditEvent = function (db) {
       await updateEvent(event, user)
 
       if (event.typeId === 10 && event.childEvents && event.childEvents.length > 0) {
-        const combinedEvents = mapCombinedEvents(event.childEvents, event.id)
+        const combinedEvents = mapToCombinedEvents(event.childEvents, event.id)
         await deleteCombinedEvents(event.id, user)
         await insertCombinedEvents([combinedEvents], user)
       }

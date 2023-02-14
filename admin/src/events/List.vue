@@ -61,8 +61,8 @@ export default {
           display: 'xs'
         },
         {
-          field: 'iaafLabel',
-          label: 'IAAF grein',
+          field: 'officialLabel',
+          label: 'Official grein',
           display: 'lg'
         },
         {
@@ -81,7 +81,7 @@ export default {
         this.events = res.body.map(item => ({
           ...item,
           typeName: item.type?.name,
-          iaafLabel: item.iaaf ? 'Já' : 'Nei',
+          officialLabel: item.official ? 'Já' : 'Nei',
           worldRecordLabel: item.worldRecord ? 'Já' : 'Nei'
         }))
       })

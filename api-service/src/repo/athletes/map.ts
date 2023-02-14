@@ -1,57 +1,51 @@
 import { Athlete, MapToAthlete } from 'types/athlete'
+import { Club } from 'types/club'
+import { Membership } from 'types/membership'
+import { Region } from 'types/region'
+import { mapToMembership } from '../membership/map'
+import { mapToRegion } from '../regions/map'
+import { mapToClubPartial } from '../clubs/map'
 
-export const mapAthletes: MapToAthlete = function (list) {
+export const mapToAthlete: MapToAthlete = function (row) {
+  return {
+    id: row.athlete_id,
+    fullName: row.athlete_fullname,
+    kt: row.athlete_kt,
+    birthyear: row.athlete_birthyear,
+    gender: row.athlete_gender,
+    country: row.athlete_country,
+    thorId: row.athlete_thorid,
+    lastCompeted: row.athlete_lastcompeted,
+    club: {} as Partial<Club>,
+    region: {} as Region,
+    membership: [] as Membership[]
+  }
+}
+
+export const mapAthletes = function (list) {
   let currentId
-  const result:Athlete[] = []
+  const result: Athlete[] = []
   list.forEach(item => {
-    if (item.id !== currentId) {
-      const atheleteObj:Athlete = {
-        id: item.id,
-        fullName: item.fullname,
-        kt: item.kt,
-        birthyear: item.birthyear,
-        gender: item.gender,
-        country: item.country,
-        thorId: item.thorid,
-        lastCompeted: item.lastcompeted,
-        club: {},
-        region: {},
-        membership: []
-      }
+    if (item.athlete_id !== currentId) {
+      const atheleteObj: Athlete = mapToAthlete(item)
       result.push(atheleteObj)
-      currentId = item.id
+      currentId = item.athlete_id
     }
-    const currentAthlete:Athlete = result[result.length - 1]
-    if (item.clubid || item.legacyclub) {
+
+    const currentAthlete: Athlete = result[result.length - 1]
+    if (item.club_id || item.membership_legacyclub) {
+      const membership: Membership = mapToMembership(item)
       currentAthlete.membership = []
-      // Create membership
-      const membership = {
-        athleteId: item.id,
-        clubId: item.clubid,
-        clubFullName: item.clubname,
-        legacyClub: item.legacyclub,
-        thorId: item.thorclubid,
-        yearFrom: item.yearfrom,
-        yearTo: item.yearto,
-        confirmed: item.confirmed === true
-      }
       currentAthlete.membership.push(membership)
+
       if (
-        item.clubid !== null &&
-        new Date().getFullYear() >= item.yearfrom &&
-        (item.yearto === null || new Date().getFullYear() <= item.yearto) &&
-        item.confirmed
+        item.club_id !== null &&
+        new Date().getFullYear() >= item.membership_yearfrom &&
+        (item.membership_yearto === null || new Date().getFullYear() <= item.membership_yearto) &&
+        item.membership_confirmed
       ) {
-        currentAthlete.club = {
-          id: item.clubid,
-          fullName: item.clubname,
-          thorId: item.thorclubid
-        }
-        currentAthlete.region = {
-          id: item.regionid,
-          fullName: item.regionfullname,
-          abbreviation: item.regionabbreviation
-        }
+        currentAthlete.club = mapToClubPartial(item)
+        currentAthlete.region = mapToRegion(item)
       }
     }
   })

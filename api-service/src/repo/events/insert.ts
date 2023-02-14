@@ -8,7 +8,7 @@ export const makeInsertEvent: MakeInsertEvent = function (db) {
     const sql = `
       INSERT INTO events (
         name,
-        iaaf,
+        official,
         typeid,
         thorid,
         _userid,
@@ -20,7 +20,7 @@ export const makeInsertEvent: MakeInsertEvent = function (db) {
 
     const params = [
       event.name,
-      event.iaaf,
+      event.official,
       event.typeId,
       event.thorId,
       user.id

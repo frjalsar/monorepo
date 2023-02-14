@@ -1,6 +1,6 @@
 import { PoolClient } from 'pg'
 import { SelectClubs } from 'types/club'
-import { mapClub } from './map'
+import { mapToClub } from './map'
 
 export type MakeSelectClubs = (db: PoolClient) => SelectClubs
 
@@ -10,14 +10,15 @@ export const makeSelectClubs: MakeSelectClubs = function (db) {
     let sql = `
       SELECT
         c.id,
-        c.fullname,
-        c.shortname,
-        c.abbreviation,
-        c.thorid,
-        r.id regionid,
-        r.fullname regionname,
-        r.abbreviation regionabbreviation 
-      FROM clubs c
+        c.fullname club_fullname,
+        c.shortname club_shortname,
+        c.abbreviation club_abbreviation,
+        c.thorid club_thorid,
+        r.id region_id,
+        r.fullname region_fullname,
+        r.abbreviation region_abbreviation 
+      FROM
+        clubs c
       LEFT JOIN
         regions r ON r.id = c.regionid`
 
@@ -30,6 +31,6 @@ export const makeSelectClubs: MakeSelectClubs = function (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows.map(mapClub))
+      .then(res => res.rows.map(mapToClub))
   }
 }

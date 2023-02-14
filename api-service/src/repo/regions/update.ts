@@ -13,7 +13,8 @@ export const makeUpdateRegion: MakeUpdateRegion = function (db) {
         _enabled = true,
         _time = CURRENT_TIMESTAMP(3)
       WHERE
-        id = $4`
+        id = $4
+      RETURNING id`
 
     const params = [
       region.fullName,
@@ -24,6 +25,6 @@ export const makeUpdateRegion: MakeUpdateRegion = function (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rowCount)
+      .then(res => res.rows[0].id)
   }
 }

@@ -4,8 +4,9 @@ import { User } from './user'
 export type JudgeClub = {
   id?: number
   fullName?: string
-  thorId?: string
+  thorId?: number
 }
+
 export type Judge = {
   id: number
   fullName: string

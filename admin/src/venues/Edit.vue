@@ -177,7 +177,7 @@
         <label
           for="certification"
           class="form-label"
-        >IAAF staðfest</label>
+        >WA staðfest</label>
         <select
           id="certification"
           v-model="currentItem.certification"

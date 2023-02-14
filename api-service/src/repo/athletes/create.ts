@@ -1,9 +1,9 @@
-import { mapMembership } from '../membership/map'
 import { PoolClient } from 'pg'
 import { CreateAthlete } from 'types/athlete'
 import { makeInsertAthlete } from './insert'
 import { makeSelectClubs } from '../clubs/select'
 import { makeInsertMembership } from '../membership/insert'
+import { assignMembership } from '../membership/asssign'
 
 export type MakeEditOrCreateAthlete = (db: PoolClient, insertCompetitor) => CreateAthlete
 
@@ -19,7 +19,7 @@ export const makeEditOrCreateAthlete: MakeEditOrCreateAthlete = function (db, in
       await client.query('BEGIN')
       const id = await insertAthlete(athlete, user)
 
-      const membershipList = athlete.newMembership ? athlete.newMembership.map(member => mapMembership(member, id)) : []
+      const membershipList = athlete.newMembership ? athlete.newMembership.map(ms => assignMembership(ms, id)) : []
       await insertMembership(membershipList, user)
 
       // THOR - always update Thor. TODO refactor away

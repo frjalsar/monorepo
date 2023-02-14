@@ -1,4 +1,4 @@
-import * as toOrdinal from 'pg-parameterize'
+import { toOrdinal } from 'pg-parameterize'
 import { PoolClient } from 'pg'
 import { SelectPasses } from 'types/pass'
 
@@ -27,7 +27,7 @@ export const makeSelectPasses: MakeSelectPasses = function (db) {
     }
 
     return db
-      .query(toOrdinal.toOrdinal(sql), params)
+      .query(toOrdinal(sql), params)
       .then(res => res.rows[0])
   }
 }

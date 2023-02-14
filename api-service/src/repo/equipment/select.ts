@@ -1,4 +1,4 @@
-import { mapEquipment } from './map'
+import { mapToEquipment } from './map'
 import { PoolClient } from 'pg'
 import { SelectEquipment } from 'types/equipment'
 
@@ -9,14 +9,15 @@ export const makeSelectEquipment: MakeSelectEquipment = function (db) {
     const params:Array<number|string> = []
     let sql = `
       SELECT
-        eq.id,
-        eq.eventid,
-        eq.gender,
-        eq.age,
-        eq.value,
-        eq.unit,
-        ev.name eventname
-      FROM equipment eq
+        eq.id equipment_id,
+        eq.eventid event_id,
+        eq.gender equipment_gender,
+        eq.age equipment_age,
+        eq.value equipment_value,
+        eq.unit equipment_unit,
+        ev.name event_name
+      FROM
+        equipment eq
       LEFT JOIN
         events ev ON ev.id = eq.eventid`
 
@@ -29,6 +30,6 @@ export const makeSelectEquipment: MakeSelectEquipment = function (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rows.map(mapEquipment))
+      .then(res => res.rows.map(mapToEquipment))
   }
 }

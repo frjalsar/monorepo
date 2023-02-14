@@ -13,7 +13,8 @@ export const makeInsertRegion: MakeInsertRegion = function (db) {
         _enabled,
         _time
       )
-      VALUES ($1, $2, $3, true, CURRENT_TIMESTAMP(3))`
+      VALUES ($1, $2, $3, true, CURRENT_TIMESTAMP(3))
+      RETURN id`
 
     const params = [
       region.fullName,
@@ -23,6 +24,6 @@ export const makeInsertRegion: MakeInsertRegion = function (db) {
 
     return db
       .query(sql, params)
-      .then(res => res.rowCount)
+      .then(res => res.rows[0].id)
   }
 }
