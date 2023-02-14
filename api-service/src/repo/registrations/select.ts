@@ -7,19 +7,20 @@ export type MakeSelectRegistrations = (db: PoolClient) => SelectRegistrations
 export const makeSelectRegistrations: MakeSelectRegistrations = function (db) {
   return function selectRegistrations (opt) {
     let sql = `SELECT 
-    r.id,
-    a.id as athleteid,
-    a.fullname, 
-    a.thorid,
-    a.country,
-    a.gender,
-    a.birthyear,
-    a.kt,
-    c.id as competitionid,
-    c.meetid,
-    c.eventid,
-    c.ageto,
-    c.agefrom
+    r.id registration_id,
+    r.note registration_note,
+    a.id athlete_id,
+    a.fullname athlete_fullname, 
+    a.thorid athlete_thorid,
+    a.country athlete_country,
+    a.gender athlete_gender,
+    a.birthyear athlete_birthyear,
+    a.kt athlete_kt,
+    c.id competition_id,
+    c.meetid  competition_meetid,
+    c.eventid  competition_eventid,
+    c.ageto competition_ageto,
+    c.agefrom  competition_agefrom
     FROM registrations r 
                 LEFT JOIN 
                     athletes a  

@@ -1,30 +1,13 @@
 import { MapToRegistration } from 'types/registration'
-
+import { mapToAthlete } from '../athletes/map'
+import { mapToCompetition } from '../competitions/map'
 export const mapToRegistration: MapToRegistration = (row) => {
   return {
-    id: row.id,
-    note: row.note,
-    athleteId: row.athleteid,
-    competitionId: row.competitionid,
-    athelete: row.athleteid
-      ? {
-          id: row.athleteid,
-          fullName: row.fullname,
-          thorId: row.thorid,
-          country: row.country,
-          gender: row.gender,
-          birthyear: row.birthyear,
-          kt: row.kt
-        }
-      : undefined,
-    competition: row.competitionid
-      ? {
-          id: row.competitionid,
-          meetId: row.meetid,
-          eventId: row.eventid,
-          ageTo: row.ageto,
-          ageFrom: row.agefrom
-        }
-      : undefined
+    id: row.registration_id,
+    note: row.registration_note,
+    athleteId: row.athlete_id,
+    competitionId: row.competition_id,
+    athelete: row.athlete_id ? mapToAthlete(row) : undefined,
+    competition: row.competition_id ? mapToCompetition(row) : undefined
   }
 }
