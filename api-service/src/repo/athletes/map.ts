@@ -5,7 +5,7 @@ export const mapAthletes: MapToAthlete = function (list) {
   const result:Athlete[] = []
   list.forEach(item => {
     if (item.id !== currentId) {
-      const atheleteObj = {
+      const atheleteObj:Athlete = {
         id: item.id,
         fullName: item.fullname,
         kt: item.kt,
@@ -23,6 +23,7 @@ export const mapAthletes: MapToAthlete = function (list) {
     }
     const currentAthlete:Athlete = result[result.length - 1]
     if (item.clubid || item.legacyclub) {
+      currentAthlete.membership = []
       // Create membership
       const membership = {
         athleteId: item.id,

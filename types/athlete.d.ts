@@ -7,11 +7,12 @@ export type Athlete = {
   gender: string;
   country: string;
   thorId: string;
-  lastCompeted: Date;
-  club: any;
-  region: any;
-  membership: any[];
+  lastCompeted?: Date;
+  club?: any;
+  region?: any;
+  membership?: any[];
   newMembership?: any[];
+
 };
 
 export type MapToAthlete = (list: any[]) => Athlete[];

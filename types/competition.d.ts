@@ -5,9 +5,10 @@ export type Competition = {
   eventId: number,
   ageFrom: number,
   ageTo: number,
-  gender: number,
-  indoor: number
-  id?: number,
+  gender?: number,
+  indoor?: number
+  id?: number
+
 }
 
 export type CompetitionsSelectOptions = {
