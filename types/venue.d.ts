@@ -5,24 +5,24 @@ export type Venue = {
     fullName: string
     indoor: boolean
     banked: boolean
-    straightLanes: number
-    ovalLanes: number
-    longTripleJump: number
-    polevault: number
-    hammerDiscus: number
-    javelin: number
-    shotPut: number
+    straightLanes: number | undefined
+    ovalLanes: number | undefined
+    longTripleJump: number | undefined
+    polevault: number | undefined
+    hammerDiscus: number | undefined
+    javelin: number | undefined
+    shotPut: number | undefined
     material: string
-    constructionYear: number
-    renovationYear: number
+    constructionYear: number | undefined
+    renovationYear: number | undefined
     warmupTrack: boolean
     throwingField: boolean
     certification: boolean
     _userid?: number
 }
 
-export type SelectVunuesOptions = {
-    id?: string | number | undefined
+export type SelectVenuesOptions = {
+    id?: string | number
     offset?: number | string
     limit?: number | string
 }
@@ -30,5 +30,5 @@ export type SelectVunuesOptions = {
 export type MapToVenues = (row: any) => Venue
 
 export type InsertVenue = (venue: Venue, user: User) => Promise<Venue[]>
-export type SelectVenues = (options?: SelectVunuesOptions) => Promise<number>
+export type SelectVenues = (options?: SelectVenuesOptions) => Promise<number>
 export type UpdateVenue = (venue: Venue, user: User) => Promise<number>

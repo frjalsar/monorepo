@@ -7,7 +7,7 @@ export type Event = {
   official: boolean
   worldrecord: boolean,
   typeId: number
-  type: EventType
+  type?: EventType
   thorId?: number
   childEvents?: Partial<Event>[]
 }

@@ -9,6 +9,6 @@ export const mapToEquipment: MapToEquipment = function (row) {
     value: Number(row.equipment_value),
     unit: row.equipment_unit,
     eventId: row.event_id,
-    event: mapToEvent(row)
+    event: row._event_id ? mapToEvent(row) : undefined
   }
 }

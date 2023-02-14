@@ -9,7 +9,7 @@ export const mapToClub: MapToClub = function (row) {
     shortName: row.club_shortname,
     thorId: row.club_thorid,
     regionId: row.region_id,
-    region: mapToRegion(row)
+    region: row.region_id ? mapToRegion(row) : undefined
   }
 }
 

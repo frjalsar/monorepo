@@ -8,7 +8,7 @@ export const mapToEvent: MapToEvent = function (row) {
     official: row.event_official,
     worldrecord: row.event_worldrecord,
     typeId: row.eventtype_id,
-    type: mapToEventType(row),
+    type: row.eventtype_id ? mapToEventType(row) : undefined,
     childEvents: row.childevent_id ? [] : undefined
   }
 }

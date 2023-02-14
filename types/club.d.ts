@@ -8,7 +8,7 @@ export type Club = {
   abbreviation: string
   thorId: number
   regionId: number
-  region: Region
+  region?: Region
 }
 
 export type MapToClub = (row: any) => Club

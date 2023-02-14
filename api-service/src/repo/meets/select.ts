@@ -26,12 +26,12 @@ export const makeSelectMeets: MakeSelectMeets = function (db) {
         m.status meet_status,
         m.sent meet_sent,
         (m.attachment IS NOT NULL) meet_hasattachment,
-        c.id competitionid competition_id,
+        c.id competition_id,
         c.agefrom competition_agefrom,
         c.ageto competition_ageto,
         c.gender competition_gender,
-        e.id eventid event_id,
-        e.name eventname event_name
+        e.id event_id,
+        e.name event_name
       FROM
         meets m
       LEFT JOIN

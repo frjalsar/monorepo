@@ -5,17 +5,17 @@ import { mapToClubPartial } from '../clubs/map'
 import { mapToJudgeType } from '../judgetypes/map'
 import { mapToRegion } from '../regions/map'
 
-export const mapToJudges: MapToJudge = function (row) {
+export const mapToJudge: MapToJudge = function (row) {
   return {
     id: row.judge_id,
     fullName: row.judge_fullname,
-    date: row.date ? format(row.judge_date, 'yyyy-MM-dd') : null,
+    date: row.judge_date ? format(row.judge_date, 'yyyy-MM-dd') : null,
     typeId: row.judgetype_id,
-    type: mapToJudgeType(row),
+    type: row.judgetype_id ? mapToJudgeType(row) : undefined,
     clubId: row.club_id,
-    club: mapToClubPartial(row),
+    club: row.club_id ? mapToClubPartial(row) : undefined,
     regionId: row.region_id,
-    region: mapToRegion(row),
+    region: row.region_id ? mapToRegion(row) : undefined,
     valid: isValidJudge(row.date)
   }
 }
