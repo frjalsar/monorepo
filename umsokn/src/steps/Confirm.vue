@@ -36,10 +36,10 @@
       <div class="col-md-4 offset-md-2">
         <h2>Keppni</h2>
         <div
-          v-for="item in application.competition"
+          v-for="item in application.competitions"
           :key="item"
         >
-          {{ item.event && item.event.name }}, {{ item.ageFrom }} - {{ item.ageTo }} ára, {{ item.gender && item.gender.text }}
+          {{ item.event && item.event.name }}<span v-if="item.ageTo">, {{ item.ageFrom }} - {{ item.ageTo }} ára,</span> {{ item.gender && item.gender.text }}
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@ export default {
           judgeId: this.application.judge ? this.application.judge.id : undefined,
           startDate: this.application.meetStart,
           endDate: this.application.meetEnd,
-          competition: this.application.competition.map(item => ({
+          competitions: this.application.competitions.map(item => ({
             eventId: item.event ? item.event.id : undefined,
             ageFrom: item.ageFrom,
             ageTo: item.ageTo,

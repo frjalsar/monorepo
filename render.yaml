@@ -55,7 +55,7 @@ services:
           name: fri-store-test
           property: connectionString
       - fromGroup: Thor
-      - fromGroup: Mailgun
+      - fromGroup: MailJet
       - fromGroup: RenderApi
   - type: redis
     name: fri-store-test

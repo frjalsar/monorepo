@@ -176,7 +176,7 @@ export default {
       return this.meetName && this.meetName.length > 3
     },
     validMeetLocation () {
-      return this.meetLocation && this.meetLocation.length > 3
+      return this.meetLocation && this.meetLocation.fulllength > 3
     },
     validMeetVenue () {
       return this.meetVenue && this.meetVenue.id
@@ -219,7 +219,7 @@ export default {
     },
     next () {
       this.shake = false
-
+      console.log(this.meetVenue)
       if (this.isValid) {
         this.$emit('next', {
           meetName: this.meetName,

@@ -16,6 +16,6 @@ export const mapToJudge: MapToJudge = function (row) {
     club: row.club_id ? mapToClubPartial(row) : undefined,
     regionId: row.region_id,
     region: row.region_id ? mapToRegion(row) : undefined,
-    valid: isValidJudge(row.date)
+    valid: isValidJudge(row.judge_date)
   }
 }

@@ -1,4 +1,3 @@
-
 import { PoolClient } from 'pg'
 import { MakeCreateMeets } from 'types/meet'
 import { MakeInsertCompetition } from '../competitions/insert'
@@ -12,9 +11,9 @@ export type MakeCreateMeet = (
 ) => MakeCreateMeets
 
 export const makeCreateMeet: MakeCreateMeet = function (makeInsertMeet, makeInsertCompetition, db, sendMail) {
-  return async function makeCreateMeets (meet, user) {
+  return async function createMeets (meet, user) {
     const client = await db.connect()
-
+    console.log('create meet')
     const insertMeet = makeInsertMeet(client)
     const insertCompetition = makeInsertCompetition(client)
 
@@ -24,7 +23,7 @@ export const makeCreateMeet: MakeCreateMeet = function (makeInsertMeet, makeInse
         meet.attachment = Buffer.from(meet.base64Attachment, 'base64')
       }
       const meetId = await insertMeet(meet, user)
-
+      console.log('insert meet')
       const competitionList:Array<any> = meet.competitions.map(c => ({
         meetId,
         eventId: c.eventId,
@@ -34,6 +33,7 @@ export const makeCreateMeet: MakeCreateMeet = function (makeInsertMeet, makeInse
       }))
 
       await insertCompetition(competitionList, user)
+      console.log('insert competition')
 
       await sendMail(
         'Mót skráð: ' + meet.name,

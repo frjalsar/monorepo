@@ -2,7 +2,7 @@ import { MapToVenues } from 'types/venue'
 
 export const mapToVenue: MapToVenues = function (item) {
   return {
-    id: item.venue_venue_id,
+    id: item.venue_id,
     fullName: item.venue_fullname,
     indoor: item.venue_indoor,
     banked: item.venue_banked,

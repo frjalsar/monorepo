@@ -54,7 +54,7 @@ const sqlPool = new sql.ConnectionPool({
   }
 })
 
-const sendMail = makeSendMail(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN)
+const sendMail = makeSendMail(process.env.MAILJET_API_KEY, process.env.MAILJET_SECRET_KEY)
 const authenticate = makeAuthenticate(pgPool, redisClient, logger)
 
 const sqlConnection = sqlPool.connect()

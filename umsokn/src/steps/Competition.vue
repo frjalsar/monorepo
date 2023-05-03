@@ -136,7 +136,7 @@
     </div>
 
     <div
-      v-for="(item, index) in competition"
+      v-for="(item, index) in competitions"
       :key="item"
       class="row mb-3"
     >
@@ -209,7 +209,7 @@ export default {
       selectedGender: undefined,
       ageFrom: undefined,
       ageTo: undefined,
-      competition: [],
+      competitions: [],
       genders: [{
         id: 1,
         text: 'Karlar'
@@ -230,7 +230,7 @@ export default {
       return this.application.type === 'hlaup'
     },
     validCompetition () {
-      return this.competition.length > 0
+      return this.competitions.length > 0
     },
     validEvent () {
       return this.selectedEvent && this.selectedEvent.id
@@ -257,7 +257,7 @@ export default {
         this.ageGroups = res.body
       })
 
-    this.competition = this.application && this.application.competition ? this.application.competition : []
+    this.competitions = this.application && this.application.competitions ? this.application.competitions : []
   },
   methods: {
     getEquipment (event, gender, ageFrom, ageTo) {
@@ -285,7 +285,7 @@ export default {
 
       if (this.validGender && this.validEvent) {
         if (this.selectedGender.id === -1) {
-          this.competition.push({
+          this.competitions.push({
             event: this.selectedEvent,
             gender: this.genders[0],
             ageFrom: this.ageFrom,
@@ -293,7 +293,7 @@ export default {
             equipment: this.getEquipment(this.selectedEvent, this.genders[0], this.ageFrom, this.ageTo)
           })
 
-          this.competition.push({
+          this.competitions.push({
             event: this.selectedEvent,
             gender: this.genders[1],
             ageFrom: this.ageFrom,
@@ -306,7 +306,7 @@ export default {
           this.ageFrom = undefined
           this.ageTo = undefined
         } else {
-          this.competition.push({
+          this.competitions.push({
             event: this.selectedEvent,
             gender: this.selectedGender,
             ageFrom: this.ageFrom,
@@ -331,7 +331,7 @@ export default {
             this.genders
               .filter(gender => gender.id !== -1)
               .forEach(gender => {
-                this.competition.push({
+                this.competitions.push({
                   event,
                   gender,
                   equipment: this.getEquipment(event, gender, ageGroup.from, ageGroup.to),
@@ -347,7 +347,7 @@ export default {
         this.genders
           .filter(gender => gender.id !== -1)
           .forEach(gender => {
-            this.competition.push({
+            this.competitions.push({
               event,
               gender,
               equipment: this.getEquipment(event, gender)
@@ -356,7 +356,7 @@ export default {
       })
     },
     remove (index) {
-      this.competition.splice(index, 1)
+      this.competitions.splice(index, 1)
     },
     back () {
       this.$emit('back')
@@ -364,7 +364,7 @@ export default {
     next () {
       if (this.isValid) {
         this.$emit('next', {
-          competition: this.competition
+          competitions: this.competitions
         })
       } else {
         this.shake = true

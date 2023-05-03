@@ -20,7 +20,7 @@ export function makeAuthenticationHandler (getToken, getUser, setUser, selectUse
                 }
               })
             }
-
+            logger.info('continue')
             req.user = JSON.parse(reply)
             return next()
           })

@@ -40,6 +40,7 @@ export const makeMeetsRouter: MakeMeetsRoute = function (selectMeets, selectMeet
   })
 
   router.post('/', authorize(['admin', 'application']), (req, res, next) => {
+    console.log('hit á route')
     return createMeet(req.body, req.user)
       .then(res.json.bind(res))
       .catch(next)
