@@ -324,7 +324,7 @@ export default {
   methods: {
     clubsByRegion (region) {
       if (region) {
-        const byRegion = this.clubs.filter(c => c.region.abbreviation === region)
+        const byRegion = this.clubs.filter(c => c.regionId && c.region.abbreviation === region)
         return (byRegion.length) ? byRegion : this.clubs
       }
 

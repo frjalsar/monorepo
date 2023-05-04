@@ -10,18 +10,20 @@ export const makeInsertClub: MakeInsertClub = function (db) {
         fullname,
         shortname,
         abbreviation,
-        regionid,
+        thorId,
+        regionid,        
         _userid,
         _enabled,
         _time
       )
-      VALUES ($1, $2, $3, $4, $5, true, CURRENT_TIMESTAMP(3))
+      VALUES ($1, $2, $3, $4, $5, $6, true, CURRENT_TIMESTAMP(3))
       RETURNING id`
 
     const params = [
       club.fullName,
       club.shortName,
       club.abbreviation,
+      club.thorId,
       club.regionId,
       user.id
     ]

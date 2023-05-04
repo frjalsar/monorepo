@@ -84,7 +84,7 @@ export default {
       .then(res => {
         this.clubs = res.body.map(item => ({
           ...item,
-          regionFullName: item.region.fullName
+          regionFullName: item.region && item.region.fullName
         }))
       })
 
