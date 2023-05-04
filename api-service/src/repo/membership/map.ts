@@ -6,6 +6,7 @@ export const mapToMembership: MapToMembership = function (row) {
     clubId: row.club_id,
     clubFullName: row.club_fullname,
     legacyClub: row.membership_legacyclub,
+    thorId: row.club_thorid,
     yearFrom: row.membership_yearfrom,
     yearTo: row.membership_yearto,
     confirmed: row.membership_confirmed
