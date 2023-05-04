@@ -1,5 +1,5 @@
 import { Int, Bit, mssqlPool } from 'mssql'
-import { isEmpty } from 'lodash.isempty'
+import isEmpty from 'lodash.isempty'
 import { SelectThorAchievements } from 'types/thor'
 
 export type MakeSelectThorAchievements = (sqlPoolConnection: mssqlPool) => SelectThorAchievements

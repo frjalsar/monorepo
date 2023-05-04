@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash.isequal'
+import isEqual from 'lodash.isequal'
 import { PoolClient } from 'pg'
 import { EditAthlete } from 'types/athlete'
 import { makeUpdateAthlete } from './update'
