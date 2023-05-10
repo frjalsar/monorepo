@@ -289,7 +289,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="(item) in currentItem.competition"
+              v-for="(item) in currentItem.competitions"
               :key="item.id"
             >
               <td>{{ item.eventName }}</td>
