@@ -14,8 +14,8 @@ export const mapToMeet: MapToMeet = function (row) {
     contactEmail: row.meet_contactemail,
     contactPhone: row.meet_contactphone,
     location: row.meet_location,
-    startdate: row.meet_startdate,
-    enddate: row.meet_enddate,
+    startDate: row.meet_startdate,
+    endDate: row.meet_enddate,
     status: row.meet_status,
     sent: row.meet_sent,
     hasAttachment: row.meet_hasattachment,
@@ -24,7 +24,6 @@ export const mapToMeet: MapToMeet = function (row) {
     competitions: [],
     venue: row.venue_id ? mapToVenue(row) : undefined,
     judge: row.judge_id ? mapToJudge(row) : undefined
-
   }
 }
 
