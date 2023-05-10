@@ -6,50 +6,25 @@
       role="tablist"
     >
       <li
+        v-for="(tab, index) in tabs"
+        :key="index"
         class="nav-item"
-        role="presentation"
-      >
-        <button
-          id="upplysingarTab"
-          class="nav-link active"
-          data-bs-toggle="tab"
-          data-bs-target="#upplysingar"
-          role="tab"
-        >
-          Upplýsingar
-        </button>
-      </li>
-      <li class="nav-item">
-        <button
-          id="timasedillTab"
-          class="nav-link"
-          data-bs-toggle="tab"
-          data-bs-target="#timasedill"
-          role="tab"
-        >
-          Keppnisgreinar
-        </button>
-      </li>
-      <li
-        id="keppendurTab"
-        class="nav-item"
-        data-bs-toggle="tab"
-        data-bs-target="#keppendurTab"
-        role="tab"
       >
         <button
           class="nav-link"
-          href="#"
+          :class="{ 'active': activeTab === index }"
+          role="tab"
+          @click="activeTab = index"
         >
-          Keppendur
+          {{ tab }}
         </button>
       </li>
     </ul>
 
     <div class="tab-content">
       <div
-        id="upplysingar"
-        class="tab-pane fade show active"
+        class="tab-pane fade"
+        :class="{'show active': activeTab === 0 }"
         role="tabpanel"
       >
         <div class="row g-3 mb-3">
@@ -274,8 +249,8 @@
       </div>
 
       <div
-        id="timasedill"
         class="tab-pane fade"
+        :class="{'show active': activeTab === 1 }"
         role="tabpanel"
       >
         <table class="table">
@@ -303,6 +278,7 @@
       <div
         id="keppendur"
         class="tab-pane fade"
+        :class="{'show active': activeTab === 2 }"
         role="tabpanel"
       >
         -
@@ -344,6 +320,8 @@ export default {
       ageFrom: undefined,
       ageTo: undefined,
       gender: undefined,
+      tabs: ['Upplýsingar', 'Greinar', 'Keppendur'],
+      activeTab: 0,
       genders: [{
         value: 1,
         text: 'Karlar'
