@@ -136,7 +136,7 @@ export default {
           ...meet,
           sentFormatted: format(new Date(meet.sent), 'dd.MM.yyyy'),
           startDateFormatted: format(new Date(meet.startDate), 'dd.MM.yyyy'),
-          eventNames: meet.competition
+          eventNames: meet.competitions
             .map(c => c.eventName)
             .filter((val, index, arr) => arr.indexOf(val) === index) // unique list
             .join(', ')
