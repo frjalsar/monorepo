@@ -24,9 +24,11 @@ export const makeEditOrCreateAthlete: MakeEditOrCreateAthlete = function (db, in
 
       // THOR - always update Thor. TODO refactor away
       const latestClub = membershipList[membershipList.length - 1]
-      const clubs = await selectClubs({ id: latestClub.clubId })
-      if (clubs.length === 1) {
-        await insertCompetitor()
+      if (latestClub) {
+        const clubs = await selectClubs({ id: latestClub.clubId })
+        if (clubs.length === 1) {
+          await insertCompetitor()
+        }
       }
 
       await client.query('COMMIT')

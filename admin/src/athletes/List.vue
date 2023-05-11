@@ -30,7 +30,6 @@
         :clubs="clubs"
         :countries="countries"
         :confirm="confirm"
-        @done="(isDone) => closeEditModal()"
         @alert="({ type, message }) => alert(type, message)"
       />
     </ModalEdit>

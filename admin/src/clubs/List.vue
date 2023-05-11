@@ -13,12 +13,12 @@
       />
     </CardComponent>
 
-    <ModalEdit v-slot="{ confirm, callback }">
+    <ModalEdit v-slot="{ confirm, alert }">
       <EditClub
         :club="selectedModalItem"
         :regions="regions"
         :confirm="confirm"
-        @done="(isDone) => closeEditModal(isDone, callback)"
+        @alert="({ type, message }) => alert(type, message)"
       />
     </ModalEdit>
   </div>

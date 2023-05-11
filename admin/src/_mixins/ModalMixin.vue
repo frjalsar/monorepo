@@ -15,13 +15,9 @@ export default {
       this.selectedModalItem = item
       this.modal.show()
     },
-    closeEditModal (isDone, callback) {
-      if (isDone) {
-        this.modal.hide()
-        this.$router.go()
-      }
-
-      callback(isDone)
+    closeEditModal () {
+      this.modal.hide()
+      this.$router.go()
     }
   }
 }

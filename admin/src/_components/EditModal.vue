@@ -22,8 +22,12 @@
         </div>
         <div class="modal-body">
           <div
-            v-if="alertType === 'error'"
-            class="alert alert-danger"
+            v-if="alertType"
+            class="alert"
+            :class="{
+              'alert-danger': alertType === 'error',
+              'alert-success': alertType === 'success'
+            }"
             role="alert"
           >
             {{ alertMessage }}
@@ -95,6 +99,7 @@ export default {
       this.shouldConfirm = true
     },
     alert (type, message) {
+      console.log('alert', type, message)
       this.alertType = type
       this.alertMessage = message
       this.shouldConfirm = false

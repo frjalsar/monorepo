@@ -30,7 +30,7 @@ export default {
         .withCredentials()
         .then(() => {
           this.busy = false
-          this.$emit('alert', undefined)
+          this.$emit('alert', { type: 'success', message: 'Tókst að villa. Þú mátt loka glugganum.' })
         })
         .catch(e => {
           console.log(e)

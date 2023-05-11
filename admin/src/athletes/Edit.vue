@@ -348,8 +348,6 @@ export default {
       })
     },
     lastMembershipItem (index) {
-      console.log('index', index)
-      console.log(this.currentItem.newMembership)
       return this.currentItem.newMembership.length - 1 === index
     },
     updateThorId () {
