@@ -268,7 +268,7 @@
               :key="item.id"
             >
               <td>{{ item.eventName }}</td>
-              <td>{{ item.gender && item.gender.text }}</td>
+              <td>{{ item.gender && genders.find(g => g.value === item.gender)?.text }}</td>
               <td>{{ item.ageFrom }}</td>
               <td>{{ item.ageTo }}</td>
             </tr>
@@ -351,7 +351,7 @@ export default {
     formatDate (d) {
       const date = new Date(d)
       if (!isNaN(date)) {
-        return format(new Date(d), 'dd.MM.yyyy')
+        return format(new Date(d), "dd.MM.yyyy 'kl.' HH:mm")
       }
 
       return ''
