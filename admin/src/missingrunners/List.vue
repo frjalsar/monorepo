@@ -1,14 +1,23 @@
 <template>
   <div>
     <PageTitle
-      text="Hlauparar án keppnisnúmer"
+      text="Hlauparar án keppnisnúmers"
       @add-new-item="openEditModal({})"
     />
 
     <CardComponent>
+      <SearchPanel
+        :meets="meets"
+        :settings="settings"
+        @search="setQueryParams"
+      />
+    </CardComponent>
+
+    <CardComponent>
       <SimpleTable
-        :data="missingRunners"
+        :data="filteredMissingRunners"
         :definition="tableDefinition"
+        :busy="busy"
         @click="openEditModal"
       />
     </CardComponent>
@@ -26,6 +35,7 @@
 <script>
 import agent from 'superagent'
 import PageTitle from '../_components/PageTitle.vue'
+import SearchPanel from './SearchPanel.vue'
 import CardComponent from '../_components/CardComponent.vue'
 import SimpleTable from '../_components/SimpleTable.vue'
 import ModalEdit from '../_components/EditModal.vue'
@@ -36,6 +46,7 @@ export default {
   name: 'MissingRunnersList',
   components: {
     PageTitle,
+    SearchPanel,
     CardComponent,
     SimpleTable,
     ModalEdit,
@@ -45,7 +56,9 @@ export default {
   inject: ['FRI_API_URL'],
   data () {
     return {
+      busy: false,
       missingRunners: [],
+      meets: [],
       tableDefinition: [
         {
           field: 'meetName',
@@ -53,63 +66,72 @@ export default {
           display: 'lg'
         },
         {
-          field: 'bibNo',
-          label: 'Rásnúmer',
-          display: 'md'
-        },
-        {
           field: 'fullName',
           label: 'Fullt nafn',
           display: 'lg'
         },
         {
-          field: 'ktOriginal',
-          label: 'Kennitala (skráð)',
-          display: 'sm'
-        },
-        {
-          field: 'kt',
-          label: 'Kennitala (leiðrétt)',
-          display: 'md'
-        },
-        {
-          field: 'competitorId',
-          label: 'Keppendanúmer',
-          display: 'md'
-        },
-        {
-          field: 'genderName',
-          label: 'Kyn',
-          display: 'sm'
-        },
-        {
           field: 'birthyear',
           label: 'Fæðingarár',
           display: 'md'
+        },
+        {
+          field: 'bibNo',
+          label: 'Rásnúmer',
+          display: 'md'
+        },
+        {
+          field: 'kt',
+          label: 'Kennitala',
+          display: 'md'
         }
-      ],
-      genders: [{
-        id: 1,
-        name: 'Karlar'
-      }, {
-        id: 2,
-        name: 'Konur'
-      }]
+      ]
+    }
+  },
+  computed: {
+    settings () {
+      return this.$route.query
     }
   },
   created () {
-    agent
-      .get(this.FRI_API_URL + '/thor/missingrunners')
-      .withCredentials()
-      .then(res => {
-        this.missingRunners = res.body.map(item => ({
-          id: item.meetCode + '-' + item.fullName + '-' + item.birthyear,
-          ...item,
-          genderName: this.genders.find(g => g.id === item.gender)?.name
+    this.getMissingRunners().then((missingRunners) => {
+      this.missingRunners = missingRunners
+      this.meets = missingRunners
+        .map(item => ({
+          code: item.meetCode,
+          name: item.meetName
         }))
-      })
+        .filter((value, index, self) => self.findIndex(m => m.code === value.code) === index)
+
+      this.search()
+    })
   },
   methods: {
+    getMissingRunners () {
+      return agent
+        .get(this.FRI_API_URL + '/thor/missingrunners')
+        .withCredentials()
+        .then(res => res.body)
+    },
+    setQueryParams (query) {
+      this.$router.replace({ query }).then(() => {
+        this.search()
+      })
+    },
+    search () {
+      this.busy = true
+      const showFixed = this.settings.showFixed === 'true'
+
+      if (this.settings.meetCode) {
+        this.filteredMissingRunners = this.missingRunners.filter(item => item.meetCode === this.settings.meetCode)
+      } else {
+        this.filteredMissingRunners = this.missingRunners
+      }
+
+      this.filteredMissingRunners = this.filteredMissingRunners.filter(item => item.fixed === showFixed)
+
+      this.busy = false
+    },
     openThor (missingRunner) {
       const path = 'http://mot.fri.is/MotFRI/SelectedCompetitionResults.aspx?Code='
       window.open(path + missingRunner.meet)

@@ -14,9 +14,9 @@ export const makeSelectMissingRunners: MakeSelectMissingRunners = function (sqlP
         hak.[Kyn] as gender,
         hak.[Félag] as club,
         hak.[Fæð_ár] as birthyear,
-        hak.[Leiðrétt kennitala] as kt,
-        hak.[Skráð kennitala] as ktOriginal,
+        coalesce(hak.[Leiðrétt kennitala], hak.[Skráð kennitala]) as kt,
         hak.[Keppandanúmer] as competitorId,
+        CAST(CASE WHEN hak.[Leiðrétt kennitala] <> '' THEN 1 ELSE 0 END as bit)  as fixed,
         c.[Name] as meetName
       FROM
         [Athletics].[dbo].[Athl$Hlauparar án keppandanúmers] hak
@@ -29,6 +29,9 @@ export const makeSelectMissingRunners: MakeSelectMissingRunners = function (sqlP
       return request
         .query(sql)
         .then(res => res.recordset)
+        .catch(e => {
+          console.log(e)
+        })
     })
   }
 }
