@@ -3,6 +3,7 @@
     <div class="d-flex justify-content-between">
       <h2>{{ text }}</h2>
       <button
+        v-if="showCreateButton"
         type="button"
         class="btn btn-primary"
         @click="$emit('addNewItem')"
@@ -21,6 +22,10 @@ export default {
     text: {
       type: String,
       required: true
+    },
+    showCreateButton: {
+      type: Boolean,
+      default: true
     }
   },
   emits: ['addNewItem']

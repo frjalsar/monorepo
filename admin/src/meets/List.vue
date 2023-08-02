@@ -2,6 +2,7 @@
   <div>
     <PageTitle
       text="Umsóknir vegna móthalds"
+      :show-create-button="false"
       @add-new-item="openEditModal({})"
     />
 
