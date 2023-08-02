@@ -61,6 +61,11 @@ export default {
       meets: [],
       tableDefinition: [
         {
+          field: 'meetCode',
+          label: 'Mótakóði',
+          display: 'lg'
+        },
+        {
           field: 'meetName',
           label: 'Mót',
           display: 'lg'
