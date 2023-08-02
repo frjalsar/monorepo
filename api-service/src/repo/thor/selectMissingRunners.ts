@@ -8,6 +8,7 @@ export const makeSelectMissingRunners: MakeSelectMissingRunners = function (sqlP
   return function selectMissingRunners () {
     const sql = `
       SELECT
+        concat(hak.[Mót], '-', hak.[Rásnúmer])  as id,
         hak.[Mót] as meetCode,
         hak.[Rásnúmer] as bibNo,
         hak.[Nafn] as fullName,

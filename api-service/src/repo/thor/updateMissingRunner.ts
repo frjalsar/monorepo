@@ -10,16 +10,23 @@ export const makeUpdateMissingRunner: MakeUpdateMissingRunner = function (sqlPoo
     }
 
     return sqlPoolConnection.then(pool => {
-      return pool.request()
+      const updateHlauparaAnKeppandaNumers = () => pool.request()
         .input('CompetitonCode', VarChar(10), missingRunner.meetCode + '')
         .input('BibNo', Int, missingRunner.bibNo)
         .input('Kennitala', VarChar(11), missingRunner.kt + '')
         .output('MsgOut', VarChar(100), '')
         .execute('UpdateHlaupararÁnkeppandanúmers')
         .then(res => res.output)
-        .catch(e => {
-          console.log(e)
-        })
+
+      const postLineFromHlaupararAnKeppnr = () => pool.request()
+        .input('Mot', VarChar(10), missingRunner.meetCode + '')
+        .input('Rasnr', Int, missingRunner.bibNo)
+        .output('MsgOut', VarChar(100), '')
+        .execute('PostLineFromHlaupararAnKeppnr')
+        .then(res => res.output)
+
+      return updateHlauparaAnKeppandaNumers()
+        .then(() => postLineFromHlaupararAnKeppnr())
     })
   }
 }

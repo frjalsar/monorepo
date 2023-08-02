@@ -59,18 +59,6 @@ export default {
       default: undefined
     }
   },
-  data () {
-    return {
-      membershipIsConfirmed: false,
-      genders: [{
-        value: 1,
-        text: 'Karl'
-      }, {
-        value: 2,
-        text: 'Kona'
-      }]
-    }
-  },
   computed: {
     apiUrl () {
       return this.FRI_API_URL + '/thor/missingrunners'
@@ -78,7 +66,6 @@ export default {
   },
   watch: {
     athlete (val) {
-      console.log(val)
       if (val && val.fullName) {
         this.currentItem = val
       } else {
@@ -93,42 +80,6 @@ export default {
 
         this.membershipIsConfirmed = false
       }
-    }
-  },
-  methods: {
-    clubsByRegion (region) {
-      if (region) {
-        const byRegion = this.clubs.filter(c => c.region.abbreviation === region)
-        return (byRegion.length) ? byRegion : this.clubs
-      }
-
-      return this.clubs
-    },
-    remove (index) {
-      this.currentItem.newMembership.splice(index, 1)
-    },
-    add () {
-      const length = this.currentItem.newMembership.length
-      const lastItem = this.currentItem.newMembership[length - 1]
-      if (lastItem) {
-        lastItem.yearTo = new Date().getFullYear() - 1
-      }
-
-      this.currentItem.newMembership.push({ yearFrom: new Date().getFullYear() })
-    },
-    confirmAllMembership () {
-      this.currentItem.newMembership.forEach(m => {
-        m.confirmed = this.membershipIsConfirmed
-      })
-    },
-    lastMembershipItem (index) {
-      return this.currentItem.newMembership.length - 1 === index
-    },
-    updateThorId () {
-      const lastIndex = this.currentItem.newMembership.length - 1
-      const lastMembership = this.currentItem.newMembership[lastIndex]
-      const findClub = this.clubs.find(club => club.id === lastMembership.clubId)
-      this.currentItem.newMembership[lastIndex].thorId = findClub.thorId
     }
   }
 }
