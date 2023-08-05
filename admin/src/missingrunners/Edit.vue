@@ -49,36 +49,33 @@
 <script>
 import EditMixin from '../_mixins/EditMixin.vue'
 export default {
-  name: 'EditAthlete',
+  name: 'EditMissingRunner',
   mixins: [EditMixin],
   inject: ['FRI_API_URL'],
   props: {
-    athlete: {
+    missingRunner: {
       type: Object,
       required: false,
       default: undefined
     }
   },
+  emits: ['alert'],
   computed: {
     apiUrl () {
       return this.FRI_API_URL + '/thor/missingrunners'
     }
   },
   watch: {
-    athlete (val) {
+    missingRunner (val) {
       if (val && val.fullName) {
         this.currentItem = val
       } else {
-        // Empty athlete object
+        // Empty missingRunner object
         this.currentItem = {
-          club: {},
-          region: {},
-          newMembership: [{
-            yearFrom: new Date().getFullYear()
-          }]
+          kt: '',
+          bibNo: '',
+          meetCode: ''
         }
-
-        this.membershipIsConfirmed = false
       }
     }
   }

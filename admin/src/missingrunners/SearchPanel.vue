@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row g-3">
-      <div class="col-md-6 col-lg-5 mb-3">
+      <div class="col-md-6 col-lg-5">
         <select
           :value="meetCode"
           class="form-select"
@@ -26,7 +26,6 @@
             v-model="showFixed"
             class="form-check-input"
             type="checkbox"
-            :disabled="busy"
             @change="changeShowFixed()"
           >
           <label
@@ -37,7 +36,7 @@
           </label>
         </div>
       </div>
-      <div class="col-md-4 col-lg-1 mb-3">
+      <div class="col-md-4 col-lg-1">
         <button
           type="button"
           class="btn btn-secondary btn-block"

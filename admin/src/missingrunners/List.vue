@@ -2,6 +2,7 @@
   <div>
     <PageTitle
       text="Hlauparar án keppnisnúmers"
+      :show-create-button="false"
       @add-new-item="openEditModal({})"
     />
 
@@ -15,18 +16,18 @@
 
     <CardComponent>
       <SimpleTable
-        :data="filteredMissingRunners"
+        :data="missingRunners"
         :definition="tableDefinition"
         :busy="busy"
         @click="openEditModal"
       />
     </CardComponent>
 
-    <ModalEdit v-slot="{ confirm, callback }">
+    <ModalEdit v-slot="{ confirm, alert }">
       <EditMissingRunners
-        :athlete="selectedModalItem"
+        :missing-runner="selectedModalItem"
         :confirm="confirm"
-        @done="(isDone) => closeEditModal(isDone, callback)"
+        @alert="({ type, message }) => alert(type, message)"
       />
     </ModalEdit>
   </div>
@@ -99,43 +100,32 @@ export default {
     }
   },
   created () {
-    this.getMissingRunners().then((missingRunners) => {
-      this.missingRunners = missingRunners
-      this.meets = missingRunners
+    this.search().then(() => {
+      this.meets = this.missingRunners
         .map(item => ({
           code: item.meetCode,
           name: item.meetName
         }))
         .filter((value, index, self) => self.findIndex(m => m.code === value.code) === index)
-
-      this.search()
     })
   },
   methods: {
-    getMissingRunners () {
+    search () {
+      this.busy = true
+      this.missingRunners = []
       return agent
         .get(this.FRI_API_URL + '/thor/missingrunners')
         .withCredentials()
-        .then(res => res.body)
+        .query(this.$route.query)
+        .then(res => {
+          this.missingRunners = res.body
+          this.busy = false
+        })
     },
     setQueryParams (query) {
       this.$router.replace({ query }).then(() => {
         this.search()
       })
-    },
-    search () {
-      this.busy = true
-      const showFixed = this.settings.showFixed === 'true'
-
-      if (this.settings.meetCode) {
-        this.filteredMissingRunners = this.missingRunners.filter(item => item.meetCode === this.settings.meetCode)
-      } else {
-        this.filteredMissingRunners = this.missingRunners
-      }
-
-      this.filteredMissingRunners = this.filteredMissingRunners.filter(item => item.fixed === showFixed)
-
-      this.busy = false
     },
     openThor (missingRunner) {
       const path = 'http://mot.fri.is/MotFRI/SelectedCompetitionResults.aspx?Code='

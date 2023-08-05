@@ -25,8 +25,8 @@ export const makeThorRoute: MakeThorRoute = function (selectThorEvents, selectTh
       .catch(next)
   })
 
-  router.get('/missingrunners', (_, res, next) => {
-    selectMissingRunners()
+  router.get('/missingrunners', (req, res, next) => {
+    selectMissingRunners(req.query)
       .then(res.json.bind(res))
       .catch(next)
   })

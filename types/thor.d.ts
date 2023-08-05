@@ -36,10 +36,15 @@ export type SelectAchievementOptions = {
     byAthlete?: string | number
 }
 
+export type selectMissingRunnersOptions = {
+    meetCode?: string
+    showFixed?: boolean
+}
+
 export type MissingRunner = {
     bibNo: string | number
     kt: string
-    meetCode:string|number
+    meetCode: string
 }
 
 export type UpdateThorCompetitor = {
@@ -50,7 +55,7 @@ export type UpdateThorCompetitor = {
 
 export type SelectThorEvents = (options?: SelectThorEventOptions) => Promise<Achievement[]>
 export type SelectThorAchievements = (options?: SelectAchievementOptions) => Promise<Achievement[]>
-export type SelectMissingRunners = () => Promise<Achievement[]>
+export type SelectMissingRunners = (options?: selectMissingRunnersOptions) => Promise<Achievement[]>
 export type SelectCompetitor = (options: SelectCompetitorOptions) => Promise<Achievement[]>
 export type UpdateMissingRunner = (missingRunner: MissingRunner) => Promise<string>
 export type UpdateCompetitor = (id: UpdateThorCompetitor, clubName: UpdateThorCompetitor, fullName: UpdateThorCompetitor) => Promise<number>

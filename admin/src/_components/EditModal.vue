@@ -99,10 +99,14 @@ export default {
       this.shouldConfirm = true
     },
     alert (type, message) {
-      console.log('alert', type, message)
       this.alertType = type
       this.alertMessage = message
       this.shouldConfirm = false
+
+      setTimeout(() => {
+        this.alertType = undefined
+        this.alertMessage = ''
+      }, 3000)
     }
   }
 }
