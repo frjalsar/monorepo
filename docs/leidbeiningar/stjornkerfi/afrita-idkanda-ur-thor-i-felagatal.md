@@ -12,17 +12,17 @@ description: >-
 
 Þegar iðkandi finnst ekki í félagatalinu birtist tómur list.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p>Iðkanda finnst ekki í félagatalinu</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/afrita/01.png" alt=""><figcaption><p>Iðkanda finnst ekki í félagatalinu</p></figcaption></figure>
 
 1.  Veldu hnappinn stofna upp í hægra horninu.\
 
 
-    <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption><p>Gluggi til að nýskrá iðkendur</p></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/afrita/02.png" alt=""><figcaption><p>Gluggi til að nýskrá iðkendur</p></figcaption></figure>
 
 2\. Skráðu inn kennitöluna án bandstriks og smelltu á stækkunarglerið. Við það fyllast reitirnir út.\
 
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Útfyllt form fyrir iðkanda</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/afrita/03.png" alt=""><figcaption><p>Útfyllt form fyrir iðkanda</p></figcaption></figure>
 
 {% hint style="warning" %}
 **ATH:** Það er mikilvægt að fara yfir reitina. Í sumum tilfella eru ekki allar upplýsingar í Þór t.d. Land eða fyrsta keppnisár. Í þeim tilfellum þarf að handfylla þá reiti út.
