@@ -5,8 +5,8 @@ export type Competition = {
   eventId: number
   ageFrom: number
   ageTo: number
-  gender: number
-  indoor: number
+  gender?: number
+  indoor?: number
   id?: number
   eventName?: string
 }

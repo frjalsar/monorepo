@@ -11,10 +11,10 @@ export type Athlete = {
   gender: string
   country: string
   thorId: number
-  lastCompeted: Date
-  club: Partial<Club>
-  region: Region
-  membership: Membership[]
+  lastCompeted?: Date
+  club?: Partial<Club>
+  region?: Region
+  membership?: Membership[]
   newMembership?: Membership[]
 }
 

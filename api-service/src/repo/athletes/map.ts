@@ -35,6 +35,7 @@ export const mapAthletes = function (list) {
     const currentAthlete: Athlete = result[result.length - 1]
     if (item.club_id || item.membership_legacyclub) {
       const membership: Membership = mapToMembership(item)
+      currentAthlete.membership = []
       currentAthlete.membership.push(membership)
 
       if (

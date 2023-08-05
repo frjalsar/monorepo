@@ -22,6 +22,7 @@ import { makeRegions } from '../composition/regions'
 import { makeUsers } from '../composition/users'
 import { makeVenues } from '../composition/venues'
 import { makeThor } from '../composition/thor'
+import { makeRegistrations } from '../composition/registrations'
 import { makeSendMail } from '../lib/sendmail'
 
 dotenv.config()
@@ -90,6 +91,8 @@ app.use('/regions', makeRegions(pgPool))
 app.use('/users', makeUsers(pgPool, redisClient))
 app.use('/venues', makeVenues(pgPool))
 app.use('/thor', makeThor(sqlConnection))
+app.use('/registrations', makeRegistrations(pgPool))
+
 
 app.get('/user', (req, res) => {
   if (req.user) {
