@@ -19,7 +19,7 @@
           </option>
         </select>
       </div>
-      <div class="col-md-4 col-lg-2 mt-4">
+      <div class="col-md-3 col-lg-2 mt-4">
         <div class="form-check">
           <input
             id="leidrett"
@@ -33,6 +33,23 @@
             for="leidrett"
           >
             Sýna leiðrétt
+          </label>
+        </div>
+      </div>
+      <div class="col-md-3 col-lg-2 mt-4">
+        <div class="form-check">
+          <input
+            id="foreigners"
+            v-model="showForeigners"
+            class="form-check-input"
+            type="checkbox"
+            @change="changeShowForeigners()"
+          >
+          <label
+            class="form-check-label"
+            for="foreigners"
+          >
+            Sýna erlenda
           </label>
         </div>
       </div>
@@ -66,14 +83,16 @@ export default {
   data () {
     return {
       meetCode: this.settings.meetCode,
-      showFixed: this.settings.showFixed
+      showFixed: this.settings.showFixed,
+      showForeigners: this.settings.showForeigners
     }
   },
   computed: {
     selected () {
       return {
         meetCode: this.meetCode,
-        showFixed: this.showFixed
+        showFixed: this.showFixed,
+        showForeigners: this.showForeigners
       }
     }
   },
@@ -81,6 +100,7 @@ export default {
     clear () {
       this.meetCode = undefined
       this.showFixed = false
+      this.showForeigners = false
       this.$emit('search', this.selected)
     },
     changeMeet (e) {
@@ -88,6 +108,9 @@ export default {
       this.$emit('search', this.selected)
     },
     changeShowFixed (e) {
+      this.$emit('search', this.selected)
+    },
+    changeShowForeigners (e) {
       this.$emit('search', this.selected)
     }
   }

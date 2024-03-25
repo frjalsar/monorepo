@@ -13,6 +13,7 @@ export type Achievement = {
     Dagsetning?: string | number
     Mót?: string | number
     Staður?: string | number
+    Land?: string
 }
 
 export type SelectThorEventOptions = {
@@ -39,6 +40,7 @@ export type SelectAchievementOptions = {
 export type selectMissingRunnersOptions = {
     meetCode?: string
     showFixed?: boolean
+    showForeigners?: boolean
 }
 
 export type MissingRunner = {

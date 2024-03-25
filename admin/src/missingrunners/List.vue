@@ -87,6 +87,11 @@ export default {
           display: 'md'
         },
         {
+          field: 'country',
+          label: 'Land',
+          display: 'md'
+        },
+        {
           field: 'kt',
           label: 'Kennitala',
           display: 'md'

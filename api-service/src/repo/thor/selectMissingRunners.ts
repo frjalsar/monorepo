@@ -21,13 +21,20 @@ export const makeSelectMissingRunners: MakeSelectMissingRunners = function (sqlP
           coalesce(hak.[Leiðrétt kennitala], hak.[Skráð kennitala]) as kt,
           hak.[Keppandanúmer] as competitorId,
           CAST(CASE WHEN hak.[Leiðrétt kennitala] <> '' THEN 1 ELSE 0 END as bit)  as fixed,
+          hak.[Land] as country,
           c.[Name] as meetName
         FROM
           [Athletics].[dbo].[Athl$Hlauparar án keppandanúmers] hak
         JOIN 
           [Athletics].[dbo].[Athl$Competition] c ON hak.[Mót] = c.[Code]
         WHERE
-          1=1`
+          CAST(CASE WHEN hak.[Land] <> 'IS' THEN 1 ELSE 0 END as bit) = @showForeigners`
+
+      if (opt && opt.showForeigners) {
+        request.input('showForeigners', opt.showForeigners)
+      } else { 
+        request.input('showForeigners', 0)
+      }
 
       if (opt && opt.meetCode) {
         sql += ' AND hak.[Mót] = @meetCode'
@@ -38,7 +45,6 @@ export const makeSelectMissingRunners: MakeSelectMissingRunners = function (sqlP
         sql += ' AND CAST(CASE WHEN hak.[Leiðrétt kennitala] <> \'\' THEN 1 ELSE 0 END as bit) = @showFixed'
         request.input('showFixed', opt.showFixed)
       }
-
       return request
         .query(sql)
         .then(res => res.recordset)

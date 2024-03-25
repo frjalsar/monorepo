@@ -1,5 +1,5 @@
 node_modules/
 .env
-createPassword.js
 .env.production
 .env.local
+src/createPassword.ts
