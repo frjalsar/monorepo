@@ -97,6 +97,25 @@
         >
       </div>
     </div>
+    <div class="row g-3 mb-3">
+      <div class="col-md-12">
+        <div class="form-check">
+          <input
+            id="inactive"
+            v-model="currentItem.inactive"
+            class="form-check-input"
+            type="checkbox"
+            :disabled="busy"
+          >
+          <label
+            class="form-check-label"
+            for="inactive"
+          >
+            Félag er ekki lengur starfandi
+          </label>
+        </div>
+      </div>
+    </div>
   </form>
 </template>
 

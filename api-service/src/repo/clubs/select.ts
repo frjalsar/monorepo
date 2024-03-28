@@ -12,8 +12,9 @@ export const makeSelectClubs: MakeSelectClubs = function (db) {
         c.id,
         c.fullname club_fullname,
         c.shortname club_shortname,
-        c.abbreviation club_abbreviation,
+        c.abbreviation club_abbreviation,        
         c.thorid club_thorid,
+        c.inactive club_inactive,
         r.id region_id,
         r.fullname region_fullname,
         r.abbreviation region_abbreviation 

@@ -9,12 +9,13 @@ export const makeUpdateClub: MakeUpdateClub = function (db) {
       UPDATE clubs SET
         fullname = $1,
         shortname = $2,
-        abbreviation = $3,
+        abbreviation = $3,        
         thorid = $4,
-        regionid = $5,
-        _userid = $6
+        inactive = $5,
+        regionid = $6,
+        _userid = $7
       WHERE
-        id = $7
+        id = $8
       RETURNING id`
 
     const params = [
@@ -22,6 +23,7 @@ export const makeUpdateClub: MakeUpdateClub = function (db) {
       club.shortName,
       club.abbreviation,
       club.thorId,
+      club.inactive,
       club.regionId,
       user.id,
       club.id

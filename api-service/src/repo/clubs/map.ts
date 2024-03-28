@@ -8,6 +8,7 @@ export const mapToClub: MapToClub = function (row) {
     abbreviation: row.club_abbreviation,
     shortName: row.club_shortname,
     thorId: row.club_thorid,
+    inactive: row.club_inactive,
     regionId: row.region_id,
     region: row.region_id ? mapToRegion(row) : undefined
   }

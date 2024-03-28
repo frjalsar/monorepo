@@ -7,6 +7,7 @@ export type Club = {
   shortName: string
   abbreviation: string
   thorId: number
+  inactive: boolean
   regionId: number
   region?: Region
 }
