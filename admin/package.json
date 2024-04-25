@@ -10,7 +10,7 @@
     "date-fns": "^2.28.0",
     "js-file-download": "^0.4.12",
     "lodash.debounce": "^4.0.8",
-    "superagent": "^7.0.2",
+    "superagent": "^9.0.0",
     "vue": "^3.2.25",
     "vue-router": "^4.0.12"
   },
